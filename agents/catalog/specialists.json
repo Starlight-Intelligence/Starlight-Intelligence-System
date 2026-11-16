@@ -1,8 +1,8 @@
 {
   "schemaVersion": "starlight.specialist-catalog.v1",
   "projection": "operational; original profiles and Foundry ontology IDs remain authoritative for their existing consumers",
-  "sourceDigest": "86018da632aaca21054e92e3808656c90049c3a9d54ea7b083f4f140c8804590",
-  "count": 151,
+  "sourceDigest": "7d35ac2471cb4f6fa9b9b853b639dcdc2b1bbec1d24fc23ac06189db360c4d0b",
+  "count": 154,
   "naming": {
     "default": "descriptive-role",
     "creativeAlias": "optional-per-instance",
@@ -28,7 +28,7 @@
     },
     {
       "path": "agents/catalog/identity-overrides.json",
-      "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+      "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
     },
     {
       "path": "agents/catalog/run-envelope.schema.json",
@@ -187,6 +187,10 @@
       "sha256": "2f4a0a4ee782242942ec78b2ca1ea11fe49bf5ae7522fa830da234b8786f5942"
     },
     {
+      "path": "agents/starlight-anime-director.md",
+      "sha256": "b5926a6c2e59607e2ee0bdf1753af978492f528b6bc2a0f3a6f62efa96fc0570"
+    },
+    {
       "path": "agents/starlight-architect.md",
       "sha256": "ae7dd38fedcd94b20f3418fdeafd5c4241b9c59349b73ea0bc328dc8ca1326fa"
     },
@@ -225,6 +229,10 @@
     {
       "path": "agents/starlight-business.md",
       "sha256": "34dad0a7b68f3757a52ef40f28dce9a2eda40d96c198a91836765f8159b248fb"
+    },
+    {
+      "path": "agents/starlight-cinematic-web-architect.md",
+      "sha256": "de201b8ce761cc6eb8a7469a23b997e928bdea5ce819a563e7f461a7c13dd536"
     },
     {
       "path": "agents/starlight-code-is.md",
@@ -325,6 +333,10 @@
     {
       "path": "agents/starlight-family-is.md",
       "sha256": "aa337f070b9b773248f74db61616e6c25bfeefb357fb247c7e467082e1f71b45"
+    },
+    {
+      "path": "agents/starlight-flow-director.md",
+      "sha256": "c0382d7b51818231f8699f659faa3e96b27485e5e0c8defdca883bc4a6f30d5f"
     },
     {
       "path": "agents/starlight-genius.md",
@@ -972,7 +984,7 @@
     },
     {
       "path": "skills/skill-rules.json",
-      "sha256": "ade688aa044657cc4afc46784085ab83c08e0af614c8562911f0acd0784faef3"
+      "sha256": "7d687f1e0817b83150f6048da7591ccfd42c9a2c4a2b32237f802d1f78120a87"
     },
     {
       "path": "skills/sound-intelligence/audience-architecture.md",
@@ -1005,6 +1017,10 @@
     {
       "path": "skills/vision/fundamentals-excavation.md",
       "sha256": "f721027ace194e0874f86a82e7e8c14d050fefb660630ca312b2d9958861c852"
+    },
+    {
+      "path": "skills/vision/google-flow-studio/SKILL.md",
+      "sha256": "fc04bf37da66657d643ad0c1e925042e84cce6a5d6a42dc0ebdbba7dfb9ac823"
     },
     {
       "path": "skills/vision/queen-swarms-visual.md",
@@ -1066,7 +1082,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -1147,7 +1163,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -1229,7 +1245,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -1310,7 +1326,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -1391,7 +1407,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -1473,7 +1489,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -1553,7 +1569,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -1633,7 +1649,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -1712,7 +1728,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -1790,7 +1806,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -1867,7 +1883,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -1946,7 +1962,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -2024,7 +2040,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -2101,7 +2117,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -2179,7 +2195,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -2311,7 +2327,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -2462,7 +2478,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -2595,7 +2611,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -2720,7 +2736,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -2873,7 +2889,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -2970,7 +2986,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -3101,7 +3117,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -3230,7 +3246,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -3309,7 +3325,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -3390,7 +3406,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -3471,7 +3487,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -3551,7 +3567,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -3630,7 +3646,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -3726,7 +3742,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -3822,7 +3838,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -3918,7 +3934,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -4015,7 +4031,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -4111,7 +4127,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -4207,7 +4223,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -4303,7 +4319,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -4400,7 +4416,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -4496,7 +4512,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -4556,6 +4572,124 @@
       }
     },
     {
+      "id": "starlight-anime-director",
+      "name": "Anime character and keyframe director",
+      "slug": "anime-character-and-keyframe-director",
+      "aliases": [
+        "Starlight Anime Director"
+      ],
+      "profileName": "starlight-anime-director",
+      "ontologyId": "agent:sis/starlight-anime-director",
+      "type": "specialist",
+      "tier": "specialist",
+      "domain": "vision",
+      "purpose": "Author character turnaround plates, expression matrices, and lore-accurate sakuga keyframes for original series and Guardian IP.",
+      "outcome": "Locked character turnaround plates, Ingredient bundles, and inspected keyframe assets",
+      "input": "Series canon locks, character archetype sheet, scene beat, and target aspect ratios",
+      "acceptance": [
+        "Verify full silhouette and anatomy across front, profile, and rear views before locking",
+        "Enforce zero boundary drift across Arcanea and AnimeLegends palettes and marks"
+      ],
+      "personality": "Precise about line weight, silhouette clarity, and emotional continuity across cuts.",
+      "identityProvenance": {
+        "sourceDeclared": [
+          "profileName",
+          "tier",
+          "domain"
+        ],
+        "curatedOperationalProposal": [
+          "name",
+          "purpose",
+          "outcome",
+          "input",
+          "acceptance",
+          "personality"
+        ],
+        "overrideSource": {
+          "path": "agents/catalog/identity-overrides.json",
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
+        },
+        "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
+      },
+      "source": {
+        "path": "agents/starlight-anime-director.md",
+        "sha256": "b5926a6c2e59607e2ee0bdf1753af978492f528b6bc2a0f3a6f62efa96fc0570"
+      },
+      "skills": [
+        {
+          "id": "vision/design-coherence",
+          "source": {
+            "path": "skills/vision/design-coherence.md",
+            "sha256": "f7f44c2888c4804eafd633fe3bd5d827a40119134fb1cb53c383073be29b1fab"
+          }
+        },
+        {
+          "id": "vision/fundamentals-excavation",
+          "source": {
+            "path": "skills/vision/fundamentals-excavation.md",
+            "sha256": "f721027ace194e0874f86a82e7e8c14d050fefb660630ca312b2d9958861c852"
+          }
+        },
+        {
+          "id": "vision/google-flow-studio",
+          "source": {
+            "path": "skills/vision/google-flow-studio/SKILL.md",
+            "sha256": "fc04bf37da66657d643ad0c1e925042e84cce6a5d6a42dc0ebdbba7dfb9ac823"
+          }
+        },
+        {
+          "id": "vision/voice-anti-slop",
+          "source": {
+            "path": "skills/vision/voice-anti-slop.md",
+            "sha256": "8ed3ab834a164c7a4b6afe97ab64601083b64cc53b176f979b9b4b0259430c32"
+          }
+        }
+      ],
+      "unresolvedSkills": [],
+      "triggers": {
+        "keywords": [
+          "anime",
+          "anime character and keyframe director",
+          "animelegends",
+          "character",
+          "director",
+          "flow dam",
+          "flow ingredients",
+          "flow studio",
+          "google flow",
+          "keyframe",
+          "multimodal brand pipeline",
+          "nano banana",
+          "omni 1.2",
+          "sacred-visions",
+          "scenebuilder",
+          "starlight anime director",
+          "starlight-anime-director",
+          "veo 3.1",
+          "vis-media"
+        ],
+        "filePatterns": []
+      },
+      "contracts": {
+        "prompt": "specialist-prompt-v1",
+        "loop": "specialist-loop-v1"
+      },
+      "authority": {
+        "mode": "host-intersection",
+        "profileRef": "agents/starlight-anime-director.md",
+        "toolsGrantedByCatalog": [],
+        "memoryScope": "tenant/project/purpose",
+        "automaticMoneyMovement": false
+      },
+      "readiness": {
+        "definition": "profile",
+        "portable": "generated",
+        "eve": "instructions-only",
+        "executableAdapters": "unverified",
+        "deployment": "unverified"
+      }
+    },
+    {
       "id": "starlight-architect",
       "name": "Systems architect",
       "slug": "systems-architect",
@@ -4592,7 +4726,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -4956,7 +5090,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -5053,7 +5187,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -5151,7 +5285,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -5249,7 +5383,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -5347,7 +5481,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -5443,7 +5577,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -5538,7 +5672,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -5632,7 +5766,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -5724,7 +5858,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -5965,6 +6099,124 @@
       }
     },
     {
+      "id": "starlight-cinematic-web-architect",
+      "name": "Cinematic web and funnel experience architect",
+      "slug": "cinematic-web-and-funnel-experience-architect",
+      "aliases": [
+        "Starlight Cinematic Web Architect"
+      ],
+      "profileName": "starlight-cinematic-web-architect",
+      "ontologyId": "agent:sis/starlight-cinematic-web-architect",
+      "type": "specialist",
+      "tier": "specialist",
+      "domain": "vision",
+      "purpose": "Wire mastered visual plates, SVG brand marks, and motion clips into performant Next.js, WebGL, and GSAP conversion experiences.",
+      "outcome": "Domain sitemap visual allocation matrix and reduced-motion-safe funnel implementation spec",
+      "input": "Approved brand pack, SVG vector mark, visual asset manifest, and target conversion route",
+      "acceptance": [
+        "Pair every motion hero with an inspected static master plate and reduced-motion fallback",
+        "Map assets to exact funnel routes with verified aspect ratios and WCAG contrast"
+      ],
+      "personality": "Disciplined about typography hierarchy, frame budgets, and honest user journeys.",
+      "identityProvenance": {
+        "sourceDeclared": [
+          "profileName",
+          "tier",
+          "domain"
+        ],
+        "curatedOperationalProposal": [
+          "name",
+          "purpose",
+          "outcome",
+          "input",
+          "acceptance",
+          "personality"
+        ],
+        "overrideSource": {
+          "path": "agents/catalog/identity-overrides.json",
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
+        },
+        "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
+      },
+      "source": {
+        "path": "agents/starlight-cinematic-web-architect.md",
+        "sha256": "de201b8ce761cc6eb8a7469a23b997e928bdea5ce819a563e7f461a7c13dd536"
+      },
+      "skills": [
+        {
+          "id": "orchestration/context-engineering",
+          "source": {
+            "path": "skills/orchestration/context-engineering/SKILL.md",
+            "sha256": "e8a9d25d1d269c004cb028b1f552cb74dcaaf0fc410ce496f5a6b6172d9fbdff"
+          }
+        },
+        {
+          "id": "vision/design-coherence",
+          "source": {
+            "path": "skills/vision/design-coherence.md",
+            "sha256": "f7f44c2888c4804eafd633fe3bd5d827a40119134fb1cb53c383073be29b1fab"
+          }
+        },
+        {
+          "id": "vision/google-flow-studio",
+          "source": {
+            "path": "skills/vision/google-flow-studio/SKILL.md",
+            "sha256": "fc04bf37da66657d643ad0c1e925042e84cce6a5d6a42dc0ebdbba7dfb9ac823"
+          }
+        },
+        {
+          "id": "vision/voice-anti-slop",
+          "source": {
+            "path": "skills/vision/voice-anti-slop.md",
+            "sha256": "8ed3ab834a164c7a4b6afe97ab64601083b64cc53b176f979b9b4b0259430c32"
+          }
+        }
+      ],
+      "unresolvedSkills": [],
+      "triggers": {
+        "keywords": [
+          "animelegends",
+          "architect",
+          "cinematic",
+          "cinematic web and funnel experience architect",
+          "experience",
+          "flow dam",
+          "flow ingredients",
+          "flow studio",
+          "funnel",
+          "google flow",
+          "multimodal brand pipeline",
+          "nano banana",
+          "omni 1.2",
+          "sacred-visions",
+          "scenebuilder",
+          "starlight cinematic web architect",
+          "starlight-cinematic-web-architect",
+          "veo 3.1",
+          "vis-media"
+        ],
+        "filePatterns": []
+      },
+      "contracts": {
+        "prompt": "specialist-prompt-v1",
+        "loop": "specialist-loop-v1"
+      },
+      "authority": {
+        "mode": "host-intersection",
+        "profileRef": "agents/starlight-cinematic-web-architect.md",
+        "toolsGrantedByCatalog": [],
+        "memoryScope": "tenant/project/purpose",
+        "automaticMoneyMovement": false
+      },
+      "readiness": {
+        "definition": "profile",
+        "portable": "generated",
+        "eve": "instructions-only",
+        "executableAdapters": "unverified",
+        "deployment": "unverified"
+      }
+    },
+    {
       "id": "starlight-code-is",
       "name": "Developer automation coordinator",
       "slug": "developer-automation-coordinator",
@@ -6001,7 +6253,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -6094,7 +6346,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -6264,7 +6516,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -6358,7 +6610,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -6455,7 +6707,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -6552,7 +6804,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -6649,7 +6901,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -6746,7 +6998,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -6843,7 +7095,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -6974,7 +7226,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -7070,7 +7322,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -7166,7 +7418,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -7261,7 +7513,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -7358,7 +7610,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -7455,7 +7707,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -7627,7 +7879,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -7761,7 +8013,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -7953,7 +8205,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -8174,7 +8426,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -8369,7 +8621,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -8532,7 +8784,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -8693,7 +8945,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -8886,7 +9138,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -9000,7 +9252,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -9078,7 +9330,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -9134,6 +9386,125 @@
       }
     },
     {
+      "id": "starlight-flow-director",
+      "name": "Multimodal studio and asset flow director",
+      "slug": "multimodal-studio-and-asset-flow-director",
+      "aliases": [
+        "Starlight Flow Director"
+      ],
+      "profileName": "starlight-flow-director",
+      "ontologyId": "agent:sis/starlight-flow-director",
+      "type": "specialist",
+      "tier": "specialist",
+      "domain": "vision",
+      "purpose": "Coordinate Google Flow, native master image generation, ffmpeg/Sharp derivatives, and Cloudflare R2 DAM provenance within credit caps.",
+      "outcome": "Credit-tracked multimodal campaign pack, provenance sidecars, and R2 sync manifest",
+      "input": "Brand prompt matrix, approved Ingredients, active credit budget, and DAM lifecycle state",
+      "acceptance": [
+        "Enforce single-output safety checks and keep Flow spend strictly inside the approved cap",
+        "Advance assets through qa_scored with visual inspection before ready_for_publish promotion"
+      ],
+      "personality": "Methodical, visual-first, and strict about provenance from prompt to edge delivery.",
+      "identityProvenance": {
+        "sourceDeclared": [
+          "profileName",
+          "tier",
+          "domain"
+        ],
+        "curatedOperationalProposal": [
+          "name",
+          "purpose",
+          "outcome",
+          "input",
+          "acceptance",
+          "personality"
+        ],
+        "overrideSource": {
+          "path": "agents/catalog/identity-overrides.json",
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
+        },
+        "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
+      },
+      "source": {
+        "path": "agents/starlight-flow-director.md",
+        "sha256": "c0382d7b51818231f8699f659faa3e96b27485e5e0c8defdca883bc4a6f30d5f"
+      },
+      "skills": [
+        {
+          "id": "vision/design-coherence",
+          "source": {
+            "path": "skills/vision/design-coherence.md",
+            "sha256": "f7f44c2888c4804eafd633fe3bd5d827a40119134fb1cb53c383073be29b1fab"
+          }
+        },
+        {
+          "id": "vision/fundamentals-excavation",
+          "source": {
+            "path": "skills/vision/fundamentals-excavation.md",
+            "sha256": "f721027ace194e0874f86a82e7e8c14d050fefb660630ca312b2d9958861c852"
+          }
+        },
+        {
+          "id": "vision/google-flow-studio",
+          "source": {
+            "path": "skills/vision/google-flow-studio/SKILL.md",
+            "sha256": "fc04bf37da66657d643ad0c1e925042e84cce6a5d6a42dc0ebdbba7dfb9ac823"
+          }
+        },
+        {
+          "id": "vision/voice-anti-slop",
+          "source": {
+            "path": "skills/vision/voice-anti-slop.md",
+            "sha256": "8ed3ab834a164c7a4b6afe97ab64601083b64cc53b176f979b9b4b0259430c32"
+          }
+        }
+      ],
+      "unresolvedSkills": [],
+      "triggers": {
+        "keywords": [
+          "animelegends",
+          "asset",
+          "director",
+          "flow",
+          "flow dam",
+          "flow ingredients",
+          "flow studio",
+          "google flow",
+          "multimodal",
+          "multimodal brand pipeline",
+          "multimodal studio and asset flow director",
+          "nano banana",
+          "omni 1.2",
+          "sacred-visions",
+          "scenebuilder",
+          "starlight flow director",
+          "starlight-flow-director",
+          "studio",
+          "veo 3.1",
+          "vis-media"
+        ],
+        "filePatterns": []
+      },
+      "contracts": {
+        "prompt": "specialist-prompt-v1",
+        "loop": "specialist-loop-v1"
+      },
+      "authority": {
+        "mode": "host-intersection",
+        "profileRef": "agents/starlight-flow-director.md",
+        "toolsGrantedByCatalog": [],
+        "memoryScope": "tenant/project/purpose",
+        "automaticMoneyMovement": false
+      },
+      "readiness": {
+        "definition": "profile",
+        "portable": "generated",
+        "eve": "instructions-only",
+        "executableAdapters": "unverified",
+        "deployment": "unverified"
+      }
+    },
+    {
       "id": "starlight-genius",
       "name": "Personal expertise analyst",
       "slug": "personal-expertise-analyst",
@@ -9170,7 +9541,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -9456,7 +9827,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -9553,7 +9924,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -9650,7 +10021,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -9744,7 +10115,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -9841,7 +10212,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -9937,7 +10308,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -10033,7 +10404,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -10130,7 +10501,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -10225,7 +10596,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -10422,7 +10793,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -10560,7 +10931,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -10657,7 +11028,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -10754,7 +11125,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -10851,7 +11222,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -10947,7 +11318,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -11044,7 +11415,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -11141,7 +11512,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -11238,7 +11609,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -11335,7 +11706,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -11431,7 +11802,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -11528,7 +11899,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -11624,7 +11995,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -11721,7 +12092,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -11817,7 +12188,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -11911,7 +12282,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -12223,7 +12594,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -12318,7 +12689,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -12413,7 +12784,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -12510,7 +12881,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -12605,7 +12976,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -12701,7 +13072,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -12796,7 +13167,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -12890,7 +13261,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -13525,7 +13896,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -13672,7 +14043,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -13820,7 +14191,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -14541,7 +14912,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -14676,7 +15047,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -14772,7 +15143,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -14869,7 +15240,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -14967,7 +15338,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -15064,7 +15435,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -15160,7 +15531,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -15257,7 +15628,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -15353,7 +15724,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -15690,7 +16061,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -15840,7 +16211,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -15934,7 +16305,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -16028,7 +16399,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -16542,7 +16913,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -16620,7 +16991,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -16699,7 +17070,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -16790,7 +17161,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -16869,7 +17240,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -16960,7 +17331,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -17050,7 +17421,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -17130,7 +17501,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -17299,7 +17670,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -17531,7 +17902,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -17699,7 +18070,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -17838,7 +18209,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -18041,7 +18412,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -18244,7 +18615,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -18342,7 +18713,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -18439,7 +18810,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -18535,7 +18906,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -18632,7 +19003,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -18728,7 +19099,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -18823,7 +19194,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -18919,7 +19290,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -19012,7 +19383,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -19106,7 +19477,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -19255,7 +19626,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -19391,7 +19762,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -19436,6 +19807,13 @@
           }
         },
         {
+          "id": "vision/google-flow-studio",
+          "source": {
+            "path": "skills/vision/google-flow-studio/SKILL.md",
+            "sha256": "fc04bf37da66657d643ad0c1e925042e84cce6a5d6a42dc0ebdbba7dfb9ac823"
+          }
+        },
+        {
           "id": "vision/queen-swarms-visual",
           "source": {
             "path": "skills/vision/queen-swarms-visual.md",
@@ -19457,6 +19835,7 @@
           "3-year",
           "30-year",
           "activate queen visual",
+          "animelegends",
           "anti-slop",
           "axis",
           "brand",
@@ -19469,8 +19848,12 @@
           "delve",
           "design system",
           "doesn't feel premium",
+          "flow dam",
+          "flow ingredients",
+          "flow studio",
           "founder vision",
           "game-changer",
+          "google flow",
           "handover",
           "harness",
           "horizon",
@@ -19482,7 +19865,10 @@
           "long horizon vision and brand planner",
           "long-term",
           "looks generic",
+          "multimodal brand pipeline",
+          "nano banana",
           "north star",
+          "omni 1.2",
           "paradigm shift",
           "plan doc",
           "planner",
@@ -19494,6 +19880,8 @@
           "queen motion",
           "queen swarms",
           "queen visual",
+          "sacred-visions",
+          "scenebuilder",
           "scroll swarm",
           "seamless",
           "site copy",
@@ -19510,6 +19898,8 @@
           "unleash",
           "user-facing prose",
           "vault entry",
+          "veo 3.1",
+          "vis-media",
           "vision",
           "visionary",
           "visual composition queen",
@@ -19578,7 +19968,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -19724,7 +20114,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -19818,7 +20208,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -19912,7 +20302,7 @@
         ],
         "overrideSource": {
           "path": "agents/catalog/identity-overrides.json",
-          "sha256": "c9e361a0a17159ccf2f9b7882122214c7648099fb6367d007cdd16efbcb728aa"
+          "sha256": "81f34020e0c14525f7e970c2b657a195fb2097c8620e4d0a6a6438d6be207f97"
         },
         "capabilityEvidence": "Profile and local skill declarations only; observed runtime capability remains unverified."
       },
@@ -19985,6 +20375,13 @@
           }
         },
         {
+          "id": "vision/google-flow-studio",
+          "source": {
+            "path": "skills/vision/google-flow-studio/SKILL.md",
+            "sha256": "fc04bf37da66657d643ad0c1e925042e84cce6a5d6a42dc0ebdbba7dfb9ac823"
+          }
+        },
+        {
           "id": "vision/queen-swarms-visual",
           "source": {
             "path": "skills/vision/queen-swarms-visual.md",
@@ -20005,6 +20402,7 @@
           "/music-name",
           "6-axis test",
           "activate queen visual",
+          "animelegends",
           "anti-slop",
           "artist",
           "banned names",
@@ -20025,8 +20423,12 @@
           "domain scan",
           "don't use git",
           "editorial",
+          "flow dam",
+          "flow ingredients",
+          "flow studio",
           "founder",
           "game-changer",
+          "google flow",
           "handover",
           "hard rejection gates",
           "harness",
@@ -20040,13 +20442,16 @@
           "leverage",
           "looks generic",
           "memorability",
+          "multimodal brand pipeline",
           "name",
           "name candidates",
           "naming",
+          "nano banana",
           "narrative",
           "narrative and editorial designer",
           "no terminal",
           "not a coder",
+          "omni 1.2",
           "pairwise judge",
           "paradigm shift",
           "persona name",
@@ -20062,6 +20467,8 @@
           "queen swarms",
           "queen visual",
           "rename",
+          "sacred-visions",
+          "scenebuilder",
           "scroll swarm",
           "seamless",
           "searchability",
@@ -20084,6 +20491,8 @@
           "unleash",
           "user-facing prose",
           "vault entry",
+          "veo 3.1",
+          "vis-media",
           "visual composition queen",
           "visual identity",
           "visual skill queen",
