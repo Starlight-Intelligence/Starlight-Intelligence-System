@@ -1,6 +1,6 @@
 {
   "schemaVersion": "starlight.specialist-constellation.v1",
-  "sourceDigest": "cffaaab9d3574e2109da7df4887388a64a86318f0c385fca297e26f20d0218df",
+  "sourceDigest": "7d35ac2471cb4f6fa9b9b853b639dcdc2b1bbec1d24fc23ac06189db360c4d0b",
   "kind": "discovery-and-policy-projection",
   "execution": "No scheduler, delegation authority, runtime activation, or data access is created by an edge. Use the existing loop and work graph contracts.",
   "nodes": [
@@ -339,10 +339,10 @@
       "kind": "agent",
       "label": "Anime character and keyframe director",
       "stableId": "starlight-anime-director",
-      "ontologyId": "agent:sis/anime-director",
+      "ontologyId": "agent:sis/starlight-anime-director",
       "source": {
         "path": "agents/starlight-anime-director.md",
-        "sha256": "b822e637707a192ac36796f5b901abd65fe4d703f470eae88578f7fd070a7045"
+        "sha256": "b5926a6c2e59607e2ee0bdf1753af978492f528b6bc2a0f3a6f62efa96fc0570"
       }
     },
     {
@@ -504,10 +504,10 @@
       "kind": "agent",
       "label": "Cinematic web and funnel experience architect",
       "stableId": "starlight-cinematic-web-architect",
-      "ontologyId": "agent:sis/cinematic-web-architect",
+      "ontologyId": "agent:sis/starlight-cinematic-web-architect",
       "source": {
         "path": "agents/starlight-cinematic-web-architect.md",
-        "sha256": "b9b939de1b078278f80ff54b99791cdaa09dc1e63445b8e0eda969681bc3b434"
+        "sha256": "de201b8ce761cc6eb8a7469a23b997e928bdea5ce819a563e7f461a7c13dd536"
       }
     },
     {
@@ -823,10 +823,10 @@
       "kind": "agent",
       "label": "Multimodal studio and asset flow director",
       "stableId": "starlight-flow-director",
-      "ontologyId": "agent:sis/flow-director",
+      "ontologyId": "agent:sis/starlight-flow-director",
       "source": {
         "path": "agents/starlight-flow-director.md",
-        "sha256": "db5abefd640871d645523c2d77578b2cdeb83ec0ecf7eb26219a59e2d18b6027"
+        "sha256": "c0382d7b51818231f8699f659faa3e96b27485e5e0c8defdca883bc4a6f30d5f"
       }
     },
     {
@@ -2478,7 +2478,7 @@
       "label": "vision/google-flow-studio",
       "source": {
         "path": "skills/vision/google-flow-studio/SKILL.md",
-        "sha256": "faf08c89493e47321c60a1638a6d6481285c036cc33cf1dac2e2fee73568e81f"
+        "sha256": "fc04bf37da66657d643ad0c1e925042e84cce6a5d6a42dc0ebdbba7dfb9ac823"
       }
     },
     {

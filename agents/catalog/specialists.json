@@ -1,7 +1,7 @@
 {
   "schemaVersion": "starlight.specialist-catalog.v1",
   "projection": "operational; original profiles and Foundry ontology IDs remain authoritative for their existing consumers",
-  "sourceDigest": "cffaaab9d3574e2109da7df4887388a64a86318f0c385fca297e26f20d0218df",
+  "sourceDigest": "7d35ac2471cb4f6fa9b9b853b639dcdc2b1bbec1d24fc23ac06189db360c4d0b",
   "count": 154,
   "naming": {
     "default": "descriptive-role",
@@ -188,7 +188,7 @@
     },
     {
       "path": "agents/starlight-anime-director.md",
-      "sha256": "b822e637707a192ac36796f5b901abd65fe4d703f470eae88578f7fd070a7045"
+      "sha256": "b5926a6c2e59607e2ee0bdf1753af978492f528b6bc2a0f3a6f62efa96fc0570"
     },
     {
       "path": "agents/starlight-architect.md",
@@ -232,7 +232,7 @@
     },
     {
       "path": "agents/starlight-cinematic-web-architect.md",
-      "sha256": "b9b939de1b078278f80ff54b99791cdaa09dc1e63445b8e0eda969681bc3b434"
+      "sha256": "de201b8ce761cc6eb8a7469a23b997e928bdea5ce819a563e7f461a7c13dd536"
     },
     {
       "path": "agents/starlight-code-is.md",
@@ -336,7 +336,7 @@
     },
     {
       "path": "agents/starlight-flow-director.md",
-      "sha256": "db5abefd640871d645523c2d77578b2cdeb83ec0ecf7eb26219a59e2d18b6027"
+      "sha256": "c0382d7b51818231f8699f659faa3e96b27485e5e0c8defdca883bc4a6f30d5f"
     },
     {
       "path": "agents/starlight-genius.md",
@@ -1020,7 +1020,7 @@
     },
     {
       "path": "skills/vision/google-flow-studio/SKILL.md",
-      "sha256": "faf08c89493e47321c60a1638a6d6481285c036cc33cf1dac2e2fee73568e81f"
+      "sha256": "fc04bf37da66657d643ad0c1e925042e84cce6a5d6a42dc0ebdbba7dfb9ac823"
     },
     {
       "path": "skills/vision/queen-swarms-visual.md",
@@ -4576,11 +4576,10 @@
       "name": "Anime character and keyframe director",
       "slug": "anime-character-and-keyframe-director",
       "aliases": [
-        "Starlight Anime Director",
-        "anime-director"
+        "Starlight Anime Director"
       ],
-      "profileName": "anime-director",
-      "ontologyId": "agent:sis/anime-director",
+      "profileName": "starlight-anime-director",
+      "ontologyId": "agent:sis/starlight-anime-director",
       "type": "specialist",
       "tier": "specialist",
       "domain": "vision",
@@ -4614,7 +4613,7 @@
       },
       "source": {
         "path": "agents/starlight-anime-director.md",
-        "sha256": "b822e637707a192ac36796f5b901abd65fe4d703f470eae88578f7fd070a7045"
+        "sha256": "b5926a6c2e59607e2ee0bdf1753af978492f528b6bc2a0f3a6f62efa96fc0570"
       },
       "skills": [
         {
@@ -4635,7 +4634,7 @@
           "id": "vision/google-flow-studio",
           "source": {
             "path": "skills/vision/google-flow-studio/SKILL.md",
-            "sha256": "faf08c89493e47321c60a1638a6d6481285c036cc33cf1dac2e2fee73568e81f"
+            "sha256": "fc04bf37da66657d643ad0c1e925042e84cce6a5d6a42dc0ebdbba7dfb9ac823"
           }
         },
         {
@@ -4651,7 +4650,6 @@
         "keywords": [
           "anime",
           "anime character and keyframe director",
-          "anime-director",
           "animelegends",
           "character",
           "director",
@@ -6105,11 +6103,10 @@
       "name": "Cinematic web and funnel experience architect",
       "slug": "cinematic-web-and-funnel-experience-architect",
       "aliases": [
-        "Starlight Cinematic Web Architect",
-        "cinematic-web-architect"
+        "Starlight Cinematic Web Architect"
       ],
-      "profileName": "cinematic-web-architect",
-      "ontologyId": "agent:sis/cinematic-web-architect",
+      "profileName": "starlight-cinematic-web-architect",
+      "ontologyId": "agent:sis/starlight-cinematic-web-architect",
       "type": "specialist",
       "tier": "specialist",
       "domain": "vision",
@@ -6143,7 +6140,7 @@
       },
       "source": {
         "path": "agents/starlight-cinematic-web-architect.md",
-        "sha256": "b9b939de1b078278f80ff54b99791cdaa09dc1e63445b8e0eda969681bc3b434"
+        "sha256": "de201b8ce761cc6eb8a7469a23b997e928bdea5ce819a563e7f461a7c13dd536"
       },
       "skills": [
         {
@@ -6164,7 +6161,7 @@
           "id": "vision/google-flow-studio",
           "source": {
             "path": "skills/vision/google-flow-studio/SKILL.md",
-            "sha256": "faf08c89493e47321c60a1638a6d6481285c036cc33cf1dac2e2fee73568e81f"
+            "sha256": "fc04bf37da66657d643ad0c1e925042e84cce6a5d6a42dc0ebdbba7dfb9ac823"
           }
         },
         {
@@ -6182,7 +6179,6 @@
           "architect",
           "cinematic",
           "cinematic web and funnel experience architect",
-          "cinematic-web-architect",
           "experience",
           "flow dam",
           "flow ingredients",
@@ -9394,11 +9390,10 @@
       "name": "Multimodal studio and asset flow director",
       "slug": "multimodal-studio-and-asset-flow-director",
       "aliases": [
-        "Starlight Flow Director",
-        "flow-director"
+        "Starlight Flow Director"
       ],
-      "profileName": "flow-director",
-      "ontologyId": "agent:sis/flow-director",
+      "profileName": "starlight-flow-director",
+      "ontologyId": "agent:sis/starlight-flow-director",
       "type": "specialist",
       "tier": "specialist",
       "domain": "vision",
@@ -9432,7 +9427,7 @@
       },
       "source": {
         "path": "agents/starlight-flow-director.md",
-        "sha256": "db5abefd640871d645523c2d77578b2cdeb83ec0ecf7eb26219a59e2d18b6027"
+        "sha256": "c0382d7b51818231f8699f659faa3e96b27485e5e0c8defdca883bc4a6f30d5f"
       },
       "skills": [
         {
@@ -9453,7 +9448,7 @@
           "id": "vision/google-flow-studio",
           "source": {
             "path": "skills/vision/google-flow-studio/SKILL.md",
-            "sha256": "faf08c89493e47321c60a1638a6d6481285c036cc33cf1dac2e2fee73568e81f"
+            "sha256": "fc04bf37da66657d643ad0c1e925042e84cce6a5d6a42dc0ebdbba7dfb9ac823"
           }
         },
         {
@@ -9474,7 +9469,6 @@
           "flow dam",
           "flow ingredients",
           "flow studio",
-          "flow-director",
           "google flow",
           "multimodal",
           "multimodal brand pipeline",
@@ -19816,7 +19810,7 @@
           "id": "vision/google-flow-studio",
           "source": {
             "path": "skills/vision/google-flow-studio/SKILL.md",
-            "sha256": "faf08c89493e47321c60a1638a6d6481285c036cc33cf1dac2e2fee73568e81f"
+            "sha256": "fc04bf37da66657d643ad0c1e925042e84cce6a5d6a42dc0ebdbba7dfb9ac823"
           }
         },
         {
@@ -20384,7 +20378,7 @@
           "id": "vision/google-flow-studio",
           "source": {
             "path": "skills/vision/google-flow-studio/SKILL.md",
-            "sha256": "faf08c89493e47321c60a1638a6d6481285c036cc33cf1dac2e2fee73568e81f"
+            "sha256": "fc04bf37da66657d643ad0c1e925042e84cce6a5d6a42dc0ebdbba7dfb9ac823"
           }
         },
         {

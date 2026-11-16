@@ -1,6 +1,6 @@
 ---
-name: vision/google-flow-studio
-description: Orchestrate Google Flow (`flow.google.com` via BrowserOS Neo), native image masters, vector SVG marks, and the 6-stage VIS v3 DAM lifecycle across multi-brand campaigns.
+name: google-flow-studio
+description: Orchestrate Google Flow (flow.google.com via BrowserOS Neo), native image masters, vector SVG marks, and the 6-stage VIS v3 DAM lifecycle across multi-brand campaigns. Use when running Google Flow generations, compiling WebP derivatives, or planning Cloudflare R2 vis-media placement.
 type: multimodal-studio-orchestration
 domain: vision
 version: 2026-11-16
