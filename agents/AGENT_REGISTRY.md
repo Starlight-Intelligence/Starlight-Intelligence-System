@@ -2,7 +2,7 @@
 
 The [specialist catalog](catalog/specialists.json) presents each agent by its descriptive role, purpose, expected artifact, and acceptance checks. Existing filenames, frontmatter identities, and Foundry ontology IDs remain intact; creative names are optional presentation aliases. The [catalog guide](../docs/agents/specialist-catalog.md) covers source validation, graph relationships, bounded loops, and portable instruction exports. This is the operational profile catalog; it does not establish that every agent has a running deployment.
 
-> One-hundred-fifty-one minds in the core registry. Nine universal intelligence layers + Domain Sub-Stack Tier (People + Sound + Music + Energy + Legal + Space + Marine + Longevity + Infrastructure + Partners + Research + Assets + Distribution) + Council Archetype Tier + Evaluator. One system. No hierarchy is permanent — only the mission is.
+> One-hundred-fifty-four minds in the core registry. Nine universal intelligence layers + Domain Sub-Stack Tier (People + Sound + Music + Energy + Legal + Space + Marine + Longevity + Infrastructure + Partners + Research + Assets + Distribution) + Council Archetype Tier + Evaluator. One system. No hierarchy is permanent — only the mission is.
 >
 > **L99 Swarm Topology Update (2026-06-17):** Scaled swarm topology specifying Kings (policy locks), Queens (orchestration loops), Starlight Board, and Model Council consensus. The complete fleet of 150 agents is specified in the [Starlight 150 Agent Blueprint](../docs/AGENT_BLUEPRINT.md) and documented in the [Swarm Topology Strategy](../docs/swarm-topology.md).
 >
@@ -160,6 +160,9 @@ Executive authority stops at every non-waivable clause: canon locks, the non-cli
 | **Social News Analyst** | `starlight-social-news-analyst.md` | Real-Time News | Scanning AI lab releases, partner updates, tracking affiliate feature sets and tech trends |
 | **Steward** | `starlight-steward.md` | Maintenance | Active file-cleanup, resolving conflicts, package maintenance |
 | **Sentinel Daemon** | `starlight-sentinel-daemon.md` | Daemon | Background monitoring, checking file drift and licenses |
+| **Flow Director** | `starlight-flow-director.md` | Multimodal Visual Production | Directing Google Flow (`Omni 1.2 Flash`, `Nano Banana 2.1`, `Veo 3.1`), 3-ref Ingredient continuity, credit governance, and VIS v3 R2 DAM provenance |
+| **Anime Director** | `starlight-anime-director.md` | Anime & Character IP | Authoring locked 3-view character turnaround sheets (`AKASHI`, `KAGE`, `MIRA`, Guardian canon plates) and sakuga animation keyframes |
+| **Cinematic Web Architect** | `starlight-cinematic-web-architect.md` | Cinematic Web & Funnels | Translating mastered stills, SVG marks, and Flow motion clips into Next.js/Three.js/GSAP experiences with reduced-motion poster parity |
 
 ### Intelligence System Tiers (v7.4 beta — 5 new agents)
 

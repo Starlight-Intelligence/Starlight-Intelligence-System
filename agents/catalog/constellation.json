@@ -1,6 +1,6 @@
 {
   "schemaVersion": "starlight.specialist-constellation.v1",
-  "sourceDigest": "86018da632aaca21054e92e3808656c90049c3a9d54ea7b083f4f140c8804590",
+  "sourceDigest": "cffaaab9d3574e2109da7df4887388a64a86318f0c385fca297e26f20d0218df",
   "kind": "discovery-and-policy-projection",
   "execution": "No scheduler, delegation authority, runtime activation, or data access is created by an edge. Use the existing loop and work graph contracts.",
   "nodes": [
@@ -335,6 +335,17 @@
       }
     },
     {
+      "id": "agent:starlight-anime-director",
+      "kind": "agent",
+      "label": "Anime character and keyframe director",
+      "stableId": "starlight-anime-director",
+      "ontologyId": "agent:sis/anime-director",
+      "source": {
+        "path": "agents/starlight-anime-director.md",
+        "sha256": "b822e637707a192ac36796f5b901abd65fe4d703f470eae88578f7fd070a7045"
+      }
+    },
+    {
       "id": "agent:starlight-architect",
       "kind": "agent",
       "label": "Systems architect",
@@ -486,6 +497,17 @@
       "source": {
         "path": "agents/executive/starlight-chief-of-staff.md",
         "sha256": "806290df82b3e1502ba3a4448fac6988822336e29e9ade9c200527ede898f791"
+      }
+    },
+    {
+      "id": "agent:starlight-cinematic-web-architect",
+      "kind": "agent",
+      "label": "Cinematic web and funnel experience architect",
+      "stableId": "starlight-cinematic-web-architect",
+      "ontologyId": "agent:sis/cinematic-web-architect",
+      "source": {
+        "path": "agents/starlight-cinematic-web-architect.md",
+        "sha256": "b9b939de1b078278f80ff54b99791cdaa09dc1e63445b8e0eda969681bc3b434"
       }
     },
     {
@@ -794,6 +816,17 @@
       "source": {
         "path": "agents/starlight-family-is.md",
         "sha256": "aa337f070b9b773248f74db61616e6c25bfeefb357fb247c7e467082e1f71b45"
+      }
+    },
+    {
+      "id": "agent:starlight-flow-director",
+      "kind": "agent",
+      "label": "Multimodal studio and asset flow director",
+      "stableId": "starlight-flow-director",
+      "ontologyId": "agent:sis/flow-director",
+      "source": {
+        "path": "agents/starlight-flow-director.md",
+        "sha256": "db5abefd640871d645523c2d77578b2cdeb83ec0ecf7eb26219a59e2d18b6027"
       }
     },
     {
@@ -2440,6 +2473,15 @@
       }
     },
     {
+      "id": "skill:vision/google-flow-studio",
+      "kind": "skill",
+      "label": "vision/google-flow-studio",
+      "source": {
+        "path": "skills/vision/google-flow-studio/SKILL.md",
+        "sha256": "faf08c89493e47321c60a1638a6d6481285c036cc33cf1dac2e2fee73568e81f"
+      }
+    },
+    {
       "id": "skill:vision/queen-swarms-visual",
       "kind": "skill",
       "label": "vision/queen-swarms-visual",
@@ -3013,6 +3055,41 @@
       "sourceRef": "agents/starlight-adapter-paperclip.md"
     },
     {
+      "from": "agent:starlight-anime-director",
+      "to": "agent:starlight-evaluator",
+      "relation": "requires-independent-review",
+      "status": "policy",
+      "sourceRef": "agents/catalog/contracts.json"
+    },
+    {
+      "from": "agent:starlight-anime-director",
+      "to": "skill:vision/design-coherence",
+      "relation": "uses-skill",
+      "status": "declared",
+      "sourceRef": "agents/starlight-anime-director.md"
+    },
+    {
+      "from": "agent:starlight-anime-director",
+      "to": "skill:vision/fundamentals-excavation",
+      "relation": "uses-skill",
+      "status": "declared",
+      "sourceRef": "agents/starlight-anime-director.md"
+    },
+    {
+      "from": "agent:starlight-anime-director",
+      "to": "skill:vision/google-flow-studio",
+      "relation": "uses-skill",
+      "status": "declared",
+      "sourceRef": "agents/starlight-anime-director.md"
+    },
+    {
+      "from": "agent:starlight-anime-director",
+      "to": "skill:vision/voice-anti-slop",
+      "relation": "uses-skill",
+      "status": "declared",
+      "sourceRef": "agents/starlight-anime-director.md"
+    },
+    {
       "from": "agent:starlight-architect",
       "to": "agent:starlight-evaluator",
       "relation": "requires-independent-review",
@@ -3424,6 +3501,41 @@
       "relation": "requires-independent-review",
       "status": "policy",
       "sourceRef": "agents/catalog/contracts.json"
+    },
+    {
+      "from": "agent:starlight-cinematic-web-architect",
+      "to": "agent:starlight-evaluator",
+      "relation": "requires-independent-review",
+      "status": "policy",
+      "sourceRef": "agents/catalog/contracts.json"
+    },
+    {
+      "from": "agent:starlight-cinematic-web-architect",
+      "to": "skill:orchestration/context-engineering",
+      "relation": "uses-skill",
+      "status": "declared",
+      "sourceRef": "agents/starlight-cinematic-web-architect.md"
+    },
+    {
+      "from": "agent:starlight-cinematic-web-architect",
+      "to": "skill:vision/design-coherence",
+      "relation": "uses-skill",
+      "status": "declared",
+      "sourceRef": "agents/starlight-cinematic-web-architect.md"
+    },
+    {
+      "from": "agent:starlight-cinematic-web-architect",
+      "to": "skill:vision/google-flow-studio",
+      "relation": "uses-skill",
+      "status": "declared",
+      "sourceRef": "agents/starlight-cinematic-web-architect.md"
+    },
+    {
+      "from": "agent:starlight-cinematic-web-architect",
+      "to": "skill:vision/voice-anti-slop",
+      "relation": "uses-skill",
+      "status": "declared",
+      "sourceRef": "agents/starlight-cinematic-web-architect.md"
     },
     {
       "from": "agent:starlight-cmo",
@@ -4103,6 +4215,41 @@
       "relation": "uses-skill",
       "status": "declared",
       "sourceRef": "agents/starlight-family-is.md"
+    },
+    {
+      "from": "agent:starlight-flow-director",
+      "to": "agent:starlight-evaluator",
+      "relation": "requires-independent-review",
+      "status": "policy",
+      "sourceRef": "agents/catalog/contracts.json"
+    },
+    {
+      "from": "agent:starlight-flow-director",
+      "to": "skill:vision/design-coherence",
+      "relation": "uses-skill",
+      "status": "declared",
+      "sourceRef": "agents/starlight-flow-director.md"
+    },
+    {
+      "from": "agent:starlight-flow-director",
+      "to": "skill:vision/fundamentals-excavation",
+      "relation": "uses-skill",
+      "status": "declared",
+      "sourceRef": "agents/starlight-flow-director.md"
+    },
+    {
+      "from": "agent:starlight-flow-director",
+      "to": "skill:vision/google-flow-studio",
+      "relation": "uses-skill",
+      "status": "declared",
+      "sourceRef": "agents/starlight-flow-director.md"
+    },
+    {
+      "from": "agent:starlight-flow-director",
+      "to": "skill:vision/voice-anti-slop",
+      "relation": "uses-skill",
+      "status": "declared",
+      "sourceRef": "agents/starlight-flow-director.md"
     },
     {
       "from": "agent:starlight-genius",
@@ -5212,6 +5359,13 @@
     },
     {
       "from": "agent:starlight-orchestrator",
+      "to": "agent:starlight-anime-director",
+      "relation": "can-route-to",
+      "status": "declared",
+      "sourceRef": "agents/starlight-orchestrator.md"
+    },
+    {
+      "from": "agent:starlight-orchestrator",
       "to": "agent:starlight-architect",
       "relation": "can-route-to",
       "status": "declared",
@@ -5304,6 +5458,13 @@
     {
       "from": "agent:starlight-orchestrator",
       "to": "agent:starlight-chief-of-staff",
+      "relation": "can-route-to",
+      "status": "declared",
+      "sourceRef": "agents/starlight-orchestrator.md"
+    },
+    {
+      "from": "agent:starlight-orchestrator",
+      "to": "agent:starlight-cinematic-web-architect",
       "relation": "can-route-to",
       "status": "declared",
       "sourceRef": "agents/starlight-orchestrator.md"
@@ -5500,6 +5661,13 @@
     {
       "from": "agent:starlight-orchestrator",
       "to": "agent:starlight-family-is",
+      "relation": "can-route-to",
+      "status": "declared",
+      "sourceRef": "agents/starlight-orchestrator.md"
+    },
+    {
+      "from": "agent:starlight-orchestrator",
+      "to": "agent:starlight-flow-director",
       "relation": "can-route-to",
       "status": "declared",
       "sourceRef": "agents/starlight-orchestrator.md"
@@ -7830,6 +7998,13 @@
     },
     {
       "from": "agent:starlight-visionary",
+      "to": "skill:vision/google-flow-studio",
+      "relation": "uses-skill",
+      "status": "declared",
+      "sourceRef": "agents/starlight-visionary.md"
+    },
+    {
+      "from": "agent:starlight-visionary",
       "to": "skill:vision/queen-swarms-visual",
       "relation": "uses-skill",
       "status": "declared",
@@ -7999,6 +8174,13 @@
     {
       "from": "agent:starlight-weaver",
       "to": "skill:vision/design-coherence",
+      "relation": "uses-skill",
+      "status": "declared",
+      "sourceRef": "agents/starlight-weaver.md"
+    },
+    {
+      "from": "agent:starlight-weaver",
+      "to": "skill:vision/google-flow-studio",
       "relation": "uses-skill",
       "status": "declared",
       "sourceRef": "agents/starlight-weaver.md"
