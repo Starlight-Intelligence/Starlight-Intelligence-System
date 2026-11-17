@@ -1,75 +1,85 @@
-<p align="center"><img src=".github/assets/hero.svg" width="100%" alt="Starlight Intelligence System hero banner"/></p>
+<p align="center"><img src=".github/assets/hero.svg" width="100%" alt="Starlight Intelligence System: local memory, defined agents, human review" /></p>
 
 # Starlight Intelligence System
 
-> **One shared brain for your entire AI fleet — across every tool and every repository.**
+**Give your AI agents a shared memory. Keep the keys.**
 
-Persistent memory. Attested knowledge. Sovereign control.
+Carry decisions and context between your tools with local memory vaults, MCP, agent definitions, and an open protocol. Inspect the source, choose the pieces you need, and build a system around your own work.
 
-Claude Code, Cursor, Codex, Gemini CLI, OpenCode, Antigravity — they all read from and write to the **same six semantic vaults**, with full provenance. No more explaining the same thing to every agent. No drift. No lost decisions.
+[Explore the system](https://starlightintelligence.org/#system-tour) · [Local setup](#60-second-start) · [Read SIP](SIP.md) · [Contribute](CONTRIBUTING.md)
 
-[![version](https://img.shields.io/badge/version-8.5.1-7fffd4?style=flat-square&labelColor=0d1117)](https://github.com/frankxai/Starlight-Intelligence-System/releases)
-[![protocol](https://img.shields.io/badge/SIP-v1.1.1-c084fc?style=flat-square&labelColor=0d1117)](SIP.md)
-[![license](https://img.shields.io/badge/license-MIT-white?style=flat-square&labelColor=0d1117)](LICENSE)
-[![protocol page](https://img.shields.io/badge/protocol-starlightintelligence.org%2Fprotocol-78a6ff?style=flat-square&labelColor=0d1117)](https://starlightintelligence.org/protocol)
-[![deploy](https://github.com/frankxai/Starlight-Intelligence-System/actions/workflows/vercel-deploy.yml/badge.svg)](https://github.com/frankxai/Starlight-Intelligence-System/actions/workflows/vercel-deploy.yml)
-[![github stars](https://img.shields.io/github/stars/frankxai/Starlight-Intelligence-System?style=flat-square&labelColor=0d1117&color=ffd700)](https://github.com/frankxai/Starlight-Intelligence-System/stargazers)
-
-Starlight Intelligence is an AI systems project led by Frank Riemer in Amsterdam. This repository contains its public protocol and reference source. [About the project and product](https://starlightintelligence.ai/about) · [Released open-source foundations](https://starlightintelligence.ai/open-source) · [Contribute and explore the community proposal](https://starlightintelligence.ai/community).
+[![License: MIT](https://img.shields.io/badge/License-MIT-c4b5fd?style=flat-square&labelColor=0d1117)](LICENSE)
+[![SIP](https://img.shields.io/badge/SIP-v1.1.1-67e8f9?style=flat-square&labelColor=0d1117)](SIP.md)
 
 ## Choose your first result
 
-Starlight is modular. Use the smallest part that solves your problem; a hosted account is not required to explore the protocol or run the local reference implementation.
+| What you want to do | Start here | What to expect |
+| --- | --- | --- |
+| Carry context between AI tools | [Local setup](#60-second-start) | Node 22 or 24; build the source and configure your MCP client |
+| Understand how the pieces connect | [Interactive architecture](https://starlightintelligence.org/#system-tour) | Illustrated memory, agent, and review layers with source links |
+| Host your own public interface | [Deploy Starlight Explorer](#deploy-starlight-explorer) | Read-only website; hosting costs may apply |
+| Adopt the shared contract | [Protocol specification](SIP.md) | MIT-licensed files and conventions; no hosted account required |
 
-| Your goal | Start here | Scope |
-|---|---|---|
-| Understand the open contract | [Read SIP](SIP.md) | Protocol and interoperability; no installation |
-| Share memory across AI tools | [60-second local start](#60-second-start) | Local vaults and MCP server; bring your own tools |
-| Explore the public interface | [Deploy Starlight Explorer](#deploy-starlight-explorer) | Read-only Explorer, **not** the private agent runtime |
-| Improve the platform | [Contribution guide](CONTRIBUTING.md) | Tests, fixes, adapters, documentation and protocol proposals |
+## What lives here
 
-**Canonical source today:** this `frankxai/Starlight-Intelligence-System` repository owns issues, pull requests and releases. Same-named copies in other organizations are **not alternate contribution targets**. If repository ownership changes, follow the verified canonical destination announced here; do not open duplicate PRs against mirrors.
+**SIP is the contract. SIS is the reference implementation.** The protocol describes composition, attribution, and decision rights. The implementation supplies memory, adapters, agent definitions, and tooling. A definition describes an agent; it does not establish that an agent is running.
+
+| Layer | Inspect it | Why it matters |
+| --- | --- | --- |
+| Memory | [Vault implementation](src/vault-memory.ts) · [Memory guide](memory/README.md) | Preserve useful context outside a chat session |
+| Agents and skills | [Agent registry](agents/AGENT_REGISTRY.md) · [Skill registry](skills/SKILL_REGISTRY.md) | Make responsibilities and reusable instructions inspectable |
+| Review and attribution | [SIP](SIP.md) · [Verification surface](https://starlightintelligence.org/verify) | Separate declared attribution from evidence you can check |
+
+You configure clients and permissions. Model providers, external services, and hosting have their own requirements and costs. Public Explorer deployment does not launch your private runtime. See [setup](SETUP.md) and the [source-counted metrics ledger](metrics/current.json) for the current implementation boundaries.
 
 ## Deploy Starlight Explorer
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Ffrankxai%2FStarlight-Intelligence-System&root-directory=site&project-name=starlight-explorer&repository-name=starlight-explorer)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FStarlight-Intelligence%2FStarlight-Intelligence-System&root-directory=site&project-name=starlight-explorer&repository-name=starlight-explorer)
 
-This creates your own Git-connected copy of the **public Starlight Explorer**: the protocol, architecture, research, knowledge maps, and read-only public vault surfaces. It builds the [`site/`](site/) Next.js application with zero required secrets.
+Create a Git-connected copy of the [`site/`](site/) Next.js application: protocol, architecture, research, knowledge maps, and read-only public vault surfaces. Zero required environment variables for the default public Explorer.
 
-Private memory, the MCP server, agent workers, credentials, and orchestration remain in your local sovereign runtime. [See the exact deployment boundary](https://starlightintelligence.org/deploy) or [run the complete system](SETUP.md).
+**What remains local:** private memory, MCP servers, agent workers, credentials, and orchestration. [Review the deployment boundary](https://starlightintelligence.org/deploy) before you deploy.
 
-![One Substrate. Every CLI in your fleet shares the same attested memory.](docs/visuals/08-readme-hero.jpg)
+## Build with us
 
-*Claude Code, Cursor, Codex, Gemini, and OpenCode — all reading the exact same attested memory from one substrate.*
+[Report a reproducible issue](https://github.com/Starlight-Intelligence/Starlight-Intelligence-System/issues/new/choose) · [Contribution guide](CONTRIBUTING.md) · [Project and founder](https://starlightintelligence.ai/about)
+
+Canonical repository: **Starlight-Intelligence/Starlight-Intelligence-System**. Open issues and pull requests here. Led by Frank Riemer in Amsterdam.
+
+<a id="60-second-start"></a>
+
+## Local setup
+
+```bash
+git clone https://github.com/Starlight-Intelligence/Starlight-Intelligence-System
+cd Starlight-Intelligence-System && npm install && npm run build
+node dist/cli.js init --vaults
+```
+
+> npm serves `@arcanea/starlight-intelligence-system@8.5.1` as checked on 10 October 2026. This checkout uses Node 22 or 24. The modular packages are release candidates; the operational SDK keeps its own contracts and sanitizer until a separately versioned root migration is published.
+
+Then add to your MCP config (Claude Code, Cursor, Codex, Gemini, etc.), pointing at the `dist/mcp-server.js` inside your clone:
+
+```json
+{
+  "mcpServers": {
+    "starlight": {
+      "command": "node",
+      "args": ["/path/to/Starlight-Intelligence-System/dist/mcp-server.js", "--vault-dir", "~/.starlight/vaults"]
+    }
+  }
+}
+```
+
+(If you installed via npm instead, the path is `node_modules/@arcanea/starlight-intelligence-system/dist/mcp-server.js` — but see the version note above.)
+
+Restart your client and confirm that the server connects. Clients configured to use this server can access the vaults you selected. Client configuration formats vary; use [SETUP.md](SETUP.md) for your environment.
 
 ---
 
-Starlight is two things in one repository:
 
-- **SIP** — the open Starlight Intelligence Protocol: a clean contract for sovereign memory, identity, and governance that anyone can adopt.
-- **SIS** — the reference implementation: source-counted agent definitions, auto-activating skills, six semantic vaults, a production MCP server, and the repeatable **Estate Factory** for running full sovereign agent armies.
-
-The current **151 agents** and all other fast-moving counts are dated in [`metrics/current.json`](metrics/current.json) and enforced by both the agent harness and site build.\n\nUse just the memory layer in your current tools. Adopt the protocol. Or run the complete system Frank uses every day.
-
-
-## Purpose
-
-Starlight Intelligence System (SIS) is the **sovereign AI substrate** for memory, orchestration, skills, governance, and evals across Claude Code, Codex, Cursor, Gemini, and Antigravity. Dual-layer: **SIP substrate** you can adopt/fork, plus this repo's **reference operational build** (vaults, MCP, agents).
-
-## How People Experience It
-
-- **Builders:** 60-second start → forge alliances → spawn vertical intelligence systems → attest artifacts.
-- **Operators:** six vaults under `~/.starlight/vaults`, MCP tools, platform adapters, named agents.
-- **Public narrative:** constellation / ecosystem maps and Health Intelligence (and sibling verticals) downloads.
-- **Humans land on:** README → 60-second start → substrate files → operational quick start.
-
-## How Agents Explore It
-
-1. Read **`CLAUDE.md`** (deepest) and **`AGENTS.md`** (SIP file-contract / Codex entry).
-2. Check `agents/AGENT_REGISTRY.md` before inventing agents.
-3. Memory first: vaults exist — query, then write durable notes for future sessions.
-4. Run harness gates before claiming production readiness; prefer proof over console language ([#35](https://github.com/frankxai/Starlight-Intelligence-System/issues/35)).
-5. Cross-links: [starlight-memory](https://github.com/frankxai/starlight-memory) · [starlight-evals](https://github.com/frankxai/starlight-evals) · [starlight-swarm](https://github.com/frankxai/starlight-swarm) · [ACOS](https://github.com/frankxai/agentic-creator-os) · [FrankX](https://github.com/frankxai/FrankX).
+<details>
+<summary><strong>Specialist tools and extended reference</strong></summary>
 
 ## Foundry: portable capabilities for ChatGPT and Codex
 
@@ -100,35 +110,6 @@ The skills-only [Agent Designer plugin](plugins/starlight-agent-designer) turns 
 - **Portfolio role:** substrate under GenCreator/ACOS/Arcanea ops; mesh and Wealth OS drafts stay issue-tracked until harness-proven.
 
 ---
-## 60-second start
-
-```bash
-git clone https://github.com/frankxai/Starlight-Intelligence-System
-cd Starlight-Intelligence-System && npm install && npm run build
-node dist/cli.js init --vaults
-```
-
-> npm serves `@arcanea/starlight-intelligence-system@8.5.1` as checked on 10 October 2026. This checkout uses Node 22 or 24. The modular packages are release candidates; the operational SDK keeps its own contracts and sanitizer until a separately versioned root migration is published.
-
-Then add to your MCP config (Claude Code, Cursor, Codex, Gemini, etc.), pointing at the `dist/mcp-server.js` inside your clone:
-
-```json
-{
-  "mcpServers": {
-    "starlight": {
-      "command": "node",
-      "args": ["/path/to/Starlight-Intelligence-System/dist/mcp-server.js", "--vault-dir", "~/.starlight/vaults"]
-    }
-  }
-}
-```
-
-(If you installed via npm instead, the path is `node_modules/@arcanea/starlight-intelligence-system/dist/mcp-server.js` — but see the version note above.)
-
-Restart your client. Every agent now shares the same memory. Thirteen `sis_*` tools appear instantly (verified by JSON-RPC handshake, 2026-07-12).
-
----
-
 ## Two layers, one repo
 
 | Layer              | What it is                                                                 | Best for |
@@ -445,7 +426,7 @@ Voice archetypes are abstract; named agents are specific implementations. Anyone
 ## Development
 
 ```bash
-git clone https://github.com/frankxai/Starlight-Intelligence-System.git
+git clone https://github.com/Starlight-Intelligence/Starlight-Intelligence-System.git
 cd Starlight-Intelligence-System
 npm install
 npm run build       # tsc to dist/
@@ -482,7 +463,7 @@ Browse them: [docs/visuals/VISUALS.md](docs/visuals/VISUALS.md) · Motion experi
 - [FrankX](https://frankx.ai) — Architect brand; SIP thought leadership
 - [Public Vaults](https://starlightintelligence.org) — Browse and fork vaults
 - [Protocol page](https://starlightintelligence.org/protocol) — Canonical SIP spec
-- [GitHub](https://github.com/frankxai/Starlight-Intelligence-System) — Source, issues, discussions
+- [GitHub](https://github.com/Starlight-Intelligence/Starlight-Intelligence-System) — Source, issues, discussions
 
 ---
 
@@ -513,3 +494,6 @@ reuse, hostile filesystem mutation and other implementations ignoring the guard
 remain outside this cooperative protocol. The separate JSONL append lock also
 remains intact after an interrupted writer; automatic orphan-lock cleanup is not
 implemented here. Exact-revision review and hosted recovery checks remain required.
+
+
+</details>

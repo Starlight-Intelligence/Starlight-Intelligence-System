@@ -1,3 +1,4 @@
+import { SystemTour } from "@/components/SystemTour";
 import Link from "next/link";
 import {
   Activity,
@@ -258,18 +259,17 @@ export default async function HomePage() {
             </div>
 
             <h1 className="mt-7 text-[2.7rem] font-semibold leading-[1.03] tracking-tight text-white sm:text-6xl lg:text-[4.4rem]">
-              Build as if the kindest future{" "}
+              Give your AI agents{" "}
               <span className="block bg-gradient-to-r from-violet-300 via-sky-100 to-cyan-300 bg-clip-text font-serif italic tracking-normal text-transparent">
-                is the realistic one.
+                a shared memory.
               </span>
             </h1>
 
             <p className="mt-6 max-w-xl text-base leading-8 text-slate-300 sm:text-lg">
-              Building that way is part of what makes it realistic. Starlight
-              is an open substrate for people running serious agent systems —
-              named agents, orchestration, memory that outlives the session,
-              and governance you hold rather than rent. Fork it, read it,
-              leave with it.
+              Carry decisions, context, and useful work between your AI tools.
+              Starlight brings local memory, agent definitions, and review
+              into a system you can inspect and shape. You keep the keys
+              and decide what your agents may do.
             </p>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -277,22 +277,22 @@ export default async function HomePage() {
                 href="/quickstart"
                 className="inline-flex min-h-12 items-center justify-center gap-2 rounded-md bg-white px-6 py-3 text-sm font-semibold text-slate-950 shadow-[0_0_40px_rgba(167,139,250,0.25)] transition-micro hover:bg-slate-200"
               >
-                Start in five minutes
+                Build your local system
                 <ArrowRight size={16} aria-hidden="true" />
               </Link>
               <Link
-                href="/protocol"
+                href="#system-tour"
                 className="inline-flex min-h-12 items-center justify-center gap-2 rounded-md border border-white/[0.14] bg-white/[0.03] px-6 py-3 text-sm font-semibold text-white backdrop-blur transition-micro hover:bg-white/[0.08]"
               >
-                Read the protocol
+                Explore the system
                 <ArrowRight size={16} aria-hidden="true" />
               </Link>
             </div>
             <p className="mt-4 max-w-xl text-sm leading-6 text-slate-400">
-              First step: clone the repo and build it. The quickstart walks
+              Requires Node 22 or 24. The quickstart walks
               through it in four steps. Stuck or have an idea?{" "}
               <a
-                href="https://github.com/frankxai/Starlight-Intelligence-System/issues/new/choose"
+                href="https://github.com/Starlight-Intelligence/Starlight-Intelligence-System/issues/new/choose"
                 className="inline-flex min-h-11 items-center font-medium text-white underline underline-offset-4 hover:text-slate-200"
               >
                 Open a GitHub issue
@@ -312,6 +312,8 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
+
+      <SystemTour />
 
       {/* =========================== THE SYSTEM =========================== */}
       <section className="border-b border-white/[0.08] px-5 py-16 text-white sm:px-6 md:py-24">
@@ -741,7 +743,7 @@ export default async function HomePage() {
           <p className="mt-6 text-sm text-slate-400">
             Questions, bugs, or ideas go to{" "}
             <a
-              href="https://github.com/frankxai/Starlight-Intelligence-System/issues/new/choose"
+              href="https://github.com/Starlight-Intelligence/Starlight-Intelligence-System/issues/new/choose"
               className="font-medium text-white underline underline-offset-4 hover:text-slate-200"
             >
               GitHub issues
