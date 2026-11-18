@@ -7,7 +7,7 @@ import { mkdirSync, mkdtempSync, writeFileSync, readFileSync, copyFileSync } fro
 import { execFileSync, spawnSync } from 'node:child_process';
 import { join } from 'node:path';
 import { validateReceipt, publishEcosystem, validateConsumerReceipt, consumerChecks,
-  assertPublishingContext, createNpmRuntime } from '../scripts/publish-npm-ecosystem.mjs';
+  assertPublishingContext, createNpmRuntime, PUBLISHING_REPOSITORY } from '../scripts/publish-npm-ecosystem.mjs';
 import { auditEstate, summarizePackage } from '../scripts/audit-npm-estate.mjs';
 
 test('packing supports pnpm JavaScript and native launchers without accepting arbitrary shells', () => {
@@ -148,12 +148,16 @@ test('dirty, mismatched or incomplete receipts and local publication cannot pass
 
 test('publication requires the exact manual main workflow and rejects token fallback', () => {
   const sha = 'a'.repeat(40);
-  const env = { GITHUB_ACTIONS: 'true', GITHUB_REPOSITORY: 'frankxai/Starlight-Intelligence-System',
+  const env = { GITHUB_ACTIONS: 'true', GITHUB_REPOSITORY: PUBLISHING_REPOSITORY,
     GITHUB_REF: 'refs/heads/main', GITHUB_SHA: sha, GITHUB_EVENT_NAME: 'workflow_dispatch',
-    GITHUB_WORKFLOW_REF: 'frankxai/Starlight-Intelligence-System/.github/workflows/npm-ecosystem-release.yml@refs/heads/main',
+    GITHUB_WORKFLOW_REF: `${PUBLISHING_REPOSITORY}/.github/workflows/npm-ecosystem-release.yml@refs/heads/main`,
     ACTIONS_ID_TOKEN_REQUEST_URL: 'https://example.invalid', ACTIONS_ID_TOKEN_REQUEST_TOKEN: 'fixture' };
   assert.doesNotThrow(() => assertPublishingContext(env, sha, ['--execute']));
+  const preTransfer = 'frankxai/Starlight-Intelligence-System';
+  assert.equal(PUBLISHING_REPOSITORY, 'Starlight-Intelligence/Starlight-Intelligence-System');
   for (const change of [{ GITHUB_ACTIONS: 'false' }, { GITHUB_REPOSITORY: 'other/repository' },
+    { GITHUB_REPOSITORY: preTransfer },
+    { GITHUB_WORKFLOW_REF: `${preTransfer}/.github/workflows/npm-ecosystem-release.yml@refs/heads/main` },
     { GITHUB_REF: 'refs/heads/feature' }, { GITHUB_SHA: 'b'.repeat(40) }, { GITHUB_EVENT_NAME: 'push' },
     { GITHUB_WORKFLOW_REF: 'other-workflow' }, { ACTIONS_ID_TOKEN_REQUEST_URL: '' },
     { ACTIONS_ID_TOKEN_REQUEST_TOKEN: '' }, { NPM_TOKEN: 'fixture' }, { NODE_AUTH_TOKEN: 'fixture' }]) {

@@ -33,12 +33,17 @@ export function validateConsumerReceipt(consumer, manifestBytes, sourceSha) {
   }
 }
 
+// The one repository allowed to publish. GitHub redirects the pre-transfer name for git and the
+// web, but a workflow run reports the current owner, so the old name must never satisfy this guard.
+export const PUBLISHING_REPOSITORY = 'Starlight-Intelligence/Starlight-Intelligence-System';
+const PUBLISHING_WORKFLOW_REF = `${PUBLISHING_REPOSITORY}/.github/workflows/npm-ecosystem-release.yml@refs/heads/main`;
+
 export function assertPublishingContext(env, sourceSha, args) {
   if (args.length !== 1 || args[0] !== '--execute' || env.GITHUB_ACTIONS !== 'true'
-      || env.GITHUB_REPOSITORY !== 'frankxai/Starlight-Intelligence-System'
+      || env.GITHUB_REPOSITORY !== PUBLISHING_REPOSITORY
       || env.GITHUB_REF !== 'refs/heads/main' || env.GITHUB_SHA !== sourceSha || !/^[a-f0-9]{40}$/.test(sourceSha)
       || env.GITHUB_EVENT_NAME !== 'workflow_dispatch'
-      || env.GITHUB_WORKFLOW_REF !== 'frankxai/Starlight-Intelligence-System/.github/workflows/npm-ecosystem-release.yml@refs/heads/main'
+      || env.GITHUB_WORKFLOW_REF !== PUBLISHING_WORKFLOW_REF
       || !env.ACTIONS_ID_TOKEN_REQUEST_URL || !env.ACTIONS_ID_TOKEN_REQUEST_TOKEN || env.NPM_TOKEN || env.NODE_AUTH_TOKEN) {
     throw new Error('Publication requires the approved main-branch OIDC workflow without a publishing token');
   }

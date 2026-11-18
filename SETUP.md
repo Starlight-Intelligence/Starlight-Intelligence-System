@@ -16,7 +16,7 @@ Estimated time end-to-end: **~30 min** including Infisical onboarding.
 - Optional: [Infisical CLI](https://infisical.com/docs/cli/overview) for centralized secrets
 
 ```bash
-git clone https://github.com/frankxai/Starlight-Intelligence-System.git
+git clone https://github.com/Starlight-Intelligence/Starlight-Intelligence-System.git
 cd Starlight-Intelligence-System
 npm install
 npm test       # 256+ tests should pass (auto-builds dist/ for the v01-evals suite)
