@@ -1,5 +1,8 @@
 # Starlight Intelligence System
 
+@AGENTS.md
+
+
 > The persistent context and memory layer for AI agents — built on the Starlight Intelligence Protocol (SIP) substrate. See `SIP.md`.
 
 ---
