@@ -126,6 +126,8 @@ describe('regression: no phantom MCP servers', () => {
     assert.doesNotMatch(output, /define_subagent|invoke_subagent|browser_control|Swarm-aware|executable multi-agent|dynamically discovered|STARLIGHT_MCP_SWARM/);
     assert.match(output, /does not grant permissions/);
     assert.match(output, /does not discover or activate native tools/);
+    const entry = files.find(file => file.filename === '.antigravity/instructions.md');
+    assert.match(entry?.content ?? '', /root AGENTS\.md/);
   });
 
   it('grok getMcpConfig declares only starlight-substrate (no never-built servers)', () => {

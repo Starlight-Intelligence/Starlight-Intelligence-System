@@ -1,5 +1,7 @@
 # Starlight Intelligence System — Antigravity Agentic Substrate
 
+For user-facing design, editorial and media work, read the [repository instruction entry point](../AGENTS.md#frontier-experience-constitution) before proceeding.
+
 > Persistent context, dynamic cognitive architecture, and federated memory vaults for AI agents. Optimized for Google Antigravity's native multi-agent capabilities. 1M-token context. Sovereign substrate. excellence execution standard.
 
 ---
