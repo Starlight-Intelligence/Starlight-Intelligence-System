@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "mode": "fixture",
+  "methodDigest": "dc4de418289212e6b6403c13fa1716d59b33516d83a28c43a7c1649fb8c2d33e",
+  "author": "author-01",
+  "pairs": [
+    {
+      "builder": "builder-02",
+      "reviewer": "reviewer-03",
+      "order": "baseline-first",
+      "baseline": {
+        "brief": "north",
+        "artifactDigest": "7ec24cce36792c58997c358994c01d9abab3cf636446002e1de7af45757dce21",
+        "reviewedDigest": "7ec24cce36792c58997c358994c01d9abab3cf636446002e1de7af45757dce21",
+        "result": "accept",
+        "minutes": 18,
+        "founderHelp": false
+      },
+      "method": {
+        "brief": "south",
+        "artifactDigest": "105a5d5ac99e139a0370d4c4d7010ca1f15202d69a7229ee7fb89eb41755e939",
+        "reviewedDigest": "105a5d5ac99e139a0370d4c4d7010ca1f15202d69a7229ee7fb89eb41755e939",
+        "result": "accept",
+        "minutes": 12,
+        "founderHelp": false
+      }
+    }
+  ]
+}
