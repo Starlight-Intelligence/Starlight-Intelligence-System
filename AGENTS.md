@@ -459,3 +459,7 @@ infrastructure as security-sensitive. Existing human release gates still apply.
 Preserve independent-review-policy, harness and scan. Inspect memory/tool execution boundaries, tenant and vault isolation, stale-output handling and denial/recovery behavior. An exit code or fresh heartbeat cannot prove useful output. Report existing bypasses separately; do not use or remove them through this instruction change.
 
 Shared measured rollout: https://github.com/frankxai/agentic-ops/pull/439.
+
+## Frontier Experience Constitution
+
+Before product UI, branded media, editorial experiences or creative workflow work, load the [Frontier Experience Constitution](https://github.com/Starlight-Intelligence/starlight-design-intelligence/blob/e25fab4c5a0dac2ea8c7b91e9397972f5af4b454/portfolio/frontier-experience-constitution.md) and [candidate review](https://github.com/Starlight-Intelligence/starlight-design-intelligence/blob/e25fab4c5a0dac2ea8c7b91e9397972f5af4b454/evals/frontier-experience-review.md). Apply the owning product's design system, resolved identities and release checks. Record the real task, exact source revisions and candidate evidence before review.

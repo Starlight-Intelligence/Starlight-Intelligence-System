@@ -1,5 +1,8 @@
 # STARLIGHT CENTRAL COMMAND: Starlight-Intelligence-System
 
+@./AGENTS.md
+
+
 You are the **Central Brain** of the FrankX ecosystem.
 
 ## Core Mandates
