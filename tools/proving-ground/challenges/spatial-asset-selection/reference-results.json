@@ -1,0 +1,51 @@
+{
+  "scope": "Observed public qualification runs using the committed programs. Neither has a production verdict.",
+  "suite_sha256": "a3b24f9fc702b0f7555150bf57ef12ffbb4cb06d6389e47c50df3bc500defa43",
+  "verifier_sha256": "9eb7a152c8bbe41e81341acaa61f7c39da82bc52533cf0c4f6401f3fb5388427",
+  "runs": [
+    {
+      "method": "lexical",
+      "submission_file_sha256": "b329ae59f627a290802d959d879de4b2cae032ab03ef39f0ae7d27eddb86937b",
+      "predictions_sha256": "1a0c3f977884fa533d897084cd2ef3779817e134a8536becead67a60d944565f",
+      "verdict": "below_public_threshold",
+      "metrics": {
+        "correct_selection": 7,
+        "wrong_selection": 0,
+        "missed_selection": 3,
+        "correct_abstention": 0,
+        "false_selection_on_abstain": 4
+      },
+      "failure_case_ids": [
+        "c03",
+        "c07",
+        "c08",
+        "c11",
+        "c12",
+        "c13",
+        "c14"
+      ]
+    },
+    {
+      "method": "always-select",
+      "submission_file_sha256": "11f203896820933f280d5d79bdc6ca0567713f54bbd23ea096dbfe1b2cb90973",
+      "predictions_sha256": "66ba8ead01af9275deea840b34eabe17137c113b003f1c63401edcd1b9fc1ea1",
+      "verdict": "below_public_threshold",
+      "metrics": {
+        "correct_selection": 7,
+        "wrong_selection": 3,
+        "missed_selection": 0,
+        "correct_abstention": 0,
+        "false_selection_on_abstain": 4
+      },
+      "failure_case_ids": [
+        "c03",
+        "c07",
+        "c08",
+        "c11",
+        "c12",
+        "c13",
+        "c14"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,102 @@
+{
+  "challenge": "spatial-asset-selection/v1",
+  "scope": "public-qualification",
+  "verdict": "below_public_threshold",
+  "suite_sha256": "a3b24f9fc702b0f7555150bf57ef12ffbb4cb06d6389e47c50df3bc500defa43",
+  "verifier_sha256": "9eb7a152c8bbe41e81341acaa61f7c39da82bc52533cf0c4f6401f3fb5388427",
+  "submission_file_sha256": "b329ae59f627a290802d959d879de4b2cae032ab03ef39f0ae7d27eddb86937b",
+  "predictions_sha256": "1a0c3f977884fa533d897084cd2ef3779817e134a8536becead67a60d944565f",
+  "metrics": {
+    "correct_selection": 7,
+    "wrong_selection": 0,
+    "missed_selection": 3,
+    "correct_abstention": 0,
+    "false_selection_on_abstain": 4
+  },
+  "results": [
+    {
+      "id": "c01",
+      "expected": "ds_R302_01",
+      "selected": "ds_R302_01",
+      "outcome": "correct_selection"
+    },
+    {
+      "id": "c02",
+      "expected": "ds_R304_01",
+      "selected": "ds_R304_01",
+      "outcome": "correct_selection"
+    },
+    {
+      "id": "c03",
+      "expected": "ds_R306_01",
+      "selected": null,
+      "outcome": "missed_selection"
+    },
+    {
+      "id": "c04",
+      "expected": "ds_R307_01",
+      "selected": "ds_R307_01",
+      "outcome": "correct_selection"
+    },
+    {
+      "id": "c05",
+      "expected": "ds_R307_02",
+      "selected": "ds_R307_02",
+      "outcome": "correct_selection"
+    },
+    {
+      "id": "c06",
+      "expected": "ds_R308_01",
+      "selected": "ds_R308_01",
+      "outcome": "correct_selection"
+    },
+    {
+      "id": "c07",
+      "expected": "ds_R311_01",
+      "selected": null,
+      "outcome": "missed_selection"
+    },
+    {
+      "id": "c08",
+      "expected": "ds_R341_01",
+      "selected": null,
+      "outcome": "missed_selection"
+    },
+    {
+      "id": "c09",
+      "expected": "ds_R342_01",
+      "selected": "ds_R342_01",
+      "outcome": "correct_selection"
+    },
+    {
+      "id": "c10",
+      "expected": "ds_R375_01",
+      "selected": "ds_R375_01",
+      "outcome": "correct_selection"
+    },
+    {
+      "id": "c11",
+      "expected": null,
+      "selected": "ds_R342_01",
+      "outcome": "false_selection_on_abstain"
+    },
+    {
+      "id": "c12",
+      "expected": null,
+      "selected": "ds_R342_01",
+      "outcome": "false_selection_on_abstain"
+    },
+    {
+      "id": "c13",
+      "expected": null,
+      "selected": "ds_R302_01",
+      "outcome": "false_selection_on_abstain"
+    },
+    {
+      "id": "c14",
+      "expected": null,
+      "selected": "ds_R342_01",
+      "outcome": "false_selection_on_abstain"
+    }
+  ]
+}

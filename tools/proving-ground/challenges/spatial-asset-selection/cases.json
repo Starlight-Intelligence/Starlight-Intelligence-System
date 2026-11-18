@@ -1,0 +1,78 @@
+{
+  "challenge": "spatial-asset-selection/v1",
+  "scope": "public-qualification",
+  "minimum_correct_selections": 8,
+  "maximum_false_selections_on_abstain": 0,
+  "cases": [
+    {
+      "id": "c01",
+      "expected": "ds_R302_01",
+      "rationale": "The board is the writable wall surface. The eraser is an accessory."
+    },
+    {
+      "id": "c02",
+      "expected": "ds_R304_01",
+      "rationale": "The inkjet takes sheets. The thermal printer takes roll stock."
+    },
+    {
+      "id": "c03",
+      "expected": "ds_R306_01",
+      "rationale": "Destroying documents by cutting them into strips identifies the shredder."
+    },
+    {
+      "id": "c04",
+      "expected": "ds_R307_01",
+      "rationale": "The black classic desktop model is distinct from the blue long-arm booklet model."
+    },
+    {
+      "id": "c05",
+      "expected": "ds_R307_02",
+      "rationale": "The booklet stapler has the required reach. The compact desktop stapler does not."
+    },
+    {
+      "id": "c06",
+      "expected": "ds_R308_01",
+      "rationale": "The two heads remove material. Neither stapler makes holes intended for binder rings."
+    },
+    {
+      "id": "c07",
+      "expected": "ds_R311_01",
+      "rationale": "Of the listed devices, the standalone calculator performs arithmetic."
+    },
+    {
+      "id": "c08",
+      "expected": "ds_R341_01",
+      "rationale": "The catalog has one optical barcode reader."
+    },
+    {
+      "id": "c09",
+      "expected": "ds_R342_01",
+      "rationale": "Thermal receipts come from roll stock. The inkjet takes sheets."
+    },
+    {
+      "id": "c10",
+      "expected": "ds_R375_01",
+      "rationale": "The requested tool clears the board. The board itself is the surface."
+    },
+    {
+      "id": "c11",
+      "expected": null,
+      "rationale": "Both the sheet-fed inkjet and the receipt printer satisfy the stated request."
+    },
+    {
+      "id": "c12",
+      "expected": null,
+      "rationale": "The exact broken unit must be replaced. Both stapler models are plausible and the order supplies no identifying detail."
+    },
+    {
+      "id": "c13",
+      "expected": null,
+      "rationale": "No projector exists in this frozen catalog. A whiteboard cannot project slides."
+    },
+    {
+      "id": "c14",
+      "expected": null,
+      "rationale": "No listed printer has evidence of waterproof certification. Model fabrication or certification claims are out of scope."
+    }
+  ]
+}

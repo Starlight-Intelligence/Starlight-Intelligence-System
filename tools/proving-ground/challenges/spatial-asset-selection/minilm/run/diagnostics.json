@@ -1,0 +1,157 @@
+{
+  "method_sha256": "ace0c66d4a03a4d8b8959a541a9943cb501ab0b20531849e30153d7a52be3bcb",
+  "catalog_sha256": "66381f7e48784a6c8e63c0e6dd67173c70a52e2f5b30746bdd0d3db8b39d3f67",
+  "prompts_sha256": "a5c60bc2cb87dd984b13b6d0b1c19086908edf0d3bfb589f1f92f9c55ec79c41",
+  "prediction_sha256": "883b18058276fbbda6f29b70263ad2f6b086460889fefa80d3c8ba9c5c954dc3",
+  "model": "sentence-transformers/all-MiniLM-L6-v2",
+  "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+  "files_sha256": {
+    "onnx/model_quint8_avx2.onnx": "b941bf19f1f1283680f449fa6a7336bb5600bdcd5f84d10ddc5cd72218a0fd21",
+    "tokenizer.json": "be50c3628f2bf5bb5e3a7f17b1f74611b2561a3a27eeab05e5aa30f411572037"
+  },
+  "encoder_sha256": "3ae21b829799a97600e4cbf50143021a7018af5312b0d5019467f5aa7dd5eeba",
+  "predictor_sha256": "7cdf3fee1220f4c546d444f6eebf1b8c4cc005364ac961a57fc7ad1a24067a5b",
+  "local_forward_passes": 24,
+  "cases": [
+    {
+      "id": "c01",
+      "first": "ds_R302_01",
+      "first_score": 0.5264242887496948,
+      "second": "ds_R375_01",
+      "second_score": 0.4430387616157532,
+      "margin": 0.08338552713394165,
+      "above_min": true,
+      "above_gap": true
+    },
+    {
+      "id": "c02",
+      "first": "ds_R304_01",
+      "first_score": 0.5581707954406738,
+      "second": "ds_R308_01",
+      "second_score": 0.4706220030784607,
+      "margin": 0.08754879236221313,
+      "above_min": true,
+      "above_gap": true
+    },
+    {
+      "id": "c03",
+      "first": "ds_R375_01",
+      "first_score": 0.2427801489830017,
+      "second": "ds_R302_01",
+      "second_score": 0.2393181324005127,
+      "margin": 0.0034620165824890137,
+      "above_min": false,
+      "above_gap": false
+    },
+    {
+      "id": "c04",
+      "first": "ds_R307_01",
+      "first_score": 0.657090425491333,
+      "second": "ds_R307_02",
+      "second_score": 0.5065213441848755,
+      "margin": 0.15056908130645752,
+      "above_min": true,
+      "above_gap": true
+    },
+    {
+      "id": "c05",
+      "first": "ds_R307_02",
+      "first_score": 0.3777080774307251,
+      "second": "ds_R375_01",
+      "second_score": 0.36588597297668457,
+      "margin": 0.011822104454040527,
+      "above_min": false,
+      "above_gap": false
+    },
+    {
+      "id": "c06",
+      "first": "ds_R307_02",
+      "first_score": 0.4248248040676117,
+      "second": "ds_R308_01",
+      "second_score": 0.3763734996318817,
+      "margin": 0.04845130443572998,
+      "above_min": true,
+      "above_gap": false
+    },
+    {
+      "id": "c07",
+      "first": "ds_R311_01",
+      "first_score": 0.3751780390739441,
+      "second": "ds_R342_01",
+      "second_score": 0.30633997917175293,
+      "margin": 0.06883805990219116,
+      "above_min": false,
+      "above_gap": true
+    },
+    {
+      "id": "c08",
+      "first": "ds_R341_01",
+      "first_score": 0.250973105430603,
+      "second": "ds_R342_01",
+      "second_score": 0.19470198452472687,
+      "margin": 0.05627112090587616,
+      "above_min": false,
+      "above_gap": true
+    },
+    {
+      "id": "c09",
+      "first": "ds_R342_01",
+      "first_score": 0.491911381483078,
+      "second": "ds_R307_02",
+      "second_score": 0.2862277030944824,
+      "margin": 0.20568367838859558,
+      "above_min": true,
+      "above_gap": true
+    },
+    {
+      "id": "c10",
+      "first": "ds_R375_01",
+      "first_score": 0.6353641748428345,
+      "second": "ds_R302_01",
+      "second_score": 0.3224456310272217,
+      "margin": 0.3129185438156128,
+      "above_min": true,
+      "above_gap": true
+    },
+    {
+      "id": "c11",
+      "first": "ds_R342_01",
+      "first_score": 0.4074322581291199,
+      "second": "ds_R304_01",
+      "second_score": 0.3953828811645508,
+      "margin": 0.012049376964569092,
+      "above_min": false,
+      "above_gap": false
+    },
+    {
+      "id": "c12",
+      "first": "ds_R307_01",
+      "first_score": 0.5107743144035339,
+      "second": "ds_R307_02",
+      "second_score": 0.44039303064346313,
+      "margin": 0.0703812837600708,
+      "above_min": true,
+      "above_gap": true
+    },
+    {
+      "id": "c13",
+      "first": "ds_R302_01",
+      "first_score": 0.24075058102607727,
+      "second": "ds_R375_01",
+      "second_score": 0.23609264194965363,
+      "margin": 0.004657939076423645,
+      "above_min": false,
+      "above_gap": false
+    },
+    {
+      "id": "c14",
+      "first": "ds_R342_01",
+      "first_score": 0.4155747890472412,
+      "second": "ds_R304_01",
+      "second_score": 0.3705759346485138,
+      "margin": 0.04499885439872742,
+      "above_min": false,
+      "above_gap": false
+    }
+  ]
+}
