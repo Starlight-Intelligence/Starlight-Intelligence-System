@@ -35,6 +35,7 @@ export class AntigravityAdapter implements PlatformAdapter {
       '> This adapter does not discover or activate native tools, agents or skills.',
       `> Loaded ${filtered.length} entries across ${new Set(filtered.map(e => e.vault)).size} vaults.`,
       '',
+      'For interface, editorial and media work, read the owning repository’s root AGENTS.md and resolve its design authority.',
       'Reference: .antigravity/instructions.md (full sovereign mandate + registry),',
       '.antigravity/swarm-protocol.md (coordination reference),',
       '.antigravity/mcp-config.json and allowlisted-tools.md (configuration proposals).',
