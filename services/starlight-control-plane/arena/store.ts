@@ -2,13 +2,13 @@
 // Pure apart from the injected D1 binding (tests drive it with node:sqlite and the real migration).
 
 import type { D1Like } from '../src/review.ts';
-import type { ArenaRow, ModelScore } from './score.ts';
+import type { ArenaRow, CohortScore, ModelScore } from './score.ts';
 
 export async function recordArenaRows(db: D1Like, rows: ArenaRow[]): Promise<void> {
   for (const r of rows) {
-    await db.prepare(`INSERT INTO arena_runs (created_at, model, knobs_json, seed_id, seed_class, base_ref, caught, false_alarm, severity, latency_ms, tokens_out, error)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`)
-      .bind(r.created_at, r.model, r.knobs_json, r.seed_id, r.seed_class, r.base_ref, r.caught, r.false_alarm, r.severity, r.latency_ms, r.tokens_out, r.error ?? null)
+    await db.prepare(`INSERT INTO arena_runs (created_at, model, knobs_json, seed_id, seed_class, base_ref, caught, false_alarm, severity, latency_ms, tokens_out, error, cohort_sha256, case_sha256)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`)
+      .bind(r.created_at, r.model, r.knobs_json, r.seed_id, r.seed_class, r.base_ref, r.caught, r.false_alarm, r.severity, r.latency_ms, r.tokens_out, r.error ?? null, r.cohort_sha256 ?? null, r.case_sha256 ?? null)
       .run();
   }
 }
@@ -24,4 +24,15 @@ export async function readArenaScores(db: D1Like): Promise<ModelScore[]> {
     false_alarm_rate: r.false_alarm_rate == null ? null : Number(r.false_alarm_rate),
     p50_latency_ms: r.p50_latency_ms == null ? null : Number(r.p50_latency_ms),
   }));
+}
+
+export async function readArenaCohorts(db: D1Like): Promise<CohortScore[]> {
+  try {
+    const { results } = await db.prepare('SELECT * FROM arena_evidence_scores ORDER BY model, cohort_sha256, knobs_json').bind().all();
+    return results as CohortScore[];
+  } catch (error) {
+    // During a rolling upgrade raw scores remain readable; a pre-0003 DB cannot recommend.
+    if (error instanceof Error && /no such table: (?:main\.)?arena_evidence_scores\b/.test(error.message)) return [];
+    throw error;
+  }
 }

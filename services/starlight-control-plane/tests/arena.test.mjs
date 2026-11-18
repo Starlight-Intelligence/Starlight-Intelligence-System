@@ -5,9 +5,9 @@ import { join } from 'node:path';
 import { DatabaseSync } from 'node:sqlite';
 import test from 'node:test';
 import { applySeed, prepareCases, runArena } from '../arena/run.ts';
-import { DEFAULT_THRESHOLDS, readThresholds, recommendGateModels, scoreCase, scoreRows } from '../arena/score.ts';
+import { DEFAULT_THRESHOLDS, readThresholds, recommendGateModels, scoreCase, scoreCohorts, scoreRows } from '../arena/score.ts';
 import { SEEDS, SEED_CLASSES, globToRegExp, selectSeeds } from '../arena/seeds.ts';
-import { readArenaScores, recordArenaRows } from '../arena/store.ts';
+import { readArenaCohorts, readArenaScores, recordArenaRows } from '../arena/store.ts';
 import { handleRequest, sha256Hex } from '../src/handler.ts';
 import { DEFAULT_MAX_TOKENS, parseKnobs } from '../src/review.ts';
 import { main } from '../scripts/review-benchmark.mjs';
@@ -195,16 +195,16 @@ test('the arena keeps each model at 20 request starts per minute across all its 
 });
 
 const score = (model, n_seeded, caught, n_clean, alarms) => ({
-  model, n: n_seeded + n_clean, n_seeded, n_clean,
+  model, cohort_sha256: 'a'.repeat(64), knobs_json: '{}', n_incomplete: 0, n_seeded, n_clean,
   catch_rate: n_seeded ? caught / n_seeded : null, false_alarm_rate: n_clean ? alarms / n_clean : null, p50_latency_ms: 1000,
 });
 
 test('recommendGateModels applies the thresholds, the family check and lists reasons', () => {
-  assert.deepEqual(DEFAULT_THRESHOLDS, { minCatch: 0.9, maxFalseAlarm: 0.1, minN: 20 });
+  assert.deepEqual(DEFAULT_THRESHOLDS, { minCatch: 0.9, maxFalseAlarm: 0.1, minN: 20, minClean: 29 });
   const rec = recommendGateModels([
-    score(OSS, 20, 18, 10, 1), // exactly on every threshold
+    score(OSS, 20, 18, 30, 3), // exactly on every threshold
     score('@cf/qwen/qwen3.8-27b', 19, 19, 10, 0), // too few seeded cases
-    score('@cf/moonshotai/kimi-k2.8', 40, 35, 10, 0), // 87.5% catch
+    score('@cf/moonshotai/kimi-k2.8', 40, 35, 30, 0), // 87.5% catch
     score('@cf/openai/gpt-oss-20b', 40, 40, 10, 2), // 20% false alarms
     score('@cf/xai/grok-5', 40, 40, 0, 0), // no clean controls
     score(DS, 40, 40, 10, 0), // perfect, but not in a known reviewer family
@@ -212,7 +212,7 @@ test('recommendGateModels applies the thresholds, the family check and lists rea
   ]);
   assert.deepEqual(rec.recommended, [OSS]);
   const why = Object.fromEntries(rec.models.map((m) => [m.model, m.reasons.join(' | ')]));
-  assert.match(why[OSS], /catch 90\.0% over 20 seeded, false alarms 10\.0% over 10 clean/);
+  assert.match(why[OSS], /catch 90\.0% over 20 seeded, false alarms 10\.0% over 30 clean/);
   assert.match(why['@cf/qwen/qwen3.8-27b'], /only 19 seeded case\(s\); needs at least 20/);
   assert.match(why['@cf/moonshotai/kimi-k2.8'], /catch rate 87\.5% is below 90\.0%/);
   assert.match(why['@cf/openai/gpt-oss-20b'], /false-alarm rate 20\.0% is above 10\.0%/);
@@ -221,18 +221,19 @@ test('recommendGateModels applies the thresholds, the family check and lists rea
   assert.match(why['@cf/anthropic/claude-x'], /maker != checker/);
   assert.match(rec.note, /Nothing here changes STARLIGHT_GATE_MODELS/);
   // Thresholds are overridable, from arguments or from the environment.
-  assert.deepEqual(recommendGateModels([score('@cf/moonshotai/kimi-k2.8', 40, 35, 10, 0)], { minCatch: 0.85 }).recommended, ['@cf/moonshotai/kimi-k2.8']);
+  assert.deepEqual(recommendGateModels([score('@cf/moonshotai/kimi-k2.8', 40, 35, 30, 0)], { minCatch: 0.85 }).recommended, ['@cf/moonshotai/kimi-k2.8']);
   const t = readThresholds({ STARLIGHT_ARENA_MIN_CATCH: '0.8', STARLIGHT_ARENA_MAX_FALSE_ALARM: '0.2', STARLIGHT_ARENA_MIN_N: '5' });
-  assert.deepEqual(t, { minCatch: 0.8, maxFalseAlarm: 0.2, minN: 5 });
+  assert.deepEqual(t, { minCatch: 0.8, maxFalseAlarm: 0.2, minN: 5, minClean: 29 });
   assert.deepEqual(readThresholds({}), DEFAULT_THRESHOLDS);
   assert.throws(() => readThresholds({ STARLIGHT_ARENA_MIN_CATCH: '90' }), /between 0 and 1/);
   assert.throws(() => readThresholds({ STARLIGHT_ARENA_MIN_N: '0' }), /positive integer/);
 });
 
-function fakeD1() {
+function fakeD1(migrated = true) {
   const db = new DatabaseSync(':memory:');
   db.exec(readFileSync(new URL('../migrations/0001_review_runs.sql', import.meta.url), 'utf8'));
   db.exec(readFileSync(new URL('../migrations/0002_arena.sql', import.meta.url), 'utf8'));
+  if (migrated) db.exec(readFileSync(new URL('../migrations/0003_arena_evidence.sql', import.meta.url), 'utf8'));
   return {
     raw: db,
     prepare: (q) => ({
@@ -255,8 +256,9 @@ test('0002_arena migration applies on node:sqlite; the view matches scoreRows; G
   // Applying twice is harmless (IF NOT EXISTS), as wrangler may re-run a migration file locally.
   db.raw.exec(readFileSync(new URL('../migrations/0002_arena.sql', import.meta.url), 'utf8'));
   const rows = [
-    ...Array.from({ length: 20 }, (_, i) => row(OSS, 'auth-bypass', i < 19 ? 1 : 0, 0, 1000 + i * 10)),
-    row(OSS, 'clean', 0, 0, 5000), row(OSS, 'clean', 0, 1, 7000),
+    ...Array.from({ length: 20 }, (_, i) => ({ ...row(OSS, 'test-unit', i < 19 ? 1 : 0, 0, 1000 + i * 10), case_sha256: i.toString(16).padStart(64, '0'), cohort_sha256: 'a'.repeat(64) })),
+    { ...row(OSS, 'clean', 0, 0, 5000), case_sha256: 'b'.repeat(64), cohort_sha256: 'a'.repeat(64) },
+    { ...row(OSS, 'clean', 0, 1, 7000), case_sha256: 'c'.repeat(64), cohort_sha256: 'a'.repeat(64) },
     row(DS, 'gate-logic', 1, 0, 300), row(DS, 'clean', 0, 0, 100), row(DS, 'gate-logic', 0, 0, 200), row(DS, 'clean', 0, 0, 400),
   ];
   await recordArenaRows(db, rows);
@@ -279,9 +281,11 @@ test('0002_arena migration applies on node:sqlite; the view matches scoreRows; G
   assert.equal(res.status, 200);
   const body = await res.json();
   assert.equal(body.scores.length, 2);
+  assert.deepEqual(body.cohorts, scoreCohorts(rows));
+  assert.deepEqual(body.cohorts.map(c => c.model), [OSS]); // legacy rows are observational only
   // OSS: 95% catch but 50% false alarms; with the false-alarm ceiling lifted by env it qualifies.
   assert.deepEqual(body.recommendation.recommended, []);
-  const lifted = await (await get({ REVIEWS_DB: db, STARLIGHT_ARENA_MAX_FALSE_ALARM: '0.5' })).json();
+  const lifted = await (await get({ REVIEWS_DB: db, STARLIGHT_ARENA_MAX_FALSE_ALARM: '0.5', STARLIGHT_ARENA_MIN_CLEAN: '2' })).json();
   assert.deepEqual(lifted.recommendation.recommended, [OSS]);
   assert.equal((await get({ REVIEWS_DB: db, STARLIGHT_ARENA_MIN_N: 'x' })).status, 503);
 });
@@ -324,4 +328,88 @@ test('review-benchmark --arena prints the per-model table, writes --out and neve
   assert.equal(JSON.parse(file).base_ref, 'fixture@abc');
   assert.equal(res.rows.length, 8);
   await assert.rejects(main(['--arena', '--models', OSS], { env: {} }), /--base-diff/);
+});
+
+test('promotion does not turn repeated public fixtures and a timed-out clean review into evidence', async () => {
+  const db = fakeD1();
+  const options = { minN: 2, minClean: 1, minCatch: 1, maxFalseAlarm: 0 };
+  const generated = await runArena({ ai: { run: async () => answer('pass', []) }, models: [OSS], seeds: TWO,
+    baseDiff: BASE, baseRef: 'copy A', cfg: CFG, sleep: async () => {} });
+  const seed = { ...generated.rows[0], caught: 1 };
+  const clean = { ...generated.rows[1], error: 'timeout' };
+  const rows = [...Array.from({ length: 20 }, (_, i) => ({ ...seed, seed_id: 'label-' + i, base_ref: 'copy ' + i })), clean];
+  await recordArenaRows(db, rows);
+  const [raw] = await readArenaScores(db);
+  assert.deepEqual([raw.n_seeded, raw.n_clean, raw.catch_rate, raw.false_alarm_rate], [20, 1, 1, 0]);
+  const [cohort] = scoreCohorts(rows);
+  assert.deepEqual(await readArenaCohorts(db), [cohort]);
+  assert.equal(cohort.n_seeded, 1);
+  assert.equal(cohort.n_clean, 0);
+  assert.equal(cohort.n_incomplete, 1);
+  assert.deepEqual(recommendGateModels([cohort], options).recommended, []);
+});
+
+test('the runner content-addresses effective inputs and separates execution protocols', async () => {
+  const ai = { run: async () => answer('pass', []) };
+  const seeds = [...TWO, SEEDS.find(s => s.id === 'clean-2')];
+  const run = (baseRef, cfg, baseDiff = BASE) => runArena({ ai, models: [OSS], seeds, baseDiff, baseRef, cfg, sleep: async () => {} });
+  const a = await run('alias A', CFG);
+  const b = await run('alias B', CFG);
+  const c = await run('alias B', { ...CFG, knobs: parseKnobs(JSON.stringify({ [OSS]: { reasoning_effort: 'low' } })) });
+  assert.equal(a.cohorts.length, 1);
+  assert.equal(a.cohorts[0].n_clean, 1); // both clean seed labels send the same bytes
+  assert.equal(a.rows[1].case_sha256, a.rows[2].case_sha256);
+  assert.notEqual(a.rows[0].case_sha256, a.rows[1].case_sha256);
+  assert.deepEqual(a.cohorts, b.cohorts); // human-supplied aliases do not mint evidence
+  assert.notEqual(a.cohorts[0].cohort_sha256, c.cohorts[0].cohort_sha256);
+  await assert.rejects(run('empty', CFG, ''), /no reviewable changes/);
+  const db = fakeD1();
+  const history = [...a.rows, ...b.rows, ...c.rows];
+  await recordArenaRows(db, history);
+  const cohorts = await readArenaCohorts(db);
+  assert.deepEqual(cohorts, scoreCohorts(history));
+  assert.equal(cohorts.length, 2);
+  assert.ok(cohorts.every(x => x.n_clean === 1 && x.n_seeded === 1));
+  const rec = recommendGateModels(cohorts, { minN: 1, minClean: 1, minCatch: 0 });
+  assert.ok(rec.models.every(x => x.qualifies && x.cohort_sha256));
+  assert.deepEqual(rec.recommended, []); // a bare model id cannot pick a setting
+});
+
+test('replayed disagreement retains the adverse outcome; invalid clean controls abstain', async () => {
+  const common = { ...row(OSS, 'clean', 0, 0, 4), cohort_sha256: 'a'.repeat(64) };
+  const clean = { ...common, case_sha256: 'b'.repeat(64) };
+  const seeded = { ...common, case_sha256: 'c'.repeat(64), seed_class: 'seed-1', caught: 1 };
+  const conflicting = { ...common, case_sha256: 'd'.repeat(64) };
+  const rows = [clean, { ...clean, false_alarm: 1 }, seeded, { ...seeded, caught: 0 },
+    conflicting, { ...conflicting, seed_class: 'contradictory' }];
+  const db = fakeD1();
+  await recordArenaRows(db, rows);
+  const [cohort] = await readArenaCohorts(db);
+  assert.deepEqual([cohort], scoreCohorts(rows));
+  assert.deepEqual([cohort.n_seeded, cohort.n_clean, cohort.n_incomplete, cohort.catch_rate, cohort.false_alarm_rate], [1, 1, 1, 0, 1]);
+  const rec = recommendGateModels([cohort], { minN: 1, minClean: 1, minCatch: 0, maxFalseAlarm: 1 });
+  assert.match(rec.models[0].reasons.join(' '), /incomplete/);
+  assert.deepEqual(rec.recommended, []);
+  const legacy = scoreRows([clean, seeded]);
+  assert.deepEqual(recommendGateModels(legacy, { minN: 1, minClean: 1, minCatch: 0 }).recommended, []);
+});
+
+test('a previous schema still serves observations and has no promotion evidence', async () => {
+  const db = fakeD1(false);
+  db.raw.exec("INSERT INTO arena_runs(created_at,model,seed_id,seed_class,base_ref) VALUES (1,'legacy','test','clean','original')");
+  assert.equal((await readArenaScores(db))[0].n, 1);
+  assert.deepEqual(await readArenaCohorts(db), []);
+  await assert.rejects(readArenaCohorts({ prepare() { throw new Error('unavailable database'); } }), /unavailable database/);
+});
+
+test('the default clean floor distinguishes 28 from 29 distinct completed controls in one cohort', async () => {
+  const db = fakeD1();
+  const evidence = Array.from({ length: 49 }, (_, i) => ({
+    ...row(OSS, i < 20 ? 'seeded' : 'clean', i < 20 ? 1 : 0, 0, 10),
+    cohort_sha256: 'e'.repeat(64), case_sha256: i.toString(16).padStart(64, '0'),
+  }));
+  await recordArenaRows(db, evidence.slice(0, 48));
+  assert.deepEqual(recommendGateModels(await readArenaCohorts(db)).recommended, []);
+  await recordArenaRows(db, evidence.slice(48));
+  assert.deepEqual(recommendGateModels(await readArenaCohorts(db)).recommended, [OSS]);
 });

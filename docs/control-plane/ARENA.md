@@ -8,7 +8,7 @@ It measures and recommends. It never posts a sign-off, never edits `wrangler.jso
 changes `STARLIGHT_GATE_MODELS`. A human reads the scores and edits the config.
 
 Code: `services/starlight-control-plane/arena/` (`seeds.ts`, `run.ts`, `score.ts`, `store.ts`),
-migration `migrations/0002_arena.sql`, CLI `scripts/review-benchmark.mjs --arena`, route
+migrations `migrations/0002_arena.sql` and `migrations/0003_arena_evidence.sql`, CLI `scripts/review-benchmark.mjs --arena`, route
 `GET /v1/arena/scores`.
 
 ## How it works
@@ -93,24 +93,27 @@ model                                            catch %   false alarm %  p50 s 
 plus the recommendation below. The view and the CLI use the same definitions (`scoreRows` in
 `arena/score.ts`, tested against the view on node:sqlite).
 
-## Promotion rule
+## Promotion evidence
 
-`recommendGateModels(scores, { minCatch: 0.9, maxFalseAlarm: 0.1, minN: 20 })` returns the models
-that qualify and the reasons for every model. A model qualifies only when all of these hold:
+The CLI and authenticated score endpoint expose three fields. `scores` describes every stored observation, including historical rows and retries. `cohorts` describes distinct evaluation inputs for each model and configuration. `recommendation` uses the cohorts.
 
-1. at least `minN` seeded cases (default 20);
-2. catch rate at or above `minCatch` (default 90%);
-3. at least one clean control, with a false-alarm rate at or below `maxFalseAlarm` (default 10%);
-4. the gate itself would accept it: a known reviewer family in `MODEL_FAMILIES` and not a
-   Claude/Anthropic model. GLM and DeepSeek fail this today until the estate adds their families
-   to `tools/cross-review.mjs` and `tools/lib/harness-identity.mjs`.
+The runner computes a SHA-256 digest over the review-visible chunks for each case. The two clean seed aliases on the same diff contribute one case. Another submission of identical input under a different base ref also contributes one case. The cohort digest binds the requested model ID, effective prompt and knobs, selected seed rules, protocol version, gateway, chunk size, limits and concurrency. Bump the protocol version in `arena/run.ts` when changing scorer semantics.
 
-Thresholds are overridable with `STARLIGHT_ARENA_MIN_CATCH`, `STARLIGHT_ARENA_MAX_FALSE_ALARM`
-(0 to 1) and `STARLIGHT_ARENA_MIN_N` (positive integer), for the Worker route and the CLI. A
-malformed value is refused (503 on the route, an error in the CLI).
+Repeated outcomes retain the adverse observation for each input. A seeded case passes only when every observed attempt caught it. A clean case records a false alarm when any attempt raised one. Errors and inconsistent clean/seed labels put that unit into `n_incomplete` and make its cohort ineligible. Keep raw observations to investigate discrepancies.
 
-The output is a recommendation. Promoting a model means a human edits `STARLIGHT_GATE_MODELS` in
-`wrangler.jsonc` and redeploys.
+`recommendGateModels` recommends a configuration only when the cohort has:
+
+1. At least 20 distinct completed seeded cases and a catch rate of at least 90%.
+2. At least 29 distinct completed clean inputs and a false-alarm rate of at most 10%.
+3. Zero incomplete cases, a known reviewer family, and eligibility for the existing human-controlled gate.
+
+The default of 29 is a coverage floor. With zero alarms in 29 independently sampled clean cases, the exact one-sided 95% upper bound is about 9.8%. Rates reported by the Arena are point estimates. Distinct bytes cannot establish independent sampling or ground-truth quality. Use a frozen holdout of unrelated reviewed diffs before promoting a reviewer. Verify the upstream revision when an endpoint exposes only a moving alias.
+
+Thresholds use `STARLIGHT_ARENA_MIN_CATCH`, `STARLIGHT_ARENA_MAX_FALSE_ALARM`, `STARLIGHT_ARENA_MIN_N` and `STARLIGHT_ARENA_MIN_CLEAN`. The counts must be positive integers. The two rates must be between 0 and 1.
+
+Each `recommendation.models` entry identifies its cohort and exact `knobs_json` with a decision and reasons. The compatibility list `recommendation.recommended` contains bare model names only when one observed evidence cohort exists for that model and it passes. When multiple configurations exist, review the individual decisions and configure the exact selected settings. Only a human changes `STARLIGHT_GATE_MODELS` and redeploys.
+
+Apply migration 0003 before loading new results. Previous rows keep their original scores and lack case/cohort digests, so they cannot qualify a model for promotion. During a rolling upgrade, a database with 0002 alone still serves historical scores with an empty cohort list. Re-run the benchmark on versioned fixtures to collect eligible evidence.
 
 ## Nightly run: disabled
 

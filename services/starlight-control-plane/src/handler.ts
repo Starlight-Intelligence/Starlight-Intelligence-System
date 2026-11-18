@@ -1,3 +1,5 @@
+import { sha256Hex } from './digest.ts';
+export { sha256Hex } from './digest.ts';
 // HTTP surface. Authenticates the caller, then forwards one operation to the single queue
 // Durable Object. Kept free of Cloudflare imports so node --test can drive it with a fake stub.
 
@@ -7,7 +9,7 @@ import { FRESH_MS, normalize, parseRouting, plan, type Action } from './events.t
 import { verifySignature } from './github.ts';
 import { listReviews, type D1Like } from './review.ts';
 import { readThresholds, recommendGateModels, type ArenaEnv } from '../arena/score.ts';
-import { readArenaScores } from '../arena/store.ts';
+import { readArenaCohorts, readArenaScores } from '../arena/store.ts';
 
 export type Op =
   | 'enqueue' | 'approve' | 'claim' | 'heartbeat' | 'complete' | 'release' | 'verify' | 'get' | 'status' | 'outbox';
@@ -93,10 +95,6 @@ export async function handleGithubEvent(request: Request, env: HandlerEnv, stub:
 const ROLES = new Set<Role>(['producer', 'worker', 'verifier', 'human']);
 const MAX_BODY_BYTES = 16 * 1024;
 
-export async function sha256Hex(text: string): Promise<string> {
-  const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
-  return [...new Uint8Array(digest)].map((b) => b.toString(16).padStart(2, '0')).join('');
-}
 
 function json(status: number, body: unknown): Response {
   return new Response(JSON.stringify(body), { status, headers: { 'content-type': 'application/json' } });
@@ -195,8 +193,8 @@ export async function handleRequest(request: Request, env: HandlerEnv, stub: Que
     if (!env.REVIEWS_DB) return json(503, { error: 'REVIEWS_DB is not bound' });
     let thresholds;
     try { thresholds = readThresholds(env); } catch (e) { return json(503, { error: String((e as Error).message) }); }
-    const scores = await readArenaScores(env.REVIEWS_DB);
-    return json(200, { scores, recommendation: recommendGateModels(scores, thresholds) });
+    const [scores, cohorts] = await Promise.all([readArenaScores(env.REVIEWS_DB), readArenaCohorts(env.REVIEWS_DB)]);
+    return json(200, { scores, cohorts, recommendation: recommendGateModels(cohorts, thresholds) });
   }
 
   let op: Op | null = null;
