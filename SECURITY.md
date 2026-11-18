@@ -34,7 +34,7 @@ sovereignty-clause violations.
 ## Report a vulnerability
 
 Submit a report through the repository's
-[private vulnerability reporting form](https://github.com/frankxai/Starlight-Intelligence-System/security/advisories/new).
+[private vulnerability reporting form](https://github.com/Starlight-Intelligence/Starlight-Intelligence-System/security/advisories/new).
 GitHub sends the report privately to the repository maintainers and supports
 private discussion while the report is assessed.
 

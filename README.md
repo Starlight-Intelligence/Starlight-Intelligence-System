@@ -8,12 +8,12 @@ Persistent memory. Attested knowledge. Sovereign control.
 
 Claude Code, Cursor, Codex, Gemini CLI, OpenCode, Antigravity — they all read from and write to the **same six semantic vaults**, with full provenance. No more explaining the same thing to every agent. No drift. No lost decisions.
 
-[![version](https://img.shields.io/badge/version-8.5.1-7fffd4?style=flat-square&labelColor=0d1117)](https://github.com/frankxai/Starlight-Intelligence-System/releases)
+[![version](https://img.shields.io/badge/version-8.5.1-7fffd4?style=flat-square&labelColor=0d1117)](https://github.com/Starlight-Intelligence/Starlight-Intelligence-System/releases)
 [![protocol](https://img.shields.io/badge/SIP-v1.1.1-c084fc?style=flat-square&labelColor=0d1117)](SIP.md)
 [![license](https://img.shields.io/badge/license-MIT-white?style=flat-square&labelColor=0d1117)](LICENSE)
 [![protocol page](https://img.shields.io/badge/protocol-starlightintelligence.org%2Fprotocol-78a6ff?style=flat-square&labelColor=0d1117)](https://starlightintelligence.org/protocol)
-[![deploy](https://github.com/frankxai/Starlight-Intelligence-System/actions/workflows/vercel-deploy.yml/badge.svg)](https://github.com/frankxai/Starlight-Intelligence-System/actions/workflows/vercel-deploy.yml)
-[![github stars](https://img.shields.io/github/stars/frankxai/Starlight-Intelligence-System?style=flat-square&labelColor=0d1117&color=ffd700)](https://github.com/frankxai/Starlight-Intelligence-System/stargazers)
+[![deploy](https://github.com/Starlight-Intelligence/Starlight-Intelligence-System/actions/workflows/vercel-deploy.yml/badge.svg)](https://github.com/Starlight-Intelligence/Starlight-Intelligence-System/actions/workflows/vercel-deploy.yml)
+[![github stars](https://img.shields.io/github/stars/Starlight-Intelligence/Starlight-Intelligence-System?style=flat-square&labelColor=0d1117&color=ffd700)](https://github.com/Starlight-Intelligence/Starlight-Intelligence-System/stargazers)
 
 Starlight Intelligence is an AI systems project led by Frank Riemer in Amsterdam. This repository contains its public protocol and reference source. [About the project and product](https://starlightintelligence.ai/about) · [Released open-source foundations](https://starlightintelligence.ai/open-source) · [Contribute and explore the community proposal](https://starlightintelligence.ai/community).
 
@@ -28,7 +28,7 @@ Starlight is modular. Use the smallest part that solves your problem; a hosted a
 | Explore the public interface | [Deploy Starlight Explorer](#deploy-starlight-explorer) | Read-only Explorer, **not** the private agent runtime |
 | Improve the platform | [Contribution guide](CONTRIBUTING.md) | Tests, fixes, adapters, documentation and protocol proposals |
 
-**Canonical source today:** this `frankxai/Starlight-Intelligence-System` repository owns issues, pull requests and releases. Same-named copies in other organizations are **not alternate contribution targets**. If repository ownership changes, follow the verified canonical destination announced here; do not open duplicate PRs against mirrors.
+**Canonical source today:** this `Starlight-Intelligence/Starlight-Intelligence-System` repository owns issues, pull requests and releases. It moved here from `frankxai/Starlight-Intelligence-System` in November 2026, and the old URL redirects. Same-named copies in other organizations are **not alternate contribution targets**; do not open duplicate PRs against mirrors.
 
 ## Deploy Starlight Explorer
 
@@ -68,7 +68,7 @@ Starlight Intelligence System (SIS) is the **sovereign AI substrate** for memory
 1. Read **`CLAUDE.md`** (deepest) and **`AGENTS.md`** (SIP file-contract / Codex entry).
 2. Check `agents/AGENT_REGISTRY.md` before inventing agents.
 3. Memory first: vaults exist — query, then write durable notes for future sessions.
-4. Run harness gates before claiming production readiness; prefer proof over console language ([#35](https://github.com/frankxai/Starlight-Intelligence-System/issues/35)).
+4. Run harness gates before claiming production readiness; prefer proof over console language ([#35](https://github.com/Starlight-Intelligence/Starlight-Intelligence-System/issues/35)).
 5. Cross-links: [starlight-memory](https://github.com/frankxai/starlight-memory) · [starlight-evals](https://github.com/frankxai/starlight-evals) · [starlight-swarm](https://github.com/frankxai/starlight-swarm) · [ACOS](https://github.com/frankxai/agentic-creator-os) · [FrankX](https://github.com/frankxai/FrankX).
 
 ## Foundry: portable capabilities for ChatGPT and Codex
@@ -103,7 +103,7 @@ The skills-only [Agent Designer plugin](plugins/starlight-agent-designer) turns 
 ## 60-second start
 
 ```bash
-git clone https://github.com/frankxai/Starlight-Intelligence-System
+git clone https://github.com/Starlight-Intelligence/Starlight-Intelligence-System
 cd Starlight-Intelligence-System && npm install && npm run build
 node dist/cli.js init --vaults
 ```
@@ -445,7 +445,7 @@ Voice archetypes are abstract; named agents are specific implementations. Anyone
 ## Development
 
 ```bash
-git clone https://github.com/frankxai/Starlight-Intelligence-System.git
+git clone https://github.com/Starlight-Intelligence/Starlight-Intelligence-System.git
 cd Starlight-Intelligence-System
 npm install
 npm run build       # tsc to dist/
@@ -482,7 +482,7 @@ Browse them: [docs/visuals/VISUALS.md](docs/visuals/VISUALS.md) · Motion experi
 - [FrankX](https://frankx.ai) — Architect brand; SIP thought leadership
 - [Public Vaults](https://starlightintelligence.org) — Browse and fork vaults
 - [Protocol page](https://starlightintelligence.org/protocol) — Canonical SIP spec
-- [GitHub](https://github.com/frankxai/Starlight-Intelligence-System) — Source, issues, discussions
+- [GitHub](https://github.com/Starlight-Intelligence/Starlight-Intelligence-System) — Source, issues, discussions
 
 ---
 
