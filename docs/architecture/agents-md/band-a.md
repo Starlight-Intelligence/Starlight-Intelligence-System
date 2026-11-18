@@ -32,6 +32,10 @@ Frank = Systems Architect x Composer x Gamer x Builder x GenCreator
 5. **Goal-driven.** Turn a vague ask into a verifiable target. Reproduce a bug with
    a test before fixing it.
 
+### Portfolio experience work
+
+For UI, editorial and media changes, load the [Frontier Experience Constitution](https://github.com/Starlight-Intelligence/starlight-design-intelligence/blob/e25fab4c5a0dac2ea8c7b91e9397972f5af4b454/portfolio/frontier-experience-constitution.md). In the owning repository record the resolved revision, brand pack, real user task and review evidence. Keep its release authority and local gates in force.
+
 ### Decision discipline
 
 Before any structural change: what specific problem, who has it, what is the
