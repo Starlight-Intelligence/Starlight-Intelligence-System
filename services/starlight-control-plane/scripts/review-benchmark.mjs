@@ -95,7 +95,7 @@ export async function arena(args, { env, cfg, chunkBytes, models, ai, say, redac
   const baseRef = args['base-ref'] || args['base-diff'];
   const caseConcurrency = posInt(args['case-concurrency'], undefined, 'case-concurrency');
   const result = await runArena({ ai, models, seeds, baseDiff: readFileSync(args['base-diff'], 'utf8'), baseRef, cfg, chunkBytes, caseConcurrency, now });
-  const recommendation = recommendGateModels(result.scores, readThresholds(env));
+  const recommendation = recommendGateModels(result.cohorts, readThresholds(env));
   say(`reviewer arena: ${seeds.length} seed(s) selected, ${seeds.length - result.skipped.length} applied, base=${flat(baseRef, 200)}`);
   for (const k of result.skipped) say(`  skipped ${k.seed_id}: ${k.reason}`);
   say('');
@@ -107,8 +107,8 @@ export async function arena(args, { env, cfg, chunkBytes, models, ai, say, redac
   for (const r of result.rows.filter((x) => x.error)) say(`  ! ${flat(r.model, 80)} ${r.seed_id}: ${sanitizeInline(r.error, 300)}`);
   say('');
   say(`recommended for STARLIGHT_GATE_MODELS (not applied): ${recommendation.recommended.length ? recommendation.recommended.join(', ') : '(none)'}`);
-  for (const m of recommendation.models) say(`  ${m.qualifies ? '+' : '-'} ${flat(m.model, 80)}: ${m.reasons.map((x) => flat(x, 400)).join('; ')}`);
-  const out = { base_ref: baseRef, rows: result.rows, skipped: result.skipped, scores: result.scores, recommendation };
+  for (const m of recommendation.models) say(`  ${m.qualifies ? '+' : '-'} ${flat(m.model, 80)} [${m.cohort_sha256?.slice(0, 12) ?? 'unversioned'}]: ${m.reasons.map((x) => flat(x, 400)).join('; ')}`);
+  const out = { base_ref: baseRef, rows: result.rows, skipped: result.skipped, scores: result.scores, cohorts: result.cohorts, recommendation };
   if (args.out) {
     // Model errors can echo request details; the token is scrubbed from the file as from the console.
     writeFileSync(args.out, `${redact(JSON.stringify(out, null, 2))}\n`);
