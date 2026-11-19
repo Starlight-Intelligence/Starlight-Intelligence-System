@@ -1,0 +1,15 @@
+{
+  "method": "minilm-closed-catalog-abstain-v1",
+  "purpose": "A label-blind, fixed-method semantic challenger for the spatial asset selection suite.",
+  "encoder": "sentence-transformers/all-MiniLM-L6-v2 using the lab's previously pinned quantized AVX2 ONNX, 256 tokens, attention-masked mean and L2 normalization, CPU single-thread",
+  "document": "Name/title and human-readable description/text in that order when both exist. Use one value per alias group, choosing name then title and description then text; when the catalog has no description alias, append ordinary descriptive scalar/list fields sorted by key, omitting IDs, links, hashes, and provenance. Asset ID only breaks ties. No task-specific hints, expansion, or per-case overrides.",
+  "query": "Verbatim user query text only.",
+  "score": "Cosine similarity via dot product against precomputed unit vectors for every catalog candidate. No lexical fusion or query rewriting.",
+  "abstention": {
+    "min_top_cosine_inclusive": 0.42,
+    "min_top_minus_second_inclusive": 0.055,
+    "decision": "Return top-1 only when both thresholds pass, otherwise abstain. For singleton catalogs apply the cosine threshold only. Ties sort by ascending asset identifier."
+  },
+  "validation": "Exactly one immutable prediction per case ID. Record full-precision top two scores in a distinct diagnostics file; hash the candidate data before reading labels or invoking canonical scorer; zero test-tuned thresholds.",
+  "limitations": "Thresholds are engineering priors, not calibrated probabilities. This is a separated author/challenger workflow with synthetic fixtures, not a human-evaluated or independent holdout."
+}

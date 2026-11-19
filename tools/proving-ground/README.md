@@ -19,6 +19,20 @@ where is it weak?"** across eight lanes, with receipts, published, on a cadence.
 | `../../agents/starlight-evaluator.md` | The Luminor-kernel evaluator disposition |
 | `../../.claude/commands/starlight-eval.md` | The command |
 
+## Reproduce a public challenge
+
+Start with [spatial asset selection](challenges/spatial-asset-selection/README.md).
+The exercise accepts data-only predictions and returns a per-case receipt. A
+counterexample that shows where the baseline fails is a useful contribution.
+
+To ask for review, open a [community evaluation issue](https://github.com/Starlight-Intelligence/Starlight-Intelligence-System/issues/new?template=community-reproduction.yml).
+The submitting builder chooses what becomes public. A maintainer can mark a case
+proposed, reproduce it at the supplied revision, or close it with a reason. Record
+the independent replay and credit the contributor before incorporating a case in
+a reviewed change. Public challenges are practice and reproduction evidence.
+Only the existing [evolution review](evolution/README.md) may consider protected
+evaluation evidence for a change to an operating route.
+
 ## Run
 
 ```

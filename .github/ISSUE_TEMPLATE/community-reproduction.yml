@@ -1,0 +1,38 @@
+name: Community evaluation or reproduction
+description: Propose a public test case or report what happened when you ran a versioned challenge.
+title: "Community evaluation — "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This issue will be public under your GitHub account when you submit it. Review every field before submitting. Someone may retain a copy after you edit or close it. Keep sensitive cases private. An issue requests human review; it does not enroll material in training, verify a result, or authorize release. Try the [spatial asset challenge](https://github.com/Starlight-Intelligence/Starlight-Intelligence-System/tree/main/tools/proving-ground/challenges/spatial-asset-selection) or read the [review and withdrawal process](https://github.com/Starlight-Intelligence/Starlight-Intelligence-System/blob/main/docs/communities/contribution-reviews.md).
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What did you contribute?
+      options:
+        - A new evaluation case
+        - A reproduction of an existing challenge
+        - A counterexample or correction
+    validations:
+      required: true
+  - type: textarea
+    id: public_draft
+    attributes:
+      label: Public reproduction draft
+      description: Paste the public excerpt you reviewed in Commons, or write a short account of the task, expected result, observed result and limits. A proposed case can say that it has not been run.
+      placeholder: "What would another builder need to see the same result?"
+    validations:
+      required: true
+  - type: textarea
+    id: revision
+    attributes:
+      label: Reproduction references
+      description: For an observed run, include the challenge revision, candidate revision or prediction digest, and the exact repeatable command. Add a public receipt link or paste a short redacted excerpt. Omit private links, credentials and proprietary inputs.
+  - type: checkboxes
+    id: public_consent
+    attributes:
+      label: Confirm public disclosure
+      options:
+        - label: I reviewed this exact excerpt, can share it publicly, and have removed private information. I understand this issue is public before maintainer review. This submission grants no separate permission for model training.
+          required: true

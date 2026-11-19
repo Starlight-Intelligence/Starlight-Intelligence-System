@@ -1,0 +1,20 @@
+{
+  "assets": [
+    {
+      "id": "ds_R307_01",
+      "url": "https://huggingface.co/datasets/nvidia/USDCraft-10K/resolve/6fbffb56c443237ddae9f6c7a05b72263fd1469e/rigid/office_commercial_hospitality/R307_stapler/01_classic_desktop_stapler/physx/model.usdc",
+      "sha256": "9503ba5040cf8109b40aa089177466e9b4c7e2dbcda3ebf3dc9c19ebf496c367",
+      "display_meshes": 9
+    },
+    {
+      "id": "ds_R307_02",
+      "url": "https://huggingface.co/datasets/nvidia/USDCraft-10K/resolve/6fbffb56c443237ddae9f6c7a05b72263fd1469e/rigid/office_commercial_hospitality/R307_stapler/02_long_arm_stapler/physx/model.usdc",
+      "sha256": "73a67084025118881b75c8a0b7b2542a158fb70ea568dcec9b80573cdf4360a8",
+      "display_meshes": 16
+    }
+  ],
+  "source": "NVIDIA USDCraft-10K",
+  "revision": "6fbffb56c443237ddae9f6c7a05b72263fd1469e",
+  "license": "Apache-2.0",
+  "process": "Material-lit rasterizations of source visual geometry. No synthesized or substituted objects."
+}

@@ -1,0 +1,90 @@
+{
+  "source": {
+    "dataset": "nvidia/USDCraft-10K",
+    "revision": "6fbffb56c443237ddae9f6c7a05b72263fd1469e",
+    "manifest_sha256": "484e0bde98a7b14de4a1b45728f8ddef2ef65b6732f966e24ec7dc8862e280ce",
+    "license": "Apache-2.0"
+  },
+  "assets": [
+    {
+      "id": "ds_R302_01",
+      "title": "Small Magnetic Whiteboard",
+      "category": "Whiteboard",
+      "description": "A wall-mounted steel writing panel with an aluminum frame and a marker tray.",
+      "upstream_path": "rigid/office_commercial_hospitality/R302_whiteboard/01_small_magnetic_whiteboard",
+      "physx_sha256": "7b546523a7ddf7187ee4cb56d697ea462f59efd2add5cfd53ba3333c45099882"
+    },
+    {
+      "id": "ds_R304_01",
+      "title": "Compact Inkjet Printer",
+      "category": "Office Printer",
+      "description": "A desktop device with a front sheet tray and a hinged cover for changing ink.",
+      "upstream_path": "rigid/office_commercial_hospitality/R304_office_printer/01_compact_inkjet_printer",
+      "physx_sha256": "3f6cc3661267ecd26bdaa9981a659ff65e44a5fc3e7c6b7eb0ff50ed18e94329"
+    },
+    {
+      "id": "ds_R306_01",
+      "title": "Strip-Cut Shredder",
+      "category": "Paper Shredder",
+      "description": "Feeds documents through a slot and collects cut strips in a pull-out basket.",
+      "upstream_path": "rigid/office_commercial_hospitality/R306_paper_shredder/01_strip_cut_shredder",
+      "physx_sha256": "46d84e9ae3ff4f17c7c7c7be2b53df862852333394ee5570a4f8b226efa44d6f"
+    },
+    {
+      "id": "ds_R307_01",
+      "title": "Classic Desktop Stapler",
+      "category": "Stapler",
+      "description": "A compact black desktop tool with a pivoting arm. Flattens a staple through stacked sheets at their edge.",
+      "upstream_path": "rigid/office_commercial_hospitality/R307_stapler/01_classic_desktop_stapler",
+      "physx_sha256": "9503ba5040cf8109b40aa089177466e9b4c7e2dbcda3ebf3dc9c19ebf496c367"
+    },
+    {
+      "id": "ds_R307_02",
+      "title": "Long-Arm Stapler",
+      "category": "Stapler",
+      "description": "The extended arm and guide reach into the center of a folded booklet to bind it.",
+      "upstream_path": "rigid/office_commercial_hospitality/R307_stapler/02_long_arm_stapler",
+      "physx_sha256": "73a67084025118881b75c8a0b7b2542a158fb70ea568dcec9b80573cdf4360a8"
+    },
+    {
+      "id": "ds_R308_01",
+      "title": "Two-Hole Desk Punch",
+      "category": "Hole Punch",
+      "description": "A lever drives two heads through a sheet against a paper guide.",
+      "upstream_path": "rigid/office_commercial_hospitality/R308_hole_punch/01_two_hole_desk_punch",
+      "physx_sha256": "a91666ae5931e388984f7a0bce5d88f8e84b6f3b8f10a44dfb10d779672bcbea"
+    },
+    {
+      "id": "ds_R311_01",
+      "title": "Standard Desktop Calculator",
+      "category": "Desktop Calculator",
+      "description": "A small numeric keypad with a display, arithmetic operators and an equals key.",
+      "upstream_path": "rigid/office_commercial_hospitality/R311_desktop_calculator/01_standard_desktop_calculator",
+      "physx_sha256": "0f5eb7955e5e12addcb1150dc586fc99e3fead5c93fa5caf62bb861f3903d824"
+    },
+    {
+      "id": "ds_R341_01",
+      "title": "Handheld Barcode Scanner",
+      "category": "Barcode Scanner",
+      "description": "A handheld reader for product codes. The grip has a trigger and an optical window.",
+      "upstream_path": "rigid/office_commercial_hospitality/R341_barcode_scanner/01_handheld_barcode_scanner",
+      "physx_sha256": "daa156db82539b336c91d0195c2d614b1d14f345cfaa6733e33d7bd31f39a9b5"
+    },
+    {
+      "id": "ds_R342_01",
+      "title": "Thermal Receipt Printer",
+      "category": "Receipt Printer",
+      "description": "A till-side device that feeds a paper roll through an output slot for sales slips.",
+      "upstream_path": "rigid/office_commercial_hospitality/R342_receipt_printer/01_thermal_receipt_printer",
+      "physx_sha256": "4c60fc51f64c28953b33cdb77fe285c42838268815d1dbd47c83991e7f1ab534"
+    },
+    {
+      "id": "ds_R375_01",
+      "title": "Magnetic Board Eraser",
+      "category": "Whiteboard Eraser",
+      "description": "A rigid wiping block for a dry-erase surface. A magnet holds the block on the ledge.",
+      "upstream_path": "rigid/office_commercial_hospitality/R375_whiteboard_eraser/01_magnetic_board_eraser",
+      "physx_sha256": "6e92a4e84e1521dcde14133d34b3f9a62ef614e45755dc858d8c4f7799ced618"
+    }
+  ]
+}
