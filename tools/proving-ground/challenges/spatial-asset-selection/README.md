@@ -4,6 +4,10 @@ A community retrieval challenge for a simulated checkout and office. Match each 
 
 Try it as the second builder. Start with [the catalog](catalog.json) and [the prompts](prompts.json). Write down the candidate version and abstention rule before reading [the public answer key](cases.json). Save your predictions before scoring. Share disagreements with a case ID and a source that supports a different label.
 
+## Try one decision in a browser
+
+Download [which-stapler.html](which-stapler.html) using GitHub’s Download raw file button and open it locally. Choose a response to a scene brief, inspect the two source models, and compare your choice with the recorded MiniLM result. The exercise reveals one public answer. Builders who want a first attempt at all 14 prompts should seal their predictions first.
+
 ## Run and contribute
 
 Use Node 22 or newer. The challenge runs offline from a checkout with no package installation or model download. Run these commands from this directory.
@@ -19,7 +23,7 @@ node verify.mjs score my-predictions.json > my-receipt.json
 
 A submission is a JSON array with one two-element pair per prompt. A pair looks like `["c01","ds_R302_01"]` or `["c11",null]`. Supply exactly 14 unique case IDs from the public prompts. A selection must be a catalog ID or JSON null. Row order is immaterial. The CLI rejects duplicate, missing or unknown case IDs, extra fields, unknown asset IDs and malformed input. Valid submissions receive a receipt even when they score below threshold. Malformed submissions exit nonzero.
 
-Use the **Community reproduction** issue form in this repository's new-issue chooser. Include the exact repository commit, challenge ID, candidate identity and settings, prediction file, suite and prediction hashes, command, Node version, and observed differences. Include the receipt or a link to its public copy. Another builder can reproduce scoring directly from the submitted JSON. Only a separate rerun of the candidate establishes that the predictions themselves reproduce. The same person running the same command twice supplies one contributor's evidence.
+Use the **Community evaluation or reproduction** issue form in this repository's new-issue chooser. Include the exact repository commit, challenge ID, candidate identity and settings, prediction file, suite and prediction hashes, command, Node version, and observed differences. Include the receipt or a link to its public copy. Another builder can reproduce scoring directly from the submitted JSON. Only a separate rerun of the candidate establishes that the predictions themselves reproduce. The same person running the same command twice supplies one contributor's evidence.
 
 ## Frozen cases and scoring
 
