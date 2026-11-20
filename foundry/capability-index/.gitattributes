@@ -1,0 +1,2 @@
+# hashes and byte-identical exports depend on LF endings on every platform
+* text eol=lf

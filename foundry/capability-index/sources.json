@@ -1,0 +1,127 @@
+{
+ "schema": "starlight.capability-sources.v1",
+ "note": "Pinned public sources. Clone each at the exact commit; ingest fails closed on mismatch. Baseline = our existing estate used for novelty/overlap evaluation.",
+ "sources": [
+  {
+   "slug": "ComposioHQ-awesome-claude-skills",
+   "url": "https://github.com/ComposioHQ/awesome-claude-skills",
+   "commit": "be2a406907dbc61b73e6827ded415c96139d13a2",
+   "commit_date": "2026-07-24T13:18:01+05:30",
+   "role": "external"
+  },
+  {
+   "slug": "anthropics-skills",
+   "url": "https://github.com/anthropics/skills",
+   "commit": "2c5958ecac7cee2b583967a2c4981d0f4a75c579",
+   "commit_date": "2026-11-06T14:32:28-08:00",
+   "role": "external"
+  },
+  {
+   "slug": "blader-humanizer",
+   "url": "https://github.com/blader/humanizer",
+   "commit": "b48c832f0f809c1b5658edbb838c2521b72f2413",
+   "commit_date": "2026-11-09T17:34:24-08:00",
+   "role": "external"
+  },
+  {
+   "slug": "cloudflare-skills",
+   "url": "https://github.com/cloudflare/skills",
+   "commit": "cbf893b954222276bf1af57e5f23379231e0efb9",
+   "commit_date": "2026-11-10T06:41:33-05:00",
+   "role": "external"
+  },
+  {
+   "slug": "coreyhaines31-marketingskills",
+   "url": "https://github.com/coreyhaines31/marketingskills",
+   "commit": "9d6d7ce8d18eb155dc2f9762435f097e60cdad7c",
+   "commit_date": "2026-11-10T01:12:20-05:00",
+   "role": "external"
+  },
+  {
+   "slug": "emilkowalski-skills",
+   "url": "https://github.com/emilkowalski/skills",
+   "commit": "715c1807e08c497cfd1dc4feb450a2a3300ef2a9",
+   "commit_date": "2026-11-09T13:07:26+01:00",
+   "role": "external"
+  },
+  {
+   "slug": "github-awesome-copilot",
+   "url": "https://github.com/github/awesome-copilot",
+   "commit": "227949a7542a55d2155c00e7cdb998d9a0fee4f3",
+   "commit_date": "2026-11-10T15:22:33+11:00",
+   "role": "external"
+  },
+  {
+   "slug": "greensock-gsap-skills",
+   "url": "https://github.com/greensock/gsap-skills",
+   "commit": "aed9cfd3277740755f6bfc1155c7aa645403b760",
+   "commit_date": "2026-04-21T18:47:02-05:00",
+   "role": "external"
+  },
+  {
+   "slug": "mattpocock-skills",
+   "url": "https://github.com/mattpocock/skills",
+   "commit": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d",
+   "commit_date": "2026-10-31T14:23:30+00:00",
+   "role": "external"
+  },
+  {
+   "slug": "obra-superpowers",
+   "url": "https://github.com/obra/superpowers",
+   "commit": "22f0b463e7a5e579904dd6211a520321035526f7",
+   "commit_date": "2026-11-03T14:17:07-08:00",
+   "role": "external"
+  },
+  {
+   "slug": "openai-skills",
+   "url": "https://github.com/openai/skills",
+   "commit": "49f948faa9258a0c61caceaf225e179651397431",
+   "commit_date": "2026-06-23T19:36:12-07:00",
+   "role": "external"
+  },
+  {
+   "slug": "pbakaus-impeccable",
+   "url": "https://github.com/pbakaus/impeccable",
+   "commit": "ebe9c265f416f7f9b83ed424ed5b9bd0d2684536",
+   "commit_date": "2026-11-10T21:12:42+08:00",
+   "role": "external"
+  },
+  {
+   "slug": "supabase-agent-skills",
+   "url": "https://github.com/supabase/agent-skills",
+   "commit": "c9be0e931b7930f7d02126d04774d904c381e7d7",
+   "commit_date": "2026-10-02T14:34:48+02:00",
+   "role": "external"
+  },
+  {
+   "slug": "vercel-labs-agent-skills",
+   "url": "https://github.com/vercel-labs/agent-skills",
+   "commit": "1a2c79d4e6c4a2283dc2c614b6538cbe1ed5ca62",
+   "commit_date": "2026-10-27T14:40:02-07:00",
+   "role": "external"
+  },
+  {
+   "slug": "wshobson-agents",
+   "url": "https://github.com/wshobson/agents",
+   "commit": "9c61ab243def98f72da12abd41cfcf5bcd91af9d",
+   "commit_date": "2026-11-08T08:14:13-05:00",
+   "role": "external"
+  },
+  {
+   "slug": "frankxai-claude-skills-library",
+   "url": "https://github.com/frankxai/claude-skills-library",
+   "commit": "e3e8966edb96edafa0a84573c3a21ea48cfdf891",
+   "commit_date": "2026-11-10T16:48:00+01:00",
+   "role": "baseline",
+   "scope": "free-skills"
+  },
+  {
+   "slug": "starlight-intelligence-starlight-agent-skills",
+   "url": "https://github.com/Starlight-Intelligence/starlight-agent-skills",
+   "commit": "d1998c932aefc4588f3b0cc0006b05206f1b29ad",
+   "commit_date": "2026-11-10T16:47:12+01:00",
+   "role": "baseline",
+   "scope": "skills"
+  }
+ ]
+}

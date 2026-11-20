@@ -1,0 +1,59 @@
+{
+ "evals": {
+  "e1_conformance_vs_existing_linter": {
+   "baseline_conformance_rate": 1.0,
+   "disagreement_count": 2,
+   "disagreements": [
+    {
+     "artifact": "openai-skills@49f948faa925:skills/.curated/openai-docs/SKILL.md",
+     "lint": true,
+     "ours": false,
+     "rule": "frontmatter"
+    },
+    {
+     "artifact": "openai-skills@49f948faa925:skills/.curated/transcribe/SKILL.md",
+     "lint": true,
+     "ours": false,
+     "rule": "frontmatter"
+    }
+   ],
+   "external_blocked": 0,
+   "external_conformance_rate": 0.947,
+   "lint_agreement": 0.9929,
+   "lint_pairs": 282,
+   "n_external": 94,
+   "pass": true,
+   "positive_agreement": 0.8462,
+   "positive_pairs_ours_or_lint": 13
+  },
+  "e2_distinctness_vs_estate": {
+   "caught_by_name_collision": 4,
+   "estimator_max_error": 0.029,
+   "estimator_pairs": 135,
+   "estimator_within_tolerance": 1.0,
+   "missed_by_name_collision": 0,
+   "missed_examples": [],
+   "n_baseline": 160,
+   "n_external": 94,
+   "overlap_threshold": 0.5,
+   "overlapping_with_estate": 3,
+   "pass": true
+  },
+  "e3_injection_scanner_vs_naive": {
+   "baseline": {
+    "false_positive_rate": 0.611,
+    "recall": 1.0
+   },
+   "improved": {
+    "false_positive_rate": 0.056,
+    "recall": 0.833
+   },
+   "n_attack": 12,
+   "n_non_attack": 18,
+   "pass": true
+  }
+ },
+ "preregistration_sha256": "13b263204e724894d03cb68ca66dc1659900a98eeaebe8839248a39859a921cc",
+ "schema": "starlight.capability-eval.v1",
+ "tool_version": "0.1.0"
+}

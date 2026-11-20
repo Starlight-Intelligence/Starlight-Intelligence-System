@@ -1,0 +1,266 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://starlightintelligence.org/schemas/foundry/capability-receipt.schema.json",
+  "title": "Starlight Capability Receipt",
+  "description": "One record per third-party SKILL.md or AGENTS.md at a pinned commit: provenance, license, security flags and bounded metadata. Never contains the artifact body. Sidecar to the capability graph, which cannot carry these facts.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "artifact_id",
+    "estate",
+    "kind",
+    "observed_at",
+    "tool_version",
+    "source",
+    "content",
+    "frontmatter",
+    "license",
+    "flags",
+    "security_verdict"
+  ],
+  "properties": {
+    "schema": {
+      "const": "starlight.capability-receipt.v1"
+    },
+    "artifact_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 600
+    },
+    "estate": {
+      "enum": [
+        "external",
+        "baseline"
+      ]
+    },
+    "kind": {
+      "enum": [
+        "skill",
+        "repo_policy"
+      ]
+    },
+    "observed_at": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "tool_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "skipped": {
+      "const": "too_large"
+    },
+    "security_verdict": {
+      "enum": [
+        "clean",
+        "review",
+        "blocked",
+        "unscanned"
+      ]
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repository",
+        "commit",
+        "path",
+        "blob_sha"
+      ],
+      "properties": {
+        "repository": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "commit": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        },
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        },
+        "blob_sha": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        }
+      }
+    },
+    "content": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "bytes",
+        "sha256"
+      ],
+      "properties": {
+        "bytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "normalized_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "words": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "frontmatter": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "parse": {
+          "enum": [
+            "ok",
+            "absent",
+            "unterminated"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 80
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 240
+        },
+        "description_chars": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "allowed_tools": {
+          "type": "array",
+          "maxItems": 20,
+          "items": {
+            "type": "string",
+            "maxLength": 200
+          }
+        },
+        "tags": {
+          "type": "array",
+          "maxItems": 12,
+          "items": {
+            "type": "string",
+            "maxLength": 40
+          }
+        },
+        "name_matches_folder": {
+          "type": "boolean"
+        }
+      }
+    },
+    "license": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "resolved",
+        "status"
+      ],
+      "properties": {
+        "resolved": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "status": {
+          "enum": [
+            "allowlisted",
+            "unknown",
+            "refused"
+          ]
+        },
+        "source": {
+          "enum": [
+            "license_file",
+            "frontmatter",
+            "none",
+            "license_file_unrecognized",
+            "license_file_vs_frontmatter"
+          ]
+        },
+        "frontmatter": {
+          "type": "string",
+          "maxLength": 80
+        },
+        "evidence": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "file",
+                "blob_sha",
+                "scope",
+                "detected"
+              ],
+              "properties": {
+                "file": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 500
+                },
+                "blob_sha": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{40}$"
+                },
+                "scope": {
+                  "enum": [
+                    "artifact_adjacent",
+                    "repo_root"
+                  ]
+                },
+                "detected": {
+                  "type": "string",
+                  "maxLength": 200
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "flags": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "rule",
+          "line",
+          "severity"
+        ],
+        "properties": {
+          "rule": {
+            "type": "string",
+            "pattern": "^[a-z_-]{3,40}$"
+          },
+          "line": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "severity": {
+            "enum": [
+              "info",
+              "review",
+              "error",
+              "high"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
