@@ -1,6 +1,6 @@
 {
  "edges": [],
- "generatedAt": "2026-11-10T15:48:00Z",
+ "generatedAt": "2026-11-10T15:48:07Z",
  "nodes": [
   {
    "description": "> Stop and check this skill before finishing any reply to a question about how to use Claude or a Claude product \u2014 it recommends matching courses, tutorials, and use cases from Claude Academy (academy.claude.com), Anthropic's learning hub. ",
@@ -19,17 +19,6 @@
    "status": "registered"
   },
   {
-   "aliases": [
-    "skill:frankxai-claude-skills-library/internal-comms"
-   ],
-   "description": "A set of resources to help me write all kinds of internal communications, using the formats that my company likes to use. Claude should use this skill whenever asked to write some sort of internal communications (status reports, leadership ",
-   "id": "skill:anthropics-skills/internal-comms",
-   "kind": "skill",
-   "path": "skills/internal-comms/SKILL.md",
-   "provides": [],
-   "status": "registered"
-  },
-  {
    "description": "Guide for creating high-quality MCP (Model Context Protocol) servers that enable LLMs to interact with external services through well-designed tools. Use when building MCP servers to integrate external APIs or services, whether in Python (F",
    "id": "skill:anthropics-skills/mcp-builder",
    "kind": "skill",
@@ -42,28 +31,6 @@
    "id": "skill:anthropics-skills/template-skill",
    "kind": "skill",
    "path": "template/SKILL.md",
-   "provides": [],
-   "status": "registered"
-  },
-  {
-   "aliases": [
-    "skill:frankxai-claude-skills-library/theme-factory"
-   ],
-   "description": "Toolkit for styling artifacts with a theme. These artifacts can be slides, docs, reportings, HTML landing pages, etc. There are 10 pre-set themes with colors/fonts that you can apply to any artifact that has been creating, or can generate a",
-   "id": "skill:anthropics-skills/theme-factory",
-   "kind": "skill",
-   "path": "skills/theme-factory/SKILL.md",
-   "provides": [],
-   "status": "registered"
-  },
-  {
-   "aliases": [
-    "skill:frankxai-claude-skills-library/webapp-testing"
-   ],
-   "description": "Toolkit for interacting with and testing local web applications using Playwright. Supports verifying frontend functionality, debugging UI behavior, capturing browser screenshots, and viewing browser logs.",
-   "id": "skill:anthropics-skills/webapp-testing",
-   "kind": "skill",
-   "path": "skills/webapp-testing/SKILL.md",
    "provides": [],
    "status": "registered"
   },
@@ -708,6 +675,17 @@
    "status": "registered"
   },
   {
+   "aliases": [
+    "skill:anthropics-skills/internal-comms"
+   ],
+   "description": "A set of resources to help me write all kinds of internal communications, using the formats that my company likes to use. Claude should use this skill whenever asked to write some sort of internal communications (status reports, leadership ",
+   "id": "skill:frankxai-claude-skills-library/internal-comms",
+   "kind": "skill",
+   "path": "free-skills/anthropic/internal-comms/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
    "description": "Production-grade agentic workflows with LangGraph \u2014 graph orchestration, state machines, human-in-the-loop, and advanced control flow. Use when building or debugging a LangGraph app, modeling agent state, or adding checkpoints and human app",
    "id": "skill:frankxai-claude-skills-library/langgraph-patterns",
    "kind": "skill",
@@ -1116,6 +1094,17 @@
    "status": "registered"
   },
   {
+   "aliases": [
+    "skill:anthropics-skills/theme-factory"
+   ],
+   "description": "Toolkit for styling artifacts with a theme. These artifacts can be slides, docs, reportings, HTML landing pages, etc. There are 10 pre-set themes with colors/fonts that you can apply to any artifact that has been creating, or can generate a",
+   "id": "skill:frankxai-claude-skills-library/theme-factory",
+   "kind": "skill",
+   "path": "free-skills/anthropic/theme-factory/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
    "description": "Three.js and WebGL adapter patterns for HyperFrames. Use when creating deterministic Three.js scenes, WebGL canvas layers, AnimationMixer timelines, camera motion, shader-driven visuals, or canvas renders that respond to HyperFrames hf-seek",
    "id": "skill:frankxai-claude-skills-library/three",
    "kind": "skill",
@@ -1176,6 +1165,17 @@
    "id": "skill:frankxai-claude-skills-library/web-design-expert",
    "kind": "skill",
    "path": "free-skills/web-design-expert/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "aliases": [
+    "skill:anthropics-skills/webapp-testing"
+   ],
+   "description": "Toolkit for interacting with and testing local web applications using Playwright. Supports verifying frontend functionality, debugging UI behavior, capturing browser screenshots, and viewing browser logs. Use when testing or debugging a loc",
+   "id": "skill:frankxai-claude-skills-library/webapp-testing",
+   "kind": "skill",
+   "path": "free-skills/anthropic/webapp-testing/SKILL.md",
    "provides": [],
    "status": "registered"
   },
@@ -1509,11 +1509,11 @@
   },
   {
    "aliases": [
-    "skill:pbakaus-impeccable/impeccable-420a68",
-    "skill:pbakaus-impeccable/impeccable-471b30",
-    "skill:pbakaus-impeccable/impeccable-782006",
-    "skill:pbakaus-impeccable/impeccable-9b7975",
-    "skill:pbakaus-impeccable/impeccable-a6ef24"
+    "skill:pbakaus-impeccable/impeccable-420d73",
+    "skill:pbakaus-impeccable/impeccable-6aab62",
+    "skill:pbakaus-impeccable/impeccable-8bb6d1",
+    "skill:pbakaus-impeccable/impeccable-bd928e",
+    "skill:pbakaus-impeccable/impeccable-d2a74f"
    ],
    "description": "Use when the user wants to design, redesign, shape, critique, audit, polish, simplify, harden, animate, or otherwise improve a frontend interface: websites, landing pages, dashboards, product UI, components, forms, settings, onboarding, emp",
    "id": "skill:pbakaus-impeccable/impeccable",
@@ -1524,7 +1524,7 @@
   },
   {
    "description": "fixture",
-   "id": "skill:pbakaus-impeccable/impeccable-550247",
+   "id": "skill:pbakaus-impeccable/impeccable-de5df7",
    "kind": "skill",
    "path": "tests/oracle/workspaces/ctx-pin/.cursor/skills/impeccable/SKILL.md",
    "provides": [],
@@ -1990,6 +1990,6 @@
  "schemaVersion": "1.0.0",
  "source": {
   "agentRegistry": "none",
-  "skillRules": "foundry/capability-index/sources.json#sha256:97ff1f34ea4d950147e654ee175a95ee8619e32a52dd17579bcf9d983a4ce0eb"
+  "skillRules": "foundry/capability-index/sources.json#sha256:a828b866893279923055a0fd6f680075d23906eb2016df30364cdd1c60c2f2ad"
  }
 }

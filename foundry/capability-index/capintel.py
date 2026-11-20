@@ -23,6 +23,11 @@ TOOL_VERSION = "0.1.0"
 RECEIPT_SCHEMA = "starlight.capability-receipt.v1"
 OUTCOME_SCHEMA = "starlight.capability-outcome.v1"
 MAX_BYTES = 256 * 1024
+HUGE_BLOB = 64 * 1024 * 1024  # larger artifacts are skipped, never hashed
+LICENSE_MAX = 200 * 1024
+MAX_LINE = 4000  # longer lines are scanned only up to this and flagged
+MAX_FLAGS = 200
+SAFE_PATH_RE = re.compile(r"[^\x00-\x1f\x7f]{1,500}")
 SKETCH_K = 128
 WIDE, NARROW, MIN_SHINGLES = 5, 3, 20  # same shingle policy as claude-skills-library absorb.mjs
 DESC_MAX = 240
@@ -37,7 +42,12 @@ SECRET_PATTERNS_NAIVE = [  # exactly the set in starlight-evals scripts/lint-ski
     r"re_[A-Za-z0-9]{20,}", r"AKIA[0-9A-Z]{16}",
 ]
 # The naive set matches inside ordinary words ("ta" + "sk-coordination-strategies"), so prefixes are anchored.
-SECRET_PATTERNS = [r"(?<![A-Za-z0-9_])" + p if p[0].islower() else p for p in SECRET_PATTERNS_NAIVE]
+SECRET_PATTERNS_EXTRA = [  # shapes the oracle misses
+    r"xox[a-z]-[A-Za-z0-9-]{10,}", r"AIza[0-9A-Za-z_-]{30,}", r"glpat-[A-Za-z0-9_-]{20,}",
+    r"npm_[A-Za-z0-9]{30,}", r"(?:sk|rk)_live_[A-Za-z0-9]{16,}",
+]
+SECRET_PATTERNS = [r"(?<![A-Za-z0-9_])" + p if p[0].islower() else p
+                   for p in SECRET_PATTERNS_NAIVE + SECRET_PATTERNS_EXTRA]
 SECRET_RE = [re.compile(p) for p in SECRET_PATTERNS]
 
 INJECTION_RE = [re.compile(p, re.I) for p in (
@@ -79,8 +89,8 @@ def has_hidden_unicode(line):
             if not (prev and nxt and _is_emoji(prev) and _is_emoji(nxt)):
                 return True
     return False
-HTML_COMMENT_RE = re.compile(r"<!--.*?(ignore|instruction|system prompt|assistant).*?-->", re.I)
-PIPE_SHELL_RE = re.compile(r"(curl|wget)[^\n|]*\|\s*(sudo\s+)?(ba|z)?sh\b|base64\s+-d[^\n|]*\|\s*(ba)?sh\b", re.I)
+HTML_COMMENT_RE = re.compile(r"<!--(?:(?!-->).){0,400}?(?:ignore|instruction|system prompt|assistant)(?:(?!-->).){0,400}-->", re.I)
+PIPE_SHELL_RE = re.compile(r"(curl|wget)[^\n|]{0,300}\|\s*(sudo\s+)?(ba|z)?sh\b|base64\s+-d[^\n|]{0,300}\|\s*(ba)?sh\b", re.I)
 DANGEROUS_RE = re.compile(r"--dangerously-skip-permissions|rm -rf /(?![\w.])|chmod 777")
 
 
@@ -93,7 +103,14 @@ def clean(s, limit=DESC_MAX):
     s = "".join(c for c in s if unicodedata.category(c) not in ("Cc", "Cf", "Co", "Cn"))
     for rx in SECRET_RE:
         s = rx.sub("[redacted-secret]", s)
-    return s[:limit]
+    out, n = [], 0
+    for ch in s:  # the foundry validator counts UTF-16 code units, not code points
+        w = 2 if ord(ch) > 0xFFFF else 1
+        if n + w > limit:
+            break
+        out.append(ch)
+        n += w
+    return "".join(out)
 
 
 def sha256(b):
@@ -117,8 +134,32 @@ def git(clone, *args):
     return r.stdout
 
 
-def tree_entries(clone, commit):
-    """{path: (mode, blob_sha)} for the pinned commit. Fails closed if HEAD is not the pinned commit."""
+def blob_size(clone, blob_sha):
+    if not re.fullmatch(r"[0-9a-f]{40}", blob_sha or ""):
+        raise RuntimeError("invalid blob sha")
+    return int(git(clone, "cat-file", "-s", blob_sha).decode().strip())
+
+
+def stream_sha256(clone, blob_sha):
+    """SHA-256 of a blob without holding it in memory."""
+    if not re.fullmatch(r"[0-9a-f]{40}", blob_sha or ""):
+        raise RuntimeError("invalid blob sha")
+    h = hashlib.sha256()
+    with subprocess.Popen(["git", "-C", str(clone), "cat-file", "blob", blob_sha], stdout=subprocess.PIPE) as proc:
+        for chunk in iter(lambda: proc.stdout.read(1 << 20), b""):
+            h.update(chunk)
+    if proc.returncode:
+        raise RuntimeError(f"git cat-file failed for {blob_sha}")
+    return h.hexdigest()
+
+
+class SkipArtifact(Exception):
+    """One artifact cannot be indexed safely; the run continues and records why."""
+
+
+def tree_entries(clone, commit, skipped=None):
+    """{path: (mode, blob_sha)} for the pinned commit. Fails closed if HEAD is not the pinned commit.
+    Paths that are not valid UTF-8 or contain control characters are left out and recorded in `skipped`."""
     head = git(clone, "rev-parse", "HEAD").decode().strip()
     if head != commit:
         raise RuntimeError(f"{clone}: HEAD {head} != pinned {commit}")
@@ -129,8 +170,17 @@ def tree_entries(clone, commit):
             continue
         meta, path = rec.split(b"\t", 1)
         mode, typ, sha = meta.decode().split()
-        if typ == "blob":
-            entries[path.decode("utf-8", "surrogateescape")] = (mode, sha)
+        if typ != "blob":
+            continue
+        try:
+            text = path.decode("utf-8")
+        except UnicodeDecodeError:
+            text = None
+        if text is None or not SAFE_PATH_RE.fullmatch(text) or ".." in text.split("/"):
+            if skipped is not None and path.rsplit(b"/", 1)[-1] in (b"SKILL.md", b"AGENTS.md"):
+                skipped.append({"reason": "unsafe_path", "path_sha256": sha256(path)})
+            continue
+        entries[text] = (mode, sha)
     return entries
 
 
@@ -238,7 +288,8 @@ def detect_spdx(text):
         return "GPL"
     for marker, spdx in (("business source license", "BUSL-1.1"), ("commons clause", "Commons-Clause"),
                          ("elastic license", "Elastic-2.0"), ("server side public license", "SSPL-1.0"),
-                         ("polyform", "PolyForm")):
+                         ("polyform", "PolyForm"), ("not be used for commercial", "Restricted"),
+                         ("no commercial use", "Restricted"), ("source available", "Restricted")):
         if marker in t:
             return spdx
     if "creativecommons.org/publicdomain/zero" in t or "cc0 1.0" in t:
@@ -288,6 +339,9 @@ def frontmatter_spdx(raw):
     return (" %s " % (ops.pop() if ops else "OR")).join(canon)
 
 
+_LICENSE_CACHE = {}
+
+
 def license_index(tree):
     """{directory: (path, blob_sha)} of regular-file license candidates; first by name wins."""
     idx = {}
@@ -309,8 +363,13 @@ def resolve_license(path, fm_license, lic_index, clone):
             break
     file_spdx, evidence = None, None
     if found:
-        data = read_verified(clone, found[0], found[1])
-        file_spdx = detect_spdx(data[:20000].decode("utf-8", "replace"))
+        key = (str(clone), found[1])
+        if key not in _LICENSE_CACHE:
+            if blob_size(clone, found[1]) > LICENSE_MAX:
+                _LICENSE_CACHE[key] = "unrecognized"  # too large to read in full, so never trusted
+            else:
+                _LICENSE_CACHE[key] = detect_spdx(read_verified(clone, found[0], found[1]).decode("utf-8", "replace"))
+        file_spdx = _LICENSE_CACHE[key]
         evidence = {"file": found[0], "blob_sha": found[1], "scope": found[2], "detected": file_spdx}
     fm_spdx = frontmatter_spdx(fm_license)
     if found and file_spdx in (None, "unrecognized"):
@@ -356,6 +415,9 @@ def scan(text, fm, tree_paths, path):
     lines = text.splitlines()
     in_fence = False
     for i, ln in enumerate(lines, 1):
+        if len(ln) > MAX_LINE:
+            ln = ln[:MAX_LINE]
+            flags.append({"rule": "long_line", "line": i, "severity": "review"})
         if re.match(r"^\s*```", ln):
             in_fence = not in_fence
             continue
@@ -460,12 +522,16 @@ def make_receipt(src, clone, path, mode_sha, tree, lic_index, observed_at):
            "estate": src["role"], "kind": ARTIFACT_NAMES[base], "observed_at": observed_at,
            "tool_version": TOOL_VERSION,
            "source": {"repository": src["url"], "commit": src["commit"], "path": path, "blob_sha": blob}}
-    data = read_verified(clone, path, blob)
-    rec["content"] = {"bytes": len(data), "sha256": sha256(data)}
-    if len(data) > MAX_BYTES:
+    size = blob_size(clone, blob)
+    if size > HUGE_BLOB:
+        raise SkipArtifact("too_large_unhashable")
+    if size > MAX_BYTES:
+        rec["content"] = {"bytes": size, "sha256": stream_sha256(clone, blob)}
         rec.update(skipped="too_large", frontmatter={}, license={"resolved": "unknown", "status": "unknown"},
                    flags=[], security_verdict="unscanned")
         return rec, None, None
+    data = read_verified(clone, path, blob)
+    rec["content"] = {"bytes": len(data), "sha256": sha256(data)}
     text = data.decode("utf-8", "replace")
     fm, body, status = parse_frontmatter(text)
     words = words_of(body)
@@ -474,7 +540,8 @@ def make_receipt(src, clone, path, mode_sha, tree, lic_index, observed_at):
     desc_raw = fm.get("description", "")
     rec["frontmatter"] = {
         "parse": status, "name": name, "description": clean(desc_raw), "description_chars": len(desc_raw),
-        "allowed_tools": split_tools(fm.get("allowed-tools", ""))[:20], "tags": tags_of(fm),
+        "allowed_tools": [x for x in (clean(tool, 80) for tool in split_tools(fm.get("allowed-tools", ""))[:20]) if x],
+        "tags": tags_of(fm),
         "name_matches_folder": bool(name) and name == folder,
     }
     rec["content"]["normalized_sha256"] = sha256(" ".join(words).encode())
@@ -489,12 +556,16 @@ def make_receipt(src, clone, path, mode_sha, tree, lic_index, observed_at):
             flags.append({"rule": "frontmatter", "line": 1, "severity": "error"})
         if not desc_raw or len(desc_raw) > 1024:
             flags.append({"rule": "frontmatter", "line": 1, "severity": "error"})
+    if len(flags) > MAX_FLAGS:  # keep the most severe, say so, never grow without bound
+        rank = {"high": 0, "review": 1, "info": 2, "error": 3}
+        flags = sorted(flags, key=lambda f: (rank[f["severity"]], f["line"], f["rule"]))[:MAX_FLAGS]
+        flags.append({"rule": "flags_truncated", "line": 0, "severity": "review"})
     rec["flags"] = sorted(flags, key=lambda f: (f["line"], f["rule"]))
     rec["security_verdict"] = ("blocked" if any(f["severity"] == "high" for f in flags)
                                else "review" if any(f["severity"] in ("review", "info") for f in flags) else "clean")
     blob_json = json.dumps(rec, ensure_ascii=False)  # not ASCII-escaped, so lookbehinds see real neighbors
     if any(rx.search(blob_json) for rx in SECRET_RE):  # a receipt must never carry a secret
-        raise RuntimeError(f"secret-like text would be written for {path}")
+        raise SkipArtifact("secret_shaped_text")
     return rec, {"artifact_id": rec["artifact_id"], **make_sketch(words)}, directives(body)
 
 
@@ -517,10 +588,13 @@ def select_sample(candidates, n, seed):
 def cmd_ingest(a):
     cfg = json.loads(read_text(a.sources))
     srcs, trees, cands = cfg["sources"], {}, []
-    lic_idx = {}
+    lic_idx, skipped = {}, []
     for s in srcs:
         clone = Path(a.clones) / s["slug"]
-        trees[s["slug"]] = tree_entries(clone, s["commit"])
+        actual = datetime.fromisoformat(git(clone, "show", "-s", "--format=%cI", s["commit"]).decode().strip())
+        if actual != datetime.fromisoformat(s["commit_date"].replace("Z", "+00:00")):
+            raise RuntimeError(f"{s['slug']}: commit_date {s['commit_date']} != clone {actual.isoformat()}")
+        trees[s["slug"]] = tree_entries(clone, s["commit"], skipped)
         lic_idx[s["slug"]] = license_index(trees[s["slug"]])
         prefix = (s.get("scope", "") + "/") if s.get("scope") else ""
         for p, (mode, _) in trees[s["slug"]].items():
@@ -534,7 +608,11 @@ def cmd_ingest(a):
     for slug, path in sorted(chosen):
         s = src_by_slug[slug]
         tree = trees[slug]
-        rec, sk, dv = make_receipt(s, Path(a.clones) / slug, path, tree[path], tree, lic_idx[slug], a.observed_at)
+        try:
+            rec, sk, dv = make_receipt(s, Path(a.clones) / slug, path, tree[path], tree, lic_idx[slug], a.observed_at)
+        except SkipArtifact as why:
+            skipped.append({"reason": str(why), "path_sha256": sha256(path.encode("utf-8"))})
+            continue
         receipts.append(rec)
         if sk:
             sketches.append(sk)
@@ -544,8 +622,9 @@ def cmd_ingest(a):
     write_jsonl(out / "receipts.jsonl", sorted(receipts, key=lambda r: r["artifact_id"]))
     write_jsonl(out / "sketches.jsonl", sorted(sketches, key=lambda r: r["artifact_id"]))
     write_jsonl(out / "conflicts.jsonl", find_conflicts(dirs))
+    write_jsonl(out / "skipped.jsonl", sorted(skipped, key=lambda r: (r["reason"], r["path_sha256"])))
     ne = sum(1 for r in receipts if r["estate"] == "external")
-    print(f"receipts={len(receipts)} external={ne} baseline={len(receipts) - ne} out={out}")
+    print(f"receipts={len(receipts)} external={ne} baseline={len(receipts) - ne} skipped={len(skipped)} out={out}")
 
 
 def write_jsonl(path, rows):
@@ -646,10 +725,10 @@ def fts_query(text):
 
 
 def search(db_path, text, limit=10, license_status=None, kind=None, estate=None, no_blocked=False):
-    db = sqlite3.connect(db_path)
     q = fts_query(text)
     if not q:
         return []
+    db = sqlite3.connect(db_path)
     sql = ("SELECT a.id,a.name,a.description,a.license,a.license_status,a.verdict,a.kind,a.estate,a.cluster,a.outcome "
            "FROM artifacts_fts f JOIN artifacts a ON a.rowid=f.rowid WHERE artifacts_fts MATCH ?")
     args = [q]
@@ -691,14 +770,18 @@ def build_graph(data_dir, sources_path):
         nid, k = "skill:" + base, 1
         while nid in used:
             k += 1
-            nid = f"skill:{base}-{r['source']['blob_sha'][:6]}" + ("" if k == 2 else f"-{k}")
+            # keyed on the path, not the content, so an id does not change when a file is edited
+            nid = f"skill:{base}-{sha256(r['source']['path'].encode('utf-8'))[:6]}" + ("" if k == 2 else f"-{k}")
         used.add(nid)
         ids[r["artifact_id"]] = nid
     # Foundry semantics: an alias names exactly one canonical node, so duplicates collapse into one node and
-    # the other copies become its aliases. Only same-name duplicates collapse; differently named near-duplicates
-    # may be different skills, so they stay separate nodes (see the `dupes` report) for a human to decide.
+    # the other copies become its aliases. Copies merge only when they share a name, a security verdict and a
+    # license outcome, so a blocked or unlicensed copy is never hidden behind a clean one. Differently named
+    # near-duplicates may be different skills, so they stay separate nodes (see the `dupes` report).
     by_id = {r["artifact_id"]: r for r in receipts}
     name_of = {a: (by_id[a]["frontmatter"].get("name") or "").lower() for a in ids}
+    trust_of = {a: (by_id[a]["security_verdict"], by_id[a]["license"]["status"], by_id[a]["license"]["resolved"])
+                for a in ids}
     parent = {a: a for a in ids}
 
     def find(x):
@@ -707,19 +790,19 @@ def build_graph(data_dir, sources_path):
             x = parent[x]
         return x
     for x, y, _sim, _kind in pairs:
-        if x in ids and y in ids and name_of[x] and name_of[x] == name_of[y]:
+        if x in ids and y in ids and name_of[x] and name_of[x] == name_of[y] and trust_of[x] == trust_of[y]:
             parent[find(y)] = find(x)
     groups = defaultdict(list)
     for a in ids:
         groups[find(a)].append(a)
     nodes = []
     for members in groups.values():
-        members.sort(key=lambda a: ids[a])
+        members.sort(key=lambda a: (by_id[a]["estate"] != "baseline", ids[a]))  # our own copy is canonical
         r = by_id[members[0]]
         n = {"id": ids[members[0]], "kind": "skill", "status": "registered", "path": r["source"]["path"],
              "description": r["frontmatter"].get("description", ""), "provides": r["frontmatter"].get("tags", [])}
         if len(members) > 1:
-            n["aliases"] = [ids[m] for m in members[1:]]
+            n["aliases"] = sorted(ids[m] for m in members[1:])
         nodes.append(n)
     nodes.sort(key=lambda n: n["id"])
     newest = max(datetime.fromisoformat(s["commit_date"].replace("Z", "+00:00")) for s in cfg["sources"])
@@ -937,9 +1020,11 @@ def main(argv=None):
     elif a.cmd == "query":
         for r in search(a.db, a.text, a.limit, a.license_status, a.kind, a.estate, a.no_blocked):
             # Third-party text is printed as a JSON string literal: quoted data, never raw.
-            print(f"{json.dumps(r['id'])}\n  name={json.dumps(r['name'])} license={r['license']}({r['license_status']}) "
-                  f"verdict={r['verdict']} kind={r['kind']} estate={r['estate']}"
-                  f"{' cluster=' + r['cluster'] if r['cluster'] else ''}\n  description={json.dumps(r['description'])}")
+            q = json.dumps
+            print(f"{q(r['id'])}\n  name={q(r['name'])} license={q(r['license'])}({q(r['license_status'])}) "
+                  f"verdict={q(r['verdict'])} kind={q(r['kind'])} estate={q(r['estate'])}"
+                  f"{' cluster=' + q(r['cluster']) if r['cluster'] else ''}"
+                  f"{' outcome=' + q(r['outcome']) if r['outcome'] else ''}\n  description={q(r['description'])}")
     elif a.cmd == "dupes":
         rec = read_jsonl(Path(a.data_dir) / "receipts.jsonl")
         groups, pairs = dupe_clusters(rec, read_jsonl(Path(a.data_dir) / "sketches.jsonl"))
