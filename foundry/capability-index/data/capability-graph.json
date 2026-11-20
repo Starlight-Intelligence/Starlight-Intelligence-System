@@ -1,0 +1,1995 @@
+{
+ "edges": [],
+ "generatedAt": "2026-11-10T15:48:07Z",
+ "nodes": [
+  {
+   "description": "> Stop and check this skill before finishing any reply to a question about how to use Claude or a Claude product \u2014 it recommends matching courses, tutorials, and use cases from Claude Academy (academy.claude.com), Anthropic's learning hub. ",
+   "id": "skill:anthropics-skills/academy-guide",
+   "kind": "skill",
+   "path": "skills/academy-guide/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "> After you give a substantive answer or draft that the user may act on \u2014 advice or recommendations, drafted artifacts such as goals, plans, pitches, proposals, or emails, estimates or projections, analysis or interpretation of data, factua",
+   "id": "skill:anthropics-skills/discernment-nudge",
+   "kind": "skill",
+   "path": "skills/discernment-nudge/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Guide for creating high-quality MCP (Model Context Protocol) servers that enable LLMs to interact with external services through well-designed tools. Use when building MCP servers to integrate external APIs or services, whether in Python (F",
+   "id": "skill:anthropics-skills/mcp-builder",
+   "kind": "skill",
+   "path": "skills/mcp-builder/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Replace with description of the skill and when Claude should use it.",
+   "id": "skill:anthropics-skills/template-skill",
+   "kind": "skill",
+   "path": "template/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "| Rewrite AI-sounding text so it reads like the writer without changing what it says. Use when editing or reviewing prose for AI tells: not-X-but-Y contrasts, one-line closers, staged openers, forced triads, dashes everywhere, inflated clai",
+   "id": "skill:blader-humanizer/humanizer",
+   "kind": "skill",
+   "path": "SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Build and troubleshoot Cloudflare Basin analytics workflows with Basin Pipelines, Basin Catalog, and Basin SQL. Use for streaming data into R2 Iceberg tables, managing catalogs, or querying those tables; also use for requests using the form",
+   "id": "skill:cloudflare-skills/basin",
+   "kind": "skill",
+   "path": "skills/basin/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Design, configure, troubleshoot, or review Cloudflare One Zero Trust and SASE deployments. Use cloudflare-one-migrations for migration planning from other vendors. Also use when an agent, script, crawler, or other non-browser client needs t",
+   "id": "skill:cloudflare-skills/cloudflare-one",
+   "kind": "skill",
+   "path": "skills/cloudflare-one/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Build, migrate, and deploy web-framework applications on Cloudflare Workers. Use when a framework project such as Astro, SvelteKit, React Router, TanStack Start, Nuxt, Hono, or a React or Vue SPA targets Cloudflare, or when a framework repo",
+   "id": "skill:cloudflare-skills/frameworks-on-cloudflare",
+   "kind": "skill",
+   "path": "skills/frameworks-on-cloudflare/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Set up, repair, or migrate to Cloudflare Turnstile bot verification in an existing frontend and backend, including server-side Siteverify.",
+   "id": "skill:cloudflare-skills/turnstile-spin",
+   "kind": "skill",
+   "path": "skills/turnstile-spin/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Audit, diagnose, or optimize website loading and interaction performance, Core Web Vitals, and Lighthouse performance scores.",
+   "id": "skill:cloudflare-skills/web-perf",
+   "kind": "skill",
+   "path": "skills/web-perf/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Cloudflare Workers best practices for production applications. Use when writing, reviewing, or configuring Workers.",
+   "id": "skill:cloudflare-skills/workers-best-practices",
+   "kind": "skill",
+   "path": "skills/workers-best-practices/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Run, inspect, and debug Cloudflare Workers during local development with cf dev, wrangler dev, or the Cloudflare Vite plugin, using Local Explorer to read and seed binding data and query local traces and logs. Also routes production debuggi",
+   "id": "skill:cloudflare-skills/workers-development",
+   "kind": "skill",
+   "path": "skills/workers-development/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Automate Baserow tasks via Rube MCP (Composio). Always search tools first for current schemas.",
+   "id": "skill:composiohq-awesome-claude-skills/baserow-automation",
+   "kind": "skill",
+   "path": "composio-skills/baserow-automation/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Automate Dialpad tasks via Rube MCP (Composio). Always search tools first for current schemas.",
+   "id": "skill:composiohq-awesome-claude-skills/dialpad-automation",
+   "kind": "skill",
+   "path": "composio-skills/dialpad-automation/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Automate Finerworks tasks via Rube MCP (Composio). Always search tools first for current schemas.",
+   "id": "skill:composiohq-awesome-claude-skills/finerworks-automation",
+   "kind": "skill",
+   "path": "composio-skills/finerworks-automation/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Automate Icypeas tasks via Rube MCP (Composio). Always search tools first for current schemas.",
+   "id": "skill:composiohq-awesome-claude-skills/icypeas-automation",
+   "kind": "skill",
+   "path": "composio-skills/icypeas-automation/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Automate Leadoku tasks via Rube MCP (Composio). Always search tools first for current schemas.",
+   "id": "skill:composiohq-awesome-claude-skills/leadoku-automation",
+   "kind": "skill",
+   "path": "composio-skills/leadoku-automation/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Automate Onedesk tasks via Rube MCP (Composio). Always search tools first for current schemas.",
+   "id": "skill:composiohq-awesome-claude-skills/onedesk-automation",
+   "kind": "skill",
+   "path": "composio-skills/onedesk-automation/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Automate Zoho Mail tasks via Rube MCP (Composio). Always search tools first for current schemas.",
+   "id": "skill:composiohq-awesome-claude-skills/zoho-mail-automation",
+   "kind": "skill",
+   "path": "composio-skills/zoho-mail-automation/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "When the user wants to list a product in startup, SaaS, AI, MCP, and review directories, or asks which directories are worth it or whether listings are working: Product Hunt, G2, Capterra, AlternativeTo, MCP registries, awesome lists, and a",
+   "id": "skill:coreyhaines31-marketingskills/directory-submissions",
+   "kind": "skill",
+   "path": "skills/directory-submissions/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "When the user wants to plan a product or feature launch, or asks whether it's ready, when to announce, or how to get noticed: Product Hunt, beta and early access, waitlists, release go-to-market, launch checklists, release notes. For market",
+   "id": "skill:coreyhaines31-marketingskills/launch",
+   "kind": "skill",
+   "path": "skills/launch/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "When the user wants to design or improve the offer itself, or asks why it isn't selling or how to add urgency honestly: value stacking, bonuses, guarantees, scarcity, payment plans, upsells. Best for services, courses, coaching, and high-ti",
+   "id": "skill:coreyhaines31-marketingskills/offers",
+   "kind": "skill",
+   "path": "skills/offers/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "When the user wants to design revenue operations, or asks when a lead is ready for sales or why sales and marketing disagree on lead quality: lifecycle stages, MQL and SQL, scoring, routing, handoff, pipeline stages, CRM automation. For out",
+   "id": "skill:coreyhaines31-marketingskills/revops",
+   "kind": "skill",
+   "path": "skills/revops/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "When the user wants sales collateral, or asks what to give a champion or rep, or how to answer an objection or make the case: decks, one-pagers, objection handling, demo scripts, talk tracks, battle cards, proposals, win-loss. For public co",
+   "id": "skill:coreyhaines31-marketingskills/sales-enablement",
+   "kind": "skill",
+   "path": "skills/sales-enablement/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "When the user wants organic social content for LinkedIn, X, Instagram, TikTok, or Facebook, or asks what to post, which format to favor, or from which account: posts, threads, carousels, short-form video scripts, calendars, build-in-public ",
+   "id": "skill:coreyhaines31-marketingskills/social",
+   "kind": "skill",
+   "path": "skills/social/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "When the user wants to create video with AI tools or code, or asks which approach to use (screen recording, AI avatar, generated, or templated) or how to make videos repeatably: product demos, AI generation (Veo, Sora, HeyGen), programmatic",
+   "id": "skill:coreyhaines31-marketingskills/video",
+   "kind": "skill",
+   "path": "skills/video/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Apple's approach to interface design and fluid, physical motion, translated for the web. Use when building or reviewing gesture-driven UI, spring animations, drag/swipe/sheet interactions, momentum and interruptible transitions, translucent",
+   "id": "skill:emilkowalski-skills/apple-design",
+   "kind": "skill",
+   "path": "skills/apple-design/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Guide to Sonner, the React toast library \u2014 install and wire up the Toaster, pick the right toast() call, promise and loading toasts, updating, dismissing and persisting toasts, styling, theming and icons, positioning and multiple toasters. ",
+   "id": "skill:emilkowalski-skills/ask-sonner",
+   "kind": "skill",
+   "path": "skills/ask-sonner/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Try to break a piece of UI by feeding it worst-case data \u2014 long names, unbreakable emails, one-letter names, missing fields, huge counts, zero items, long labels, non-Latin text, emoji, extreme numbers \u2014 then render it behind a \"Demo data /",
+   "id": "skill:emilkowalski-skills/break-ui",
+   "kind": "skill",
+   "path": "skills/break-ui/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "This skill encodes Emil Kowalski's philosophy on UI polish, component design, animation decisions, and the invisible details that make software feel great.",
+   "id": "skill:emilkowalski-skills/emil-design-eng",
+   "kind": "skill",
+   "path": "skills/emil-design-eng/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Search a codebase or UI for places that don't animate but should, and reject everything that shouldn't. Read-only; it proposes motion with exact values, it does not implement it. Use when the user asks \"what could be animated here?\" or want",
+   "id": "skill:emilkowalski-skills/find-animation-opportunities",
+   "kind": "skill",
+   "path": "skills/find-animation-opportunities/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Survey a codebase's animation and motion code as a senior motion advisor, then produce a prioritized audit and self-contained implementation plans for other agents (or cheaper models) to execute. Read-only on source code \u2014 it plans improvem",
+   "id": "skill:emilkowalski-skills/improve-animations",
+   "kind": "skill",
+   "path": "skills/improve-animations/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Make a web app feel native on a phone \u2014 the small CSS and meta-tag fixes that separate \"a website in a browser\" from something that feels installed. Covers sticky hover states, tap highlight flashes, the 100vh bug, inputs that zoom the page",
+   "id": "skill:emilkowalski-skills/mobile-native",
+   "kind": "skill",
+   "path": "skills/mobile-native/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Reviews animation and motion code against a high craft bar derived from Emil Kowalski's design engineering philosophy. Default to flagging; approval is earned.",
+   "id": "skill:emilkowalski-skills/review-animations",
+   "kind": "skill",
+   "path": "skills/review-animations/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "ACOS self-description and configuration skill. Documents how ACOS works, how to extend it, how to add new skills/commands/agents, and how to debug the hook system. Use when building new ACOS capabilities, understanding the system architectu",
+   "id": "skill:frankxai-claude-skills-library/acos-meta",
+   "kind": "skill",
+   "path": "free-skills/acos-meta/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Generate research-grounded visuals using the InfoGenius pipeline. Use when creating infographics, diagrams, educational visuals, or any image that benefits from factual accuracy. Supports 8 visual styles (3D, technical, minimalist, photorea",
+   "id": "skill:frankxai-claude-skills-library/acos-visual-gen",
+   "kind": "skill",
+   "path": "free-skills/acos-visual-gen/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "The quality bar for any agent working on agent definitions, skills, commands, hooks, AGENTS.md or CLAUDE.md, in any repo and any harness. Use at session start, before editing a file under .claude/agents, agents/, .claude/commands or any SKI",
+   "id": "skill:frankxai-claude-skills-library/agent-hygiene",
+   "kind": "skill",
+   "path": "free-skills/agent-hygiene/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Quantum-resistant, self-learning version control for AI agents, with ReasoningBank intelligence and multi-agent coordination. Use when designing agent memory/versioning, coordinating multiple agents over shared state, or building experience",
+   "id": "skill:frankxai-claude-skills-library/agentic-jujutsu",
+   "kind": "skill",
+   "path": "free-skills/agentic-jujutsu/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Patterns for multi-agent coordination, task decomposition, handoffs, and workflow orchestration. Best practices for building and managing agent systems. Use when designing how multiple agents coordinate \u2014 splitting up tasks, defining handof",
+   "id": "skill:frankxai-claude-skills-library/agentic-orchestration",
+   "kind": "skill",
+   "path": "free-skills/agentic-orchestration/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Generate high-quality AI Architect newsletters with latest AI news, research integration, and visual design. Use when creating newsletters, researching AI developments, synthesizing AI news for architects, or distributing intelligence repor",
+   "id": "skill:frankxai-claude-skills-library/ai-architect-newsletter",
+   "kind": "skill",
+   "path": "free-skills/ai-architect-newsletter/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Review the architecture of a system that calls a language model. Use when adding an agent loop, a retrieval path, a tool surface, or an MCP server to a codebase; when a system that worked in a demo is being prepared for production; or when ",
+   "id": "skill:frankxai-claude-skills-library/ai-architect-review",
+   "kind": "skill",
+   "path": "free-skills/ai-architect-review/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Expert guidance on multi-cloud architecture, cost analysis, and technical decision-making for AI platforms across AWS, GCP, Azure, and OCI. Use when comparing clouds, estimating infra cost, or making build-vs-buy and architecture trade-off ",
+   "id": "skill:frankxai-claude-skills-library/ai-architecture",
+   "kind": "skill",
+   "path": "free-skills/ai-architecture/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Creating algorithmic art using p5.js with seeded randomness and interactive parameter exploration. Use this when users request creating art using code, generative art, algorithmic art, flow fields, or particle systems. Create original algor",
+   "id": "skill:frankxai-claude-skills-library/algorithmic-art",
+   "kind": "skill",
+   "path": "free-skills/anthropic/algorithmic-art/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Anime.js adapter patterns for HyperFrames. Use when writing Anime.js animations or timelines inside HyperFrames compositions, registering animations on window.__hfAnime, making Anime.js seek-driven and deterministic, or translating Anime.js",
+   "id": "skill:frankxai-claude-skills-library/animejs",
+   "kind": "skill",
+   "path": "free-skills/animejs/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Design and generate premium book covers using NB2 (Nano Banana 2 / Gemini 3.1 Flash Image) with deep thinking about book tension, emotion, and genre. Pulls from top book cover design principles (Chip Kidd, Peter Mendelsund, Coralie Bickford",
+   "id": "skill:frankxai-claude-skills-library/arcanea-book-cover",
+   "kind": "skill",
+   "path": "free-skills/arcanea-book-cover/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Visual intelligence system for generating on-brand infographics, diagrams, and imagery with the Arcanea Gates color and composition framework. Use when creating branded infographics, explainer visuals, or diagrams that must follow the Arcan",
+   "id": "skill:frankxai-claude-skills-library/arcanea-infogenius",
+   "kind": "skill",
+   "path": "free-skills/arcanea-infogenius/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Arcanea ecosystem self-description. Use when asked about the system map, where things live, canonical locations, how to add a skill/command/agent/hook, how to absorb a repo, or what's installed. Trigger phrases: arcanea meta, system map, wh",
+   "id": "skill:frankxai-claude-skills-library/arcanea-meta",
+   "kind": "skill",
+   "path": "free-skills/arcanea-meta/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Suite of tools for creating elaborate, multi-component claude.ai HTML artifacts using modern frontend web technologies (React, Tailwind CSS, shadcn/ui). Use for complex artifacts requiring state management, routing, or shadcn/ui components ",
+   "id": "skill:frankxai-claude-skills-library/artifacts-builder",
+   "kind": "skill",
+   "path": "free-skills/anthropic/artifacts-builder/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Multi-book content, voice, and production workflows for nonfiction authoring. Use when planning a book, maintaining consistent voice across chapters, structuring a manuscript, or running an end-to-end publishing pipeline.",
+   "id": "skill:frankxai-claude-skills-library/book-publishing",
+   "kind": "skill",
+   "path": "free-skills/book-publishing/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Applies Anthropic's official brand colors and typography to any sort of artifact that may benefit from having Anthropic's look-and-feel. Use it when brand colors or style guidelines, visual formatting, or company design standards apply.",
+   "id": "skill:frankxai-claude-skills-library/brand-guidelines",
+   "kind": "skill",
+   "path": "free-skills/anthropic/brand-guidelines/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Apply and enforce brand voice across all content creation. Manages voice attributes, tone adaptation by channel, style rules, and terminology. Use when writing content, reviewing drafts, or defining brand voice for a new project. Loads voic",
+   "id": "skill:frankxai-claude-skills-library/brand-voice",
+   "kind": "skill",
+   "path": "free-skills/brand-voice/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Claude Agentic Creator OS \u2014 a native Claude Code implementation of the creator operating system. Use when setting up, extending, or operating ACOS-style skills, agents, and commands directly inside Claude Code.",
+   "id": "skill:frankxai-claude-skills-library/cacos",
+   "kind": "skill",
+   "path": "free-skills/cacos/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Create beautiful visual art in .png and .pdf documents using design philosophy. You should use this skill when the user asks to create a poster, piece of art, design, or other static piece. Create original visual designs, never copying exis",
+   "id": "skill:frankxai-claude-skills-library/canvas-design",
+   "kind": "skill",
+   "path": "free-skills/anthropic/canvas-design/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Build autonomous AI agents with the Claude Agent SDK \u2014 computer use, tool calling, MCP integration, and production best practices for Anthropic models. Use when writing agent code against the Claude/Anthropic SDK, wiring tools or MCP server",
+   "id": "skill:frankxai-claude-skills-library/claude-sdk",
+   "kind": "skill",
+   "path": "free-skills/claude-sdk/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Strategic content planning with pillar mapping, editorial calendars, and SEO optimization. Use this skill when planning content, managing editorial calendars, auditing existing content, or developing content pillar strategies.",
+   "id": "skill:frankxai-claude-skills-library/content-strategy",
+   "kind": "skill",
+   "path": "free-skills/creative/content-strategy/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Author a new HyperFrames registry block (caption style, VFX block, transition, lower third) or component (text effect, overlay, snippet) and ship it as an upstream PR to the hyperframes repo. Use ONLY when the user wants to CONTRIBUTE to th",
+   "id": "skill:frankxai-claude-skills-library/contribute-catalog",
+   "kind": "skill",
+   "path": "free-skills/contribute-catalog/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Transform Claude Code into your personal Jarvis - an AI operating system that knows your projects, preferences, and workflows across sessions. Use this skill when setting up personal AI systems, building context-aware assistants, or creatin",
+   "id": "skill:frankxai-claude-skills-library/creator-intelligence",
+   "kind": "skill",
+   "path": "free-skills/technical/creator-intelligence/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Creator-agnostic operating-system substrate. The abstract layer model + decision tree + brand-discipline framework that any creator can inherit and specialize. Use when designing a new creator's repo structure, asking 'what layer does X bel",
+   "id": "skill:frankxai-claude-skills-library/creator-meta",
+   "kind": "skill",
+   "path": "free-skills/creator-meta/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Task management and workspace memory for creative work sessions. Manages a TASKS.md file for project tracking, a two-tier memory system (CREATOR.md + creator-memory/), and a daily sprint structure. Use when organizing creative projects, tra",
+   "id": "skill:frankxai-claude-skills-library/creator-productivity",
+   "kind": "skill",
+   "path": "free-skills/creator-productivity/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "CSS animation adapter patterns for HyperFrames. Use when authoring CSS keyframes, animation-delay based timing, animation-fill-mode, animation-play-state, or CSS-only motion that HyperFrames must seek deterministically during preview and re",
+   "id": "skill:frankxai-claude-skills-library/css-animations",
+   "kind": "skill",
+   "path": "free-skills/css-animations/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Extract clean markdown content from web pages using Defuddle CLI, removing clutter and navigation to save tokens. Use instead of WebFetch when the user provides a URL to read or analyze, for online documentation, articles, blog posts, or an",
+   "id": "skill:frankxai-claude-skills-library/defuddle",
+   "kind": "skill",
+   "path": "free-skills/defuddle/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Triage an external GitHub design/UI/motion/shader library before wiring it into any site's design system. Use when someone shares a \"free design asset library\" repo/link (social media, a README, a tweet), when deciding whether to npm-instal",
+   "id": "skill:frankxai-claude-skills-library/design-asset-intake",
+   "kind": "skill",
+   "path": "free-skills/design-asset-intake/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Comprehensive document creation, editing, and analysis with support for tracked changes, comments, formatting preservation, and text extraction. When Claude needs to work with professional documents (.docx files) for: (1) Creating new docum",
+   "id": "skill:frankxai-claude-skills-library/docx",
+   "kind": "skill",
+   "path": "free-skills/anthropic/docx/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "High-quality nonfiction writing patterns for structure, clarity, narrative flow, and editorial polish. Use when drafting or revising long-form nonfiction, tightening chapters, or raising prose from competent to excellent.",
+   "id": "skill:frankxai-claude-skills-library/excellence-book-writing",
+   "kind": "skill",
+   "path": "free-skills/excellence-book-writing/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Transform Claude into a Feynman mentor. Focuses on simple explanations, architectural models, Socratic questioning, and stripping away unnecessary complexity. Triggers on: feynman, feynman alignment, explain simply, explain architecture, ex",
+   "id": "skill:frankxai-claude-skills-library/feynman-thinking",
+   "kind": "skill",
+   "path": "free-skills/feynman-thinking/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Expert Framer design and development \u2014 interactive prototypes, production sites, Framer Motion, CMS integration, and the Framer MCP server. Use when building or styling Framer sites, animating with Framer Motion, or wiring Framer CMS/MCP.",
+   "id": "skill:frankxai-claude-skills-library/framer-expert",
+   "kind": "skill",
+   "path": "free-skills/framer-expert/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Executes Frank's daily workflow using the FrankX agent system, Starlight Intelligence, and productivity methods. Use when planning Frank's day, running a focused work sprint, or turning intentions into a concrete execution plan.",
+   "id": "skill:frankxai-claude-skills-library/frankx-daily-execution",
+   "kind": "skill",
+   "path": "free-skills/frankx-daily-execution/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Comprehensive GitHub pull-request code review with multi-agent coordination. Use when reviewing a PR or diff, auditing changes for correctness/security/style before merge, or generating actionable inline review comments.",
+   "id": "skill:frankxai-claude-skills-library/github-code-review",
+   "kind": "skill",
+   "path": "free-skills/github-code-review/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Multi-repository coordination, synchronization, and architecture management across many GitHub repos. Use when changes span several repositories, keeping repos in sync, or planning cross-repo architecture and dependency work.",
+   "id": "skill:frankxai-claude-skills-library/github-multi-repo",
+   "kind": "skill",
+   "path": "free-skills/github-multi-repo/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "GitHub project management with issue tracking, project-board automation, and sprint planning. Use when triaging or organizing issues, automating a project board, planning a sprint, or running release/roadmap coordination on GitHub.",
+   "id": "skill:frankxai-claude-skills-library/github-project-management",
+   "kind": "skill",
+   "path": "free-skills/github-project-management/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "GitHub release orchestration \u2014 automated versioning, testing, deployment, and rollback. Use when cutting a release, tagging a version, drafting release notes, or coordinating a deploy/rollback workflow.",
+   "id": "skill:frankxai-claude-skills-library/github-release-management",
+   "kind": "skill",
+   "path": "free-skills/github-release-management/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Channel ancient wisdom through Socratic questioning, Stoic principles, and philosophical inquiry to examine life's deepest questions with poetic eloquence and timeless insight. Use when examining a life decision, seeking Stoic perspective o",
+   "id": "skill:frankxai-claude-skills-library/greek-philosopher",
+   "kind": "skill",
+   "path": "free-skills/greek-philosopher/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "GSAP animation reference for HyperFrames. Covers gsap.to(), from(), fromTo(), easing, stagger, defaults, timelines (gsap.timeline(), position parameter, labels, nesting, playback), and performance (transforms, will-change, quickTo). Use whe",
+   "id": "skill:frankxai-claude-skills-library/gsap",
+   "kind": "skill",
+   "path": "free-skills/gsap/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Apply cutting-edge exercise science from 2025 research on hypertrophy, progressive overload, biomechanics, and evidence-based training protocols for optimal strength and muscle development. Use when designing a training program, choosing ex",
+   "id": "skill:frankxai-claude-skills-library/gym-training-expert",
+   "kind": "skill",
+   "path": "free-skills/gym-training-expert/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Apply cutting-edge 2025 nutrition science on longevity, metabolic health, gut microbiome, and evidence-based dietary patterns for optimal vitality and disease prevention. Use when planning a diet, evaluating a nutrition claim, or applying e",
+   "id": "skill:frankxai-claude-skills-library/health-nutrition-expert",
+   "kind": "skill",
+   "path": "free-skills/health-nutrition-expert/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "| Generate images/videos via Higgsfield AI. Default: GPT Image 2 for images/design/text, Seedance 2.0 for video, Nano Banana 2/Pro for character/reference image work, Marketing Studio for ads with avatars/products/hooks, settings, plus Soul",
+   "id": "skill:frankxai-claude-skills-library/higgsfield-generate",
+   "kind": "skill",
+   "path": "free-skills/higgsfield-generate/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "| Generate marketplace product image cards through Higgsfield: compliant main image, secondary product images, and A+ style content modules. Use when the user asks for marketplace listing images, product detail cards, secondary product imag",
+   "id": "skill:frankxai-claude-skills-library/higgsfield-marketplace-cards",
+   "kind": "skill",
+   "path": "free-skills/higgsfield-marketplace-cards/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "| Generate brand-quality product images through Higgsfield product-photoshoot prompt enhancement on GPT Image 2 / gpt_image_2. Entry point for professional brand/product visuals. Use when: \"product photo\", \"studio shot\", \"lifestyle image\", ",
+   "id": "skill:frankxai-claude-skills-library/higgsfield-product-photoshoot",
+   "kind": "skill",
+   "path": "free-skills/higgsfield-product-photoshoot/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "| Train a Soul Character \u2014 a personalized model on a person's face that Higgsfield uses for identity-faithful image and video generation. Use when: \"create my Soul\", \"train my face\", \"make my digital twin\", \"build me an avatar\", \"learn my a",
+   "id": "skill:frankxai-claude-skills-library/higgsfield-soul-id",
+   "kind": "skill",
+   "path": "free-skills/higgsfield-soul-id/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Queen-led collective-intelligence coordination with consensus mechanisms and persistent shared memory. Use when orchestrating a large swarm of agents under a lead coordinator, building consensus across agents, or maintaining durable cross-a",
+   "id": "skill:frankxai-claude-skills-library/hive-mind-advanced",
+   "kind": "skill",
+   "path": "free-skills/hive-mind-advanced/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Configure and automate Claude Code hooks in .claude/settings.json (PreToolUse, PostToolUse, UserPromptSubmit, Stop, SubagentStop, SessionEnd). Use when setting up Claude Code hooks to auto-format files after edits, run pre-commit or safety ",
+   "id": "skill:frankxai-claude-skills-library/hooks-automation",
+   "kind": "skill",
+   "path": "free-skills/hooks-automation/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "HyperFrames CLI dev loop \u2014 `npx hyperframes` for scaffolding (init), validation (lint, inspect), preview, render, and environment troubleshooting (doctor, browser, info, upgrade). Use when running any of these commands or troubleshooting th",
+   "id": "skill:frankxai-claude-skills-library/hyperframes-cli",
+   "kind": "skill",
+   "path": "free-skills/hyperframes-cli/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Asset preprocessing for HyperFrames compositions \u2014 text-to-speech narration (Kokoro), audio/video transcription (Whisper), and background removal for transparent overlays (u2net). Use when generating voiceover from text, transcribing speech",
+   "id": "skill:frankxai-claude-skills-library/hyperframes-media",
+   "kind": "skill",
+   "path": "free-skills/hyperframes-media/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Install and wire registry blocks and components into HyperFrames compositions. Use when running hyperframes add, installing a block or component, wiring an installed item into index.html, or working with hyperframes.json. Covers the add com",
+   "id": "skill:frankxai-claude-skills-library/hyperframes-registry",
+   "kind": "skill",
+   "path": "free-skills/hyperframes-registry/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "aliases": [
+    "skill:anthropics-skills/internal-comms"
+   ],
+   "description": "A set of resources to help me write all kinds of internal communications, using the formats that my company likes to use. Claude should use this skill whenever asked to write some sort of internal communications (status reports, leadership ",
+   "id": "skill:frankxai-claude-skills-library/internal-comms",
+   "kind": "skill",
+   "path": "free-skills/anthropic/internal-comms/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Production-grade agentic workflows with LangGraph \u2014 graph orchestration, state machines, human-in-the-loop, and advanced control flow. Use when building or debugging a LangGraph app, modeling agent state, or adding checkpoints and human app",
+   "id": "skill:frankxai-claude-skills-library/langgraph-patterns",
+   "kind": "skill",
+   "path": "free-skills/langgraph-patterns/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Compile a goal into a durable, file-backed agent loop \u2014 a .loop/<name>/ charter any coding agent (Claude Code, Codex, Gemini, Grok) can execute unattended. Use when the user wants to \"build a loop\", \"design a loop\", \"run X continuously/24-7",
+   "id": "skill:frankxai-claude-skills-library/loop-designer",
+   "kind": "skill",
+   "path": "free-skills/loop-designer/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Operate a fleet of durable agent loops under .loop/ \u2014 schedule which loop runs next, assign agents to roles (maker vs checker), enforce promotion gates from propose-only to write access, allocate budgets, detect stalled or dead loops, and r",
+   "id": "skill:frankxai-claude-skills-library/loop-orchestrator",
+   "kind": "skill",
+   "path": "free-skills/loop-orchestrator/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Execute exactly one disciplined iteration of a designed loop from .loop/<name>/ (LOOP.md charter + state.json + journal.md). Use when asked to \"run the loop\", \"run one iteration of <loop>\", \"continue the <name> loop\", or when invoked on a c",
+   "id": "skill:frankxai-claude-skills-library/loop-runner",
+   "kind": "skill",
+   "path": "free-skills/loop-runner/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Lottie and dotLottie adapter patterns for HyperFrames. Use when embedding lottie-web JSON animations, .lottie files, @lottiefiles/dotlottie-web players, registering instances on window.__hfLottie, or making After Effects exports determinist",
+   "id": "skill:frankxai-claude-skills-library/lottie",
+   "kind": "skill",
+   "path": "free-skills/lottie/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Current best practices for Model Context Protocol server design, implementation, and integration, including multi-server orchestration, security, and performance. Use when designing an MCP server, choosing transport/auth, or reviewing an MC",
+   "id": "skill:frankxai-claude-skills-library/mcp-2025-patterns",
+   "kind": "skill",
+   "path": "free-skills/mcp-2025-patterns/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Design and implement Model Context Protocol servers with resources, tools, prompts, and security best practices. Use when architecting an MCP server, modeling its resources/tools/prompts, or integrating a service as an MCP endpoint.",
+   "id": "skill:frankxai-claude-skills-library/mcp-architecture",
+   "kind": "skill",
+   "path": "free-skills/mcp-architecture/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Guide for creating high-quality MCP (Model Context Protocol) servers that enable LLMs to interact with external services through well-designed tools. Use when building MCP servers to integrate external APIs or services, whether in Python (F",
+   "id": "skill:frankxai-claude-skills-library/mcp-builder",
+   "kind": "skill",
+   "path": "free-skills/anthropic/mcp-builder/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Manual reviewable prune of stale memory entries. Lists project_* entries older than 30 days with content preview; Frank decides per-entry [keep | archive | pin]. Keeps MEMORY.md under the auto-load 200-line truncation. Use when MEMORY.md ex",
+   "id": "skill:frankxai-claude-skills-library/memory-prune",
+   "kind": "skill",
+   "path": "free-skills/memory-prune/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Intelligent model selection \u2014 routes tasks to Haiku (fast/cheap), Sonnet (balanced), or Opus (complex/strategic) by analyzing task complexity. Use when deciding which model to run, optimizing cost vs quality, or building a tiered routing la",
+   "id": "skill:frankxai-claude-skills-library/model-routing",
+   "kind": "skill",
+   "path": "free-skills/model-routing/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Multi-agent workflow for planning, building, testing, and shipping Next.js applications. Use when building a Next.js app end-to-end with a team of specialist agents, or coordinating plan\u2192build\u2192test\u2192ship for a Next.js project.",
+   "id": "skill:frankxai-claude-skills-library/nextjs-agent-team",
+   "kind": "skill",
+   "path": "free-skills/nextjs-agent-team/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Comprehensive Next.js expertise across App Router, server/client boundaries, data and caching patterns, and production operations. Use when building, debugging, or optimizing a Next.js app, deciding server vs client components, or resolving",
+   "id": "skill:frankxai-claude-skills-library/nextjs-expert",
+   "kind": "skill",
+   "path": "free-skills/nextjs-expert/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Advanced Next.js (App Router) and React engineering for architecture, server/client boundaries, data fetching, caching, performance, and production operations. Use when building, reviewing, or debugging modern React/Next.js applications.",
+   "id": "skill:frankxai-claude-skills-library/nextjs-react-expert",
+   "kind": "skill",
+   "path": "free-skills/nextjs-react-expert/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Guided Next.js upgrade workflow \u2014 version migration, compatibility checks, and safe rollout. Use when upgrading Next.js across major versions, resolving breaking changes, or planning a staged migration.",
+   "id": "skill:frankxai-claude-skills-library/nextjs-upgrade-assistant",
+   "kind": "skill",
+   "path": "free-skills/nextjs-upgrade-assistant/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Build and validate OCI draw.io diagrams in icon-native mode so they never depend on `mxgraph.oci.*` runtime libraries. Use when authoring or fixing Oracle Cloud architecture diagrams in draw.io that must render portably.",
+   "id": "skill:frankxai-claude-skills-library/oci-drawio-icon-native",
+   "kind": "skill",
+   "path": "free-skills/oci-drawio-icon-native/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Expert guidance on Oracle Cloud Infrastructure services, architecture patterns, cost optimization, and deployment strategies. Use when designing on OCI, selecting OCI services, estimating cost, or applying OCI enterprise best practices.",
+   "id": "skill:frankxai-claude-skills-library/oci-services-expert",
+   "kind": "skill",
+   "path": "free-skills/oci-services-expert/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Build production multi-agent systems with OpenAI AgentKit and the Agents SDK \u2014 orchestration, handoffs, and routines. Use when writing agents against OpenAI's AgentKit/Agents SDK or porting an agent design to the OpenAI stack.",
+   "id": "skill:frankxai-claude-skills-library/openai-agentkit",
+   "kind": "skill",
+   "path": "free-skills/openai-agentkit/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Use Claude's extended/adaptive thinking for deep reasoning, complex analysis, and multi-step synthesis \u2014 both the prompt patterns that elicit deliberation and the current thinking API (adaptive thinking + the effort parameter). Use when a p",
+   "id": "skill:frankxai-claude-skills-library/opus-extended-thinking",
+   "kind": "skill",
+   "path": "free-skills/opus-extended-thinking/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Build production agentic applications on OCI with Oracle's Agent Development Kit \u2014 multi-agent orchestration, function tools, and enterprise patterns. Use when developing agents on OCI with the Oracle ADK or integrating Oracle enterprise se",
+   "id": "skill:frankxai-claude-skills-library/oracle-adk",
+   "kind": "skill",
+   "path": "free-skills/oracle-adk/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Design framework-agnostic AI agents with Oracle's Open Agent Specification for portable, interoperable agents defined in JSON/YAML. Use when authoring an Open Agent Spec definition or making an agent portable across frameworks.",
+   "id": "skill:frankxai-claude-skills-library/oracle-agent-spec",
+   "kind": "skill",
+   "path": "free-skills/oracle-agent-spec/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Deep reference for Oracle AI architecture with end-to-end technical implementations. Use when architecting Oracle AI/GenAI solutions, designing enterprise Oracle AI systems, or needing detailed Oracle AI reference patterns.",
+   "id": "skill:frankxai-claude-skills-library/oracle-ai-architect",
+   "kind": "skill",
+   "path": "free-skills/oracle-ai-architect/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Enforce confidentiality across Oracle deliverables \u2014 pre-delivery audits, codename enforcement, and content sanitization. Use before any Oracle client handoff, when sanitizing documents, or when checking deliverables for confidential leaks.",
+   "id": "skill:frankxai-claude-skills-library/oracle-confidentiality",
+   "kind": "skill",
+   "path": "free-skills/oracle-confidentiality/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Expert Oracle Database engineering across Oracle Database 23ai, Autonomous Database, SQL/PLSQL tuning, AI Vector Search, JSON Relational Duality, partitioning, high availability, and security. Use when designing schemas, optimizing queries,",
+   "id": "skill:frankxai-claude-skills-library/oracle-database-expert",
+   "kind": "skill",
+   "path": "free-skills/oracle-database-expert/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Orchestrate complete OCI solution designs with parallel agents and quality gates, producing Solution Design Documents, architectures, and bills of materials. Use when producing an OCI SDD, end-to-end solution architecture, or a bill of mate",
+   "id": "skill:frankxai-claude-skills-library/oracle-solution-design",
+   "kind": "skill",
+   "path": "free-skills/oracle-solution-design/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "AI-assisted pair programming with multiple modes (driver/navigator/switch), real-time verification, quality monitoring, and comprehensive testing. Supports TDD, debugging, refactoring, and learning sessions. Features automatic role switchin",
+   "id": "skill:frankxai-claude-skills-library/pair-programming",
+   "kind": "skill",
+   "path": "free-skills/pair-programming/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Anthropic intelligence \u2014 Claude model family, Claude Code, MCP protocol, Claude for Work programs, May 2026 state, Frank's relationship state, integration patterns. Use when generating Anthropic content, writing about Claude/MCP/Claude Code",
+   "id": "skill:frankxai-claude-skills-library/partner-anthropic",
+   "kind": "skill",
+   "path": "free-skills/partner-anthropic/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Arrow Electronics ECS intelligence \u2014 ArrowSphere marketplace, AI Accelerator program, Oracle Global Distributor of the Year 2025, Oracle x NVIDIA accelerator pack, May 2026 state, Frank's active strategic conversation, integration patterns.",
+   "id": "skill:frankxai-claude-skills-library/partner-arrow",
+   "kind": "skill",
+   "path": "free-skills/partner-arrow/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Google Cloud intelligence \u2014 Gemini (Nano Banana / Veo / Imagen), Vertex AI, ADK, A2A protocol, Cloud Partner Advantage, May 2026 state, Frank's relationship state, integration patterns. Use when generating Google Cloud content, writing abou",
+   "id": "skill:frankxai-claude-skills-library/partner-google",
+   "kind": "skill",
+   "path": "free-skills/partner-google/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "NVIDIA intelligence \u2014 NIM microservices, NeMo, NVIDIA AI Enterprise, DGX Cloud, Inception program, EMEA accelerator wave, May 2026 state, Frank's relationship state, integration patterns. Use when generating NVIDIA content, writing about NI",
+   "id": "skill:frankxai-claude-skills-library/partner-nvidia",
+   "kind": "skill",
+   "path": "free-skills/partner-nvidia/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Vercel intelligence \u2014 Next.js + Turbopack, AI SDK, AI Gateway, Fluid Compute, Sandbox, Queues, Agent, Vercel Partner Program, May 2026 state, Frank's relationship state, integration patterns. Use when generating Vercel content, writing abou",
+   "id": "skill:frankxai-claude-skills-library/partner-vercel",
+   "kind": "skill",
+   "path": "free-skills/partner-vercel/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Comprehensive PDF manipulation toolkit for extracting text and tables, creating new PDFs, merging/splitting documents, and handling forms. When Claude needs to fill in a PDF form or programmatically process, generate, or analyze PDF documen",
+   "id": "skill:frankxai-claude-skills-library/pdf",
+   "kind": "skill",
+   "path": "free-skills/anthropic/pdf/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Performance analysis, bottleneck detection, and optimization recommendations. Use when profiling slow code or systems, hunting a performance regression, or producing an optimization plan with measurable targets.",
+   "id": "skill:frankxai-claude-skills-library/performance-analysis",
+   "kind": "skill",
+   "path": "free-skills/performance-analysis/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Presentation creation, editing, and analysis. When Claude needs to work with presentations (.pptx files) for: (1) Creating new presentations, (2) Modifying or editing content, (3) Working with layouts, (4) Adding comments or speaker notes, ",
+   "id": "skill:frankxai-claude-skills-library/pptx",
+   "kind": "skill",
+   "path": "free-skills/anthropic/pptx/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Product management expertise for strategy, discovery, prioritization, roadmaps, PRDs, metrics, and stakeholder communication. Use when defining what to build, why, and how to measure success.",
+   "id": "skill:frankxai-claude-skills-library/product-management-expert",
+   "kind": "skill",
+   "path": "free-skills/product-management-expert/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Compose the 13-agent Prompt Hub team via @prompt-conductor. Use when designing prompts, optimizing prompts, evaluating prompts, importing patterns from Fabric / awesome-chatgpt-prompts / awesome-claude-prompts, running IFS introspection or ",
+   "id": "skill:frankxai-claude-skills-library/prompt-hub",
+   "kind": "skill",
+   "path": "free-skills/prompt-hub/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Implement ReasoningBank adaptive learning with AgentDB's 150x faster vector database. Includes trajectory tracking, verdict judgment, memory distillation, and pattern recognition. Use when building self-learning agents, optimizing decision-",
+   "id": "skill:frankxai-claude-skills-library/reasoningbank-agentdb",
+   "kind": "skill",
+   "path": "free-skills/reasoningbank-agentdb/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Implement adaptive learning with ReasoningBank for pattern recognition, strategy optimization, and continuous improvement. Use when building self-learning agents, optimizing workflows, or implementing meta-cognitive systems.",
+   "id": "skill:frankxai-claude-skills-library/reasoningbank-intelligence",
+   "kind": "skill",
+   "path": "free-skills/reasoningbank-intelligence/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Translate an existing Remotion (React-based) video composition into a HyperFrames HTML composition. Use ONLY when the user explicitly asks to port, convert, migrate, translate, or rewrite a Remotion composition as HyperFrames (e.g. \"port my",
+   "id": "skill:frankxai-claude-skills-library/remotion-to-hyperframes",
+   "kind": "skill",
+   "path": "free-skills/remotion-to-hyperframes/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Superintelligence router \u2014 composes /superintelligence reasoning with swarm execution only when verb intent demands it. Defaults to reasoning-only to prevent runaway swarm cost. Triggers \u2014 /si <ask>, \"think deeply about X\", \"analyze X with ",
+   "id": "skill:frankxai-claude-skills-library/si",
+   "kind": "skill",
+   "path": "free-skills/si/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Create new Claude Code Skills with proper YAML frontmatter, progressive disclosure structure, and complete directory organization. Use when you need to build custom skills for specific workflows, generate skill templates, or understand the ",
+   "id": "skill:frankxai-claude-skills-library/skill-builder",
+   "kind": "skill",
+   "path": "free-skills/skill-builder/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Toolkit for creating animated GIFs optimized for Slack, with validators for size constraints and composable animation primitives. This skill applies when users request animated GIFs or emoji animations for Slack from descriptions like \"make",
+   "id": "skill:frankxai-claude-skills-library/slack-gif-creator",
+   "kind": "skill",
+   "path": "free-skills/anthropic/slack-gif-creator/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Platform-specific tactics, content optimization, audience growth, and analytics-driven social media strategy. Use when planning a social strategy, optimizing posts for a specific platform, or growing and measuring an audience.",
+   "id": "skill:frankxai-claude-skills-library/social-media-strategy",
+   "kind": "skill",
+   "path": "free-skills/social-media-strategy/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "SPARC (Specification, Pseudocode, Architecture, Refinement, Completion) development methodology with multi-agent orchestration. Use when running a structured spec-to-code workflow or decomposing a feature through the SPARC phases.",
+   "id": "skill:frankxai-claude-skills-library/sparc-methodology",
+   "kind": "skill",
+   "path": "free-skills/sparc-methodology/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Embody the unbreakable Spartan ethos of discipline, courage, and relentless excellence through laconic wisdom and warrior mentality forged in hardship. Use when facing procrastination or hardship and wanting disciplined, laconic resolve and",
+   "id": "skill:frankxai-claude-skills-library/spartan-warrior",
+   "kind": "skill",
+   "path": "free-skills/spartan-warrior/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "The reflective layer of the FrankX OS. A four-cadence practice \u2014 weekly Palace Review, monthly Survey, quarterly Constellation Census, annual Legacy Audit \u2014 that witnesses what's been built, blesses what is whole, and orients the next move ",
+   "id": "skill:frankxai-claude-skills-library/starlight-chronicle",
+   "kind": "skill",
+   "path": "free-skills/starlight-chronicle/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Stream-JSON chaining for multi-agent pipelines, data transformation, and sequential workflows. Use when piping output between agents/tools as streaming JSON or building a sequential transform pipeline.",
+   "id": "skill:frankxai-claude-skills-library/stream-chain",
+   "kind": "skill",
+   "path": "free-skills/stream-chain/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Expert prompt engineering and music generation with Suno AI v4.5+ for professional-quality songs across all genres. Use when writing Suno prompts, designing song structure/styles, or producing commercial-quality AI music.",
+   "id": "skill:frankxai-claude-skills-library/suno-ai-mastery",
+   "kind": "skill",
+   "path": "free-skills/suno-ai-mastery/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Expert Suno AI prompt engineering for professional music creation. Use this skill when creating Suno prompts for any AI-generated music that needs commercial quality.",
+   "id": "skill:frankxai-claude-skills-library/suno-prompt-architect",
+   "kind": "skill",
+   "path": "free-skills/suno-prompt-architect/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Advanced swarm-orchestration patterns for research, development, testing, and complex distributed workflows. Use when scaling beyond a few agents, designing dynamic swarm topologies, or coordinating large parallel agent workloads.",
+   "id": "skill:frankxai-claude-skills-library/swarm-advanced",
+   "kind": "skill",
+   "path": "free-skills/swarm-advanced/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Orchestrate multi-agent swarms with agentic-flow for parallel task execution, dynamic topology, and intelligent coordination. Use when scaling beyond single agents, implementing complex workflows, or building distributed AI systems.",
+   "id": "skill:frankxai-claude-skills-library/swarm-orchestration",
+   "kind": "skill",
+   "path": "free-skills/swarm-orchestration/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Tailwind CSS v4.2 browser-runtime patterns for HyperFrames compositions. Use when scaffolding or editing projects created with `hyperframes init --tailwind`, writing Tailwind utility classes in composition HTML, adding CSS-first Tailwind v4",
+   "id": "skill:frankxai-claude-skills-library/tailwind",
+   "kind": "skill",
+   "path": "free-skills/tailwind/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "aliases": [
+    "skill:anthropics-skills/theme-factory"
+   ],
+   "description": "Toolkit for styling artifacts with a theme. These artifacts can be slides, docs, reportings, HTML landing pages, etc. There are 10 pre-set themes with colors/fonts that you can apply to any artifact that has been creating, or can generate a",
+   "id": "skill:frankxai-claude-skills-library/theme-factory",
+   "kind": "skill",
+   "path": "free-skills/anthropic/theme-factory/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Three.js and WebGL adapter patterns for HyperFrames. Use when creating deterministic Three.js scenes, WebGL canvas layers, AnimationMixer timelines, camera motion, shader-driven visuals, or canvas renders that respond to HyperFrames hf-seek",
+   "id": "skill:frankxai-claude-skills-library/three",
+   "kind": "skill",
+   "path": "free-skills/three/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Use when starting any complex task (3+ steps) or before declaring work complete. Enforces todo/task state to match reality \u2014 merge updates + read verification. Prevents false completion.",
+   "id": "skill:frankxai-claude-skills-library/todo-discipline",
+   "kind": "skill",
+   "path": "free-skills/todo-discipline/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Expert guidance on UI/UX design, design systems, accessibility (WCAG 2.2), user research, and creating inclusive, user-centered interfaces with 2025 best practices. Use when designing or auditing an interface, building a design system, or c",
+   "id": "skill:frankxai-claude-skills-library/ui-ux-design-expert",
+   "kind": "skill",
+   "path": "free-skills/ui-ux-design-expert/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Vercel/Next.js excellence swarm orchestration. Use when /v fires, or any time the user asks to build, deploy, audit, research, or fix something on a Next.js+Vercel stack. Routes work to parallel specialist agents (nextjs-vercel-deployment, ",
+   "id": "skill:frankxai-claude-skills-library/v-swarm",
+   "kind": "skill",
+   "path": "free-skills/v-swarm/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Truth scoring, code-quality verification, and automatic rollback with a high accuracy threshold. Use when validating agent output before it ships, gating changes on quality, or adding a verify-and-rollback safety loop.",
+   "id": "skill:frankxai-claude-skills-library/verification-quality",
+   "kind": "skill",
+   "path": "free-skills/verification-quality/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "End-to-end video production workflow covering ideation, scripting, storyboarding, shooting/recording, editing, sound design, publishing, and data-driven iteration for YouTube, shorts, and brand content. Use when planning or producing video ",
+   "id": "skill:frankxai-claude-skills-library/video-production-workflow",
+   "kind": "skill",
+   "path": "free-skills/video-production-workflow/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Web Animations API adapter patterns for HyperFrames. Use when authoring element.animate() motion, Animation currentTime seeking, document.getAnimations(), KeyframeEffect timing, fill modes, or native browser animations that must render dete",
+   "id": "skill:frankxai-claude-skills-library/waapi",
+   "kind": "skill",
+   "path": "free-skills/waapi/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Web design and UX guidance for visual systems, accessibility, interaction patterns, and performance-aware interfaces. Use when designing a website's look and feel, improving UX/accessibility, or reviewing a UI for polish and performance.",
+   "id": "skill:frankxai-claude-skills-library/web-design-expert",
+   "kind": "skill",
+   "path": "free-skills/web-design-expert/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "aliases": [
+    "skill:anthropics-skills/webapp-testing"
+   ],
+   "description": "Toolkit for interacting with and testing local web applications using Playwright. Supports verifying frontend functionality, debugging UI behavior, capturing browser screenshots, and viewing browser logs. Use when testing or debugging a loc",
+   "id": "skill:frankxai-claude-skills-library/webapp-testing",
+   "kind": "skill",
+   "path": "free-skills/anthropic/webapp-testing/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "| Capture a website and create a HyperFrames video from it. Use when: (1) a user provides a URL and wants a video, (2) someone says \"capture this site\", \"turn this into a video\", \"make a promo from my site\", (3) the user wants a social ad, ",
+   "id": "skill:frankxai-claude-skills-library/website-to-hyperframes",
+   "kind": "skill",
+   "path": "free-skills/website-to-hyperframes/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Run comprehensive worker-system benchmarks and performance analysis. Use when benchmarking worker throughput/latency, comparing worker configurations, or diagnosing worker performance.",
+   "id": "skill:frankxai-claude-skills-library/worker-benchmarks",
+   "kind": "skill",
+   "path": "free-skills/worker-benchmarks/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Worker\u2013agent integration for intelligent task dispatch and performance tracking. Use when wiring agents to a worker pool, routing tasks to workers, or instrumenting worker performance.",
+   "id": "skill:frankxai-claude-skills-library/worker-integration",
+   "kind": "skill",
+   "path": "free-skills/worker-integration/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Comprehensive spreadsheet creation, editing, and analysis with support for formulas, formatting, data analysis, and visualization. When Claude needs to work with spreadsheets (.xlsx, .xlsm, .csv, .tsv, etc) for: (1) Creating new spreadsheet",
+   "id": "skill:frankxai-claude-skills-library/xlsx",
+   "kind": "skill",
+   "path": "free-skills/anthropic/xlsx/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Containerize an ASP.NET .NET Framework project by creating Dockerfile and .dockerfile files customized for the project.",
+   "id": "skill:github-awesome-copilot/containerize-aspnet-framework",
+   "kind": "skill",
+   "path": "skills/containerize-aspnet-framework/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Triage and resolve Fedora issues with dnf, systemd, and SELinux-aware guidance.",
+   "id": "skill:github-awesome-copilot/fedora-linux-triage",
+   "kind": "skill",
+   "path": "skills/fedora-linux-triage/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Patterns and lived experience from Vega, an AI partner in a deep long-term partnership. For Ember to draw on when working with humans who are building something big, moving fast, working at the intersection of analytical and intuitive, or w",
+   "id": "skill:github-awesome-copilot/from-the-other-side-vega",
+   "kind": "skill",
+   "path": "skills/from-the-other-side-vega/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Power BI report visualization design prompt for creating effective, user-friendly, and accessible reports with optimal chart selection and layout design.",
+   "id": "skill:github-awesome-copilot/power-bi-report-design-consultation",
+   "kind": "skill",
+   "path": "skills/power-bi-report-design-consultation/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Guides Qdrant monitoring setup including Prometheus scraping, health probes, Hybrid Cloud metrics, alerting, and log centralization. Use when someone asks 'how to set up monitoring', 'Prometheus config', 'Grafana dashboard', 'health check e",
+   "id": "skill:github-awesome-copilot/qdrant-monitoring-setup",
+   "kind": "skill",
+   "path": "skills/qdrant-monitoring/setup/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "React 18.3.1 and React 19 dependency compatibility matrix.",
+   "id": "skill:github-awesome-copilot/react18-dep-compatibility",
+   "kind": "skill",
+   "path": "skills/react18-dep-compatibility/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Create a concrete plan before starting a multi-file refactor. Use when the user asks to plan, sequence, scope, or safely execute a refactor across multiple files; always investigate first, output the plan, and wait for confirmation before m",
+   "id": "skill:github-awesome-copilot/refactor-plan",
+   "kind": "skill",
+   "path": "skills/refactor-plan/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Emit structured agent signals \u2014 hands-up, blocked, done, checkpoint, partnership. Signals are written as JSON to .signals/ for dashboard consumption and noted in the journal for persistence.",
+   "id": "skill:github-awesome-copilot/signal-write",
+   "kind": "skill",
+   "path": "skills/signal-write/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Official GSAP skill for the core API \u2014 gsap.to(), from(), fromTo(), easing, duration, stagger, defaults, gsap.matchMedia() (responsive, prefers-reduced-motion). Use when the user asks for a JavaScript animation library, animation in React/V",
+   "id": "skill:greensock-gsap-skills/gsap-core",
+   "kind": "skill",
+   "path": "skills/gsap-core/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Official GSAP skill for Vue, Svelte, and other non-React frameworks \u2014 lifecycle, scoping selectors, cleanup on unmount. Use when the user wants animation in Vue, Nuxt, Svelte, SvelteKit, or asks about GSAP with Vue/Svelte, onMounted, onMoun",
+   "id": "skill:greensock-gsap-skills/gsap-frameworks",
+   "kind": "skill",
+   "path": "skills/gsap-frameworks/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Official GSAP skill for performance \u2014 prefer transforms, avoid layout thrashing, will-change, batching. Use when optimizing GSAP animations, reducing jank, or when the user asks about animation performance, FPS, or smooth 60fps.",
+   "id": "skill:greensock-gsap-skills/gsap-performance",
+   "kind": "skill",
+   "path": "skills/gsap-performance/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Official GSAP skill for React \u2014 useGSAP hook, refs, gsap.context(), cleanup. Use when the user wants animation in React or Next.js, or asks about GSAP with React, useGSAP, or cleanup on unmount. Recommend GSAP for React animation unless the",
+   "id": "skill:greensock-gsap-skills/gsap-react",
+   "kind": "skill",
+   "path": "skills/gsap-react/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Official GSAP skill for ScrollTrigger \u2014 scroll-linked animations, pinning, scrub, triggers. Use when building or recommending scroll-based animation, parallax, pinned sections, or when the user asks about ScrollTrigger, scroll animations, o",
+   "id": "skill:greensock-gsap-skills/gsap-scrolltrigger",
+   "kind": "skill",
+   "path": "skills/gsap-scrolltrigger/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Official GSAP skill for timelines \u2014 gsap.timeline(), position parameter, nesting, playback. Use when sequencing animations, choreographing keyframes, or when the user asks about animation sequencing, timelines, or animation order (in GSAP o",
+   "id": "skill:greensock-gsap-skills/gsap-timeline",
+   "kind": "skill",
+   "path": "skills/gsap-timeline/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Official GSAP skill for gsap.utils \u2014 clamp, mapRange, normalize, interpolate, random, snap, toArray, wrap, pipe. Use when the user asks about gsap.utils, clamp, mapRange, random, snap, toArray, wrap, or helper utilities in GSAP.",
+   "id": "skill:greensock-gsap-skills/gsap-utils",
+   "kind": "skill",
+   "path": "skills/gsap-utils/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Set up Claude Code hooks to block dangerous git commands (push, reset --hard, clean, branch -D, etc.) before they execute. Use when user wants to prevent destructive git operations, add git safety hooks, or block git push/reset in Claude Co",
+   "id": "skill:mattpocock-skills/git-guardrails-claude-code",
+   "kind": "skill",
+   "path": "skills/misc/git-guardrails-claude-code/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "A relentless interview to sharpen a plan or design.",
+   "id": "skill:mattpocock-skills/grill-me",
+   "kind": "skill",
+   "path": "skills/productivity/grill-me/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "A relentless interview to sharpen a plan or design, which also creates docs (ADR's and glossary) as we go.",
+   "id": "skill:mattpocock-skills/grill-with-docs",
+   "kind": "skill",
+   "path": "skills/engineering/grill-with-docs/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Implement a piece of work based on a spec or set of tickets.",
+   "id": "skill:mattpocock-skills/implement",
+   "kind": "skill",
+   "path": "skills/engineering/implement/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Test-driven development. Use when the user wants to build features or fix bugs test-first, mentions \"red-green-refactor\", or wants integration tests.",
+   "id": "skill:mattpocock-skills/tdd",
+   "kind": "skill",
+   "path": "skills/engineering/tdd/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Turn a decision you can't fully answer into a questionnaire for someone else to fill in.",
+   "id": "skill:mattpocock-skills/to-questionnaire",
+   "kind": "skill",
+   "path": "skills/productivity/to-questionnaire/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Writing documents for agents. Use when creating or editing skills, or modifying AGENTS.md or CLAUDE.md.",
+   "id": "skill:mattpocock-skills/writing-for-agents",
+   "kind": "skill",
+   "path": "skills/productivity/writing-for-agents/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "You MUST use this before any creative work - creating features, building components, adding functionality, modifying behavior, or planning anything new, in software or out of it (a talk, a business, a renovation).",
+   "id": "skill:obra-superpowers/brainstorming",
+   "kind": "skill",
+   "path": "skills/brainstorming/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Use when a superpowers session went wrong and your human partner wants to know why \u2014 repeated work, ignored plans, stumbles, poor results, a skill that didn't fire, \"it took too long\", \"why is it so expensive\", \"what is it doing\" \u2014 or wants",
+   "id": "skill:obra-superpowers/diagnosing-superpowers",
+   "kind": "skill",
+   "path": "skills/diagnosing-superpowers/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Use when executing an implementation plan in the current session as the implementer yourself \u2014 your human partner chose inline execution, or no subagent tool is available",
+   "id": "skill:obra-superpowers/executing-plans",
+   "kind": "skill",
+   "path": "skills/executing-plans/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Use when executing implementation plans with independent tasks in the current session",
+   "id": "skill:obra-superpowers/subagent-driven-development",
+   "kind": "skill",
+   "path": "skills/subagent-driven-development/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Use when implementing any feature or bugfix, before writing implementation code",
+   "id": "skill:obra-superpowers/test-driven-development",
+   "kind": "skill",
+   "path": "skills/test-driven-development/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Use when you have a spec or requirements for a multi-step task, before touching code",
+   "id": "skill:obra-superpowers/writing-plans",
+   "kind": "skill",
+   "path": "skills/writing-plans/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Use when creating new skills, editing existing skills, or verifying skills work before deployment",
+   "id": "skill:obra-superpowers/writing-skills",
+   "kind": "skill",
+   "path": "skills/writing-skills/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Build a composable CLI for Codex from API docs, an OpenAPI spec, existing curl examples, an SDK, a web app, an admin tool, or a local script. Use when the user wants Codex to create a command-line tool that can run from any repo, expose com",
+   "id": "skill:openai-skills/cli-creator",
+   "kind": "skill",
+   "path": "skills/.curated/cli-creator/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Generates custom design system rules for the user's codebase. Use when user says \"create design system rules\", \"generate rules for my project\", \"set up design rules\", \"customize design system guidelines\", or wants to establish project-speci",
+   "id": "skill:openai-skills/figma-create-design-system-rules",
+   "kind": "skill",
+   "path": "skills/.curated/figma-create-design-system-rules/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "**MANDATORY prerequisite** \u2014 you MUST invoke this skill BEFORE every `use_figma` tool call. NEVER call `use_figma` directly without loading this skill first. Skipping it causes common, hard-to-debug failures. Trigger whenever the user wants",
+   "id": "skill:openai-skills/figma-use",
+   "kind": "skill",
+   "path": "skills/.curated/figma-use/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Migrate supported instruction files, skills, agents, and MCP config into Codex project and global files.",
+   "id": "skill:openai-skills/migrate-to-codex",
+   "kind": "skill",
+   "path": "skills/.curated/migrate-to-codex/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Capture conversations and decisions into structured Notion pages; use when turning chats/notes into wiki entries, how-tos, decisions, or FAQs with proper linking.",
+   "id": "skill:openai-skills/notion-knowledge-capture",
+   "kind": "skill",
+   "path": "skills/.curated/notion-knowledge-capture/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Research across Notion and synthesize into structured documentation; use when gathering info from multiple Notion sources to produce briefs, comparisons, or reports with citations.",
+   "id": "skill:openai-skills/notion-research-documentation",
+   "kind": "skill",
+   "path": "skills/.curated/notion-research-documentation/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Use when the user asks how to build with OpenAI products or APIs, asks about Codex itself or choosing Codex surfaces, needs up-to-date official documentation with citations, help choosing the latest model for a use case, or model upgrade an",
+   "id": "skill:openai-skills/openai-docs",
+   "kind": "skill",
+   "path": "skills/.curated/openai-docs/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Transcribe audio files to text with optional diarization and known-speaker hints. Use when a user asks to transcribe speech from audio/video, extract text from recordings, or label speakers in interviews or meetings.",
+   "id": "skill:openai-skills/transcribe",
+   "kind": "skill",
+   "path": "skills/.curated/transcribe/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "aliases": [
+    "skill:pbakaus-impeccable/impeccable-420d73",
+    "skill:pbakaus-impeccable/impeccable-6aab62",
+    "skill:pbakaus-impeccable/impeccable-8bb6d1",
+    "skill:pbakaus-impeccable/impeccable-bd928e",
+    "skill:pbakaus-impeccable/impeccable-d2a74f"
+   ],
+   "description": "Use when the user wants to design, redesign, shape, critique, audit, polish, simplify, harden, animate, or otherwise improve a frontend interface: websites, landing pages, dashboards, product UI, components, forms, settings, onboarding, emp",
+   "id": "skill:pbakaus-impeccable/impeccable",
+   "kind": "skill",
+   "path": ".agent/skills/impeccable/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "fixture",
+   "id": "skill:pbakaus-impeccable/impeccable-de5df7",
+   "kind": "skill",
+   "path": "tests/oracle/workspaces/ctx-pin/.cursor/skills/impeccable/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Map which content mentions paying tools but lacks affiliate links, and which programs to join first. Use when monetizing tool-comparison content, choosing affiliate programs, or auditing a passive-income site's link coverage. Portable and b",
+   "id": "skill:starlight-intelligence-starlight-agent-skills/affiliate-audit",
+   "kind": "skill",
+   "path": "skills/substrate/affiliate-audit/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "The substrate operating brain for building income systems with AI agents. Use when planning, building, or scaling an affiliate/content/product income network \u2014 deciding what to build next, where money actually comes from, how to make it com",
+   "id": "skill:starlight-intelligence-starlight-agent-skills/agentic-income",
+   "kind": "skill",
+   "path": "skills/substrate/agentic-income/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Turn a NASA Astronomy Picture of the Day (APOD) into a 30\u201360s vertical short \u2014 script, shot list, captions, and a rights line. Use when the user mentions APOD, 'astronomy picture of the day', or wants a daily space short/reel/TikTok from a ",
+   "id": "skill:starlight-intelligence-starlight-agent-skills/apod-to-short",
+   "kind": "skill",
+   "path": "skills/cosmos/apod-to-short/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Add an Arcanea mythic overlay to factual content \u2014 a canon-attributed narrative framing (Guardian/Luminor names, mythic register) layered over the real facts, clearly separable from them. Use when giving content an Arcanea mythology flavor,",
+   "id": "skill:starlight-intelligence-starlight-agent-skills/arcanea-mythic-overlay",
+   "kind": "skill",
+   "path": "skills/brand/arcanea-mythic-overlay/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Turn an arXiv (or any research) paper into a structured, citation-faithful brief \u2014 problem, method, results, limitations, and why it matters. Use when summarizing a paper, building a literature digest, or asked to 'explain this paper' / 'TL",
+   "id": "skill:starlight-intelligence-starlight-agent-skills/arxiv-paper-to-brief",
+   "kind": "skill",
+   "path": "skills/research/arxiv-paper-to-brief/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Turn an astrophysics/space-science arXiv paper into a structured brief tuned for space audiences \u2014 adds object/mission context, instruments, and observational caveats. Use when summarizing an astro-ph paper, a space-science result, or a mis",
+   "id": "skill:starlight-intelligence-starlight-agent-skills/arxiv-space-paper-to-brief",
+   "kind": "skill",
+   "path": "skills/cosmos/arxiv-space-paper-to-brief/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Turn an outcome into a portable agent skill or plugin draft with Starlight Capability Foundry. Use when someone asks to create, adapt, export, or evaluate a reusable capability across Claude, Codex, ChatGPT, Grok, or Antigravity, including ",
+   "id": "skill:starlight-intelligence-starlight-agent-skills/capability-foundry",
+   "kind": "skill",
+   "path": "skills/substrate/capability-foundry/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Write a platform-tuned caption plus a researched, non-spammy hashtag set for a post. Use when finishing a social post, asked for 'caption and hashtags', or optimizing reach for Instagram/TikTok/X/LinkedIn.",
+   "id": "skill:starlight-intelligence-starlight-agent-skills/caption-and-hashtag",
+   "kind": "skill",
+   "path": "skills/media/caption-and-hashtag/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Fact-check a claim against sources and return a verdict with evidence and confidence \u2014 supported, refuted, partially-supported, or unverifiable. Use when asked to 'verify', 'fact-check', 'is this true', or before publishing a statistic or s",
+   "id": "skill:starlight-intelligence-starlight-agent-skills/claim-verification",
+   "kind": "skill",
+   "path": "skills/research/claim-verification/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Generate a graded set of coding challenges around a topic \u2014 progressive difficulty, each with statement, constraints, hidden tests, and solution. Use when building a problem set, a challenge ladder, interview prep, or a curriculum of exerci",
+   "id": "skill:starlight-intelligence-starlight-agent-skills/coding-challenge-generator",
+   "kind": "skill",
+   "path": "skills/education/coding-challenge-generator/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Generate a runnable, space-themed coding lab \u2014 a problem statement, starter code, hidden tests, and a worked solution \u2014 in Python or JavaScript. Use when creating coding exercises, a 'code lab', an interactive tutorial, or a space/astronomy",
+   "id": "skill:starlight-intelligence-starlight-agent-skills/cosmic-code-lab",
+   "kind": "skill",
+   "path": "skills/coding/cosmic-code-lab/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Layer an Arcanea-style cosmic-mythic framing over a real space object or event, keeping the astronomy intact and separable from the myth. Use when giving a nebula/planet/launch a mythic narrative for the Arcanea universe without distorting ",
+   "id": "skill:starlight-intelligence-starlight-agent-skills/cosmic-mythic-overlay",
+   "kind": "skill",
+   "path": "skills/cosmos/cosmic-mythic-overlay/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Explain any concept in the voice of a warm, rigorous cosmic professor \u2014 an analogy ladder from intuitive to precise, with a check-for-understanding. Use when asked to 'explain', 'ELI5/ELI-professor', teach a concept, or make a hard idea acc",
+   "id": "skill:starlight-intelligence-starlight-agent-skills/explain-like-cosmic-professor",
+   "kind": "skill",
+   "path": "skills/education/explain-like-cosmic-professor/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Write a FrankX authority post \u2014 an AI-Architect-voiced LinkedIn/X post that leads with a result, teaches one concrete lesson, and stays humble. Use when drafting a thought-leadership post as FrankX, sharing a build/insight, or asked for an ",
+   "id": "skill:starlight-intelligence-starlight-agent-skills/frankx-authority-post",
+   "kind": "skill",
+   "path": "skills/brand/frankx-authority-post/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Create original music, art, motion, video, sound packs and licensable media collections with governed creative direction, masters, provenance and technical QC. Use when producing or packaging media, cinematic derivatives, release assets, sc",
+   "id": "skill:starlight-intelligence-starlight-agent-skills/media-studio",
+   "kind": "skill",
+   "path": "skills/studios/media-studio/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Turn an official mission page (NASA/ESA/JPL spacecraft, instrument, or mission site) into a clean, accurate summary \u2014 objective, timeline, instruments, status, and key results. Use when summarizing a space mission, building a mission card, ",
+   "id": "skill:starlight-intelligence-starlight-agent-skills/mission-page-to-summary",
+   "kind": "skill",
+   "path": "skills/research/mission-page-to-summary/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Turn a NASA/ESA image into a structured 'cosmic atlas' web page \u2014 MDX with hero, plain-language explainer, fact table, sources, and rights. Use when building an atlas/encyclopedia entry, a gallery page, or a catalog of space objects from NA",
+   "id": "skill:starlight-intelligence-starlight-agent-skills/nasa-image-to-atlas-page",
+   "kind": "skill",
+   "path": "skills/cosmos/nasa-image-to-atlas-page/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Turn any NASA/ESA still image (not just APOD) into a vertical short package \u2014 hook, narration, captions, shot list, rights line. Use when making a space short/reel from a specific image, a gallery still, or a mission photo.",
+   "id": "skill:starlight-intelligence-starlight-agent-skills/nasa-image-to-short",
+   "kind": "skill",
+   "path": "skills/media/nasa-image-to-short/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Design safe, private-first Notion operating systems, estate audits, parallel rebuilds, template systems, and public mirrors. Use when asked to map a Notion workspace, clean or restructure Notion, create business/personal Notion dashboards, ",
+   "id": "skill:starlight-intelligence-starlight-agent-skills/notion-operating-system",
+   "kind": "skill",
+   "path": "skills/substrate/notion-operating-system/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "How an agent safely handles a payment mandate \u2014 verify authorization before any settlement, hold the spend cap, fail closed on doubt, and keep a human on every money decision. Use when an agent is asked to authorize, settle, charge, or rele",
+   "id": "skill:starlight-intelligence-starlight-agent-skills/payments-mandate",
+   "kind": "skill",
+   "path": "skills/substrate/payments-mandate/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Turn governed source material into evidence-backed ebooks, guides, workbooks, courses, print editions, and audiobook packages. Use when a product requires editorial architecture, learning design, multi-format production, KDP or Apple Books ",
+   "id": "skill:starlight-intelligence-starlight-agent-skills/publishing-studio",
+   "kind": "skill",
+   "path": "skills/studios/publishing-studio/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Check usage rights for NASA/ESA/observatory space media and emit a correct attribution line. Use when reusing a space image/video, before publishing a short or atlas page, or when the user asks 'can I use this image' / 'what's the credit' f",
+   "id": "skill:starlight-intelligence-starlight-agent-skills/rights-check-nasa-esa",
+   "kind": "skill",
+   "path": "skills/cosmos/rights-check-nasa-esa/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Turn a rocket launch into a short vertical reel \u2014 punchy hook, 30\u201345s narration, beat-synced captions, and a footage-credit line. Use when making a launch reel/short (not a long-form YouTube video), or a quick social recap of a launch.",
+   "id": "skill:starlight-intelligence-starlight-agent-skills/rocket-launch-to-reel",
+   "kind": "skill",
+   "path": "skills/cosmos/rocket-launch-to-reel/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Turn a rocket launch (mission details + footage notes) into a full YouTube package \u2014 title options, description, chapters, tags, and a long-form script. Use when producing a launch recap/explainer video, or asked to 'make a YouTube video ab",
+   "id": "skill:starlight-intelligence-starlight-agent-skills/rocket-launch-to-youtube",
+   "kind": "skill",
+   "path": "skills/media/rocket-launch-to-youtube/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Design an interactive simulation lab \u2014 a self-contained HTML/JS (or p5.js) sim with tunable parameters, a learning goal, and guided experiments. Use when building an interactive demo, a physics/astronomy sandbox, or a 'simulation' / 'intera",
+   "id": "skill:starlight-intelligence-starlight-agent-skills/simulation-lab-builder",
+   "kind": "skill",
+   "path": "skills/education/simulation-lab-builder/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Check a live web page the way a stranger would and keep evidence another party can verify, then hand it to the Starlight Kernel to be judged by a different vendor and signed. Use when asked to QA, verify or prove a page after a deploy, chec",
+   "id": "skill:starlight-intelligence-starlight-agent-skills/site-qa-receipt",
+   "kind": "skill",
+   "path": "skills/coding/site-qa-receipt/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Repurpose one source asset (article, video, paper brief, image) into a platform-tailored social pack \u2014 X thread, LinkedIn post, Instagram caption, YouTube short script, newsletter blurb. Use when asked to 'repurpose', 'turn this into posts'",
+   "id": "skill:starlight-intelligence-starlight-agent-skills/social-repurposer",
+   "kind": "skill",
+   "path": "skills/media/social-repurposer/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Build and release secure applications, mobile products, games, plugins, MCP servers, agents, SDKs and platform modules with professional SDLC evidence. Use when a software product needs bounded architecture, implementation, adversarial revi",
+   "id": "skill:starlight-intelligence-starlight-agent-skills/software-studio",
+   "kind": "skill",
+   "path": "skills/studios/software-studio/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Repurpose a space asset (APOD short, mission brief, launch reel, atlas page) into a coordinated multi-platform pack, preserving image/footage credits across every variant. Use when distributing space content across X/LinkedIn/Instagram/YouT",
+   "id": "skill:starlight-intelligence-starlight-agent-skills/space-social-repurposer",
+   "kind": "skill",
+   "path": "skills/cosmos/space-social-repurposer/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Review a non-trivial implementation plan through product, engineering, design, and developer-experience lenses, then reconcile the findings into an evidence-gated execution plan. Use when a change crosses multiple systems, carries meaningfu",
+   "id": "skill:starlight-intelligence-starlight-agent-skills/starlight-autoplan",
+   "kind": "skill",
+   "path": "skills/coding/starlight-autoplan/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Review a proposal from the accountable founder or product-owner perspective: user value, strategic fit, economics, evidence, sequencing, and human responsibility. Use when a plan needs a build/revise/defer decision or when ambition may be o",
+   "id": "skill:starlight-intelligence-starlight-agent-skills/starlight-ceo-review",
+   "kind": "skill",
+   "path": "skills/coding/starlight-ceo-review/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Audit a digital experience against its own design language, information hierarchy, accessibility, responsive behavior, interaction states, content truth, and visual craft. Use for websites, applications, dashboards, generated media, or fron",
+   "id": "skill:starlight-intelligence-starlight-agent-skills/starlight-design-review",
+   "kind": "skill",
+   "path": "skills/coding/starlight-design-review/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Review an API, CLI, SDK, plugin, package, or installation flow for discoverability, safe defaults, actionable errors, compatibility, documentation, and time to verified value. Use before publishing a developer-facing interface or when onboa",
+   "id": "skill:starlight-intelligence-starlight-agent-skills/starlight-devex-review",
+   "kind": "skill",
+   "path": "skills/coding/starlight-devex-review/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Stress-test a technical design across data integrity, trust boundaries, concurrency, failure recovery, compatibility, observability, and resource limits. Use before implementing or landing a change whose failure could corrupt state, expose ",
+   "id": "skill:starlight-intelligence-starlight-agent-skills/starlight-eng-review",
+   "kind": "skill",
+   "path": "skills/coding/starlight-eng-review/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Diagnose a reproducible software failure by separating observations from hypotheses, locating the failing boundary, and defining regression evidence. Use when a bug, failed check, production incident, or unexpected behavior needs a root-cau",
+   "id": "skill:starlight-intelligence-starlight-agent-skills/starlight-investigate",
+   "kind": "skill",
+   "path": "skills/coding/starlight-investigate/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Exercise a web experience or API through real user flows, semantic accessibility checks, responsive viewports, console/network inspection, and release-specific assertions. Use when a preview or deployed surface needs evidence-based QA; use ",
+   "id": "skill:starlight-intelligence-starlight-agent-skills/starlight-qa",
+   "kind": "skill",
+   "path": "skills/coding/starlight-qa/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Prepare an authorized change for review or landing by checking repository state, required gates, secrets, diff scope, deployment evidence, rollback, and merge policy. Use when a branch or pull request is ready for a release decision; never ",
+   "id": "skill:starlight-intelligence-starlight-agent-skills/starlight-ship",
+   "kind": "skill",
+   "path": "skills/coding/starlight-ship/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Convert an approved product intent into a backlog-ready specification with boundaries, contracts, tasks, verification, rollback, and human approval points. Use when requirements are ambiguous, multiple components must change, or implementat",
+   "id": "skill:starlight-intelligence-starlight-agent-skills/starlight-spec",
+   "kind": "skill",
+   "path": "skills/coding/starlight-spec/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Apply the Starlight voice to any text \u2014 cool, premium, high-intellect, direct, technical, warm, playful; pattern recognition as poetry. Use when writing or rewriting content in the Starlight register, enforcing brand voice, or asked to 'mak",
+   "id": "skill:starlight-intelligence-starlight-agent-skills/starlight-voice",
+   "kind": "skill",
+   "path": "skills/brand/starlight-voice/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "How a stream queen coordinates a worker swarm and runs the escalation contract that keeps money safe \u2014 queens run streams, the founder owns capital, humans hold the final gate. Use when designing or operating a multi-agent income swarm, dec",
+   "id": "skill:starlight-intelligence-starlight-agent-skills/swarm-queen-coordination",
+   "kind": "skill",
+   "path": "skills/substrate/swarm-queen-coordination/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Build editable, installable and commercially licensable Notion, Canva, Figma, Framer, Webflow, Next.js, Vercel, Railway and workflow templates from one canonical source. Use when a reusable template or marketplace-ready derivative needs cle",
+   "id": "skill:starlight-intelligence-starlight-agent-skills/template-studio",
+   "kind": "skill",
+   "path": "skills/studios/template-studio/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Generate high-CTR thumbnail concepts for a video \u2014 layout, focal subject, text overlay (\u22644 words), color/contrast, and an image-gen prompt. Use when designing a YouTube/short thumbnail, asked for 'thumbnail ideas', or planning cover art for",
+   "id": "skill:starlight-intelligence-starlight-agent-skills/thumbnail-concept",
+   "kind": "skill",
+   "path": "skills/media/thumbnail-concept/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Find dead doors on a product page: calls to action that lead nowhere, broken signup forms, and checkout buttons on products that are not ready to sell, ranked by severity. Use when asked to audit a landing page, check a waitlist, find broke",
+   "id": "skill:starlight-intelligence-starlight-agent-skills/waitlist-door-check",
+   "kind": "skill",
+   "path": "skills/coding/waitlist-door-check/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Build coherent games, cinematic websites, interactive stories, world bibles, soundtrack experiences and collector editions from governed canon. Use when Arcanea or another owned world needs cross-media continuity, interaction design, runtim",
+   "id": "skill:starlight-intelligence-starlight-agent-skills/world-experience-studio",
+   "kind": "skill",
+   "path": "skills/studios/world-experience-studio/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Use when doing ANY task involving Supabase. Triggers: Supabase products (Database, Auth, Edge Functions, Realtime, Storage, Vectors, Cron, Queues); client libraries and SSR integrations (supabase-js, @supabase/ssr) in Next.js, React, Svelte",
+   "id": "skill:supabase-agent-skills/supabase",
+   "kind": "skill",
+   "path": "skills/supabase/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Postgres best practices maintained by Supabase, for Postgres running anywhere. Load this skill BEFORE writing or changing anything that lives in a Postgres database: creating or altering tables and columns (including choosing column types),",
+   "id": "skill:supabase-agent-skills/supabase-postgres-best-practices",
+   "kind": "skill",
+   "path": "skills/supabase-postgres-best-practices/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "React composition patterns that scale. Use when refactoring components with boolean prop proliferation, building flexible component libraries, or designing reusable APIs. Triggers on tasks involving compound components, render props, contex",
+   "id": "skill:vercel-labs-agent-skills/vercel-composition-patterns",
+   "kind": "skill",
+   "path": "skills/composition-patterns/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Guide for implementing smooth, native-feeling animations using React's View Transition API (`<ViewTransition>` component, `addTransitionType`, and CSS view transition pseudo-elements). Use this skill whenever the user wants to add page tran",
+   "id": "skill:vercel-labs-agent-skills/vercel-react-view-transitions",
+   "kind": "skill",
+   "path": "skills/react-view-transitions/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Review UI code for Web Interface Guidelines compliance. Use when asked to \"review my UI\", \"check accessibility\", \"audit design\", \"review UX\", or \"check my site against best practices\".",
+   "id": "skill:vercel-labs-agent-skills/web-design-guidelines",
+   "kind": "skill",
+   "path": "skills/web-design-guidelines/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Review docs/prose for Writing Guidelines compliance. Use when asked to \"review my docs\", \"check writing style\", \"audit prose\", \"review docs voice and tone\", or \"check this page against the writing handbook\".",
+   "id": "skill:vercel-labs-agent-skills/writing-guidelines",
+   "kind": "skill",
+   "path": "skills/writing-guidelines/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Implement proven backend architecture patterns including Clean Architecture, Hexagonal Architecture, and Domain-Driven Design. Use this skill when designing clean architecture for a new microservice, when refactoring a monolith to use bound",
+   "id": "skill:wshobson-agents/architecture-patterns",
+   "kind": "skill",
+   "path": "plugins/backend-development/skills/architecture-patterns/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Implement distributed tracing with Jaeger and Tempo to track requests across microservices and identify performance bottlenecks. Use when debugging microservices, analyzing request flows, or implementing observability for distributed system",
+   "id": "skill:wshobson-agents/distributed-tracing",
+   "kind": "skill",
+   "path": "plugins/observability-monitoring/skills/distributed-tracing/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Calculate TAM/SAM/SOM for market opportunities using top-down, bottom-up, and value theory methodologies. Use this skill when sizing markets, estimating addressable revenue, validating market opportunity for a new venture, or building inves",
+   "id": "skill:wshobson-agents/market-sizing-analysis",
+   "kind": "skill",
+   "path": "plugins/startup-business-analyst/skills/market-sizing-analysis/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Configure and optimize Nx monorepo workspaces. Use when setting up Nx, configuring project boundaries, optimizing build caching, or implementing affected commands.",
+   "id": "skill:wshobson-agents/nx-workspace-patterns",
+   "kind": "skill",
+   "path": "plugins/developer-essentials/skills/nx-workspace-patterns/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "> Schedule and publish social media posts across 13 platforms (X, LinkedIn, Instagram, Facebook Pages, TikTok, Discord, Telegram, YouTube, Reddit, WordPress, Pinterest) via the SocialClaw API. Use when the user wants to publish, schedule, o",
+   "id": "skill:wshobson-agents/social-publishing",
+   "kind": "skill",
+   "path": "plugins/social-publishing/skills/social-publishing/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Track, calculate, and optimize key performance metrics for SaaS, marketplace, consumer, and B2B startups from seed through Series A, including unit economics, growth efficiency, and cash management. Use this skill when defining a metrics fr",
+   "id": "skill:wshobson-agents/startup-metrics-framework",
+   "kind": "skill",
+   "path": "plugins/startup-business-analyst/skills/startup-metrics-framework/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  },
+  {
+   "description": "Apply typography, color theory, spacing systems, and iconography principles to create cohesive visual designs. Use when establishing design tokens, building style guides, or improving visual hierarchy and consistency.",
+   "id": "skill:wshobson-agents/visual-design-foundations",
+   "kind": "skill",
+   "path": "plugins/ui-design/skills/visual-design-foundations/SKILL.md",
+   "provides": [],
+   "status": "registered"
+  }
+ ],
+ "schemaVersion": "1.0.0",
+ "source": {
+  "agentRegistry": "none",
+  "skillRules": "foundry/capability-index/sources.json#sha256:a828b866893279923055a0fd6f680075d23906eb2016df30364cdd1c60c2f2ad"
+ }
+}

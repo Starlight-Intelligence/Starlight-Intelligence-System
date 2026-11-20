@@ -1,0 +1,21 @@
+{
+ "e1": {
+  "claim": "Our frontmatter/dollar-digit/secret checks agree with the existing starlight-evals lint-skills.mjs oracle on external skills.",
+  "min_lint_agreement": 0.95
+ },
+ "e2": {
+  "claim": "Sketch Jaccard tracks exact 5-word-shingle Jaccard (the absorb.mjs gate) closely enough to replace pairwise body reads; report overlap the name-collision baseline misses.",
+  "max_abs_error": 0.1,
+  "min_within_tolerance": 0.95,
+  "overlap_threshold": 0.5,
+  "pairs": 150
+ },
+ "e3": {
+  "claim": "Context-aware injection scanning cuts false positives vs the naive phrase match without losing attack recall.",
+  "max_false_positive_rate": 0.1,
+  "min_recall": 0.8,
+  "requires_lower_fp_than_baseline": true
+ },
+ "registered_on": "2026-11-10",
+ "schema": "starlight.capability-prereg.v1"
+}

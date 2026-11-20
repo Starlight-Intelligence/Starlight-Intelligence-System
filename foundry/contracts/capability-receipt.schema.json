@@ -1,0 +1,488 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://starlightintelligence.org/schemas/foundry/capability-receipt.schema.json",
+  "title": "Starlight Capability Receipt",
+  "description": "One record per third-party SKILL.md or AGENTS.md at a pinned commit: provenance, license, security flags and bounded metadata. Never contains the artifact body. Sidecar to the capability graph, which cannot carry these facts. The verdict must agree with the flags (clean: only errors; review: no high flag and at least one non-error flag; blocked: at least one high flag; unscanned: oversize, no flags), and the license status with the resolved value.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "artifact_id",
+    "estate",
+    "kind",
+    "observed_at",
+    "tool_version",
+    "source",
+    "content",
+    "frontmatter",
+    "license",
+    "flags",
+    "security_verdict"
+  ],
+  "properties": {
+    "schema": {
+      "const": "starlight.capability-receipt.v1"
+    },
+    "artifact_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*@[0-9a-f]{12}:[^\\u0000-\\u001f\\u007f]+$",
+      "maxLength": 600
+    },
+    "estate": {
+      "enum": [
+        "external",
+        "baseline"
+      ]
+    },
+    "kind": {
+      "enum": [
+        "skill",
+        "repo_policy"
+      ]
+    },
+    "observed_at": {
+      "type": "string",
+      "pattern": "^\\d{4}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12]\\d|3[01])$"
+    },
+    "tool_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "skipped": {
+      "const": "too_large"
+    },
+    "security_verdict": {
+      "enum": [
+        "clean",
+        "review",
+        "blocked",
+        "unscanned"
+      ]
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repository",
+        "commit",
+        "path",
+        "blob_sha"
+      ],
+      "properties": {
+        "repository": {
+          "type": "string",
+          "pattern": "^https://[A-Za-z0-9.-]+/[A-Za-z0-9_./-]+$",
+          "maxLength": 300
+        },
+        "commit": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        },
+        "path": {
+          "type": "string",
+          "pattern": "^(?!.*(?:^|/)\\.\\.(?:/|$))[^\\u0000-\\u001f\\u007f]+$",
+          "maxLength": 500
+        },
+        "blob_sha": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        }
+      }
+    },
+    "content": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "bytes",
+        "sha256"
+      ],
+      "properties": {
+        "bytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "normalized_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "words": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "frontmatter": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "parse": {
+          "enum": [
+            "ok",
+            "absent",
+            "unterminated"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 80
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 240
+        },
+        "description_chars": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "allowed_tools": {
+          "type": "array",
+          "maxItems": 20,
+          "items": {
+            "type": "string",
+            "maxLength": 80
+          }
+        },
+        "tags": {
+          "type": "array",
+          "maxItems": 12,
+          "items": {
+            "type": "string",
+            "maxLength": 40
+          }
+        },
+        "name_matches_folder": {
+          "type": "boolean"
+        }
+      }
+    },
+    "license": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "resolved",
+        "status"
+      ],
+      "properties": {
+        "resolved": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "status": {
+          "enum": [
+            "allowlisted",
+            "unknown",
+            "refused"
+          ]
+        },
+        "source": {
+          "enum": [
+            "license_file",
+            "frontmatter",
+            "none",
+            "license_file_unrecognized",
+            "license_file_vs_frontmatter"
+          ]
+        },
+        "frontmatter": {
+          "type": "string",
+          "maxLength": 80
+        },
+        "evidence": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "file",
+                "blob_sha",
+                "scope",
+                "detected"
+              ],
+              "properties": {
+                "file": {
+                  "type": "string",
+                  "pattern": "^[^\\u0000-\\u001f\\u007f]+$",
+                  "maxLength": 500
+                },
+                "blob_sha": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{40}$"
+                },
+                "scope": {
+                  "enum": [
+                    "artifact_adjacent",
+                    "repo_root"
+                  ]
+                },
+                "detected": {
+                  "type": "string",
+                  "maxLength": 200
+                }
+              }
+            }
+          ]
+        }
+      },
+      "anyOf": [
+        {
+          "properties": {
+            "status": {
+              "const": "allowlisted"
+            },
+            "resolved": {
+              "pattern": "^(?:MIT|Apache-2\\.0|BSD-2-Clause|BSD-3-Clause|ISC|CC0-1\\.0|CC-BY-4\\.0|Unlicense)(?: (?:OR|AND) (?:MIT|Apache-2\\.0|BSD-2-Clause|BSD-3-Clause|ISC|CC0-1\\.0|CC-BY-4\\.0|Unlicense))*$"
+            }
+          }
+        },
+        {
+          "properties": {
+            "status": {
+              "const": "unknown"
+            },
+            "resolved": {
+              "pattern": "^(?:unknown|unrecognized)$"
+            }
+          }
+        },
+        {
+          "properties": {
+            "status": {
+              "const": "refused"
+            },
+            "resolved": {
+              "not": {
+                "pattern": "^(?:MIT|Apache-2\\.0|BSD-2-Clause|BSD-3-Clause|ISC|CC0-1\\.0|CC-BY-4\\.0|Unlicense)(?: (?:OR|AND) (?:MIT|Apache-2\\.0|BSD-2-Clause|BSD-3-Clause|ISC|CC0-1\\.0|CC-BY-4\\.0|Unlicense))*$"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "flags": {
+      "type": "array",
+      "maxItems": 201,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "rule",
+          "line",
+          "severity"
+        ],
+        "properties": {
+          "rule": {
+            "type": "string",
+            "pattern": "^[a-z_-]{3,40}$"
+          },
+          "line": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "severity": {
+            "enum": [
+              "info",
+              "review",
+              "error",
+              "high"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "anyOf": [
+    {
+      "not": {
+        "required": [
+          "skipped"
+        ]
+      },
+      "properties": {
+        "frontmatter": {
+          "required": [
+            "parse",
+            "name",
+            "description",
+            "description_chars",
+            "allowed_tools",
+            "tags",
+            "name_matches_folder"
+          ]
+        },
+        "content": {
+          "required": [
+            "normalized_sha256",
+            "words"
+          ]
+        },
+        "license": {
+          "required": [
+            "source",
+            "frontmatter",
+            "evidence"
+          ]
+        },
+        "security_verdict": {
+          "const": "clean"
+        },
+        "flags": {
+          "items": {
+            "properties": {
+              "severity": {
+                "enum": [
+                  "error"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "not": {
+        "required": [
+          "skipped"
+        ]
+      },
+      "properties": {
+        "frontmatter": {
+          "required": [
+            "parse",
+            "name",
+            "description",
+            "description_chars",
+            "allowed_tools",
+            "tags",
+            "name_matches_folder"
+          ]
+        },
+        "content": {
+          "required": [
+            "normalized_sha256",
+            "words"
+          ]
+        },
+        "license": {
+          "required": [
+            "source",
+            "frontmatter",
+            "evidence"
+          ]
+        },
+        "security_verdict": {
+          "const": "review"
+        },
+        "flags": {
+          "items": {
+            "properties": {
+              "severity": {
+                "enum": [
+                  "info",
+                  "review",
+                  "error"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "not": {
+            "properties": {
+              "flags": {
+                "items": {
+                  "properties": {
+                    "severity": {
+                      "enum": [
+                        "error"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "not": {
+        "required": [
+          "skipped"
+        ]
+      },
+      "properties": {
+        "frontmatter": {
+          "required": [
+            "parse",
+            "name",
+            "description",
+            "description_chars",
+            "allowed_tools",
+            "tags",
+            "name_matches_folder"
+          ]
+        },
+        "content": {
+          "required": [
+            "normalized_sha256",
+            "words"
+          ]
+        },
+        "license": {
+          "required": [
+            "source",
+            "frontmatter",
+            "evidence"
+          ]
+        },
+        "security_verdict": {
+          "const": "blocked"
+        }
+      },
+      "allOf": [
+        {
+          "not": {
+            "properties": {
+              "flags": {
+                "items": {
+                  "properties": {
+                    "severity": {
+                      "enum": [
+                        "info",
+                        "review",
+                        "error"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "required": [
+        "skipped"
+      ],
+      "properties": {
+        "security_verdict": {
+          "const": "unscanned"
+        },
+        "flags": {
+          "maxItems": 0
+        }
+      }
+    }
+  ]
+}
