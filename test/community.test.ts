@@ -1,5 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { StarlightQueen } from '../src/orchestration/starlight-queen.ts';
 import { CommunityLedger, fixtureCommunityAdapter as adapter, planCommunityAction, validateCommunityEvent } from '../src/community.ts';
 import type { CommunityConsent, CommunityEvent, CommunityEventKind } from '../src/community.ts';
 
@@ -110,4 +111,37 @@ test('no action planner output can authorize execution', () => {
     assert.deepEqual(planCommunityAction(action), { action, mode: 'human-review', executable: false });
   }
   assert.throws(() => planCommunityAction('unknown' as 'send'));
+});
+
+test('private partner intake replays once after both adapter recovery and ledger reconstruction', () => {
+  const intake = event('intake', { privacy: 'private', objectId: 'engineering-proposal' });
+  const processingOnly = [{ ...consent[0], public: false, memory: false }];
+  const first = new CommunityLedger();
+  const unavailable = { ...adapter, health: 'offline' as const };
+  assert.deepEqual(first.ingest(intake, unavailable, processingOnly),
+    { status: 'fallback', reason: 'adapter-unavailable', eventId: intake.id });
+  assert.equal(first.ingest(intake, adapter, processingOnly).status, 'accepted');
+
+  const restored = new CommunityLedger();
+  const deliveries = [intake, structuredClone(intake)];
+  assert.deepEqual(deliveries.map(row => restored.ingest(row, adapter, processingOnly).status),
+    ['accepted', 'duplicate']);
+  const score = restored.scorecard(intake.communityId, intake.loopId, processingOnly);
+  assert.deepEqual(score, first.scorecard(intake.communityId, intake.loopId, processingOnly));
+  assert.equal(score.members, 1);
+  for (const audience of ['public', 'memory'] as const) {
+    assert.deepEqual(restored.project(intake.communityId, audience, processingOnly), []);
+  }
+});
+
+test('proposed partner settlement and external sending require human review', () => {
+  const queen = new StarlightQueen();
+  queen.enqueueAction({ id: 'settlement-review', name: 'Review proposed referral settlement',
+    category: 'money_movement', riskTier: 'high_irreversible_gate', params: {} });
+  const batch = queen.drainQueue();
+  assert.deepEqual(batch.executed, []);
+  assert.equal(batch.gated.length, 1);
+  assert.equal(batch.gated[0].requiredRole, 'human_operator');
+  assert.equal(batch.gated[0].status, 'open');
+  assert.deepEqual(planCommunityAction('send'), { action: 'send', mode: 'human-review', executable: false });
 });
