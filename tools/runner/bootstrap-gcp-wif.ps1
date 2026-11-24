@@ -57,14 +57,18 @@ function Invoke-GcloudStep {
   }
 
   Write-Host "[APPLY] $Label" -ForegroundColor Green
+  $prevEap = $ErrorActionPreference
+  $ErrorActionPreference = "Continue"
   $output = & $GcloudCmd @GcloudArgs 2>&1
-  if ($LASTEXITCODE -ne 0) {
+  $code = $LASTEXITCODE
+  $ErrorActionPreference = $prevEap
+  if ($code -ne 0) {
     $text = ($output | Out-String)
     if ($IgnoreAlreadyExists -and $text -match "ALREADY_EXISTS|already exists") {
       Write-Host "          Already exists; continuing." -ForegroundColor DarkGray
       return
     }
-    throw "Step '$Label' failed (exit $LASTEXITCODE): $text"
+    throw "Step '$Label' failed (exit $code): $text"
   }
   if ($output) { $output | ForEach-Object { Write-Host "          $_" } }
 }
@@ -78,11 +82,15 @@ Write-Host "WIF Orgs:  $($GitHubOrgs -join ', ')"
 Write-Host ""
 
 if ($Apply) {
+  $prevEap = $ErrorActionPreference
+  $ErrorActionPreference = "Continue"
   $activeAuth = & $GcloudCmd auth list --filter="status:ACTIVE" --format="value(account)" 2>&1
-  if ($LASTEXITCODE -ne 0 -or -not ($activeAuth | Out-String).Trim()) {
+  $authCode = $LASTEXITCODE
+  $ErrorActionPreference = $prevEap
+  if ($authCode -ne 0 -or -not ($activeAuth | Out-String).Trim()) {
     throw "No active gcloud auth session. Run '$GcloudCmd auth login' first."
   }
-  Write-Host "Active gcloud account: $($activeAuth | Out-String)".Trim()
+  Write-Host "Active gcloud account: $(($activeAuth | Out-String).Trim())"
 }
 
 Invoke-GcloudStep -Label "1. Enable required GCP APIs" -GcloudArgs @(
