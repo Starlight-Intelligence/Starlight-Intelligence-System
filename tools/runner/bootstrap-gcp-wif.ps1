@@ -59,17 +59,28 @@ function Invoke-GcloudStep {
   Write-Host "[APPLY] $Label" -ForegroundColor Green
   $prevEap = $ErrorActionPreference
   $ErrorActionPreference = "Continue"
-  $output = & $GcloudCmd @GcloudArgs 2>&1
-  $code = $LASTEXITCODE
-  $ErrorActionPreference = $prevEap
-  if ($code -ne 0) {
+  $maxAttempts = 4
+  $output = $null
+  $code = 1
+  for ($attempt = 1; $attempt -le $maxAttempts; $attempt++) {
+    $output = & $GcloudCmd @GcloudArgs 2>&1
+    $code = $LASTEXITCODE
+    if ($code -eq 0) { break }
     $text = ($output | Out-String)
-    if ($IgnoreAlreadyExists -and $text -match "ALREADY_EXISTS|already exists") {
+    if ($IgnoreAlreadyExists -and $text -match "ALREADY_EXISTS|already exists|already owns") {
       Write-Host "          Already exists; continuing." -ForegroundColor DarkGray
+      $ErrorActionPreference = $prevEap
       return
     }
+    if ($attempt -lt $maxAttempts -and $text -match "does not exist") {
+      Write-Host "          Waiting 5s for GCP IAM propagation (attempt $attempt/$maxAttempts)..." -ForegroundColor DarkGray
+      Start-Sleep -Seconds 5
+      continue
+    }
+    $ErrorActionPreference = $prevEap
     throw "Step '$Label' failed (exit $code): $text"
   }
+  $ErrorActionPreference = $prevEap
   if ($output) { $output | ForEach-Object { Write-Host "          $_" } }
 }
 
