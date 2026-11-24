@@ -67,7 +67,7 @@ function Invoke-GcloudStep {
     $code = $LASTEXITCODE
     if ($code -eq 0) { break }
     $text = ($output | Out-String)
-    if ($IgnoreAlreadyExists -and $text -match "ALREADY_EXISTS|already exists|already owns") {
+    if ($IgnoreAlreadyExists -and $text -match "ALREADY_EXISTS|already exists|already\s+own\s+it|HTTPError 409") {
       Write-Host "          Already exists; continuing." -ForegroundColor DarkGray
       $ErrorActionPreference = $prevEap
       return
