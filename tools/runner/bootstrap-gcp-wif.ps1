@@ -13,7 +13,7 @@ Built on SIP v1.1.1.
 #>
 [CmdletBinding()]
 param(
-  [string]$ProjectId = $(if ($env:GCP_PROJECT_ID) { $env:GCP_PROJECT_ID } else { "starlight-intelligence-estate" }),
+  [string]$ProjectId = $(if ($env:GCP_PROJECT_ID) { $env:GCP_PROJECT_ID } else { "starlight-intelligence" }),
   [string]$Region = $(if ($env:GCP_REGION) { $env:GCP_REGION } else { "europe-west4" }),
   [string]$JobName = $(if ($env:CLOUD_RUN_JOB) { $env:CLOUD_RUN_JOB } else { "starlight-runner-job" }),
   [string[]]$GitHubOrgs = @("Starlight-Intelligence", "frankxai"),
@@ -93,6 +93,8 @@ Invoke-GcloudStep -Label "1. Enable required GCP APIs" -GcloudArgs @(
   "secretmanager.googleapis.com",
   "iamcredentials.googleapis.com",
   "aiplatform.googleapis.com",
+  "billingbudgets.googleapis.com",
+  "cloudresourcemanager.googleapis.com",
   "--project=$ProjectId"
 )
 

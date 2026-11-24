@@ -12,7 +12,7 @@
   "vars": {
     "GCP_REGION": "europe-west4",
     "CLOUD_RUN_JOB": "starlight-runner-job",
-    "GCP_PROJECT_ID": "starlight-intelligence-estate"
+    "GCP_PROJECT_ID": "starlight-intelligence"
   },
   "observability": {
     "enabled": true,

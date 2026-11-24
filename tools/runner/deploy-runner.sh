@@ -6,9 +6,11 @@
 
 set -eo pipefail
 
-PROJECT_ID="${GCP_PROJECT_ID:-$(gcloud config get-value project 2>/dev/null || echo "")}"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ID="${GCP_PROJECT_ID:-$(gcloud config get-value project 2>/dev/null || echo "starlight-intelligence")}"
 REGION="${GCP_REGION:-europe-west4}"
 JOB_NAME="${CLOUD_RUN_JOB:-starlight-runner-job}"
+RUNNER_SA="${GCP_RUNNER_SA:-starlight-runner-sa@${PROJECT_ID}.iam.gserviceaccount.com}"
 IMAGE_TAG="${REGION}-docker.pkg.dev/${PROJECT_ID}/starlight-fleet/runner:latest"
 
 if [ -z "$PROJECT_ID" ]; then
@@ -34,8 +36,9 @@ gcloud artifacts repositories create starlight-fleet \
 
 # 3. Build container image using Cloud Build
 echo "Building container with Cloud Build..."
-gcloud builds submit . \
-  --tag="$IMAGE_TAG" \
+gcloud builds submit "$SCRIPT_DIR" \
+  --config="$SCRIPT_DIR/cloudbuild.yaml" \
+  --substitutions="_IMAGE_TAG=${IMAGE_TAG}" \
   --project="$PROJECT_ID"
 
 # 4. Optional Cloud Storage FUSE Persistent Volume for Zero-Network Dependency Caching
@@ -59,6 +62,7 @@ if gcloud run jobs describe "$JOB_NAME" --region="$REGION" --project="$PROJECT_I
   gcloud run jobs update "$JOB_NAME" \
     --image="$IMAGE_TAG" \
     --region="$REGION" \
+    --service-account="$RUNNER_SA" \
     --cpu=2 \
     --memory=4Gi \
     --task-timeout=900s \
@@ -69,6 +73,7 @@ else
   gcloud run jobs create "$JOB_NAME" \
     --image="$IMAGE_TAG" \
     --region="$REGION" \
+    --service-account="$RUNNER_SA" \
     --cpu=2 \
     --memory=4Gi \
     --task-timeout=900s \
