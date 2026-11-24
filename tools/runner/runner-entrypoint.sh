@@ -40,21 +40,20 @@ fi
 cd repo
 
 echo " Configuring dependency cache..."
-if [ -d "/cache/pnpm" ] && [ -w "/cache/pnpm" ]; then
-  echo " Using mounted persistent cache volume at /cache/pnpm"
-  pnpm config set store-dir /cache/pnpm/store
-elif [ -d "/home/starlight/.local/share/pnpm/store/v3" ]; then
-  echo " Using pre-warmed image store cache"
-  pnpm config set store-dir /home/starlight/.local/share/pnpm/store/v3
-fi
+# Keep active pnpm store on local POSIX disk so SQLite index.db-shm and executable +x bits work reliably.
+LOCAL_PNPM_STORE="/home/starlight/.local/share/pnpm/store/v3"
+mkdir -p "$LOCAL_PNPM_STORE"
+pnpm config set store-dir "$LOCAL_PNPM_STORE"
 
 echo " Installing dependencies..."
 INSTALL_START=$(date +%s)
-if [ -f "pnpm-lock.yaml" ]; then
-  pnpm install --frozen-lockfile --prefer-offline || pnpm install
+if [ "${STARLIGHT_SKIP_INSTALL:-0}" = "1" ]; then
+  echo " Skipping dependency install (STARLIGHT_SKIP_INSTALL=1)"
+elif [ -f "pnpm-lock.yaml" ]; then
+  pnpm install --frozen-lockfile --prefer-offline || pnpm install --frozen-lockfile
 elif [ -f "package-lock.json" ]; then
   npm ci --prefer-offline || npm install
-else
+elif [ -f "package.json" ]; then
   npm install
 fi
 INSTALL_DURATION=$(( $(date +%s) - INSTALL_START ))
