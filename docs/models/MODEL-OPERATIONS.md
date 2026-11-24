@@ -5,6 +5,19 @@
 > Claude-side lineup and the eval loop that keeps routing decisions honest.
 > Last updated: 2026-06-09 (Fable 5 arrival + Arena Rounds 1–3; `/model-arena` skill formalized at `~/.claude/skills/model-arena/`).
 
+## Current evidence checkpoint · 24 November 2026
+
+The June lineup and routing notes below describe the Claude Code environment and the tasks measured in those rounds. Resolve current IDs, access, limits and rates through provider documentation and the invoked harness. The versioned routing table and its evidence remain the operational reference for this loop. A provider release enters evaluation before it enters policy.
+
+| Workload | Candidates for the next comparison | Primary source |
+|---|---|---|
+| Routine and frontier reasoning | GPT-6.2 Sol and Astra, Claude Opus 5.5 and Fable 5.2, Gemini 4 Neon and Carbon | [OpenAI changelog](https://developers.openai.com/api/docs/changelog), [Anthropic models](https://www.anthropic.com/news/models), [Gemini changelog](https://aistudio.google.com/docs/changelog) |
+| Typed decisions | Cloudflare Clef-flash and Clef-omni, OpenAI `gpt-6-luna` Decisions, Google `gemini-decision-1`, Microsoft Decision 1.1 | [Cloudflare model family](https://developers.cloudflare.com/changelog/post/2026-10-09-clef-omni-workers-ai/), [OpenAI Decisions](https://developers.openai.com/api/docs/guides/decisions), [Google Decisions](https://aistudio.google.com/docs/decisions-api), [Microsoft Decision](https://commandline.microsoft.com/microsoft-decision-model-ga/) |
+
+For typed decisions, compare rules, constrained JSON and typed APIs on the same research-intake cases. Track calibration, critical misroutes, abstention, p95 latency and total cost per accepted decision. Keep text, images and time-based media in distinct evaluation slices. The owning workflow applies authorization, budget, fallback and approvals.
+
+For model and harness comparisons, freeze the model revision, endpoint, tools, inference effort, task corpus and judge. Store the artifact and full run receipt in the [Arena](../../tools/arena/), follow the [Proving Ground specification](../../tools/proving-ground/SPEC.md) for measurements, and use the [routing doctrine](../../tools/proving-ground/ROUTING-DOCTRINE.md) for promotion. This checkpoint records provider documentation and a proposed evaluation. Performance, account access and operating status await receipts.
+
 ## The lineup (June 2026)
 
 | Model | ID | Role on this machine |
