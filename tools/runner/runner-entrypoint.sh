@@ -15,10 +15,12 @@ echo " Memory: $(grep MemTotal /proc/meminfo | awk '{print $2}') kB"
 echo " CPU: $(nproc) vCPUs"
 echo "=========================================================="
 
-REPO="${STARLIGHT_REPO:-$1}"
-REF="${STARLIGHT_REF:-${2:-main}}"
+REPO="${STARLIGHT_REPO:-${REPO:-$1}}"
+RAW_REF="${STARLIGHT_REF:-${GIT_REF:-${2:-main}}}"
+REF="${RAW_REF#refs/heads/}"
+REF="${REF#refs/tags/}"
 COMMAND="${STARLIGHT_COMMAND:-${3:-npm test}}"
-CALLBACK_URL="${STARLIGHT_CALLBACK_URL:-$4}"
+CALLBACK_URL="${STARLIGHT_CALLBACK_URL:-${CALLBACK_URL:-$4}}"
 
 if [ -z "$REPO" ]; then
   echo "Error: No repository specified. Pass via STARLIGHT_REPO env or argument 1."

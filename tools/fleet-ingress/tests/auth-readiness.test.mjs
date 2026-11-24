@@ -119,4 +119,97 @@ test('202 requires a successful executor response and preserves the source bindi
   assert.equal(url, 'https://run.googleapis.com/v2/projects/fixture-project/locations/europe-west4/jobs/fixture-job:run');
   const env = JSON.parse(options.body).overrides.containerOverrides[0].env;
   assert.equal(env.find((item) => item.name === 'COMMIT_SHA').value, push.after);
+  assert.equal(env.find((item) => item.name === 'STARLIGHT_REPO').value, 'fixture/example');
+  assert.equal(env.find((item) => item.name === 'STARLIGHT_REF').value, 'main');
+});
+
+function signedCallbackRequest(payload, runnerSecret = secret) {
+  const body = typeof payload === 'string' ? payload : JSON.stringify(payload);
+  return new Request('https://local.invalid/v1/runner/callback', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-starlight-signature': 'sha256=' + createHmac('sha256', runnerSecret).update(body).digest('hex'),
+    },
+    body,
+  });
+}
+
+test('runner callback fails closed when STARLIGHT_RUNNER_SECRET is missing or blank', async () => {
+  for (const runnerSecret of [undefined, '  ']) {
+    const response = await handleRequest(
+      signedCallbackRequest({ repo: 'fixture/example', ref: 'main', status: 'pass', exitCode: 0 }),
+      { STARLIGHT_RUNNER_SECRET: runnerSecret }
+    );
+    assert.equal(response.status, 503);
+    assert.deepEqual(await response.json(), { error: 'callback_unavailable' });
+  }
+});
+
+test('runner callback rejects missing or invalid HMAC signature', async () => {
+  const validReceipt = { repo: 'fixture/example', ref: 'main', status: 'pass', exitCode: 0 };
+  const badSigReq = signedCallbackRequest(validReceipt, 'wrong-secret');
+  const badRes = await handleRequest(badSigReq, { STARLIGHT_RUNNER_SECRET: secret });
+  assert.equal(badRes.status, 401);
+  assert.deepEqual(await badRes.json(), { error: 'invalid_signature' });
+
+  const noSigReq = new Request('https://local.invalid/v1/runner/callback', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(validReceipt),
+  });
+  const noSigRes = await handleRequest(noSigReq, { STARLIGHT_RUNNER_SECRET: secret });
+  assert.equal(noSigRes.status, 401);
+});
+
+test('runner callback rejects malformed JSON and invalid receipt fields', async () => {
+  for (const badBody of ['{', '[]', 'null']) {
+    const res = await handleRequest(signedCallbackRequest(badBody), { STARLIGHT_RUNNER_SECRET: secret });
+    assert.equal(res.status, 400);
+    assert.deepEqual(await res.json(), { error: 'malformed_json' });
+  }
+
+  for (const badReceipt of [
+    { ref: 'main', status: 'pass', exitCode: 0 },
+    { repo: 'fixture/example', ref: 'main', status: 'unknown', exitCode: 0 },
+    { repo: 'fixture/example', ref: 'main', status: 'pass', exitCode: '0' },
+  ]) {
+    const res = await handleRequest(signedCallbackRequest(badReceipt), { STARLIGHT_RUNNER_SECRET: secret });
+    assert.equal(res.status, 400);
+    assert.deepEqual(await res.json(), { error: 'invalid_receipt' });
+  }
+});
+
+test('runner callback accepts valid signed receipt and queues to STARLIGHT_AGENT_JOBS', async () => {
+  const queued = [];
+  const receiptPayload = {
+    repo: 'fixture/example',
+    ref: 'main',
+    status: 'pass',
+    duration: 12,
+    installDuration: 4,
+    exitCode: 0,
+    timestamp: '2026-11-24T15:00:00Z',
+  };
+
+  const res = await handleRequest(signedCallbackRequest(receiptPayload), {
+    STARLIGHT_RUNNER_SECRET: secret,
+    STARLIGHT_AGENT_JOBS: {
+      async send(msg) {
+        queued.push(msg);
+      },
+    },
+  });
+
+  assert.equal(res.status, 202);
+  const json = await res.json();
+  assert.equal(json.ok, true);
+  assert.equal(json.received, true);
+  assert.equal(json.protocol, 'SIP-1.1.1');
+  assert.equal(json.receipt.repo, 'fixture/example');
+  assert.equal(json.receipt.status, 'pass');
+  assert.equal(json.receipt.exitCode, 0);
+  assert.equal(queued.length, 1);
+  assert.equal(queued[0].job, 'runner-receipt');
+  assert.equal(queued[0].receipt.repo, 'fixture/example');
 });

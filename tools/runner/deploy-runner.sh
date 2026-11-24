@@ -7,8 +7,8 @@
 set -eo pipefail
 
 PROJECT_ID="${GCP_PROJECT_ID:-$(gcloud config get-value project 2>/dev/null || echo "")}"
-REGION="${GCP_REGION:-us-central1}"
-JOB_NAME="starlight-runner"
+REGION="${GCP_REGION:-europe-west4}"
+JOB_NAME="${CLOUD_RUN_JOB:-starlight-runner-job}"
 IMAGE_TAG="${REGION}-docker.pkg.dev/${PROJECT_ID}/starlight-fleet/runner:latest"
 
 if [ -z "$PROJECT_ID" ]; then

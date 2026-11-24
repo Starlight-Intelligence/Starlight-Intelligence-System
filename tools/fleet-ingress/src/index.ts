@@ -43,6 +43,7 @@ export interface Env {
   CLOUD_RUN_JOB?: string;
   GCP_SERVICE_ACCOUNT_TOKEN?: string;
   INGRESS_AUTH_BEARER?: string;
+  STARLIGHT_RUNNER_SECRET?: string;
   STARLIGHT_AGENT_JOBS?: Queue;
 }
 
@@ -158,15 +159,24 @@ export function buildCloudRunExecutionPayload(
   meta: WebhookEventMeta,
   callbackUrl?: string
 ): Record<string, any> {
+  const normalizedRef = meta.ref
+    ? meta.ref.replace(/^refs\/(heads|tags)\//, '')
+    : undefined;
+
   const envOverrides: Array<{ name: string; value: string }> = [
     { name: 'REPO', value: meta.repo },
+    { name: 'STARLIGHT_REPO', value: meta.repo },
     { name: 'TRIGGER_EVENT', value: meta.event },
   ];
 
   if (meta.sha) envOverrides.push({ name: 'COMMIT_SHA', value: meta.sha });
   if (meta.prNumber) envOverrides.push({ name: 'PR_NUMBER', value: String(meta.prNumber) });
   if (meta.ref) envOverrides.push({ name: 'GIT_REF', value: meta.ref });
-  if (callbackUrl) envOverrides.push({ name: 'CALLBACK_URL', value: callbackUrl });
+  if (normalizedRef) envOverrides.push({ name: 'STARLIGHT_REF', value: normalizedRef });
+  if (callbackUrl) {
+    envOverrides.push({ name: 'CALLBACK_URL', value: callbackUrl });
+    envOverrides.push({ name: 'STARLIGHT_CALLBACK_URL', value: callbackUrl });
+  }
 
   return {
     overrides: {
@@ -310,6 +320,93 @@ export async function handleRequest(request: Request, env: Env = {}): Promise<Re
           repo: meta.repo,
           runnerRequired: true,
           gcp: gcpDispatchResult,
+        }),
+        {
+          status: 202,
+          headers: { 'Content-Type': 'application/json' },
+        }
+      );
+    }
+
+    // Runner completion receipt callback (HMAC-SHA256 authenticated)
+    if (request.method === 'POST' && url.pathname === '/v1/runner/callback') {
+      if (!env.STARLIGHT_RUNNER_SECRET?.trim()) {
+        return new Response(JSON.stringify({ error: 'callback_unavailable' }), {
+          status: 503,
+          headers: { 'Content-Type': 'application/json' },
+        });
+      }
+
+      const signature = request.headers.get('x-starlight-signature');
+      const rawBody = await request.text();
+      const isValid = await verifySignature(rawBody, signature, env.STARLIGHT_RUNNER_SECRET);
+      if (!isValid) {
+        return new Response(JSON.stringify({ error: 'invalid_signature' }), {
+          status: 401,
+          headers: { 'Content-Type': 'application/json' },
+        });
+      }
+
+      let payload: Record<string, any> = {};
+      try {
+        payload = JSON.parse(rawBody);
+      } catch {
+        return new Response(JSON.stringify({ error: 'malformed_json' }), {
+          status: 400,
+          headers: { 'Content-Type': 'application/json' },
+        });
+      }
+
+      if (!payload || typeof payload !== 'object' || Array.isArray(payload)) {
+        return new Response(JSON.stringify({ error: 'malformed_json' }), {
+          status: 400,
+          headers: { 'Content-Type': 'application/json' },
+        });
+      }
+
+      if (
+        typeof payload.repo !== 'string' ||
+        !payload.repo.trim() ||
+        typeof payload.ref !== 'string' ||
+        !payload.ref.trim() ||
+        (payload.status !== 'pass' && payload.status !== 'fail') ||
+        typeof payload.exitCode !== 'number' ||
+        !Number.isFinite(payload.exitCode)
+      ) {
+        return new Response(JSON.stringify({ error: 'invalid_receipt' }), {
+          status: 400,
+          headers: { 'Content-Type': 'application/json' },
+        });
+      }
+
+      const receipt: Record<string, any> = {
+        repo: payload.repo.trim(),
+        ref: payload.ref.trim(),
+        status: payload.status,
+        exitCode: payload.exitCode,
+        timestamp: typeof payload.timestamp === 'string' ? payload.timestamp : new Date().toISOString(),
+      };
+      if (typeof payload.duration === 'number' && Number.isFinite(payload.duration)) {
+        receipt.duration = payload.duration;
+      }
+      if (typeof payload.installDuration === 'number' && Number.isFinite(payload.installDuration)) {
+        receipt.installDuration = payload.installDuration;
+      }
+
+      if (env.STARLIGHT_AGENT_JOBS && typeof env.STARLIGHT_AGENT_JOBS.send === 'function') {
+        await env.STARLIGHT_AGENT_JOBS.send({
+          job: 'runner-receipt',
+          protocol: 'SIP-1.1.1',
+          receipt,
+        });
+      }
+
+      return new Response(
+        JSON.stringify({
+          ok: true,
+          received: true,
+          protocol: 'SIP-1.1.1',
+          receipt,
         }),
         {
           status: 202,
