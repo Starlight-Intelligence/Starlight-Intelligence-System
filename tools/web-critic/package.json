@@ -1,0 +1,17 @@
+{
+  "name": "@starlight/web-design-critic",
+  "version": "1.0.0",
+  "description": "Scale-to-zero GCP Cloud Run Playwright visual QA and Web Production Kernel critic for Starlight preview deployments",
+  "private": true,
+  "type": "module",
+  "main": "src/critic.mjs",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "start": "node src/critic.mjs"
+  },
+  "dependencies": {
+    "playwright": "^1.52.0"
+  },
+  "author": "Frank Riemer (frankx.ai)",
+  "license": "MIT"
+}
