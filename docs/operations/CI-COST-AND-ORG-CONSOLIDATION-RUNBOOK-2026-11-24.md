@@ -1,12 +1,12 @@
-# CI Cost, Autonomous Agent Optimization & Org Consolidation Runbook
+# CI Cost, Autonomous Agent Optimization & Org Consolidation Runbook (RFC v2)
 
-**Measured:** 2026-11-24 (GitHub Enhanced Billing Usage API `2026-11`, org APIs, and Wrangler account `0b5c0d4435bdb220b9ed28efa0a98554`).
+**Measured:** 2026-11-24 / 2026-11-25 (GitHub Enhanced Billing Usage API `2026-11`, org APIs, branch-protection APIs, and Wrangler account `0b5c0d4435bdb220b9ed28efa0a98554`).
 
 ---
 
 ## 1. Verified Live Baseline (Nov 1–24, 2026)
 
-### Account Spend (`frankxai` Pro)
+### Account Spend (`frankxai` Pro — $4/mo, 3,000 Linux min, 2 GB storage)
 
 | Product | Quantity | Gross | Net Billed |
 | --- | ---: | ---: | ---: |
@@ -18,21 +18,21 @@
 
 | SKU | Quantity | Gross | Net Billed |
 | --- | ---: | ---: | ---: |
-| Actions Linux | 30,330.0 | $181.98 | $61.75 |
-| Actions macOS 3-core | 233.0 | $14.45 | $6.37 |
-| Actions Linux Slim | 2,676.0 | $5.35 | $5.13 |
-| Actions Windows | 1,243.0 | $12.43 | $3.30 |
+| Actions Linux (2-core, $0.006/min) | 30,330.0 | $181.98 | $61.75 |
+| Actions macOS 3-core ($0.062/min, 10x) | 233.0 | $14.45 | $6.37 |
+| Actions Linux Slim (1-core, $0.002/min, 3x cheaper) | 2,676.0 | $5.35 | $5.13 |
+| Actions Windows ($0.010/min, 1.7x) | 1,243.0 | $12.43 | $3.30 |
 | Actions storage | 5,904.3 | $1.98 | $0.64 |
 
-### Top 5 Billed Private Repos (86.2% of Actions Bill)
+### Top 5 Billed Private Repos on `frankxai` (86.2% of Actions Bill)
 
-| Repository | Qty | Gross | Net Billed |
-| --- | ---: | ---: | ---: |
-| `starlightintelligence.ai` | 8,106.0 | $52.87 | **$37.80** |
-| `agentic-ops` | 3,212.0 | $12.17 | **$10.84** |
-| `agentic-ops-hub` | 1,209.4 | $7.15 | **$6.49** |
-| `agenticincome` | 1,063.1 | $6.38 | **$5.73** |
-| `gencreator.ai` | 2,661.8 | $6.21 | **$5.66** |
+| Repository | Qty | Gross | Net Billed | Ownership Rule |
+| --- | ---: | ---: | ---: | --- |
+| `starlightintelligence.ai` | 8,106.0 | $52.87 | **$37.80** | Already in `Starlight-Intelligence` org (Model B) |
+| `agentic-ops` | 3,212.0 | $12.17 | **$10.84** | **Model A — keep in `frankxai/`** |
+| `agentic-ops-hub` | 1,209.4 | $7.15 | **$6.49** | **Model A — keep in `frankxai/`** |
+| `agenticincome` | 1,063.1 | $6.38 | **$5.73** | **Model A — keep in `frankxai/`** (Vercel-bound) |
+| `gencreator.ai` | 2,661.8 | $6.21 | **$5.66** | **Model A — keep in `frankxai/`** (Vercel-bound) |
 
 ### All 11 GitHub Namespaces (Seats, Repo Counts & Installed Apps)
 
@@ -50,72 +50,80 @@
 | `Agentic-Income` | Free | `frankxai` (1) | `[]` | 12 / 2 | $0.68 / $0.00 | `claude`, `blacksmith-sh`, `google-labs-jules`, `chatgpt-codex-connector`, `cursor` |
 | `oci-ai-architects` | Free | `frankxai` (1) | `[]` | 13 / 1 | $0.00 / $0.00 | `claude`, `blacksmith-sh` |
 
----
-
-## 2. Draft PRs Shipped Today (2026-11-24)
-
-| Repository | Draft PR | Key Changes & Impact |
-| --- | --- | --- |
-| `Starlight-Intelligence/starlightintelligence.ai` | https://github.com/Starlight-Intelligence/starlightintelligence.ai/pull/396 | Adds zero-dependency `workers/ci-sentinel` Cloudflare Worker (`17 */6 * * *` cron + `/health`, `/audit`, `/run` reporting to one durable issue at $0 GitHub Actions cost), switches `ci-contract` & `release-aggregate` to `ubuntu-slim`, caps artifact retention to 1–3 days. |
-| `frankxai/agentic-ops` | https://github.com/frankxai/agentic-ops/pull/659 | Moves 7 lightweight workflows/legs (`cf-checker-ci`, `queen-work-contract`, `queen-chain-behavior`, `swarm-bus-behavior`, `production-reliability`, `customer-intelligence`, `media-platform-ci`) to `ubuntu-slim` (3x cheaper), draft-gates `customer-intelligence`, trims artifact retention to 3 days. |
-| `frankxai/agentic-ops-hub` | https://github.com/frankxai/agentic-ops-hub/pull/524 | Moves `ci`, `estate-guard`, `fleet-watch`, `estate-ci-watch` to `ubuntu-slim`, draft-gates `estate-guard`, halves `fleet-watch` cron (`*/6` -> `*/12`), cuts artifact retention to 1–3 days. |
-| `frankxai/gencreator.ai` | https://github.com/frankxai/gencreator.ai/pull/375 | Enables PR-only `cancel-in-progress` on `ci.yml`, moves `web-excellence` & `estate-guard` to `ubuntu-slim`, removes duplicate `pull_request` trigger on `estate-guard` (`ci.yml` already runs it), trims artifact retention to 1 day. Locked governance surfaces untouched. |
-| `Starlight-Intelligence/.github` | https://github.com/Starlight-Intelligence/.github/pull/13 | Upgrades org-wide `reusable-ci.yml` default runner to `ubuntu-slim` with configurable `runner`, `timeout-minutes`, and `run-build` wiring. |
+**Live Quota Lockout Proof (2026-11-25):**
+`Starlight-Intelligence` logged **2,068.8 private Actions minutes** in Nov (`starlightintelligence.ai` 802, `starlight-command-center` 770, `starlight-kernel` 249, `starlight-agent-config` 186.8, others 61). On `Starlight-Intelligence/starlightintelligence.ai#396`, `Starlight CI / aggregate contract tests` and `release-aggregate` failed immediately with empty `runner_name` because `Starlight-Intelligence` (Free tier: 2,000 min/mo) hit its hard spending cap (`$0`), and private branch protection returns `HTTP 403`.
 
 ---
 
-## 3. Frank's 5-Minute Manual Execution Checklist (Money / UI / Deploy)
+## 2. Core Architectural Rulings (Audited & Locked)
 
-> Agents cannot touch billing, Copilot UI toggles, repo transfers, repo visibility, or live production deploys without explicit operator action.
+### Ruling 1 — Model A vs Model B Repo Placement (Do NOT Mass-Transfer)
+- **Keep canonical in `frankxai/` (Model A):**
+  - `frankxai/agentic-ops` & `frankxai/agentic-ops-hub` — personal control plane, Registry source of truth, `merge-steward.yml` (`github.repository == 'frankxai/agentic-ops-hub'`, `owner: frankxai`), fleet manifests, and non-transferable Environment secrets (`merge-steward`, `media-staging`, `media-production`).
+  - `frankxai/frankx.ai-vercel-website`, `frankxai/gencreator.ai`, `frankxai/agenticincome` — Vercel-bound projects (transferring to an org severs Vercel's GitHub App link and forces paid Vercel Team seats).
+  - `frankxai/claude-skills-library` — public canonical URL with stars/traffic ($0 CI).
+- **Keep/Create in Brand Orgs (Model B):**
+  - Protocol, platform, and non-personal repos belong in their brand orgs (`Starlight-Intelligence`, `Arcanea-Labs`, `GenCreator-ai`, `FrankX-AI`, `Agentic-Income`, `AI-Architect-Academy`, `Life-Commons`, `AI-Architect-Studio`, `oci-ai-architects`).
+  - **Batch 4 consolidation:** Collapse `Starlight-Intelligence-Systems` (2 private / 6 public) into `Starlight-Intelligence`.
 
-### Step A — Disable Automatic Copilot PR Reviews (UI, saves ~$65/mo immediately)
-1. Open **GitHub → Settings → Copilot → Code review**.
-2. Turn **Automatic code review** **Off** (or disable *Review new pushes* and *Review draft PRs*). Keep manual `@copilot review` only when explicitly wanted.
-
-### Step B — Activate 1-Seat GitHub Enterprise Cloud ($21/mo unified billing + 50,000 pooled Actions min)
-Every one of your 10 orgs currently has **`filled_seats: 1` (`frankxai`)** and **0 outside collaborators**. All installed tools are GitHub Apps (0 seats).
-1. Create a **GitHub Enterprise Cloud** account billed to 1 seat ($21/mo) and attach your active orgs under it.
-2. Result: **1 invoice, 1 payment method, 1 global Actions spending cap, 50,000 pooled Actions minutes/month ($300/mo compute credit), and 50 GB storage** across every attached org — including every new org you create in the future.
-
-### Step C — Move Top Billed Personal Private Repos into Orgs (Enter the 50k Pool)
-Personal `frankxai` repos do **not** share the Enterprise 50,000-minute pool; org repos do.
-Transfer these 4 private repos from `frankxai` (via **Repo Settings → General → Danger Zone → Transfer**):
-- `frankxai/agentic-ops` → `Starlight-Intelligence`
-- `frankxai/agentic-ops-hub` → `Starlight-Intelligence`
-- `frankxai/gencreator.ai` → `GenCreator-ai`
-- `frankxai/agenticincome` → `Agentic-Income`
-
-Also decide explicitly on `Starlight-Intelligence/starlightintelligence.ai` visibility (public = unlimited $0 CI; private = covered by the 50k Enterprise pool once attached).
-
-### Step D — Deploy `starlight-ci-sentinel` to Cloudflare (Startup Credits)
-Account verified via `wrangler whoami`: `0b5c0d4435bdb220b9ed28efa0a98554`.
-After merging `starlightintelligence.ai` PR #396:
-
-```bash
-cd workers/ci-sentinel
-npx wrangler secret put SENTINEL_TOKEN
-npx wrangler secret put GH_ESTATE_TOKEN
-npx wrangler deploy
-```
-
-- `SENTINEL_TOKEN`: generate with `node -e "console.log(require('crypto').randomBytes(32).toString('base64url'))"`.
-- `GH_ESTATE_TOKEN`: fine-grained PAT (or App token) with read access to org/user Actions & billing + `issues:write` on `frankxai/agentic-ops-hub`.
-- Once verified live on cron, disable or remove `fleet-watch.yml`, `estate-ci-watch.yml`, and `ci-budget-guard.yml` crons in GitHub Actions.
-- Also install the existing `starlight-review` (`services/cf-checker`) GitHub App on your other 8 orgs (currently only on `Starlight-Intelligence` and `Arcanea-Labs`) to replace runner-based review gates (`Review Gate`, `pr-gate`).
-
-### Step E — Cloudflare Workers Builds & R2 Remote Cache
-1. Connect Worker/Pages/OpenNext projects to **Cloudflare Workers Builds** (Paid plan: 6,000 build min/mo included, 4 vCPU / 8 GB RAM / 20 GB disk, drawn from Startup Credits) instead of running `wrangler deploy` in GitHub Actions PR previews.
-2. Create an R2 bucket (e.g. `starlight-ci-cache`) with a 7-day lifecycle expiration rule for Turborepo/build artifacts and Playwright screenshots so GitHub's artifact quota is never hit again.
-
-### Step F — Org Consolidation Candidates (Operator Decision)
-- `Starlight-Intelligence-Systems` (2 private, 6 public) vs `Starlight-Intelligence` (25 private, 19 public): consider consolidating to eliminate duplicate branding/admin.
-- `AI-Architect-Studio` (1 private, 11 public) vs `AI-Architect-Academy` (4 private, 1 public): consider whether both orgs are needed.
+### Ruling 2 — Option A ("1+1" Billing = $8/mo Fixed) Before Option B (Enterprise Cloud)
+- **Execute Option A now ($8/mo fixed total):**
+  - Keep **`frankxai` Pro ($4/mo)** with a **$20/mo Actions spending cap** (covers Model A control plane + Vercel-bound repos after Copilot & `ubuntu-slim` cuts).
+  - Upgrade **only `Starlight-Intelligence` to Team ($4/mo)** with a **$20/mo Actions spending cap** (unlocks 3,000 included min, unblocks `starlightintelligence.ai` runner allocation immediately, and unlocks private branch protection/rulesets).
+  - Leave all **other 8 active orgs on Free ($0/mo, $0 cap)** — 0 billing setup needed.
+- **Objective trigger to upgrade to Option B (1-seat GitHub Enterprise Cloud, $21/mo = 50,000 pooled org min + 50 GB storage):**
+  - Upgrade *only if* combined monthly private Actions overages across orgs exceed **$17/mo for two consecutive months** (breakeven: $4 Team + $17 overage = $21 Enterprise) OR 3+ orgs simultaneously require private branch protection. Verify self-serve 1-seat metered checkout terms before switching.
 
 ---
 
-## 4. Autonomous Agent CI Operating Rules ("Checks Only Where Needed")
-1. **Always open Draft PRs first.** Agents iterate locally (`scripts/local_verify.py` / `pnpm test`) at $0 before marking Ready for Review.
-2. **One consolidated Tier-1 job per repo** (1 checkout, 1 install, sequential checks on `ubuntu-slim` where no Docker/service containers are needed).
-3. **Never trigger Actions runners on `issue_comment` or `pull_request_review`.** Route comment/review/policy checks through Cloudflare Workers (`starlight-review` / `starlight-ci-sentinel`).
-4. **Never run `macos-latest` (10x) or `windows-latest` (1.7x) on PRs** unless platform-native compilation is strictly required for merge — keep desktop bundles on `push: main` / release tags.
-5. **Artifact retention max 1–3 days** (`retention-days: 1` on PR artifacts).
+## 3. All 9 Draft PRs Shipped (Waves 1 & 2, 2026-11-24 – 2026-11-25)
+
+| Wave | Repository | Draft PR | Summary & Verification |
+| --- | --- | --- | --- |
+| 1 | `Starlight-Intelligence/starlightintelligence.ai` | https://github.com/Starlight-Intelligence/starlightintelligence.ai/pull/396 | Adds zero-dependency `workers/ci-sentinel` Cloudflare Worker (`17 */6 * * *` cron + `/health`, `/audit`, `/run`), `CLOUDFLARE-CI-CUTOVER.md` guide, switches `ci-contract` & `release-aggregate` to `ubuntu-slim`, caps retention to 1–3d. (`ci-aggregate.test.mjs` 54/54, `ci-sentinel` 6/6, `wrangler deploy --dry-run` pass.) |
+| 1 | `frankxai/agentic-ops` | https://github.com/frankxai/agentic-ops/pull/659 | Moves 7 lightweight workflows/legs to `ubuntu-slim`, draft-gates `customer-intelligence`, trims retention to 3d. `claude-code-review.yml` untouched. (`scripts/tests` + `multi-machine/tests` 21/21 pass.) |
+| 1 | `frankxai/agentic-ops-hub` | https://github.com/frankxai/agentic-ops-hub/pull/524 | Moves `ci`, `estate-guard`, `fleet-watch`, `estate-ci-watch` to `ubuntu-slim`, draft-gates `estate-guard`, halves `fleet-watch` cron (`*/6` -> `*/12`), cuts retention to 1–3d. (`handover` 20/20, `ci_budget` 71/71, `plan_limits` 16/16 via `uv --with tzdata`, remaining unit tests pass; pre-existing `sync-agent-rules` drift on `main` untouched.) |
+| 1 | `frankxai/gencreator.ai` | https://github.com/frankxai/gencreator.ai/pull/375 | Enables PR-only `cancel-in-progress` on `ci.yml`, moves `web-excellence` & `estate-guard` to `ubuntu-slim`, removes duplicate PR `estate-guard`, caps retention to 1d. Locked surfaces untouched. (`ci-results.test.mjs` 34/34 pass.) |
+| 1 | `Starlight-Intelligence/.github` | https://github.com/Starlight-Intelligence/.github/pull/13 | Defaults org-wide `reusable-ci.yml` to `ubuntu-slim` with configurable `runner`, `timeout-minutes`, and `run-build`. (YAML OK.) |
+| 1 | `Starlight-Intelligence/Starlight-Intelligence-System` | https://github.com/Starlight-Intelligence/Starlight-Intelligence-System/pull/617 | This RFC v2 Runbook (zero substrate files modified). |
+| 2 | `frankxai/agenticincome` | https://github.com/frankxai/agenticincome/pull/155 | Switches `dependency-audit`, `estate-guard`, `web-excellence`, `knowledge-freshness`, `org-mirror` to `ubuntu-slim`; draft-gates `web-excellence`; caps `estate-guard` retention to 1d and Dependabot open PRs to 3. Required checks (`build`, `Dependency audit`, `scan`) preserved on every PR; locked surfaces untouched. (YAML OK.) |
+| 2 | `Arcanea-Labs/arcanea-ai-app` | https://github.com/Arcanea-Labs/arcanea-ai-app/pull/776 | Caps `retention-days: 1` across all 9 workflows calling `upload-artifact` (down from 7–30 days) to prevent account-wide 2 GB quota lockouts. (YAML OK; note Actions is currently disabled on repo.) |
+| 2 | `frankxai/frankx.ai-vercel-website` | https://github.com/frankxai/frankx.ai-vercel-website/pull/1334 | Caps `upload-artifact` retention to 1d (`ci.yml`, `estate-guard.yml`, `search-context-evidence.yml`) and switches `estate-guard.yml` & `web-excellence.yml` to `ubuntu-slim`. Protected surfaces untouched. (YAML OK.) |
+
+---
+
+## 4. Frank's 5-Minute Manual Execution Checklist (Money / UI / Deploy)
+
+1. **Turn off Copilot Auto Code Review (saves ~$65/mo immediately):**
+   - **GitHub → Settings → Copilot → Code review → Off** (keep manual `@copilot review` only).
+2. **Apply Option A ("1+1" Billing = $8/mo fixed):**
+   - Keep `frankxai` Pro ($4/mo) with **$20/mo Actions cap**.
+   - Upgrade **only `Starlight-Intelligence` → Team ($4/mo)** with **$20/mo Actions cap** (immediately unblocks `starlightintelligence.ai#396` and enables private branch protection).
+   - Keep the other 8 orgs on Free ($0/mo).
+3. **Merge the 9 Draft PRs** (start with `agentic-ops#659`, `agentic-ops-hub#524`, `gencreator.ai#375`, `agenticincome#155`, `arcanea-ai-app#776`, `frankx.ai-vercel-website#1334`, `.github#13`, `SIS#617`, then `starlightintelligence.ai#396` once `Starlight-Intelligence` has Team minutes).
+4. **Execute Cloudflare Startup Credits Cutover** (see `workers/ci-sentinel/docs/CLOUDFLARE-CI-CUTOVER.md` in PR #396, account `0b5c0d4435bdb220b9ed28efa0a98554`):
+   ```bash
+   cd workers/ci-sentinel
+   npx wrangler secret put SENTINEL_TOKEN
+   npx wrangler secret put GH_ESTATE_TOKEN
+   npx wrangler deploy
+
+   # Shared 7-day R2 CI cache/artifact bucket:
+   npx wrangler r2 bucket create starlight-ci-cache
+   npx wrangler r2 bucket lifecycle add starlight-ci-cache "expire-7d" --expire-days 7 --prefix ""
+   ```
+   - Install `starlight-review` (`services/cf-checker`) App on `frankxai` and the remaining 8 orgs.
+   - Connect `workers/agents`, `workers/mcp`, and preview builds to **Cloudflare Workers Builds** (6,000 build min/mo @ 4 vCPU, Startup Credits).
+   - Once `starlight-ci-sentinel` cron is verified live, disable `fleet-watch.yml`, `estate-ci-watch.yml`, and `ci-budget-guard.yml` crons in `agentic-ops-hub`.
+
+---
+
+## 5. Independent Agent Review Checklist (Falsification Protocol)
+
+1. **Math check:** Re-run `users/frankxai/settings/billing/usage` and `orgs/Starlight-Intelligence/settings/billing/usage` for `2026-11`; verify Option A ($8/mo fixed) beats Option B ($25/mo fixed) until combined org overage >$17/mo for 2 months.
+2. **Model A boundary check:** Confirm no control-plane or Vercel-bound repo is slated for transfer, and `merge-steward` Environment secrets remain intact in `frankxai/agentic-ops-hub`.
+3. **Workflow safety check:** Confirm zero `ubuntu-slim` jobs use Docker `services:`, `sudo apt-get`, or >15 min timeouts, and zero required checks (`agenticincome` `build`, `Dependency audit`, `scan`; `starlightintelligence.ai` `ci-contract`, `release-aggregate`) are skipped on drafts.
+4. **Security check on `workers/ci-sentinel`:** Confirm `/audit` & `/run` fail closed (`503` unbound, constant-time `401` mismatch) and `/health` leaks zero secrets or billing data.
+5. **Artifact safety check:** Confirm every `upload-artifact` change only reduces `retention-days` (no producer upload removed where a `download-artifact` exists).
+6. **Cloudflare credit scope check:** Confirm Workers, Cron Triggers, Workers Builds, and R2 draw from the active Cloudflare for Startups credit balance on account `0b5c0d4435bdb220b9ed28efa0a98554`.
+7. **Red-team check:** Monitor `starlightintelligence.ai` monthly private Actions usage after migrating `pr-gate` to `starlight-review` and previews to Workers Builds to confirm it stays inside `Starlight-Intelligence` Team's 3,000 included minutes.
