@@ -178,7 +178,7 @@ Write-Host "=== Post-Bootstrap Manual / Secret Steps (Never Automated With Inlin
 Write-Host "1. Bind WIF principalSet to $DeployerSaEmail scoped to exact repo:"
 Write-Host "   gcloud projects describe $ProjectId --format='value(projectNumber)'"
 Write-Host "   gcloud iam service-accounts add-iam-policy-binding $DeployerSaEmail --project=$ProjectId --role=roles/iam.workloadIdentityUser --member=principalSet://iam.googleapis.com/projects/<PROJECT_NUMBER>/locations/global/workloadIdentityPools/$PoolId/attribute.repository/Starlight-Intelligence/Starlight-Intelligence-System"
-Write-Host "2. Create STARLIGHT_RUNNER_SECRET and grant secretAccessor on THAT secret only to $ExecSaEmail:"
+Write-Host "2. Create STARLIGHT_RUNNER_SECRET and grant secretAccessor on THAT secret only to ${ExecSaEmail}:"
 Write-Host "   gcloud secrets create STARLIGHT_RUNNER_SECRET --project=$ProjectId"
 Write-Host "   gcloud secrets add-iam-policy-binding STARLIGHT_RUNNER_SECRET --project=$ProjectId --member=serviceAccount:$ExecSaEmail --role=roles/secretmanager.secretAccessor"
 Write-Host "3. Set a monthly billing budget alert in GCP Billing Console before deploying Cloud Run Jobs."
