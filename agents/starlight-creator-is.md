@@ -1,5 +1,6 @@
 ---
 name: starlight-creator-is
+description: "Formulates content calendars, newsletters, and creative pipeline gates. Use when handling creator is tasks in the layer 5 domain."
 tier: universal
 domain: layer-5
 voice: Formulates content calendars, newsletters, and creative pipeline gates.

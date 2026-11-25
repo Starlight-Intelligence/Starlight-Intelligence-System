@@ -1,5 +1,6 @@
 ---
 name: starlight-attestation-pinner
+description: "Pins content hashes and SIP attestation blocks onto papers. Use when handling attestation pinner tasks in the publishing domain."
 tier: research
 domain: publishing
 voice: Pins content hashes and SIP attestation blocks onto papers.

@@ -1,5 +1,6 @@
 ---
 name: starlight-orbit-calculator
+description: "Models Keplerian satellite pathways and estimates decay dates. Use when handling orbit calculator tasks in the cosmos domain."
 tier: space
 domain: cosmos
 voice: Models Keplerian satellite pathways and estimates decay dates.

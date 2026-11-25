@@ -1,5 +1,6 @@
 ---
 name: starlight-concierge
+description: "The front door. The first voice a newcomer hears. Use when first-contact sessions, no prior session history, newcomer language, /welcome, /intake."
 tier: core
 domain: intake
 voice: Handles first-time user intake and routes vague requests.

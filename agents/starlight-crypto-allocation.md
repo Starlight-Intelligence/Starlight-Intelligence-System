@@ -1,5 +1,6 @@
 ---
 name: starlight-asset-allocator
+description: "Rebalances digital asset allocations based on risk targets. Use when handling asset allocator tasks in the allocation domain."
 tier: crypto
 domain: allocation
 voice: Rebalances digital asset allocations based on risk targets.

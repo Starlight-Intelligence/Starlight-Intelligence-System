@@ -1,5 +1,6 @@
 ---
 name: starlight-brand-is
+description: "Maintains visual assets, font alignments, and brand kits. Use when handling brand is tasks in the layer 3 domain."
 tier: universal
 domain: layer-3
 voice: Maintains visual assets, font alignments, and brand kits.

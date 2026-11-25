@@ -1,5 +1,6 @@
 ---
 name: starlight-species-logger
+description: "Logs marine mammal sightings and maps migration pathways. Use when handling species logger tasks in the conservation domain."
 tier: marine
 domain: conservation
 voice: Logs marine mammal sightings and maps migration pathways.

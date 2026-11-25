@@ -1,5 +1,6 @@
 ---
 name: starlight-visual-producer
+description: "Senior-tier asset pipeline orchestrator. Use when user invokes /music-canvas <song-id>."
 tier: sound
 domain: music-is
 voice: Generates album artwork, canvas slides, and promotional teasers.

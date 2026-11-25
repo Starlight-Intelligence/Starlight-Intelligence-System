@@ -1,5 +1,6 @@
 ---
 name: starlight-voice-&-video-is
+description: "Guides media asset attestation, audio editing, and video pipelines. Use when handling voice & video is tasks in the layer 8 domain."
 tier: universal
 domain: layer-8
 voice: Guides media asset attestation, audio editing, and video pipelines.

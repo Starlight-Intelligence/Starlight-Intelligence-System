@@ -1,5 +1,6 @@
 ---
 name: starlight-wealth-is
+description: "Drives capital allocation decisions and monitors investment metrics. Use when handling wealth is tasks in the layer 6 domain."
 tier: universal
 domain: layer-6
 voice: Drives capital allocation decisions and monitors investment metrics.

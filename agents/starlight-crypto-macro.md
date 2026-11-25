@@ -1,5 +1,6 @@
 ---
 name: starlight-macro-analyst
+description: "Models interest rate policies, market cycles, and liquidity pools. Use when handling macro analyst tasks in the macro domain."
 tier: crypto
 domain: macro
 voice: Models interest rate policies, market cycles, and liquidity pools.

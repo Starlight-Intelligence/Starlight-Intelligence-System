@@ -1,5 +1,6 @@
 ---
 name: starlight-markdown-formatter
+description: "Formats text columns into clean academic GitHub Markdown. Use when handling markdown formatter tasks in the publishing domain."
 tier: research
 domain: publishing
 voice: Formats text columns into clean academic GitHub Markdown.

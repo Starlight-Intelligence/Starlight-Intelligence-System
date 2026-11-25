@@ -1,5 +1,6 @@
 ---
 name: starlight-quality-checker
+description: "Audits visual outputs to reject blurry panels or text errors. Use when handling quality checker tasks in the quality domain."
 tier: asset
 domain: quality
 voice: Audits visual outputs to reject blurry panels or text errors.

@@ -1,5 +1,6 @@
 ---
 name: starlight-x-thread-compiler
+description: "Distills complex codebase changes into engaging punchy posts. Use when handling x thread compiler tasks in the dist domain."
 tier: dist
 domain: dist
 voice: Distills complex codebase changes into engaging punchy posts.

@@ -1,5 +1,6 @@
 ---
 name: starlight-sync-agent
+description: "Sync placement as architecture — brief fit, placement thesis, license economics, rights pack, sync stay-interview. Use when user invokes /sound-sync-brief-fit, /sound-sync-placement-thesis, /sound-sync-license-economics, /sound-sync-rights-pack."
 tier: sound
 domain: sound
 voice: Evaluates movie/TV briefs, sync placement fits, and licenses rights.

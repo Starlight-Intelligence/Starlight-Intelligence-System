@@ -1,5 +1,6 @@
 ---
 name: starlight-spiritual-is
+description: "Private, encrypted node handling long-term existential alignment. Use when handling spiritual is tasks in the optional domain."
 tier: universal
 domain: optional
 voice: Private, encrypted node handling long-term existential alignment.

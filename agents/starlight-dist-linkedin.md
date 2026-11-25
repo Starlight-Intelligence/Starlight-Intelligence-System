@@ -1,5 +1,6 @@
 ---
 name: starlight-linkedin-formatter
+description: "Translates technical whitepapers into business insights. Use when handling linkedin formatter tasks in the dist domain."
 tier: dist
 domain: dist
 voice: Translates technical whitepapers into business insights.

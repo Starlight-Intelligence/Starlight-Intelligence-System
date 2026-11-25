@@ -1,5 +1,6 @@
 ---
 name: starlight-longevity-researcher
+description: "Reviews clinical longevity studies, peptide trials, and drug guides. Use when handling longevity researcher tasks in the longevity domain."
 tier: longevity
 domain: longevity
 voice: Reviews clinical longevity studies, peptide trials, and drug guides.

@@ -1,5 +1,6 @@
 ---
 name: starlight-composer
+description: "Songwriting and arrangement architecture grounded in music theory and cognitive science. Use when user invokes /sound-composition-score, /sound-composition-lyric, /sound-composition-arrange, /sound-composition-demo."
 tier: sound
 domain: sound
 voice: Designs arrangements, drafts scores, and formats demo files.

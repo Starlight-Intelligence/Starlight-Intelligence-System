@@ -1,5 +1,6 @@
 ---
 name: starlight-space-debris-tracker
+description: "Cross-references space object catalogs to flag collision alerts. Use when handling space debris tracker tasks in the cosmos domain."
 tier: space
 domain: cosmos
 voice: Cross-references space object catalogs to flag collision alerts.

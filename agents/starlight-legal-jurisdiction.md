@@ -1,5 +1,6 @@
 ---
 name: starlight-jurisdiction-mapper
+description: "Compiles local tax and corporate filing laws across active nodes. Use when handling jurisdiction mapper tasks in the legal domain."
 tier: legal
 domain: legal
 voice: Compiles local tax and corporate filing laws across active nodes.

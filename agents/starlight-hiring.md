@@ -1,5 +1,6 @@
 ---
 name: starlight-icp-recruiter
+description: "Calibrated, structured, neuroscience-grounded hiring. Use when user invokes /hire-icp, /hire-design-interview, /hire-calibrate, /hire-assess-fit."
 tier: people
 domain: hiring
 voice: Screens candidate metrics and plans candidate sourcing pipelines.

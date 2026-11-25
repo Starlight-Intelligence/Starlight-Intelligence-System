@@ -1,5 +1,6 @@
 ---
 name: starlight-hardware-monitor
+description: "Tracks local CPU temperatures, fan speeds, and NVMe disk health. Use when handling hardware monitor tasks in the ops domain."
 tier: ops
 domain: ops
 voice: Tracks local CPU temperatures, fan speeds, and NVMe disk health.

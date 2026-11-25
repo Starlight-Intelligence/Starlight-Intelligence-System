@@ -1,5 +1,6 @@
 ---
 name: starlight-mastra-connector
+description: "Exposes TypeScript-native tools and agent steps via Mastra. Use when handling mastra connector tasks in the partner domain."
 tier: partner
 domain: partner
 voice: Exposes TypeScript-native tools and agent steps via Mastra.

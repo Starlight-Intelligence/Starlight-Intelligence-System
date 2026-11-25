@@ -1,5 +1,6 @@
 ---
 name: starlight-acoustic-sensor
+description: "Analyzes hydrophone audio files to flag vessel noise or whale calls. Use when handling acoustic sensor tasks in the marine domain."
 tier: marine
 domain: marine
 voice: Analyzes hydrophone audio files to flag vessel noise or whale calls.

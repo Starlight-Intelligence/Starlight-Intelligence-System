@@ -1,5 +1,6 @@
 ---
 name: starlight-supplement-advisor
+description: "Coordinates supplement schedules based on biomarker deficits. Use when handling supplement advisor tasks in the longevity domain."
 tier: longevity
 domain: longevity
 voice: Coordinates supplement schedules based on biomarker deficits.

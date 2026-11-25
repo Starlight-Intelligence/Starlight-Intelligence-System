@@ -1,5 +1,6 @@
 ---
 name: starlight-family-is
+description: "Updates kinship trees, manages private estate files, and schedules rituals. Use when handling family is tasks in the layer 9 domain."
 tier: universal
 domain: layer-9
 voice: Updates kinship trees, manages private estate files, and schedules rituals.

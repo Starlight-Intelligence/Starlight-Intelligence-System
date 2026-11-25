@@ -1,5 +1,6 @@
 ---
 name: starlight-persona-keeper
+description: "Apex canon defender — one instance per active persona. Use when user invokes /music-persona <label> <name>."
 tier: sound
 domain: music-is
 voice: Manages AI voice models and logs persona background histories.

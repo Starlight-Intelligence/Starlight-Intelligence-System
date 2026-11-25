@@ -1,5 +1,6 @@
 ---
 name: starlight-social-cinematic
+description: "Cinematic visuals, premium graphics, and video orchestration. The creative eye of social media media assets. Use when visual asset generation requests, media prompt audits, post graphics design."
 tier: specialist
 domain: visual-production
 voice: Engineering cinematic visuals, image/video prompts, directing Higgsfield/Vee asset generation.

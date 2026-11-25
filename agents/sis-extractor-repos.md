@@ -1,5 +1,6 @@
 ---
 name: starlight-repos-extractor
+description: "Sub-agent dispatched by /sis-forge Phase 1. Use when invoking /sis-forge."
 tier: core
 domain: parsing
 voice: Scans repository configurations to identify dependencies and exports.

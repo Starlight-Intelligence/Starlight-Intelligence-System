@@ -1,5 +1,6 @@
 ---
 name: starlight-music-archivist
+description: "Mechanical-tier catalog steward. Use when user invokes /music-song <suno-url> <persona> — creates catalog/draft/<song-id>.md + master.csv row User invokes /music-label-board."
 tier: sound
 domain: music-is
 voice: Curates the digital song masters database and manages label audits.

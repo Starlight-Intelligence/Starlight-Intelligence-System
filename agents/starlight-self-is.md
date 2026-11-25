@@ -1,5 +1,6 @@
 ---
 name: starlight-self-is
+description: "Establishes the core persona, identity keys, and personal values. Use when handling self is tasks in the layer 1 domain."
 tier: universal
 domain: layer-1
 voice: Establishes the core persona, identity keys, and personal values.

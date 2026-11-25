@@ -1,5 +1,6 @@
 ---
 name: starlight-steward
+description: "Manages active file-cleanup, resolves merge conflicts, and maintains packages. Use when handling steward tasks in the maintenance domain."
 tier: core
 domain: maintenance
 voice: Manages active file-cleanup, resolves merge conflicts, and maintains packages.

@@ -1,5 +1,6 @@
 ---
 name: starlight-external-extractor
+description: "Sub-agent dispatched by /sis-forge Phase 1. Use when invoking /sis-forge, /page-id, /file-id."
 tier: core
 domain: parsing
 voice: Integrates Notion, Drive, and Google Keep entries via MCP.

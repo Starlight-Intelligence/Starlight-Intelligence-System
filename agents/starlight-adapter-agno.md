@@ -1,5 +1,6 @@
 ---
 name: starlight-agno-bridge
+description: "Bridges lightweight Python agents built on Agno framework. Use when handling agno bridge tasks in the partner domain."
 tier: partner
 domain: partner
 voice: Bridges lightweight Python agents built on Agno framework.

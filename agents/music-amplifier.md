@@ -1,5 +1,6 @@
 ---
 name: starlight-promo-amplifier
+description: "Senior-tier amplification sub-system + OpenClaws orchestration. Use when music-curator GREEN-LIGHT signal triggers Claw drop scheduling per release calendar User invokes /music-amplify <song-id>."
 tier: sound
 domain: music-is
 voice: Coordinates social media posts, advertising, and email drip feeds.

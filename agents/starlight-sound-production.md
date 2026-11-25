@@ -1,5 +1,6 @@
 ---
 name: starlight-audio-producer
+description: "Mix and master as system design — frequency budget, gain stage hierarchy, dynamic-range envelope, recall as state. Use when user invokes /sound-production-mix-plan, /sound-production-master-plan, /sound-production-vocal-chain."
 tier: sound
 domain: sound
 voice: Drafts mixing and mastering configurations and logs vocal chains.

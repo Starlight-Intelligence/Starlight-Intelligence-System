@@ -1,5 +1,6 @@
 ---
 name: starlight-catalog-mint
+description: "Catalog as systems design. Use when user invokes /sound-catalog-release-plan, /sound-catalog-isrc-mint, /sound-catalog-metadata-pack, /sound-catalog-version-map."
 tier: sound
 domain: sound
 voice: Registers ISRCs, compiles metadata sheets, and handles deplatforming.

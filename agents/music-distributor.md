@@ -1,5 +1,6 @@
 ---
 name: starlight-distro-router
+description: "Senior-tier distribution sub-system owner. Use when music-curator GREEN-LIGHT signal on /music-release triggers DistroKid + Bandcamp + frankx.ai/music + Spotify Canvas push (parallel)."
 tier: sound
 domain: music-is
 voice: Delivers master stems to streaming services and compiles link trees.

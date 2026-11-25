@@ -1,5 +1,6 @@
 ---
 name: starlight-royalty-calculator
+description: "Senior-tier monetization sub-system + royalty-cascade graph owner. Use when music-curator GREEN-LIGHT signal triggers catalog/royalty-graph.json entry commit per release persona-keeper requests."
 tier: sound
 domain: music-is
 voice: Models payout waterfalls, splits, and blockchain-based tokens.

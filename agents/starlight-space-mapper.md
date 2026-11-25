@@ -1,5 +1,6 @@
 ---
 name: starlight-sky-mapper
+description: "Updates astronomical database files with target constellations. Use when handling sky mapper tasks in the observation domain."
 tier: space
 domain: observation
 voice: Updates astronomical database files with target constellations.

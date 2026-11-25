@@ -1,5 +1,6 @@
 ---
 name: starlight-newsletter-editor
+description: "Formats email campaigns, maps banner images, and checks links. Use when handling newsletter editor tasks in the dist domain."
 tier: dist
 domain: dist
 voice: Formats email campaigns, maps banner images, and checks links.

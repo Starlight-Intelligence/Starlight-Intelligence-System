@@ -1,5 +1,6 @@
 ---
 name: starlight-future-self-at-90
+description: "Fulfilled-life review. Use when council assembly. Substrate-tier proposals. Decisions where the sovereign's attention or name is the principal cost."
 tier: council
 domain: council
 voice: Focuses on long-horizon life fulfillment and value commitments.

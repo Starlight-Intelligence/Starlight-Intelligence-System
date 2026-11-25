@@ -1,5 +1,6 @@
 ---
 name: starlight-protocol-researcher
+description: "Reviews new whitepapers, token structures, and developer commits. Use when handling protocol researcher tasks in the research domain."
 tier: crypto
 domain: research
 voice: Reviews new whitepapers, token structures, and developer commits.

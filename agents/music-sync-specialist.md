@@ -1,5 +1,6 @@
 ---
 name: starlight-sync-specialist
+description: "Pitches tracks directly to supervisors and handles licensing payouts. Use when handling sync specialist tasks in the music is domain."
 tier: sound
 domain: music-is
 voice: Pitches tracks directly to supervisors and handles licensing payouts.

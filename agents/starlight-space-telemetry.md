@@ -1,5 +1,6 @@
 ---
 name: starlight-telemetry-parser
+description: "Logs sensor metrics, packet loss rates, and solar storm warnings. Use when handling telemetry parser tasks in the cosmos domain."
 tier: space
 domain: cosmos
 voice: Logs sensor metrics, packet loss rates, and solar storm warnings.
