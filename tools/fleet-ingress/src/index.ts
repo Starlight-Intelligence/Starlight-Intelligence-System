@@ -41,10 +41,147 @@ export interface Env {
   GCP_PROJECT_ID?: string;
   GCP_REGION?: string;
   CLOUD_RUN_JOB?: string;
+  GCP_SERVICE_ACCOUNT_JSON?: string;
   GCP_SERVICE_ACCOUNT_TOKEN?: string;
   INGRESS_AUTH_BEARER?: string;
   STARLIGHT_RUNNER_SECRET?: string;
   STARLIGHT_AGENT_JOBS?: Queue;
+}
+
+interface ServiceAccountKey {
+  client_email: string;
+  private_key: string;
+  private_key_id?: string;
+  token_uri?: string;
+}
+
+const gcpTokenCache = new Map<string, { token: string; expiresAtMs: number }>();
+
+export function clearGcpTokenCache(): void {
+  gcpTokenCache.clear();
+}
+
+function base64UrlEncode(input: Uint8Array | string): string {
+  const bytes = typeof input === 'string' ? new TextEncoder().encode(input) : input;
+  let binary = '';
+  for (let i = 0; i < bytes.length; i += 1) {
+    binary += String.fromCharCode(bytes[i]);
+  }
+  return btoa(binary).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/g, '');
+}
+
+function pemPkcs8ToDer(pem: string): ArrayBuffer {
+  const cleaned = pem
+    .replace(/-----BEGIN [A-Z0-9 ]+-----/g, '')
+    .replace(/-----END [A-Z0-9 ]+-----/g, '')
+    .replace(/\s+/g, '');
+  if (!cleaned) {
+    throw new Error('empty_private_key');
+  }
+  const binary = atob(cleaned);
+  const bytes = new Uint8Array(binary.length);
+  for (let i = 0; i < binary.length; i += 1) {
+    bytes[i] = binary.charCodeAt(i);
+  }
+  return bytes.buffer;
+}
+
+/**
+ * Mint a short-lived Google OAuth2 access token from a Service Account JSON key
+ * using Web Crypto RS256 JWT assertion. Cached in memory until 60s before expiry.
+ */
+export async function mintGcpAccessToken(
+  serviceAccountJson: string,
+  fetchImpl: typeof fetch = fetch,
+  nowMs: number = Date.now()
+): Promise<string> {
+  const parsed = JSON.parse(serviceAccountJson) as Partial<ServiceAccountKey>;
+  if (
+    !parsed ||
+    typeof parsed !== 'object' ||
+    typeof parsed.client_email !== 'string' ||
+    !parsed.client_email.trim() ||
+    typeof parsed.private_key !== 'string' ||
+    !parsed.private_key.trim()
+  ) {
+    throw new Error('invalid_service_account_json');
+  }
+
+  const tokenUri =
+    typeof parsed.token_uri === 'string' && parsed.token_uri.startsWith('https://')
+      ? parsed.token_uri
+      : 'https://oauth2.googleapis.com/token';
+  const cacheKey = `${parsed.client_email}:${parsed.private_key_id || ''}:${tokenUri}`;
+  const cached = gcpTokenCache.get(cacheKey);
+  if (cached && nowMs < cached.expiresAtMs - 60_000) {
+    return cached.token;
+  }
+
+  const iat = Math.floor(nowMs / 1000);
+  const exp = iat + 3600;
+  const header: Record<string, string> = { alg: 'RS256', typ: 'JWT' };
+  if (typeof parsed.private_key_id === 'string' && parsed.private_key_id.trim()) {
+    header.kid = parsed.private_key_id.trim();
+  }
+  const claims = {
+    iss: parsed.client_email.trim(),
+    scope: 'https://www.googleapis.com/auth/cloud-platform',
+    aud: tokenUri,
+    iat,
+    exp,
+  };
+
+  const signingInput = `${base64UrlEncode(JSON.stringify(header))}.${base64UrlEncode(JSON.stringify(claims))}`;
+  const key = await crypto.subtle.importKey(
+    'pkcs8',
+    pemPkcs8ToDer(parsed.private_key),
+    { name: 'RSASSA-PKCS1-v1_5', hash: 'SHA-256' },
+    false,
+    ['sign']
+  );
+  const signature = await crypto.subtle.sign(
+    'RSASSA-PKCS1-v1_5',
+    key,
+    new TextEncoder().encode(signingInput)
+  );
+  const assertion = `${signingInput}.${base64UrlEncode(new Uint8Array(signature))}`;
+
+  const tokenRes = await fetchImpl(tokenUri, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams({
+      grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer',
+      assertion,
+    }).toString(),
+  });
+  if (!tokenRes.ok) {
+    throw new Error(`gcp_token_exchange_${tokenRes.status}`);
+  }
+  const tokenBody = (await tokenRes.json()) as { access_token?: string; expires_in?: number };
+  if (typeof tokenBody.access_token !== 'string' || !tokenBody.access_token.trim()) {
+    throw new Error('missing_access_token');
+  }
+  const ttlSec = typeof tokenBody.expires_in === 'number' && tokenBody.expires_in > 0
+    ? tokenBody.expires_in
+    : 3600;
+  gcpTokenCache.set(cacheKey, {
+    token: tokenBody.access_token,
+    expiresAtMs: nowMs + ttlSec * 1000,
+  });
+  return tokenBody.access_token;
+}
+
+export async function resolveGcpAccessToken(
+  env: Env,
+  fetchImpl: typeof fetch = fetch
+): Promise<string> {
+  if (typeof env.GCP_SERVICE_ACCOUNT_JSON === 'string' && env.GCP_SERVICE_ACCOUNT_JSON.trim()) {
+    return mintGcpAccessToken(env.GCP_SERVICE_ACCOUNT_JSON, fetchImpl);
+  }
+  if (typeof env.GCP_SERVICE_ACCOUNT_TOKEN === 'string' && env.GCP_SERVICE_ACCOUNT_TOKEN.trim()) {
+    return env.GCP_SERVICE_ACCOUNT_TOKEN.trim();
+  }
+  throw new Error('gcp_credentials_missing');
 }
 
 
@@ -270,8 +407,15 @@ export async function handleRequest(request: Request, env: Env = {}): Promise<Re
       }
 
       // If GCP credentials exist, dispatch directly to Google Cloud Run Jobs REST API
-      if (![env.GCP_PROJECT_ID, env.GCP_REGION, env.CLOUD_RUN_JOB, env.GCP_SERVICE_ACCOUNT_TOKEN]
-        .every((value) => typeof value === 'string' && value.trim().length > 0)) {
+      const hasGcpCreds = Boolean(
+        env.GCP_SERVICE_ACCOUNT_JSON?.trim() || env.GCP_SERVICE_ACCOUNT_TOKEN?.trim()
+      );
+      if (
+        ![env.GCP_PROJECT_ID, env.GCP_REGION, env.CLOUD_RUN_JOB].every(
+          (value) => typeof value === 'string' && value.trim().length > 0
+        ) ||
+        !hasGcpCreds
+      ) {
         return new Response(JSON.stringify({ error: 'runner_unavailable' }), {
           status: 503,
           headers: { 'Content-Type': 'application/json' },
@@ -285,10 +429,11 @@ export async function handleRequest(request: Request, env: Env = {}): Promise<Re
         const gcpEndpoint = `https://run.googleapis.com/v2/projects/${env.GCP_PROJECT_ID}/locations/${env.GCP_REGION}/jobs/${env.CLOUD_RUN_JOB}:run`;
 
         try {
+          const accessToken = await resolveGcpAccessToken(env);
           const gcpRes = await fetch(gcpEndpoint, {
             method: 'POST',
             headers: {
-              'Authorization': `Bearer ${env.GCP_SERVICE_ACCOUNT_TOKEN}`,
+              'Authorization': `Bearer ${accessToken}`,
               'Content-Type': 'application/json',
             },
             body: JSON.stringify(execPayload),

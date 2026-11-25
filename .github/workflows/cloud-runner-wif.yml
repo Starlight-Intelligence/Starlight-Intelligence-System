@@ -1,0 +1,79 @@
+name: Starlight Cloud Runner (Keyless WIF)
+
+# Manual keyless dispatch into Google Cloud Run Jobs via Workload Identity Federation.
+# Safe by construction: workflow_dispatch only, never executes untrusted PR code,
+# and defaults to dry_run=true.
+on:
+  workflow_dispatch:
+    inputs:
+      repo:
+        description: Target repository (owner/name)
+        required: false
+        default: Starlight-Intelligence/Starlight-Intelligence-System
+        type: string
+      ref:
+        description: Git ref (branch or SHA) to test inside Cloud Run
+        required: false
+        default: main
+        type: string
+      dry_run:
+        description: Print the Cloud Run execution command without billing compute
+        required: false
+        default: true
+        type: boolean
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  dispatch-cloud-runner:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GCP_PROJECT_ID: starlight-intelligence
+      GCP_PROJECT_NUMBER: '847235130480'
+      GCP_REGION: europe-west4
+      CLOUD_RUN_JOB: starlight-runner-job
+      WIF_PROVIDER: projects/847235130480/locations/global/workloadIdentityPools/starlight-github-pool/providers/github-actions
+      RUNNER_SA: starlight-runner-sa@starlight-intelligence.iam.gserviceaccount.com
+    steps:
+      - name: Validate workflow inputs
+        env:
+          INPUT_REPO: ${{ inputs.repo }}
+          INPUT_REF: ${{ inputs.ref }}
+        run: |
+          if [[ ! "$INPUT_REPO" =~ ^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$ ]]; then
+            echo "Invalid repo format: $INPUT_REPO" >&2
+            exit 1
+          fi
+          if [[ ! "$INPUT_REF" =~ ^[A-Za-z0-9_./-]+$ ]]; then
+            echo "Invalid ref format: $INPUT_REF" >&2
+            exit 1
+          fi
+
+      - name: Authenticate to Google Cloud (keyless WIF)
+        uses: google-github-actions/auth@b7593ed2efd1c1617e1b0254da33b86225adb2a5 # v2.1.12
+        with:
+          workload_identity_provider: ${{ env.WIF_PROVIDER }}
+          service_account: ${{ env.RUNNER_SA }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@77e7a554d41e2ee56fc945c52dfd3f33d12def9a # v2.1.4
+
+      - name: Execute or dry-run Cloud Run Job
+        env:
+          INPUT_REPO: ${{ inputs.repo }}
+          INPUT_REF: ${{ inputs.ref }}
+          DRY_RUN: ${{ inputs.dry_run }}
+        run: |
+          if [ "$DRY_RUN" = "true" ]; then
+            echo "[dry-run] Keyless WIF auth verified for $RUNNER_SA"
+            echo "Would run: gcloud run jobs execute $CLOUD_RUN_JOB --project=$GCP_PROJECT_ID --region=$GCP_REGION --update-env-vars=STARLIGHT_REPO=$INPUT_REPO,STARLIGHT_REF=$INPUT_REF --wait"
+          else
+            gcloud run jobs execute "$CLOUD_RUN_JOB" \
+              --project="$GCP_PROJECT_ID" \
+              --region="$GCP_REGION" \
+              --update-env-vars="STARLIGHT_REPO=$INPUT_REPO,STARLIGHT_REF=$INPUT_REF" \
+              --wait
+          fi
