@@ -4,11 +4,12 @@
 set -eo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PROJECT_ID="${GCP_PROJECT_ID:-$(gcloud config get-value project 2>/dev/null || echo "starlight-intelligence")}"
+PROJECT_ID="${GCP_PROJECT_ID:-starlight-intelligence}"
 REGION="${GCP_REGION:-europe-west4}"
 JOB_NAME="${CLOUD_RUN_CRITIC_JOB:-starlight-web-critic-job}"
-RUNNER_SA="${GCP_RUNNER_SA:-starlight-runner-sa@${PROJECT_ID}.iam.gserviceaccount.com}"
-IMAGE_TAG="${REGION}-docker.pkg.dev/${PROJECT_ID}/starlight-fleet/web-critic:latest"
+RUNNER_SA="${GCP_CRITIC_SA:-starlight-runner-sa@${PROJECT_ID}.iam.gserviceaccount.com}"
+GIT_SHA="$(git -C "$SCRIPT_DIR/../.." rev-parse --short HEAD 2>/dev/null || date -u +%Y%m%d%H%M%S)"
+IMAGE_TAG="${REGION}-docker.pkg.dev/${PROJECT_ID}/starlight-fleet/web-critic:${GIT_SHA}"
 
 echo "Deploying Starlight Web Design Critic Job..."
 echo "Project: $PROJECT_ID | Region: $REGION | Job: $JOB_NAME"

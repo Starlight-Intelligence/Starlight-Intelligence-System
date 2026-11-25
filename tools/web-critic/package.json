@@ -10,7 +10,7 @@
     "start": "node src/critic.mjs"
   },
   "dependencies": {
-    "playwright": "^1.52.0"
+    "playwright": "1.52.0"
   },
   "author": "Frank Riemer (frankx.ai)",
   "license": "MIT"
