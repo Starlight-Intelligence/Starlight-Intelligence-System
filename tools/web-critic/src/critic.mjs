@@ -48,36 +48,107 @@ function normalizeIpv4(ip) {
   return v4Mapped ? v4Mapped[1] : null;
 }
 
+/**
+ * Parse an IPv4 or IPv6 literal into 16 bytes (IPv6) or null if invalid.
+ */
+function parseIpv6Bytes(rawIp) {
+  let ip = String(rawIp || '').trim().toLowerCase().replace(/^\[|\]$/g, '');
+  const zoneIdx = ip.indexOf('%');
+  if (zoneIdx !== -1) ip = ip.slice(0, zoneIdx);
+  if (!net.isIPv6(ip)) return null;
+
+  // Handle trailing IPv4 dotted quad if present (e.g., ::ffff:127.0.0.1)
+  const lastColon = ip.lastIndexOf(':');
+  if (lastColon !== -1 && ip.slice(lastColon + 1).includes('.')) {
+    const v4Part = ip.slice(lastColon + 1);
+    if (!net.isIPv4(v4Part)) return null;
+    const nums = v4Part.split('.').map(Number);
+    const hi = ((nums[0] << 8) | nums[1]).toString(16);
+    const lo = ((nums[2] << 8) | nums[3]).toString(16);
+    ip = `${ip.slice(0, lastColon)}:${hi}:${lo}`;
+  }
+
+  const halves = ip.split('::');
+  if (halves.length > 2) return null;
+  const left = halves[0] ? halves[0].split(':').filter(Boolean) : [];
+  const right = halves.length === 2 && halves[1] ? halves[1].split(':').filter(Boolean) : [];
+  const missing = halves.length === 2 ? 8 - (left.length + right.length) : 0;
+  if (missing < 0 || (halves.length === 1 && left.length !== 8)) return null;
+
+  const groups = [...left, ...Array(missing).fill('0'), ...right];
+  if (groups.length !== 8) return null;
+
+  const bytes = new Uint8Array(16);
+  for (let i = 0; i < 8; i += 1) {
+    const val = Number.parseInt(groups[i], 16);
+    if (Number.isNaN(val) || val < 0 || val > 0xffff) return null;
+    bytes[i * 2] = (val >> 8) & 0xff;
+    bytes[i * 2 + 1] = val & 0xff;
+  }
+  return bytes;
+}
+
+function bytesToIpv4(bytes, offset) {
+  return `${bytes[offset]}.${bytes[offset + 1]}.${bytes[offset + 2]}.${bytes[offset + 3]}`;
+}
+
+function isBlockedIpv4Tuple(a, b, c) {
+  if (a === 0) return true; // 0.0.0.0/8
+  if (a === 10) return true; // RFC1918
+  if (a === 100 && b >= 64 && b <= 127) return true; // CGNAT 100.64.0.0/10
+  if (a === 127) return true; // Loopback
+  if (a === 169 && b === 254) return true; // Link-local & cloud metadata
+  if (a === 172 && b >= 16 && b <= 31) return true; // RFC1918
+  if (a === 192 && b === 0 && (c === 0 || c === 2)) return true; // IETF / TEST-NET-1
+  if (a === 192 && b === 168) return true; // RFC1918
+  if (a === 198 && (b === 18 || b === 19)) return true; // Benchmarking 198.18.0.0/15
+  if (a === 198 && b === 51 && c === 100) return true; // TEST-NET-2
+  if (a === 203 && b === 0 && c === 113) return true; // TEST-NET-3
+  if (a >= 224) return true; // Multicast & reserved
+  return false;
+}
+
 export function isBlockedIpAddress(ip) {
-  const normalized = String(ip || '').trim().toLowerCase();
+  const normalized = String(ip || '').trim().toLowerCase().replace(/^\[|\]$/g, '');
   if (!normalized) return true;
 
   const ipv4 = normalizeIpv4(normalized);
   if (ipv4) {
     const parts = ipv4.split('.').map(Number);
     if (parts.length !== 4 || parts.some((n) => Number.isNaN(n) || n < 0 || n > 255)) return true;
-    const [a, b] = parts;
-    if (a === 0) return true; // 0.0.0.0/8
-    if (a === 10) return true; // RFC1918 10.0.0.0/8
-    if (a === 127) return true; // Loopback 127.0.0.0/8
-    if (a === 169 && b === 254) return true; // Link-local & GCP metadata 169.254.0.0/16
-    if (a === 172 && b >= 16 && b <= 31) return true; // RFC1918 172.16.0.0/12
-    if (a === 192 && b === 168) return true; // RFC1918 192.168.0.0/16
-    if (a === 100 && b >= 64 && b <= 127) return true; // CGNAT 100.64.0.0/10
-    if (a >= 224) return true; // Multicast / reserved
-    return false;
+    return isBlockedIpv4Tuple(parts[0], parts[1], parts[2]);
   }
 
-  if (net.isIPv6(normalized)) {
-    if (normalized === '::' || normalized === '::1') return true;
-    if (normalized.startsWith('fc') || normalized.startsWith('fd')) return true; // ULA fc00::/7
-    if (normalized.startsWith('fe8') || normalized.startsWith('fe9') || normalized.startsWith('fea') || normalized.startsWith('feb')) {
-      return true; // Link-local fe80::/10
-    }
-    return false;
+  const bytes = parseIpv6Bytes(normalized);
+  if (!bytes) return true;
+
+  // :: (unspecified) and ::1 (loopback)
+  const prefix15Zero = bytes.slice(0, 15).every((b) => b === 0);
+  if (prefix15Zero && (bytes[15] === 0 || bytes[15] === 1)) return true;
+
+  // fc00::/7 (ULA), fe80::/10 (link-local), fec0::/10 (deprecated site-local), ff00::/8 (multicast)
+  if ((bytes[0] & 0xfe) === 0xfc) return true;
+  if (bytes[0] === 0xfe && (bytes[1] & 0xc0) === 0x80) return true;
+  if (bytes[0] === 0xfe && (bytes[1] & 0xc0) === 0xc0) return true;
+  if (bytes[0] === 0xff) return true;
+
+  // Unwrap IPv4-mapped (::ffff:0:0/96) and IPv4-compatible (::/96)
+  const first10Zero = bytes.slice(0, 10).every((b) => b === 0);
+  if (first10Zero && ((bytes[10] === 0xff && bytes[11] === 0xff) || (bytes[10] === 0 && bytes[11] === 0))) {
+    return isBlockedIpAddress(bytesToIpv4(bytes, 12));
   }
 
-  return true;
+  // Unwrap NAT64 (64:ff9b::/96 and 64:ff9b:1::/48)
+  if (bytes[0] === 0x00 && bytes[1] === 0x64 && bytes[2] === 0xff && bytes[3] === 0x9b) {
+    return isBlockedIpAddress(bytesToIpv4(bytes, 12));
+  }
+
+  // Unwrap 6to4 (2002::/16 -> embedded IPv4 in bytes[2..5])
+  if (bytes[0] === 0x20 && bytes[1] === 0x02) {
+    return isBlockedIpAddress(bytesToIpv4(bytes, 2));
+  }
+
+  return false;
 }
 
 function isBlockedHostname(hostname, { allowLocalhost = false } = {}) {
@@ -123,21 +194,21 @@ export function validateTargetUrl(rawUrl, { allowLocalhost = false, envName = 'T
 }
 
 /**
- * Resolve DNS and enforce fail-closed private/metadata IP denylist against DNS rebinding.
+ * Resolve DNS, validate all IPs against the private/metadata denylist, and return pinned address info.
  */
-export async function assertSafeDestination(rawUrl, { allowLocalhost = false, lookup = dns.lookup, envName = 'TARGET_URL' } = {}) {
+export async function resolvePinnedDestination(rawUrl, { allowLocalhost = false, lookup = dns.lookup, envName = 'TARGET_URL' } = {}) {
   const normalized = validateTargetUrl(rawUrl, { allowLocalhost, envName });
   const parsed = new URL(normalized);
   const host = parsed.hostname.replace(/^\[|\]$/g, '').toLowerCase();
 
   if (allowLocalhost && (host === 'localhost' || host === '127.0.0.1' || host === '::1')) {
-    return normalized;
+    return { url: normalized, hostname: host, pinnedIp: host === 'localhost' ? '127.0.0.1' : host };
   }
   if (net.isIP(host)) {
     if (isBlockedIpAddress(host)) {
       throw new Error(`Blocked ${envName} IP address: ${host}`);
     }
-    return normalized;
+    return { url: normalized, hostname: host, pinnedIp: host };
   }
 
   const records = await lookup(host, { all: true });
@@ -149,7 +220,22 @@ export async function assertSafeDestination(rawUrl, { allowLocalhost = false, lo
       throw new Error(`Blocked ${envName} resolved IP: ${record.address}`);
     }
   }
-  return normalized;
+  const preferred = records.find((r) => net.isIPv4(r.address)) || records[0];
+  return { url: normalized, hostname: host, pinnedIp: preferred.address };
+}
+
+export async function assertSafeDestination(rawUrl, options = {}) {
+  const resolved = await resolvePinnedDestination(rawUrl, options);
+  return resolved.url;
+}
+
+export function buildHostResolverRules(pinnedMap) {
+  const rules = [];
+  for (const [host, ip] of pinnedMap.entries()) {
+    const formattedIp = net.isIPv6(ip) ? `[${ip}]` : ip;
+    rules.push(`MAP ${host} ${formattedIp}`);
+  }
+  return rules.join(', ');
 }
 
 /**
@@ -338,6 +424,7 @@ export async function deliverSignedReceipt(receiptJson, env = process.env, fetch
 
   const res = await fetchImpl(safeCallback, {
     method: 'POST',
+    redirect: 'error',
     headers: {
       'Content-Type': 'application/json',
       'X-Starlight-Signature': signPayload(receiptJson, secret.trim()),
@@ -351,11 +438,12 @@ export async function deliverSignedReceipt(receiptJson, env = process.env, fetch
   return res.status;
 }
 
-async function inspectViewport(browser, targetUrl, vp, { reducedMotion = false, outDir, allowLocalhost = false }) {
+async function inspectViewport(browser, targetUrl, vp, { reducedMotion = false, outDir, allowLocalhost = false, targetHost = '' }) {
   const label = reducedMotion ? `${vp.name}-reduced-motion` : vp.name;
   const context = await browser.newContext({
     viewport: { width: vp.width, height: vp.height },
     reducedMotion: reducedMotion ? 'reduce' : 'no-preference',
+    serviceWorkers: 'block',
   });
 
   try {
@@ -371,7 +459,12 @@ async function inspectViewport(browser, targetUrl, vp, { reducedMotion = false, 
         return route.continue();
       }
       try {
-        await assertSafeDestination(reqUrl, { allowLocalhost, envName: 'REQUEST_URL' });
+        const safeUrl = await assertSafeDestination(reqUrl, { allowLocalhost, envName: 'REQUEST_URL' });
+        const reqHost = new URL(safeUrl).hostname.replace(/^\[|\]$/g, '').toLowerCase();
+        // Mitigate DNS rebinding on unpinned third-party domains when running with host-resolver pinning
+        if (targetHost && reqHost !== targetHost && net.isIP(reqHost) && isBlockedIpAddress(reqHost)) {
+          throw new Error('Blocked unpinned subresource');
+        }
         return route.continue();
       } catch {
         failedRequests.push(`Blocked unsafe subresource: ${reqUrl.slice(0, 160)}`);
@@ -459,27 +552,42 @@ async function inspectViewport(browser, targetUrl, vp, { reducedMotion = false, 
 export async function runCritic(env = process.env) {
   const start = Date.now();
   const allowLocalhost = env.STARLIGHT_ALLOW_LOCALHOST === 'true';
-  const targetUrl = await assertSafeDestination(env.TARGET_URL || env.STARLIGHT_TARGET_URL, {
+  const pinned = await resolvePinnedDestination(env.TARGET_URL || env.STARLIGHT_TARGET_URL, {
     allowLocalhost,
     envName: 'TARGET_URL',
   });
+  const targetUrl = pinned.url;
   const viewports = parseViewports(env.STARLIGHT_VIEWPORTS);
   const outDir = env.OUT_DIR || '/tmp/web-critic-artifacts';
   await fs.mkdir(outDir, { recursive: true });
 
+  const pinnedMap = new Map([[pinned.hostname, pinned.pinnedIp]]);
+  const hostResolverRules = buildHostResolverRules(pinnedMap);
+  const launchArgs = hostResolverRules ? [`--host-resolver-rules=${hostResolverRules}`] : [];
+
   const { chromium } = await import('playwright');
-  const browser = await chromium.launch({ headless: true });
+  const browser = await chromium.launch({ headless: true, args: launchArgs });
   const observations = [];
 
   try {
     for (const vp of viewports) {
       observations.push(
-        await inspectViewport(browser, targetUrl, vp, { reducedMotion: false, outDir, allowLocalhost })
+        await inspectViewport(browser, targetUrl, vp, {
+          reducedMotion: false,
+          outDir,
+          allowLocalhost,
+          targetHost: pinned.hostname,
+        })
       );
     }
     const desktopVp = viewports.find((vp) => vp.width >= 1200) || viewports[viewports.length - 1];
     observations.push(
-      await inspectViewport(browser, targetUrl, desktopVp, { reducedMotion: true, outDir, allowLocalhost })
+      await inspectViewport(browser, targetUrl, desktopVp, {
+        reducedMotion: true,
+        outDir,
+        allowLocalhost,
+        targetHost: pinned.hostname,
+      })
     );
   } finally {
     await browser.close();

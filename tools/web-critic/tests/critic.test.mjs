@@ -5,6 +5,8 @@ import {
   parseViewports,
   validateTargetUrl,
   assertSafeDestination,
+  resolvePinnedDestination,
+  buildHostResolverRules,
   isBlockedIpAddress,
   evaluateAuditFindings,
   buildCriticReceipt,
@@ -39,6 +41,10 @@ test('validateTargetUrl fails closed on SSRF hosts, metadata IPs, embedded crede
   assert.throws(() => validateTargetUrl('https://127.0.0.1/'), /Blocked TARGET_URL host/);
   assert.throws(() => validateTargetUrl('https://10.0.0.5/'), /Blocked TARGET_URL host/);
   assert.throws(() => validateTargetUrl('https://localhost:3000/'), /Blocked TARGET_URL host/);
+  // Hex-normalized IPv4-mapped IPv6 forms produced by WHATWG URL must be blocked
+  assert.throws(() => validateTargetUrl('https://[::ffff:169.254.169.254]/'), /Blocked TARGET_URL host/);
+  assert.throws(() => validateTargetUrl('https://[::ffff:a9fe:a9fe]/'), /Blocked TARGET_URL host/);
+  assert.throws(() => validateTargetUrl('https://[::ffff:7f00:1]/'), /Blocked TARGET_URL host/);
 
   assert.equal(validateTargetUrl('https://starlightintelligence.ai'), 'https://starlightintelligence.ai/');
   assert.equal(
@@ -47,9 +53,13 @@ test('validateTargetUrl fails closed on SSRF hosts, metadata IPs, embedded crede
   );
 });
 
-test('assertSafeDestination blocks DNS rebinding to private or metadata IP addresses', async () => {
+test('assertSafeDestination blocks DNS rebinding, hex IPv6 tunnels, and builds Chromium host pinning rules', async () => {
   assert.equal(isBlockedIpAddress('169.254.169.254'), true);
   assert.equal(isBlockedIpAddress('::ffff:127.0.0.1'), true);
+  assert.equal(isBlockedIpAddress('::ffff:a9fe:a9fe'), true);
+  assert.equal(isBlockedIpAddress('::ffff:7f00:1'), true);
+  assert.equal(isBlockedIpAddress('64:ff9b::a9fe:a9fe'), true);
+  assert.equal(isBlockedIpAddress('2002:7f00:0001::'), true);
   assert.equal(isBlockedIpAddress('93.184.216.34'), false);
 
   await assert.rejects(
@@ -60,10 +70,15 @@ test('assertSafeDestination blocks DNS rebinding to private or metadata IP addre
     /Blocked TARGET_URL resolved IP/
   );
 
-  const ok = await assertSafeDestination('https://starlightintelligence.ai/', {
+  const pinned = await resolvePinnedDestination('https://starlightintelligence.ai/', {
     lookup: async () => [{ address: '76.76.21.21', family: 4 }],
   });
-  assert.equal(ok, 'https://starlightintelligence.ai/');
+  assert.equal(pinned.url, 'https://starlightintelligence.ai/');
+  assert.equal(pinned.pinnedIp, '76.76.21.21');
+  assert.equal(
+    buildHostResolverRules(new Map([[pinned.hostname, pinned.pinnedIp]])),
+    'MAP starlightintelligence.ai 76.76.21.21'
+  );
 });
 
 test('evaluateAuditFindings catches console errors, failed subresources, reduced-motion mismatch, and layout issues', () => {
