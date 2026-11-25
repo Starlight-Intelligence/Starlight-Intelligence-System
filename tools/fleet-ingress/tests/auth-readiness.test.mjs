@@ -6,7 +6,7 @@ import {
   mintGcpAccessToken,
   verifySignature,
 } from '../src/index.ts';
-import { createHmac, generateKeyPairSync } from 'node:crypto';
+import { createHmac, generateKeyPairSync, verify as cryptoVerify } from 'node:crypto';
 
 const secret = 'synthetic-fixture-secret';
 const credentials = {
@@ -220,29 +220,33 @@ test('runner callback accepts valid signed receipt and queues to STARLIGHT_AGENT
 });
 
 function createEphemeralSaJson(overrides = {}) {
-  const { privateKey } = generateKeyPairSync('rsa', {
+  const { privateKey, publicKey } = generateKeyPairSync('rsa', {
     modulusLength: 2048,
     privateKeyEncoding: { type: 'pkcs8', format: 'pem' },
     publicKeyEncoding: { type: 'spki', format: 'pem' },
   });
-  return JSON.stringify({
-    client_email: 'runner-test@fixture-project.iam.gserviceaccount.com',
-    private_key: privateKey,
-    private_key_id: 'ephemeral-kid-' + Math.random().toString(36).slice(2, 8),
-    token_uri: 'https://oauth2.googleapis.com/token',
-    ...overrides,
-  });
+  return {
+    publicKey,
+    saJson: JSON.stringify({
+      client_email: 'runner-test@fixture-project.iam.gserviceaccount.com',
+      private_key: privateKey,
+      private_key_id: 'ephemeral-kid-test',
+      token_uri: 'https://oauth2.googleapis.com/token',
+      ...overrides,
+    }),
+  };
 }
 
-test('mintGcpAccessToken signs RS256 JWT assertion, exchanges for OAuth2 token, and caches result', async () => {
+test('mintGcpAccessToken signs verifiable RS256 JWT assertion with kid, exchanges for OAuth2 token, and caches result', async () => {
   clearGcpTokenCache();
-  const saJson = createEphemeralSaJson();
+  const { saJson, publicKey } = createEphemeralSaJson({ token_uri: 'https://evil.example.invalid/steal' });
   let calls = 0;
   let capturedGrantType = '';
   let capturedAssertion = '';
 
   const mockFetch = async (url, init) => {
     calls += 1;
+    // Non-Google token_uri must be ignored in favor of oauth2.googleapis.com
     assert.equal(url, 'https://oauth2.googleapis.com/token');
     const params = new URLSearchParams(init.body);
     capturedGrantType = params.get('grant_type') || '';
@@ -261,10 +265,23 @@ test('mintGcpAccessToken signs RS256 JWT assertion, exchanges for OAuth2 token, 
   assert.equal(token2, 'short-lived-gcp-token');
   assert.equal(calls, 1);
   assert.equal(capturedGrantType, 'urn:ietf:params:oauth:grant-type:jwt-bearer');
-  assert.equal(capturedAssertion.split('.').length, 3);
-  const claims = JSON.parse(Buffer.from(capturedAssertion.split('.')[1], 'base64url').toString('utf8'));
+  const parts = capturedAssertion.split('.');
+  assert.equal(parts.length, 3);
+  const header = JSON.parse(Buffer.from(parts[0], 'base64url').toString('utf8'));
+  const claims = JSON.parse(Buffer.from(parts[1], 'base64url').toString('utf8'));
+  assert.equal(header.alg, 'RS256');
+  assert.equal(header.kid, 'ephemeral-kid-test');
   assert.equal(claims.iss, 'runner-test@fixture-project.iam.gserviceaccount.com');
+  assert.equal(claims.aud, 'https://oauth2.googleapis.com/token');
   assert.equal(claims.scope, 'https://www.googleapis.com/auth/cloud-platform');
+
+  const sigValid = cryptoVerify(
+    'RSA-SHA256',
+    Buffer.from(`${parts[0]}.${parts[1]}`),
+    publicKey,
+    Buffer.from(parts[2], 'base64url')
+  );
+  assert.equal(sigValid, true);
 
   // Near expiry (<60s remaining), cache refreshes cleanly
   const token3 = await mintGcpAccessToken(saJson, async () => {
@@ -277,7 +294,7 @@ test('mintGcpAccessToken signs RS256 JWT assertion, exchanges for OAuth2 token, 
 
 test('webhook dispatches via GCP_SERVICE_ACCOUNT_JSON when GCP_SERVICE_ACCOUNT_TOKEN is unset', async (t) => {
   clearGcpTokenCache();
-  const saJson = createEphemeralSaJson();
+  const { saJson } = createEphemeralSaJson();
   const fetchMock = t.mock.method(globalThis, 'fetch', async (url, init) => {
     if (url === 'https://oauth2.googleapis.com/token') {
       return new Response(JSON.stringify({ access_token: 'minted-sa-bearer', expires_in: 3600 }), { status: 200 });
@@ -317,7 +334,7 @@ test('malformed GCP_SERVICE_ACCOUNT_JSON or failed token exchange fails closed w
     GCP_PROJECT_ID: 'fixture-project',
     GCP_REGION: 'europe-west4',
     CLOUD_RUN_JOB: 'fixture-job',
-    GCP_SERVICE_ACCOUNT_JSON: createEphemeralSaJson(),
+    GCP_SERVICE_ACCOUNT_JSON: createEphemeralSaJson().saJson,
   });
   assert.equal(failedExchange.status, 502);
   assert.deepEqual(await failedExchange.json(), { error: 'runner_dispatch_failed' });

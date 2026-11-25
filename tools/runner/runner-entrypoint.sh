@@ -31,10 +31,19 @@ WORKSPACE_DIR="/home/starlight/workspace"
 cd "$WORKSPACE_DIR"
 
 echo " Cloning repository: $REPO (ref: $REF)..."
+CLONE_URL="https://github.com/${REPO}.git"
 if [ -n "$GITHUB_TOKEN" ]; then
-  git clone --depth 1 --branch "$REF" "https://x-access-token:${GITHUB_TOKEN}@github.com/${REPO}.git" repo
+  CLONE_URL="https://x-access-token:${GITHUB_TOKEN}@github.com/${REPO}.git"
+fi
+
+if [[ "$REF" =~ ^[0-9a-fA-F]{40}$ ]]; then
+  git clone --depth 1 "$CLONE_URL" repo
+  cd repo
+  git fetch --depth 1 origin "$REF"
+  git checkout --detach FETCH_HEAD
+  cd "$WORKSPACE_DIR"
 else
-  git clone --depth 1 --branch "$REF" "https://github.com/${REPO}.git" repo
+  git clone --depth 1 --branch "$REF" "$CLONE_URL" repo
 fi
 
 cd repo
@@ -80,7 +89,12 @@ DURATION=$((END_TIME - START_TIME))
 echo " Run duration: ${DURATION}s"
 
 if [ -n "$CALLBACK_URL" ]; then
-  echo " Posting execution receipt to callback: $CALLBACK_URL"
+  if [ -z "$STARLIGHT_RUNNER_SECRET" ]; then
+    echo "Error: CALLBACK_URL is set without STARLIGHT_RUNNER_SECRET; refusing unsigned receipt callback." >&2
+    exit 1
+  fi
+
+  echo " Posting signed execution receipt to callback: $CALLBACK_URL"
   PAYLOAD=$(jq -n \
     --arg repo "$REPO" \
     --arg ref "$REF" \
@@ -89,16 +103,15 @@ if [ -n "$CALLBACK_URL" ]; then
     --arg installDuration "$INSTALL_DURATION" \
     --arg exitCode "$EXIT_CODE" \
     '{repo: $repo, ref: $ref, status: $status, duration: ($duration|tonumber), installDuration: ($installDuration|tonumber), exitCode: ($exitCode|tonumber), timestamp: (now|todate)}')
-  
-  CURL_ARGS=(-s -X POST "$CALLBACK_URL" -H "Content-Type: application/json")
 
-  # Authenticate receipt with HMAC-SHA256 signature if runner secret is provided
-  if [ -n "$STARLIGHT_RUNNER_SECRET" ]; then
-    SIG=$(echo -n "$PAYLOAD" | openssl dgst -sha256 -hmac "$STARLIGHT_RUNNER_SECRET" | awk '{print $2}')
-    CURL_ARGS+=(-H "X-Starlight-Signature: sha256=$SIG")
+  SIG=$(printf '%s' "$PAYLOAD" | openssl dgst -sha256 -hmac "$STARLIGHT_RUNNER_SECRET" | awk '{print $2}')
+  if ! curl -fsS --max-time 15 -X POST "$CALLBACK_URL" \
+    -H "Content-Type: application/json" \
+    -H "X-Starlight-Signature: sha256=$SIG" \
+    -d "$PAYLOAD"; then
+    echo "Error: Signed receipt callback to $CALLBACK_URL failed." >&2
+    exit 1
   fi
-
-  curl "${CURL_ARGS[@]}" -d "$PAYLOAD" || true
 fi
 
 exit "$EXIT_CODE"

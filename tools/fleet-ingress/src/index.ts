@@ -107,10 +107,17 @@ export async function mintGcpAccessToken(
     throw new Error('invalid_service_account_json');
   }
 
-  const tokenUri =
-    typeof parsed.token_uri === 'string' && parsed.token_uri.startsWith('https://')
-      ? parsed.token_uri
-      : 'https://oauth2.googleapis.com/token';
+  let tokenUri = 'https://oauth2.googleapis.com/token';
+  if (typeof parsed.token_uri === 'string' && parsed.token_uri.trim()) {
+    try {
+      const candidate = new URL(parsed.token_uri.trim());
+      if (candidate.origin === 'https://oauth2.googleapis.com') {
+        tokenUri = candidate.toString();
+      }
+    } catch {
+      // Fall back to canonical Google OAuth2 token endpoint.
+    }
+  }
   const cacheKey = `${parsed.client_email}:${parsed.private_key_id || ''}:${tokenUri}`;
   const cached = gcpTokenCache.get(cacheKey);
   if (cached && nowMs < cached.expiresAtMs - 60_000) {

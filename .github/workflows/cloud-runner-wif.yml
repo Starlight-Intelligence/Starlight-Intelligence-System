@@ -43,11 +43,11 @@ jobs:
           INPUT_REPO: ${{ inputs.repo }}
           INPUT_REF: ${{ inputs.ref }}
         run: |
-          if [[ ! "$INPUT_REPO" =~ ^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$ ]]; then
-            echo "Invalid repo format: $INPUT_REPO" >&2
+          if [[ ! "$INPUT_REPO" =~ ^(Starlight-Intelligence|frankxai)/[A-Za-z0-9_.-]+$ ]]; then
+            echo "Repository outside allowlisted orgs (Starlight-Intelligence, frankxai): $INPUT_REPO" >&2
             exit 1
           fi
-          if [[ ! "$INPUT_REF" =~ ^[A-Za-z0-9_./-]+$ ]]; then
+          if [[ ! "$INPUT_REF" =~ ^[A-Za-z0-9_][A-Za-z0-9_./-]*$ ]] || [[ "$INPUT_REF" == *".."* ]]; then
             echo "Invalid ref format: $INPUT_REF" >&2
             exit 1
           fi

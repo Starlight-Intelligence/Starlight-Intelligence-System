@@ -8,15 +8,15 @@ Built on SIP v1.1.1.
   Prints all commands that would run without mutating GCP.
 
 .EXAMPLE
-.\tools\runner\bootstrap-gcp-wif.ps1 -ProjectId "starlight-intelligence-estate" -Region "europe-west4" -Apply
-  Applies API enablement, Artifact Registry, GCS FUSE cache bucket, WIF pool/provider, and runner SA.
+.\tools\runner\bootstrap-gcp-wif.ps1 -ProjectId "starlight-intelligence" -Region "europe-west4" -Apply
+  Applies API enablement, Artifact Registry, split deployer vs execution SAs, WIF pool/provider, and runner secret scoping.
 #>
 [CmdletBinding()]
 param(
   [string]$ProjectId = $(if ($env:GCP_PROJECT_ID) { $env:GCP_PROJECT_ID } else { "starlight-intelligence" }),
   [string]$Region = $(if ($env:GCP_REGION) { $env:GCP_REGION } else { "europe-west4" }),
   [string]$JobName = $(if ($env:CLOUD_RUN_JOB) { $env:CLOUD_RUN_JOB } else { "starlight-runner-job" }),
-  [string[]]$GitHubOrgs = @("Starlight-Intelligence", "frankxai"),
+  [string[]]$GitHubRepos = @("Starlight-Intelligence/Starlight-Intelligence-System"),
   [switch]$Apply
 )
 
@@ -38,10 +38,12 @@ if (-not $GcloudCmd -and $Apply) {
 
 $PoolId = "starlight-github-pool"
 $ProviderId = "github-actions"
-$ServiceAccountName = "starlight-runner-sa"
-$ServiceAccountEmail = "$ServiceAccountName@$ProjectId.iam.gserviceaccount.com"
-$CacheBucket = "$ProjectId-starlight-runner-cache"
-$OrgCondition = ($GitHubOrgs | ForEach-Object { "assertion.repository_owner=='$_'" }) -join " || "
+# Split deployer identity (WIF / Cloud Build / Cloud Run dispatch) from runtime execution identity.
+$DeployerSaName = "starlight-runner-sa"
+$DeployerSaEmail = "$DeployerSaName@$ProjectId.iam.gserviceaccount.com"
+$ExecSaName = "starlight-runner-exec-sa"
+$ExecSaEmail = "$ExecSaName@$ProjectId.iam.gserviceaccount.com"
+$RepoCondition = ($GitHubRepos | ForEach-Object { "assertion.repository=='$_'" }) -join " || "
 
 function Invoke-GcloudStep {
   param(
@@ -89,7 +91,7 @@ Write-Host "Mode:      $(if ($Apply) { 'APPLY (live mutation)' } else { 'DRY-RUN
 Write-Host "Project:   $ProjectId"
 Write-Host "Region:    $Region"
 Write-Host "Cloud Run: $JobName"
-Write-Host "WIF Orgs:  $($GitHubOrgs -join ', ')"
+Write-Host "WIF Repos: $($GitHubRepos -join ', ')"
 Write-Host ""
 
 if ($Apply) {
@@ -125,32 +127,32 @@ Invoke-GcloudStep -Label "2. Create Artifact Registry repository (starlight-flee
   "--project=$ProjectId"
 )
 
-Invoke-GcloudStep -Label "3. Create GCS FUSE dependency cache bucket" -IgnoreAlreadyExists -GcloudArgs @(
-  "storage", "buckets", "create", "gs://$CacheBucket",
-  "--location=$Region",
-  "--uniform-bucket-level-access",
+Invoke-GcloudStep -Label "3. Create deployer service account (WIF / dispatch only)" -IgnoreAlreadyExists -GcloudArgs @(
+  "iam", "service-accounts", "create", $DeployerSaName,
+  "--display-name=Starlight Cloud Runner Deployer SA",
   "--project=$ProjectId"
 )
 
-Invoke-GcloudStep -Label "4. Create least-privilege runner service account" -IgnoreAlreadyExists -GcloudArgs @(
-  "iam", "service-accounts", "create", $ServiceAccountName,
-  "--display-name=Starlight Cloud Runner SA",
-  "--project=$ProjectId"
-)
-
-foreach ($role in @("roles/run.developer", "roles/artifactregistry.writer", "roles/secretmanager.secretAccessor")) {
-  Invoke-GcloudStep -Label "5. Grant $role to $ServiceAccountEmail" -GcloudArgs @(
+foreach ($role in @("roles/run.developer", "roles/artifactregistry.writer")) {
+  Invoke-GcloudStep -Label "4. Grant $role to $DeployerSaEmail" -GcloudArgs @(
     "projects", "add-iam-policy-binding", $ProjectId,
-    "--member=serviceAccount:$ServiceAccountEmail",
+    "--member=serviceAccount:$DeployerSaEmail",
     "--role=$role",
     "--condition=None"
   )
 }
 
-Invoke-GcloudStep -Label "6. Scope storage.objectAdmin to cache bucket only" -GcloudArgs @(
-  "storage", "buckets", "add-iam-policy-binding", "gs://$CacheBucket",
-  "--member=serviceAccount:$ServiceAccountEmail",
-  "--role=roles/storage.objectAdmin"
+Invoke-GcloudStep -Label "5. Create isolated Cloud Run execution service account (no project admin roles)" -IgnoreAlreadyExists -GcloudArgs @(
+  "iam", "service-accounts", "create", $ExecSaName,
+  "--display-name=Starlight Cloud Runner Execution SA",
+  "--project=$ProjectId"
+)
+
+Invoke-GcloudStep -Label "6. Grant deployer iam.serviceAccountUser on execution SA only" -GcloudArgs @(
+  "iam", "service-accounts", "add-iam-policy-binding", $ExecSaEmail,
+  "--project=$ProjectId",
+  "--member=serviceAccount:$DeployerSaEmail",
+  "--role=roles/iam.serviceAccountUser"
 )
 
 Invoke-GcloudStep -Label "7. Create Workload Identity Pool ($PoolId)" -IgnoreAlreadyExists -GcloudArgs @(
@@ -160,24 +162,24 @@ Invoke-GcloudStep -Label "7. Create Workload Identity Pool ($PoolId)" -IgnoreAlr
   "--project=$ProjectId"
 )
 
-Invoke-GcloudStep -Label "8. Create OIDC Provider ($ProviderId) scoped to allowed GitHub orgs" -IgnoreAlreadyExists -GcloudArgs @(
+Invoke-GcloudStep -Label "8. Create OIDC Provider ($ProviderId) scoped to allowlisted repositories" -IgnoreAlreadyExists -GcloudArgs @(
   "iam", "workload-identity-pools", "providers", "create-oidc", $ProviderId,
   "--location=global",
   "--workload-identity-pool=$PoolId",
   "--display-name=GitHub Actions OIDC",
   "--issuer-uri=https://token.actions.githubusercontent.com",
   "--attribute-mapping=google.subject=assertion.sub,attribute.actor=assertion.actor,attribute.repository=assertion.repository,attribute.repository_owner=assertion.repository_owner",
-  "--attribute-condition=$OrgCondition",
+  "--attribute-condition=$RepoCondition",
   "--project=$ProjectId"
 )
 
 Write-Host ""
 Write-Host "=== Post-Bootstrap Manual / Secret Steps (Never Automated With Inline Secrets) ==="
-Write-Host "1. Bind WIF principalSet to $ServiceAccountEmail after retrieving PROJECT_NUMBER:"
+Write-Host "1. Bind WIF principalSet to $DeployerSaEmail scoped to exact repo:"
 Write-Host "   gcloud projects describe $ProjectId --format='value(projectNumber)'"
-Write-Host "   gcloud iam service-accounts add-iam-policy-binding $ServiceAccountEmail --project=$ProjectId --role=roles/iam.workloadIdentityUser --member=principalSet://iam.googleapis.com/projects/<PROJECT_NUMBER>/locations/global/workloadIdentityPools/$PoolId/attribute.repository_owner/Starlight-Intelligence"
-Write-Host "2. Set Secret Manager entries (read from stdin/file, never shell history):"
+Write-Host "   gcloud iam service-accounts add-iam-policy-binding $DeployerSaEmail --project=$ProjectId --role=roles/iam.workloadIdentityUser --member=principalSet://iam.googleapis.com/projects/<PROJECT_NUMBER>/locations/global/workloadIdentityPools/$PoolId/attribute.repository/Starlight-Intelligence/Starlight-Intelligence-System"
+Write-Host "2. Create STARLIGHT_RUNNER_SECRET and grant secretAccessor on THAT secret only to $ExecSaEmail:"
 Write-Host "   gcloud secrets create STARLIGHT_RUNNER_SECRET --project=$ProjectId"
-Write-Host "   gcloud secrets create GITHUB_TOKEN --project=$ProjectId"
+Write-Host "   gcloud secrets add-iam-policy-binding STARLIGHT_RUNNER_SECRET --project=$ProjectId --member=serviceAccount:$ExecSaEmail --role=roles/secretmanager.secretAccessor"
 Write-Host "3. Set a monthly billing budget alert in GCP Billing Console before deploying Cloud Run Jobs."
 Write-Host "4. Deploy container & Cloud Run Job ($JobName) via bash tools/runner/deploy-runner.sh"
