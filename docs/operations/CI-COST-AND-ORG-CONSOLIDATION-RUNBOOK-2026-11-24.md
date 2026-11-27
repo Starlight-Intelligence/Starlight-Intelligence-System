@@ -11,7 +11,7 @@
 | Product | Quantity | Gross | Net Billed |
 | --- | ---: | ---: | ---: |
 | GitHub Actions (Nov 1–26) | 41,531.0 | $222.68 | **$78.37** |
-| Copilot AI credits (auto PR reviews, Nov 1–26) | 26,500.0 | $265.00 | **$65.00** *(cap hit)* |
+| Copilot AI credits (auto PR reviews, Nov 1–26) | 26,500.0 | $265.00 | **$65.00** *(cap hit; Auto Review toggled **OFF** 2026-11-27)* |
 | **Total (Nov 1–26)** | — | **$487.68** | **$143.37** |
 
 ### Actions SKU Breakdown (`frankxai`, Nov 1–24 snapshot)
@@ -79,11 +79,11 @@
 
 ---
 
-## 3. All 23 PRs Shipped (Waves 1–4, 2026-11-24 – 2026-11-27)
+## 3. All 27 PRs Shipped (Waves 1–5, 2026-11-24 – 2026-11-27)
 
 | Wave | Repository | PR | State | Summary & Verification |
 | --- | --- | --- | --- | --- |
-| 1 | `Starlight-Intelligence/starlightintelligence.ai` | https://github.com/Starlight-Intelligence/starlightintelligence.ai/pull/396 | Draft | Adds zero-dependency `workers/ci-sentinel` Cloudflare Worker (`17 */6 * * *` cron + `/health`, `/audit`, `/run`), `CLOUDFLARE-CI-CUTOVER.md` guide, switches `ci-contract` & `release-aggregate` to `ubuntu-slim`, caps retention to 1–3d. (`ci-aggregate.test.mjs` 54/54, `ci-sentinel` 6/6, `wrangler deploy --dry-run` pass; blocked on `Starlight-Intelligence` Free 2,000-min cap.) |
+| 1 | `Starlight-Intelligence/starlightintelligence.ai` | https://github.com/Starlight-Intelligence/starlightintelligence.ai/pull/396 | **MERGED** | Adds zero-dependency `workers/ci-sentinel` Cloudflare Worker (`17 */6 * * *` cron + `/health`, `/audit`, `/run`), `CLOUDFLARE-CI-CUTOVER.md` guide, switches `ci-contract` & `release-aggregate` to `ubuntu-slim`, caps retention to 1–3d. (`starlight-ci-sentinel` **deployed live** `05f61ff5-1a8d-4a2a-82d6-8fef3b381572`; `/health` `200`, `/audit` `503` fail-closed.) |
 | 1 | `frankxai/agentic-ops` | https://github.com/frankxai/agentic-ops/pull/659 | **MERGED** | Moves 7 lightweight workflows/legs to `ubuntu-slim`, draft-gates `customer-intelligence`, trims retention to 3d. `claude-code-review.yml` untouched. |
 | 1 | `frankxai/agentic-ops-hub` | https://github.com/frankxai/agentic-ops-hub/pull/524 | **MERGED** | Moves `ci`, `estate-guard`, `fleet-watch`, `estate-ci-watch` to `ubuntu-slim`, draft-gates `estate-guard`, halves `fleet-watch` cron (`*/6` -> `*/12`), cuts retention to 1–3d. |
 | 1 | `frankxai/gencreator.ai` | https://github.com/frankxai/gencreator.ai/pull/375 | **MERGED** | Enables PR-only `cancel-in-progress` on `ci.yml`, moves `web-excellence` & `estate-guard` to `ubuntu-slim`, removes duplicate PR `estate-guard`, caps retention to 1d. Locked surfaces untouched. |
@@ -106,27 +106,31 @@
 | 4 | `frankxai/llm-evals` | https://github.com/frankxai/llm-evals/pull/31 | **MERGED** | Gates `deterministic-verification.yml` (`windows-2022`) on ready PRs (`draft == false`), preserving pushes to `main`. |
 | 4 | `frankxai/claude-code-config` | https://github.com/frankxai/claude-code-config/pull/70 | **MERGED** | Switches pure-Python `validate` job in `ci.yml` to `ubuntu-slim`. |
 | 4 | `frankxai/frankx-strategy` | https://github.com/frankxai/frankx-strategy/pull/22 | **MERGED** | Switches `test` job in `ci.yml` to `ubuntu-slim` (`timeout-minutes: 10`), adds draft PR gating and PR-only `cancel-in-progress`. |
+| 5 | `frankxai/agentic-ops` | https://github.com/frankxai/agentic-ops/pull/669 | **MERGED** | Pins `setup-python`/`setup-node` on `ubuntu-slim` jobs and restores `ubuntu-latest` for git-heavy chain test (`queen-chain-behavior.yml`). |
+| 5 | `frankxai/frankx.ai-vercel-website` | https://github.com/frankxai/frankx.ai-vercel-website/pull/1347 | **MERGED** | Keeps `3`-day retention on `search-context-evidence.yml`. |
+| 5 | `frankxai/gencreator-community` | https://github.com/frankxai/gencreator-community/pull/39 | **MERGED** | Switches Dependabot schedule from `weekly` -> `monthly` and caps `open-pull-requests-limit: 3` across `npm` & `github-actions`. |
+| 5 | `frankxai/agentic-ops` | https://github.com/frankxai/agentic-ops/pull/670 | **MERGED** | Frontier `services/cf-checker` upgrade: grounds prompts in live passing CI checks (`Repo.ci().passing` -> `passed:` in `userPrompt()`) + 2026 CI cost hygiene; `219/219` tests pass; **deployed live** (`a07b7513-b6d9-4b96-83ec-bb5ce85d2992`). |
 
 ---
 
-## 4. Frank's Remaining Manual Execution Checklist (Money / UI / Secrets)
+## 4. Frank's Remaining Manual Execution Checklist (Money / Secrets / Final Approval)
 
-*Already executed automatically (2026-11-27): merged **21 of 23** PRs across Waves 1–4, deployed updated `starlight-cf-checker` (`70e955d6-aa5c-4804-9108-2cc06d5e7a81`), created R2 bucket `starlight-ci-cache` (`expire-7d`), purged **419.88 MB** of stale CI storage (`383` stale artifacts / `140.54 MB` + `24` closed-PR caches / `279.34 MB`), and staged all login-gated portals cleanly in **BrowserOS neo** session `antigravity-client/ci-cost-audit`.*
+*Already executed automatically (2026-11-27): toggled **Copilot Automatic Code Review OFF** (`aria-pressed=false` verified after reload, saving ~$65/mo); merged **26 of 27** PRs across Waves 1–5; deployed frontier `starlight-cf-checker` (`a07b7513-b6d9-4b96-83ec-bb5ce85d2992`) and `starlight-ci-sentinel` (`05f61ff5-1a8d-4a2a-82d6-8fef3b381572`, `/health` HTTP `200`, `/audit` HTTP `503`); created R2 bucket `starlight-ci-cache` (`expire-7d`); purged **419.88 MB** of stale CI storage.*
 
-1. **Sign in to the 5 staged BrowserOS neo tabs** (`GitHub Copilot`, `Starlight-Intelligence Billing`, `Cloudflare Dashboard`, `Blacksmith.sh`, `Vercel`):
-   - **GitHub → Copilot → Code review → Off** (saves ~$65/mo immediately; keep `@copilot review` manual-only).
-   - **Option A ("1+1" Billing = `$8/mo` base):** Keep `frankxai` Pro (`$4/mo`, `$20/mo` Actions cap), upgrade **only `Starlight-Intelligence` → Team (`$4/mo`, `$20/mo` Actions cap)**, leave the other 8 orgs on Free (`$0/mo`).
-2. **Merge the final 2 open PRs:**
-   - Merge `Starlight-Intelligence/starlightintelligence.ai#396` once `Starlight-Intelligence` Team minutes unlock.
-   - Review/approve & merge `Starlight-Intelligence/Starlight-Intelligence-System#617` (`independent-review-policy` + 1 maintainer review).
-3. **Bind `workers/ci-sentinel` Secrets After `#396` Lands:**
+1. **Apply Option A ("1+1" Billing = `$8/mo` base) in staged BrowserOS neo tab (`Starlight-Intelligence Billing`):**
+   - Keep `frankxai` Pro (`$4/mo`) with **$20/mo Actions cap**.
+   - Upgrade **only `Starlight-Intelligence` → Team (`$4/mo`)** with **$20/mo Actions cap** (restores private minutes + unlocks private branch protection). Keep the other 8 orgs on Free (`$0/mo`).
+2. **Bind `workers/ci-sentinel` Secrets (then retire Hub cron watchers):**
    ```bash
    cd workers/ci-sentinel
    npx wrangler secret put SENTINEL_TOKEN
    npx wrangler secret put GH_ESTATE_TOKEN
    npx wrangler deploy
    ```
-   - Install `starlight-review` (`services/cf-checker`) App on `frankxai` and the remaining orgs; once `starlight-ci-sentinel` cron is live, disable `fleet-watch.yml`, `estate-ci-watch.yml`, and `ci-budget-guard.yml` crons in `agentic-ops-hub`.
+   - Once verified live with secrets, disable `fleet-watch.yml`, `estate-ci-watch.yml`, and `ci-budget-guard.yml` crons in `agentic-ops-hub`.
+3. **Approve & Merge Final Open PR (`SIS#617`):**
+   - Review/approve & merge `Starlight-Intelligence/Starlight-Intelligence-System#617` (`independent-review-policy` + 1 maintainer review).
+   - **Hold / Do NOT merge `frankxai/agentic-ops#664` as-is:** It raises `DAILY_BUDGET_USD` from `$5` → `$100/day` right before Dec 1, 2026 when Cloudflare Workers AI leaves credit coverage! Keep `DAILY_BUDGET_USD="5"` + AI Gateway caching & rate-limiting active.
 
 ---
 
@@ -146,8 +150,8 @@
 
 | Lever | Free Tier / Credits | Current State | Highest-ROI Action |
 | --- | --- | --- | --- |
-| **Blacksmith.sh (`blacksmith-sh`)** | **3,000 FREE 4-vCPU min/mo** (`blacksmith-4vcpu-ubuntu-2404`) + sticky NVMe caches | GitHub App **already installed on 8 orgs**; `0` workflows currently route to it | Route heavy Docker/Next.js builds & Playwright E2E (`gencreator.ai`, `frankx.ai-vercel-website`, `starlightintelligence.ai`) to `blacksmith-4vcpu-ubuntu-2404` for faster runs at `$0` within free tier |
+| **Blacksmith.sh (`blacksmith-sh`)** | **Free Tier per org** (`$4.87 − $4.87 = $0.00` verified on `Starlight-Intelligence`; `$0.00` on `frankxai` & `Arcanea-Labs`, no card on file) | **All 9 orgs/user already connected** (`frankxai`, `Starlight-Intelligence`, `Arcanea-Labs`, `FrankX-AI`, `Agentic-Income`, `AI-Architect-Academy`, `AI-Architect-Studio`, `Life-Commons`, `oci-ai-architects`); `0` workflows route to it | Route heavy Docker/Next.js builds & Playwright E2E (`gencreator.ai`, `frankx.ai-vercel-website`, `starlightintelligence.ai`) to `blacksmith-4vcpu-ubuntu-2404` for faster runs + NVMe cache at `$0` inside each org's free quota |
 | **OCI Always Free Ampere A1 ARM** | **4 OCPU + 24 GB RAM + 200 GB storage + 10 TB egress/mo (`$0/mo` forever)** | Available on Frank's Oracle Cloud tenancy | Provision 1 ephemeral private-repo-only self-hosted runner VM for unlimited Linux CI/agent batch jobs outside GitHub quotas |
-| **Cloudflare Startup Credits + Free Tiers** | Workers Cron (100k req/day), R2 `starlight-ci-cache` (10 GB/mo free, 0 egress), Workers Builds (6,000 build min/mo), AI Gateway response caching | `starlight-cf-checker` deployed (`70e955d6`); `starlight-ci-cache` R2 + `expire-7d` **live** | Turn on AI Gateway caching (`starlight-review`) for repeated diff/prompt lookups, deploy `ci-sentinel`, and shift Workers/MCP preview builds to Workers Builds |
-| **GitHub Pro / Team Free Caps** | `frankxai` Pro: 3,000 Linux min + 2 GB storage; `Starlight-Intelligence` Team: 3,000 Linux min + 2 GB storage | All 21 CI/retention PRs merged; **419.88 MB** purged (`383` stale artifacts = `140.54 MB`, `24` closed-PR caches = `279.34 MB`) | Keep `ubuntu-slim` (`3x` cheaper, `1` min = `0.33` standard min multiplier) + `1d` retention so private storage never hits 2 GB lockout again |
-| **Dependabot Batching** | Fewer CI storms | Capped open PRs on `agenticincome`; other repos still ungrouped | Apply weekly `groups:` + `open-pull-requests-limit: 3` across remaining active npm/pip repos |
+| **Cloudflare Startup Credits + Free Tiers** | **`$10,000.00` active** (expires Oct 30, 2027; `R2 · $2,500`, `PlanetScale · $2,500`, Workers/Builds/Containers covered; **EXCLUDES AI Gateway, and Workers AI leaves credit coverage Dec 1, 2026**) | `starlight-cf-checker` **frontier v2 live** (`a07b7513-b6d9-4b96-83ec-bb5ce85d2992`); `starlight-ci-sentinel` **live** (`05f61ff5-1a8d-4a2a-82d6-8fef3b381572`); `starlight-ci-cache` R2 + `expire-7d` **live**; `starlight-review` AI Gateway has `Cache Responses`, `Rate Limit`, and `Spend Limits` **enabled** | **CRITICAL:** Keep `DAILY_BUDGET_USD="5"` on `starlight-cf-checker` (hold `#664` `$100/day`) so post-Dec 1 Workers AI traffic (`$84.88` / `95.9M` tokens in past 30d) stays strictly capped; shift Workers/MCP previews to Workers Builds |
+| **GitHub Pro / Team Free Caps** | `frankxai` Pro: 3,000 Linux min + 2 GB storage; `Starlight-Intelligence` Team: 3,000 Linux min + 2 GB storage | **26/27 PRs merged**; Copilot Auto Review **OFF** (`~$65/mo` saved); **419.88 MB** purged (`383` stale artifacts = `140.54 MB`, `24` closed-PR caches = `279.34 MB`) | Keep `ubuntu-slim` (`3x` cheaper) + `1d–3d` retention so private storage never hits 2 GB lockout again |
+| **Dependabot Batching** | Fewer CI storms | `agenticincome#155` & `gencreator-community#39` **MERGED** (`monthly`, grouped, `limit: 3`) | Keep monthly + grouped (`limit: 3`) standard across any new repo |
