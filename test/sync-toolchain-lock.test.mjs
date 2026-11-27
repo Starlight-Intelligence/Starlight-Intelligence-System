@@ -55,6 +55,12 @@ test("syncToolchainLock detects package.json digest drift in --check mode and re
 
     const checkAfter = syncToolchainLock({ root: fixture, check: true });
     assert.deepEqual(checkAfter.changes, []);
+
+    const defaultCall = syncToolchainLock({ root: fixture });
+    assert.deepEqual(defaultCall.changes, []);
+
+    rmSync(join(fixture, "foundry/vendor/agent-plugins/1.0.0/provenance.json"));
+    assert.throws(() => inspectToolchainLock(fixture), /provenance is missing/i);
   } finally {
     rmSync(fixture, { recursive: true, force: true });
   }

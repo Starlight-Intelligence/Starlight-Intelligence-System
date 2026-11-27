@@ -1,16 +1,12 @@
 #!/usr/bin/env node
-import { createHash } from "node:crypto";
-import { existsSync, lstatSync, readFileSync } from "node:fs";
-import { dirname, join, resolve } from "node:path";
+import { existsSync, lstatSync } from "node:fs";
+import { dirname, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { readPnpmDependencyLock } from "../tools/foundry/lib/dependency-lock.mjs";
 import { assertNoSymlinkPath, hashFile, readJson, writeJson } from "../tools/foundry/lib/io.mjs";
 
 const DEFAULT_LOCK_REL = "foundry/validators/toolchain.lock.v1.json";
-
-function sha256Hex(path) {
-  return createHash("sha256").update(readFileSync(path)).digest("hex");
-}
+const PROVENANCE_REL = "foundry/vendor/agent-plugins/1.0.0/provenance.json";
 
 function syncSourceClosure(root, label, closure, changes) {
   if (!closure || typeof closure !== "object" || Array.isArray(closure)) return;
@@ -69,8 +65,11 @@ export function inspectToolchainLock(root, lockRelPath = DEFAULT_LOCK_REL) {
     syncSourceClosure(absRoot, "portable.validator", lock.portable.validator.sourceClosure, changes);
   }
 
-  const provenancePath = join(absRoot, "foundry", "vendor", "agent-plugins", "1.0.0", "provenance.json");
-  if (lock.portable && existsSync(provenancePath) && lstatSync(provenancePath).isFile()) {
+  const provenancePath = assertNoSymlinkPath(absRoot, PROVENANCE_REL);
+  if (!existsSync(provenancePath) || !lstatSync(provenancePath).isFile()) {
+    throw new Error(`Agent Plugins provenance is missing or not a regular file: ${PROVENANCE_REL}`);
+  }
+  if (lock.portable) {
     const provSha = hashFile(provenancePath).sha256;
     if (lock.portable.provenanceSha256 !== provSha) {
       changes.push({ field: "portable.provenanceSha256", before: lock.portable.provenanceSha256, after: provSha });
@@ -109,12 +108,12 @@ export function inspectToolchainLock(root, lockRelPath = DEFAULT_LOCK_REL) {
   return { absLockPath, changes, nextLock: lock };
 }
 
-export function syncToolchainLock({ root, lockPath = DEFAULT_LOCK_REL, check = false } = {}) {
+export function syncToolchainLock({ root, lockPath = DEFAULT_LOCK_REL, check = true } = {}) {
   const { absLockPath, changes, nextLock } = inspectToolchainLock(root, lockPath);
   if (!check && changes.length > 0) {
     writeJson(absLockPath, nextLock);
   }
-  return { absLockPath, changes, nextLock, sha256: sha256Hex(absLockPath) };
+  return { absLockPath, changes, nextLock, sha256: hashFile(absLockPath).sha256 };
 }
 
 function parseArgs(argv) {
