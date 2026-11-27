@@ -1,3 +1,4 @@
+import { SystemTour } from "@/components/SystemTour";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { GalaxyField } from "@/components/cinematic/GalaxyField";
@@ -25,7 +26,7 @@ export const metadata: Metadata = {
 };
 
 const SIP_GITHUB_URL =
-  "https://github.com/frankxai/Starlight-Intelligence-System/blob/main/SIP.md";
+  "https://github.com/Starlight-Intelligence/Starlight-Intelligence-System/blob/main/SIP.md";
 
 const FILE_CONTRACT_ROWS: Array<{
   file: string;
@@ -213,7 +214,7 @@ export default function ProtocolPage() {
             rel="noopener noreferrer"
             className="inline-flex min-h-8 items-center font-mono text-slate-400 transition-std hover:text-violet-300"
           >
-            frankxai/Starlight-Intelligence-System
+            Starlight-Intelligence/Starlight-Intelligence-System
           </a>
           <span className="text-slate-700">·</span>
           <span className="font-mono text-slate-400">SIP.md</span>
@@ -221,6 +222,8 @@ export default function ProtocolPage() {
           <span>MIT-licensed</span>
         </div>
       </section>
+
+      <SystemTour />
 
       <div className="mx-auto max-w-3xl px-6 py-16 md:py-20">
         {/* ── Scope ── */}

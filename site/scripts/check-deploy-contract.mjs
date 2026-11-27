@@ -17,7 +17,7 @@ const read = (relativePath) => readFileSync(resolve(repoRoot, relativePath), "ut
 expect(contract.schemaVersion === "1.0.0", "deployment contract schemaVersion must be 1.0.0");
 expect(contract.productName === "Starlight Explorer", "deployment product must be named Starlight Explorer");
 expect(
-  contract.repositoryUrl === "https://github.com/frankxai/Starlight-Intelligence-System",
+  contract.repositoryUrl === "https://github.com/Starlight-Intelligence/Starlight-Intelligence-System",
   "deployment source must be the canonical public repository",
 );
 expect(contract.rootDirectory === "site", "Vercel root directory must be site");
