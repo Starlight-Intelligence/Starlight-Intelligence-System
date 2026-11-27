@@ -152,8 +152,8 @@
 | --- | --- | --- | --- |
 | **Blacksmith.sh (`blacksmith-sh`)** | **Free Tier per org** (`$4.87 − $4.87 = $0.00` verified on `Starlight-Intelligence`; `$0.00` on `frankxai` & `Arcanea-Labs`, no card on file) | **All 9 orgs/user already connected** (`frankxai`, `Starlight-Intelligence`, `Arcanea-Labs`, `FrankX-AI`, `Agentic-Income`, `AI-Architect-Academy`, `AI-Architect-Studio`, `Life-Commons`, `oci-ai-architects`); `0` workflows route to it | Route heavy Docker/Next.js builds & Playwright E2E (`gencreator.ai`, `frankx.ai-vercel-website`, `starlightintelligence.ai`) to `blacksmith-4vcpu-ubuntu-2404` for faster runs + NVMe cache at `$0` inside each org's free quota |
 | **OCI Always Free Ampere A1 ARM** | **4 OCPU + 24 GB RAM + 200 GB storage + 10 TB egress/mo (`$0/mo` forever)** | Available on Frank's Oracle Cloud tenancy | Provision 1 ephemeral private-repo-only self-hosted runner VM for unlimited Linux CI/agent batch jobs outside GitHub quotas |
-| **Cloudflare Startup Credits + Free Tiers** | **`$10,000.00` active** (expires Oct 30, 2027; `R2 · $2,500`, `PlanetScale · $2,500`, Workers/Builds/Containers covered; **EXCLUDES AI Gateway, and Workers AI leaves credit coverage Dec 1, 2026**) | `starlight-cf-checker` **frontier v3 live** (`3fe871d9-4695-4f06-89b2-77ae5514dab4`); `starlight-ci-sentinel` **v0.2.0 live** (`b9874704-42ed-43b4-a465-f2366f603ae2`, `/health` `200`, `/sweep` `503`); `starlight-ci-cache` R2 + `expire-7d` **live**; `starlight-review` AI Gateway has `Cache Responses`, `Rate Limit`, and `Spend Limits` **enabled** | **CRITICAL:** Keep `DAILY_BUDGET_USD="5"` on `starlight-cf-checker` (hold `#664` `$100/day`) so post-Dec 1 Workers AI traffic (`$84.88` / `95.9M` tokens in past 30d) stays strictly capped; shift Workers/MCP previews to Workers Builds |
-| **GitHub Pro / Team Free Caps** | `frankxai` Pro: 3,000 Linux min + 2 GB storage; `Starlight-Intelligence` Team: 3,000 Linux min + 2 GB storage | **31/32 PRs merged** (26/27 Waves 1–5 + 5/5 Wave 6; only `SIS#617` open); Copilot Auto Review **OFF** (`~$65/mo` saved); **419.88 MB** purged (`383` stale artifacts = `140.54 MB`, `24` closed-PR caches = `279.34 MB`) | Keep `ubuntu-slim` (`3x` cheaper) + `1d–3d` retention so private storage never hits 2 GB lockout again |
+| **Cloudflare Startup Credits + Free Tiers** | **`$10,000.00` active** (expires Oct 30, 2027; `R2 · $2,500`, `PlanetScale · $2,500`, Workers/Builds/Containers covered; **EXCLUDES AI Gateway, and Workers AI leaves credit coverage Dec 1, 2026**) | `starlight-cf-checker` **v3.1+ live** (`510b9bf3-a073-46f1-865d-3d837ec2f336`); `starlight-ci-sentinel` **v0.2.0 live** (`b9874704-42ed-43b4-a465-f2366f603ae2`, `/health` `200`, `/sweep` `503`); `starlight-turbo-cache` **v0.1.0 live** (`bb959c9a-9236-4053-9bd4-7b9486c17464`, `/health` `200`, `/v8/artifacts/*` `503`); `starlight-ci-cache` R2 + `expire-7d` **live**; `starlight-review` AI Gateway has `Cache Responses`, `Rate Limit`, and `Spend Limits` **enabled** | **CRITICAL:** Keep `DAILY_BUDGET_USD="5"` on `starlight-cf-checker` (hold `#664` `$100/day`) so post-Dec 1 Workers AI traffic (`$84.88` / `95.9M` tokens in past 30d) stays strictly capped; shift Workers/MCP previews to Workers Builds |
+| **GitHub Pro / Team Free Caps** | `frankxai` Pro: 3,000 Linux min + 2 GB storage; `Starlight-Intelligence` Team: 3,000 Linux min + 2 GB storage | **40/41 PRs merged** (26/27 Waves 1–5 + 5/5 Wave 6 + **9/9 Wave 7**; only `SIS#617` open); Copilot Auto Review **OFF** (`~$65/mo` saved); **419.88 MB** purged (`383` stale artifacts = `140.54 MB`, `24` closed-PR caches = `279.34 MB`) | Keep `ubuntu-slim` (`3x` cheaper) + `1d–3d` retention so private storage never hits 2 GB lockout again |
 | **Dependabot Batching** | Fewer CI storms | `agenticincome#155` & `gencreator-community#39` **MERGED** (`monthly`, grouped, `limit: 3`) | Keep monthly + grouped (`limit: 3`) standard across any new repo |
 
 ---
@@ -188,3 +188,59 @@
    Connect Worker repos/apps to native Cloudflare Workers Builds (`$10,000` credit pool) so static/Worker preview deployments never burn GitHub Linux minutes.
 4. **OCI Always Free Ampere A1 ARM64 Runner (`4 OCPU / 24 GB RAM / 200 GB`):**
    Register one ephemeral `actions/runner` systemd service restricted to private control-plane repos (no fork PR execution) for heavy autonomous agent/eval suites outside GitHub minute caps.
+
+---
+
+## 8. Frontier Wave 7 Shipped (2026-11-27) & Overnight 8-Hour Autonomous Ops Protocol
+
+### Wave 7 PRs Merged (9 / 9 Shipped)
+
+| Repo | PR | Merge Commit | Merged At (UTC) | Summary |
+| --- | --- | --- | --- | --- |
+| `Starlight-Intelligence/starlightintelligence.ai` | https://github.com/Starlight-Intelligence/starlightintelligence.ai/pull/411 | `57ffe10d` | `2026-11-27T04:44:23Z` | Zero-dependency `workers/turbo-cache` Turborepo v8 R2 Remote Cache (`FixedLengthStream` PUTs, 50 MiB limit / 16 MiB chunked cap, SHA-256 constant-time auth, `ALLOWED_TEAMS` support, `5/5` tests). |
+| `frankxai/agentic-ops` | https://github.com/frankxai/agentic-ops/pull/678 | `8f7d9b6e` | `2026-11-27T04:30:26Z` | `cf-checker` v3.1: tightens `isSupportPath` so only `*.test.*`/`*.spec.*` and data/media fixtures weigh 1/4 toward `maxLines`, while arbitrary `.ts`/`.js` files in `test/`/`fixtures/` count 100% weight. |
+| `frankxai/agentic-ops` | https://github.com/frankxai/agentic-ops/pull/679 | `a765bd88` | `2026-11-27T04:40:43Z` | `cf-checker` flow-control 2b: an unproven lone objection passes with advisory notes instead of blocking clean PRs (`check`, `verify`, `Starlight Review` `SUCCESS`). |
+| `frankxai/agenticincome` | https://github.com/frankxai/agenticincome/pull/157 | `17de0052` | `2026-11-27T04:45:07Z` | Adds `BLACKSMITH_RUNNER == 'true'` opt-in fallback (`blacksmith-2vcpu-ubuntu-2404`), scopes `cancel-in-progress` to `pull_request`, aligns `setup-node@v7`. |
+| `frankxai/agenticincome` | https://github.com/frankxai/agenticincome/pull/149 | `72dce624` | `2026-11-27T04:35:37Z` | Adds read-only SHA-pinned `.github/workflows/frontier-surface-review.yml` (`build`, `Review Gate`, `Surface Guard`, `Vercel`, and Codex review all green). |
+| `Arcanea-Labs/arcanea-ai-app` | https://github.com/Arcanea-Labs/arcanea-ai-app/pull/782 | `2f15bcd8` | `2026-11-27T11:57:08Z` | Adds gated `blacksmith-4vcpu-ubuntu-2404` opt-in, same-repo-guarded R2 Turbo cache env wiring on `typecheck` & `build`, and moves `CI Status` to `ubuntu-slim`. |
+| `Starlight-Intelligence/starlight-command-center` | https://github.com/Starlight-Intelligence/starlight-command-center/pull/162 | `67375462` | `2026-11-27T04:41:36Z` | Upgrades Actions to `@v7`/`@v6`, scopes `cancel-in-progress` to PRs, and adds `blacksmith-4vcpu-ubuntu-2404` opt-in on `observatory` (`Starlight Review` dual `APPROVE`). |
+| `frankxai/agentic-ops-hub` | https://github.com/frankxai/agentic-ops-hub/pull/531 | `a289cbe6` | `2026-11-27T04:28:32Z` | Updates `merge-steward/targets.yml` to `Arcanea-Labs/arcanea-ai-app` and `Starlight-Intelligence/starlightintelligence.ai` (`160/160` `test_merge_steward` green, dual `APPROVE`). |
+| `Starlight-Intelligence/starlight-agent-config` | https://github.com/Starlight-Intelligence/starlight-agent-config/pull/228 | `18ebcfdc` | `2026-11-27T04:25:55Z` | Adds read-only MCP convergence audit CLI & unit tests (`5/5` tests pass locally, `MERGEABLE`/`CLEAN`). |
+
+### Live 3-Worker Cloudflare Stack
+
+| Worker | Endpoint | Live Version ID | Bindings | Verified Live Probes |
+| --- | --- | --- | --- | --- |
+| `starlight-cf-checker` | `https://starlight-cf-checker.frankxai.workers.dev` | `510b9bf3-a073-46f1-865d-3d837ec2f336` | KV `STATE`, Queue `starlight-review-jobs`, D1 `starlight-review`, Workers AI + AI Gateway `starlight-review` (`DAILY_BUDGET_USD="5"`) | `GET /health` -> HTTP `200` (`ok: true`, `reviews_by_status.done: 114`) |
+| `starlight-ci-sentinel` | `https://starlight-ci-sentinel.frankxai.workers.dev` | `b9874704-42ed-43b4-a465-f2366f603ae2` | Cron Trigger `17 */6 * * *` (`SENTINEL_TOKEN` & `GH_ESTATE_TOKEN` unbound until bound) | `GET /health` -> HTTP `200`; `POST /sweep` -> HTTP `503` fail-closed |
+| `starlight-turbo-cache` | `https://starlight-turbo-cache.frankxai.workers.dev` | `bb959c9a-9236-4053-9bd4-7b9486c17464` | R2 `CACHE_BUCKET` (`starlight-ci-cache`, `expire-7d`, `MAX_ARTIFACT_BYTES="52428800"`) | `GET /health` -> HTTP `200` (`storage: "r2"`); `HEAD /v8/artifacts/0123...` -> HTTP `503` fail-closed |
+
+### One-Command Cutover (Turbo Remote Cache & Blacksmith Runners)
+
+```bash
+# 1. Bind shared bearer secret on starlight-turbo-cache (same value stored in GitHub Actions secret TURBO_TOKEN):
+npx --yes wrangler secret put TURBO_CACHE_TOKEN --config workers/turbo-cache/wrangler.jsonc
+
+# 2. Wire Arcanea R2 remote cache & Blacksmith runner variables (reversible anytime via `gh variable delete`):
+gh variable set TURBO_API --body https://starlight-turbo-cache.frankxai.workers.dev -R Arcanea-Labs/arcanea-ai-app
+gh variable set TURBO_TEAM --body arcanea -R Arcanea-Labs/arcanea-ai-app
+gh secret set TURBO_TOKEN -R Arcanea-Labs/arcanea-ai-app
+gh variable set CI_RUNNER --body blacksmith -R Arcanea-Labs/arcanea-ai-app
+gh variable set BLACKSMITH_RUNNER --body true -R frankxai/agenticincome
+gh variable set BLACKSMITH_RUNNER --body true -R Starlight-Intelligence/starlight-command-center
+```
+
+### Overnight 8-Hour Autonomous Ops Protocol (Prepped for Unattended Execution)
+
+1. **Cadence & Execution Lanes:** Run bounded 45-minute waves inside isolated worktrees (`git worktree` / fresh depth-1 clone); delete every `wt-ci-*` scratch checkout before closing a wave.
+2. **PR Triage & Merge Gate (No `--admin` Bypass):**
+   - Only merge ready (non-draft) `MERGEABLE` PRs after reading the diff, confirming every required CI/governance/Vercel check is green, and verifying `Starlight Review` / Codex receipts carry zero unresolved real bugs.
+   - Held/deferred estate PRs requiring manual resolution or human approval:
+     - **Money / Billing / Budgets:** `frankxai/agentic-ops#664`, `frankxai/starlight-estate#65`, `frankxai/frankx.ai-vercel-website#1320`, `frankxai/gencreator.ai#366` (money fails closed).
+     - **Human Gates / Security / Doctrine / Intent Blockers:** `Starlight-Intelligence/starlight-command-center#144` (Frank human gate on auth/SQL), `Starlight-Intelligence/starlight-agent-config#227` (`SYSTEM-SPINE.md` doctrine), `frankxai/gencreator.ai#351` (`Vercel Security Review=FAILURE`), `#368` (blocked at Drain check intent), `#355` (honeypot/E2E bug finding), `frankxai/starlight-estate#128` (`GITHUB_TOKEN` leak finding), `frankxai/agenticincome#139` (`rm` scratch bypass finding).
+     - **Conflicts / Real Build Failures / Review Bugs:** `frankxai/agentic-ops-hub#525`, `#496`, `#487` (`CONFLICTING/DIRTY`), `Starlight-Intelligence/starlight-agent-config#235` (`renderCard` bug finding), `Arcanea-Labs/arcanea-ai-app#781`, `#779`.
+3. **Circuit Breakers & Cost Guardrails:**
+   - Abort and hand back after **2 consecutive failures** on the same check or workflow.
+   - Keep `starlight-cf-checker` `DAILY_BUDGET_USD="5"` (AI Gateway cache + rate-limit active before Dec 1 Workers AI billing change).
+   - Keep `Starlight-Intelligence` private Actions workflows off heavy Linux legs until Frank upgrades only `Starlight-Intelligence` to Team (`$4/mo` + `$20/mo` cap).
+   - Run `starlight-ci-sentinel` `POST /sweep` in dry-run/scheduled audit once `SENTINEL_TOKEN` + `GH_ESTATE_TOKEN` are bound to keep private Actions cache/artifact storage well below `2 GB`.
