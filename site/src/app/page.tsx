@@ -27,6 +27,7 @@ import { OperationalProofConsole } from "@/components/OperationalProofConsole";
 import { AgentConstellation } from "@/components/AgentConstellation";
 import { StarlightMark } from "@/components/StarlightMark";
 import { GalaxyField } from "@/components/cinematic/GalaxyField";
+import { AskStarlight } from "@/components/ask/AskStarlight";
 import { CURRENT_METRICS, METRICS_AS_OF } from "@/lib/metrics";
 import {
   ACCENT_TEXT,
@@ -229,6 +230,13 @@ const AGENT_ENDPOINTS: [string, string][] = [
   ["GET /badge/latest", "Built-on-SIP badge, current canonical pin"],
 ];
 
+/** Prompts for the Ask Starlight panel. Choosing one fills the box; nothing runs until the visitor asks. */
+const ASK_SUGGESTIONS = [
+  "What changed in open reasoning models this quarter?",
+  "Is prompt caching worth it for a weekly research loop?",
+  "How do agent memory systems handle conflicting facts?",
+];
+
 export default async function HomePage() {
   const [entries, registry, featured] = await Promise.all([
     getAllEntries(),
@@ -271,6 +279,11 @@ export default async function HomePage() {
               and governance you hold rather than rent. Fork it, read it,
               leave with it.
             </p>
+
+            {/* Client island: the rest of the page stays a revalidated server component. */}
+            <div className="mt-8">
+              <AskStarlight suggestions={ASK_SUGGESTIONS} />
+            </div>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
               <Link
