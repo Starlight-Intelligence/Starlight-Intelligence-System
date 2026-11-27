@@ -160,6 +160,8 @@
     "foundry:toolchain:install": "npm ci --prefix foundry/validators/native",
     "foundry:loader:codex": "node tools/foundry/codex-loader-smoke.mjs",
     "foundry:validator:claude": "node tools/foundry/claude-validator-smoke.mjs",
+    "foundry:lock:sync": "node scripts/sync-toolchain-lock.mjs",
+    "foundry:lock:check": "node scripts/sync-toolchain-lock.mjs --check",
     "test:foundry:conformance": "node --import tsx --test test/foundry-conformance.test.ts",
     "test:foundry": "node --import tsx --test test/v92-foundry.test.ts test/foundry-conformance.test.ts",
     "blueprints:validate": "node blueprints/validate.mjs",
