@@ -1,0 +1,967 @@
+{
+  "schemaVersion": "1.0.0",
+  "verifiedAt": "2026-11-27",
+  "owner": "Starlight Architecture",
+  "statusRules": {
+    "live": "A production deploy path is cited in deployEvidence, and a public URL served by that deploy answered when it was checked (liveCheck). Live describes the deployed code path. It does not prove that every credential behind it is set.",
+    "wired": "Code or config that would run exists in this repository, but no production deploy of it was observed. At least one evidence path is code or config, not a document.",
+    "planned": "Only documents, profiles, or type declarations mention it. Nothing in this repository calls it, and it has no deploy evidence."
+  },
+  "providers": [
+    {
+      "id": "anthropic",
+      "name": "Anthropic",
+      "kind": "model-lab",
+      "status": "wired",
+      "surface": {
+        "integration": "Direct REST calls to the Messages API, plus Claude Code inside the Cloudflare harness sandbox routed through Cloudflare AI Gateway",
+        "envVars": [
+          "ANTHROPIC_API_KEY"
+        ]
+      },
+      "models": [
+        "claude-3-7-sonnet-20250219",
+        "claude-sonnet-5-5"
+      ],
+      "evidence": [
+        "services/starlight-cloud-worker/src/llm/ai-gateway.ts",
+        "src/orchestration/model-adapters/anthropic-adapter.ts",
+        "services/starlight-harness/src/agents.ts",
+        "services/starlight-harness/wrangler.jsonc"
+      ],
+      "notes": "Every Anthropic call path sits in a Worker or library with no observed production deploy. In the harness the key is a placeholder that the outbound entrypoint swaps for the gateway token."
+    },
+    {
+      "id": "openai",
+      "name": "OpenAI",
+      "kind": "model-lab",
+      "status": "wired",
+      "surface": {
+        "integration": "Direct REST calls to Chat Completions, plus Codex CLI inside the Cloudflare harness sandbox routed through Cloudflare AI Gateway",
+        "envVars": [
+          "OPENAI_API_KEY"
+        ]
+      },
+      "models": [
+        "gpt-4o-mini",
+        "gpt-6-sol"
+      ],
+      "evidence": [
+        "services/starlight-cloud-worker/src/llm/ai-gateway.ts",
+        "src/orchestration/model-adapters/openai-adapter.ts",
+        "services/starlight-harness/src/agents.ts",
+        "services/starlight-harness/wrangler.jsonc"
+      ],
+      "notes": "OpenAI open-weight models also run live through other hosts: openai/gpt-oss-120b on Nebius (the Desk judge) and @cf/openai/gpt-oss-120b on Workers AI (cf-review). Those rows belong to the host, not to this provider."
+    },
+    {
+      "id": "google-gemini",
+      "name": "Google Gemini API",
+      "kind": "model-lab",
+      "status": "wired",
+      "surface": {
+        "integration": "Direct REST calls to generativelanguage.googleapis.com generateContent",
+        "envVars": [
+          "GEMINI_API_KEY"
+        ]
+      },
+      "evidence": [
+        "src/orchestration/model-adapters/google-adapter.ts"
+      ],
+      "notes": "Library adapter used by the local model router. The Queen swarm planner also names gemini-2.5-flash as its scout model, but that code only selects a model."
+    },
+    {
+      "id": "google-vertex-ai",
+      "name": "Google Vertex AI",
+      "kind": "model-host",
+      "status": "planned",
+      "surface": {
+        "integration": "None in code",
+        "envVars": []
+      },
+      "evidence": [
+        "docs/architecture/starlight-sovereign-startup-swarm-os.md"
+      ],
+      "notes": "Named in an architecture document only. No code calls Vertex AI."
+    },
+    {
+      "id": "xai",
+      "name": "xAI",
+      "kind": "model-lab",
+      "status": "planned",
+      "surface": {
+        "integration": "None in code",
+        "envVars": [
+          "XAI_API_KEY"
+        ]
+      },
+      "evidence": [
+        ".claude/hooks/lib/hook-env.sh",
+        "services/starlight-control-plane/src/core.ts",
+        "src/adapters/grok.ts"
+      ],
+      "notes": "hook-env.sh only checks whether the variable is set, core.ts lists xai as a model family, and grok.ts writes a context file for the Grok CLI. No code calls the xAI API."
+    },
+    {
+      "id": "mistral",
+      "name": "Mistral",
+      "kind": "model-lab",
+      "status": "planned",
+      "surface": {
+        "integration": "None in code",
+        "envVars": []
+      },
+      "evidence": [
+        "docs/strategic/2026-10-08-agentic-estate-production-architecture.md",
+        "services/starlight-control-plane/src/core.ts"
+      ],
+      "notes": "Named as a possible self-hosted route in a strategy document and as a model family in core.ts. No adapter exists."
+    },
+    {
+      "id": "meta-workers-ai",
+      "name": "Meta Llama via Cloudflare Workers AI",
+      "kind": "model-lab",
+      "status": "wired",
+      "surface": {
+        "integration": "Workers AI binding: env.AI.run on a Meta model id",
+        "envVars": []
+      },
+      "models": [
+        "@cf/meta/llama-3.3-70b-instruct"
+      ],
+      "evidence": [
+        "services/starlight-cloud-worker/src/llm/ai-gateway.ts",
+        "services/starlight-cloud-worker/wrangler.toml"
+      ],
+      "notes": "Used when a request asks for starlight-edge or llama-3.3 in the cloud worker gateway. The cloud worker has no observed production deploy."
+    },
+    {
+      "id": "nebius-token-factory",
+      "name": "Nebius Token Factory",
+      "kind": "model-host",
+      "status": "live",
+      "surface": {
+        "integration": "OpenAI-compatible chat completions over fetch, no SDK",
+        "envVars": [
+          "NEBIUS_API_KEY",
+          "NEBIUS_BASE_URL"
+        ]
+      },
+      "models": [
+        "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+        "deepseek-ai/DeepSeek-V4-Flash-0731",
+        "openai/gpt-oss-120b"
+      ],
+      "evidence": [
+        "site/src/lib/desk/provider.ts",
+        "site/src/lib/desk/cascade.ts",
+        "site/src/app/api/desk/run/route.ts"
+      ],
+      "deployEvidence": [
+        ".github/workflows/vercel-deploy.yml",
+        "site/vercel.json"
+      ],
+      "liveCheck": {
+        "url": "https://starlightintelligence.org/desk",
+        "observedAt": "2026-11-27",
+        "httpStatus": 200,
+        "note": "The Desk page answered from production. A model run was not triggered for this check because it spends credits, so whether NEBIUS_API_KEY is set in production is unverified."
+      },
+      "notes": "Serves every model stage of the Desk cascade: extract, synthesize, contradict, and judge."
+    },
+    {
+      "id": "vercel-ai-gateway",
+      "name": "Vercel AI Gateway",
+      "kind": "gateway",
+      "status": "planned",
+      "surface": {
+        "integration": "None in code",
+        "envVars": []
+      },
+      "evidence": [
+        "docs/architecture/harness-production.md"
+      ],
+      "notes": "Listed as a routing option in an architecture document. packages/ai-sdk-adapter is memory middleware for the Vercel AI SDK, not a gateway integration."
+    },
+    {
+      "id": "cloudflare-workers-ai",
+      "name": "Cloudflare Workers AI",
+      "kind": "model-host",
+      "status": "wired",
+      "surface": {
+        "integration": "Workers AI binding (ai.binding = AI) in wrangler config",
+        "envVars": []
+      },
+      "models": [
+        "@cf/openai/gpt-oss-120b",
+        "@cf/meta/llama-3.3-70b-instruct"
+      ],
+      "evidence": [
+        "services/starlight-control-plane/wrangler.jsonc",
+        "services/starlight-control-plane/src/review.ts",
+        "services/starlight-cloud-worker/wrangler.toml"
+      ],
+      "notes": "Both Workers that bind Workers AI are undeployed as far as this repository shows. The control plane's D1 database id is still a placeholder."
+    },
+    {
+      "id": "cloudflare-ai-gateway",
+      "name": "Cloudflare AI Gateway",
+      "kind": "gateway",
+      "status": "wired",
+      "surface": {
+        "integration": "gateway.ai.cloudflare.com base URLs for Anthropic and OpenAI, and a named gateway for Workers AI reviews",
+        "envVars": [
+          "AI_GATEWAY_TOKEN",
+          "AI_GATEWAY_ACCOUNT_ID",
+          "AI_GATEWAY_ID",
+          "STARLIGHT_REVIEW_GATEWAY"
+        ]
+      },
+      "evidence": [
+        "services/starlight-harness/src/agents.ts",
+        "services/starlight-harness/wrangler.jsonc",
+        "services/starlight-control-plane/src/review.ts",
+        "services/starlight-control-plane/wrangler.jsonc"
+      ],
+      "notes": "AI_GATEWAY_ACCOUNT_ID is the literal placeholder <ACCOUNT_ID> in the harness config."
+    },
+    {
+      "id": "elevenlabs",
+      "name": "ElevenLabs",
+      "kind": "voice",
+      "status": "wired",
+      "surface": {
+        "integration": "Consent-gated speech synthesis client",
+        "package": "@starlight-intelligence/elevenlabs",
+        "envVars": [
+          "ELEVENLABS_API_KEY"
+        ]
+      },
+      "evidence": [
+        "packages/elevenlabs/src/client.ts",
+        "packages/elevenlabs/package.json"
+      ],
+      "notes": "A library package. No deployed service in this repository imports it. npm publication was not verified."
+    },
+    {
+      "id": "tavily",
+      "name": "Tavily",
+      "kind": "search",
+      "status": "live",
+      "surface": {
+        "integration": "Search API over fetch",
+        "envVars": [
+          "TAVILY_API_KEY",
+          "TAVILY_URL"
+        ]
+      },
+      "evidence": [
+        "site/src/lib/desk/retrieve.ts",
+        "site/src/app/api/desk/run/route.ts"
+      ],
+      "deployEvidence": [
+        ".github/workflows/vercel-deploy.yml",
+        "site/vercel.json"
+      ],
+      "liveCheck": {
+        "url": "https://starlightintelligence.org/desk",
+        "observedAt": "2026-11-27",
+        "httpStatus": 200,
+        "note": "The Desk page answered from production. A run was not triggered, so whether TAVILY_API_KEY is set in production is unverified."
+      },
+      "notes": "The retrieve stage of the Desk cascade."
+    },
+    {
+      "id": "ollama",
+      "name": "Ollama (local models)",
+      "kind": "local-models",
+      "status": "planned",
+      "surface": {
+        "integration": "None in code",
+        "envVars": []
+      },
+      "evidence": [
+        "agents/starlight-adapter-ollama.md"
+      ],
+      "notes": "An agent profile describes an Ollama adapter. No code calls a local Ollama endpoint. LM Studio has no evidence in this repository and is not listed."
+    }
+  ],
+  "runtimes": [
+    {
+      "id": "local-cli",
+      "name": "Local machine (CLI and stdio MCP)",
+      "platform": "local",
+      "status": "wired",
+      "evidence": [
+        "package.json",
+        "src/mcp-server.ts",
+        "src/queen/swarm-command.ts"
+      ],
+      "notes": "Runs wherever someone installs the package: the starlight CLI and the stdio MCP servers. Local runs are not production deploys, so this never counts as live."
+    },
+    {
+      "id": "vercel-site",
+      "name": "Vercel: starlightintelligence.org",
+      "platform": "vercel",
+      "status": "live",
+      "evidence": [
+        "site/vercel.json",
+        "vercel.json",
+        "site/package.json"
+      ],
+      "deployEvidence": [
+        ".github/workflows/vercel-deploy.yml",
+        "site/vercel.json"
+      ],
+      "liveCheck": {
+        "url": "https://starlightintelligence.org/desk",
+        "observedAt": "2026-11-27",
+        "httpStatus": 200,
+        "note": "Production answered. The last vercel-deploy.yml run seen was 2026-08-25, so newer production builds may come from Vercel's Git integration; which path built the current deploy was not determined."
+      },
+      "notes": "The public site and its API routes, including the Desk."
+    },
+    {
+      "id": "cf-cloud-worker",
+      "name": "Cloudflare Worker: starlight-cloud-worker",
+      "platform": "cloudflare-workers",
+      "status": "wired",
+      "evidence": [
+        "services/starlight-cloud-worker/wrangler.toml",
+        "services/starlight-cloud-worker/src/index.ts"
+      ],
+      "notes": "No deploy workflow. workers_dev is false, and the workers.dev URL in scripts/test-cloud-worker-live.mjs returned 404 on 2026-11-27."
+    },
+    {
+      "id": "cf-control-plane",
+      "name": "Cloudflare Worker: starlight-control-plane",
+      "platform": "cloudflare-workers",
+      "status": "wired",
+      "evidence": [
+        "services/starlight-control-plane/wrangler.jsonc",
+        "services/starlight-control-plane/src/index.ts",
+        "docs/control-plane/DEPLOY.md"
+      ],
+      "notes": "Deploy is manual per DEPLOY.md. The D1 database_id is still SET-FROM-wrangler-d1-create, so this config cannot deploy as committed."
+    },
+    {
+      "id": "cf-harness",
+      "name": "Cloudflare Worker: starlight-harness (sandboxed coding agents)",
+      "platform": "cloudflare-workers",
+      "status": "wired",
+      "evidence": [
+        "services/starlight-harness/wrangler.jsonc",
+        "services/starlight-harness/src/index.ts",
+        "services/starlight-harness/docker/claude.Dockerfile",
+        "services/starlight-harness/docker/codex.Dockerfile"
+      ],
+      "notes": "Every harness has max 0 (off) and the gateway account id is a placeholder."
+    },
+    {
+      "id": "cf-mission",
+      "name": "Cloudflare Worker: starlight-mission",
+      "platform": "cloudflare-workers",
+      "status": "wired",
+      "evidence": [
+        "services/starlight-mission/wrangler.jsonc",
+        "services/starlight-mission/src/index.js"
+      ],
+      "notes": "No deploy workflow and no observed production URL."
+    },
+    {
+      "id": "cf-plugin-mcp",
+      "name": "Cloudflare Worker: starlight-intelligence-mcp (plugin)",
+      "platform": "cloudflare-workers",
+      "status": "wired",
+      "evidence": [
+        "plugins/starlight-intelligence/wrangler.jsonc",
+        "plugins/starlight-intelligence/server/src/worker.ts"
+      ],
+      "deployEvidence": [
+        ".github/workflows/starlight-plugin-deploy.yml"
+      ],
+      "notes": "The deploy workflow is manual (workflow_dispatch) and had no recorded runs on 2026-11-27."
+    },
+    {
+      "id": "cf-fleet-ingress",
+      "name": "Cloudflare Worker: fleet-ingress",
+      "platform": "cloudflare-workers",
+      "status": "wired",
+      "evidence": [
+        "tools/fleet-ingress/wrangler.jsonc",
+        "tools/fleet-ingress/src/index.ts"
+      ],
+      "notes": "Open PR #616 changes the ingress and Cloud Run runner contract."
+    },
+    {
+      "id": "gcp-cloud-run-runner",
+      "name": "GCP Cloud Run job: agent runner",
+      "platform": "gcp-cloud-run",
+      "status": "wired",
+      "evidence": [
+        "tools/runner/Dockerfile.runner",
+        "tools/runner/deploy-runner.sh",
+        "tools/runner/runner-entrypoint.sh"
+      ],
+      "notes": "deploy-runner.sh creates or updates a Cloud Run job by hand. No CI deploy on main. Open PR #616 adds a workload identity workflow, and open PR #618 proposes a Cloud Run web critic that is not on main and not listed here."
+    },
+    {
+      "id": "oci",
+      "name": "Oracle Cloud Infrastructure",
+      "platform": "oci",
+      "status": "planned",
+      "evidence": [
+        "docs/architecture/STARLIGHT-SWARM-AND-CLOUD-TOPOLOGY.md"
+      ],
+      "notes": "Named as an enterprise compute partner in a topology document. No config or code targets OCI."
+    }
+  ],
+  "agentSpecs": [
+    {
+      "id": "agents-md",
+      "name": "AGENTS.md instruction file",
+      "status": "wired",
+      "evidence": [
+        "AGENTS.md",
+        "docs/architecture/agents-md/band-a.md"
+      ],
+      "validatedBy": [
+        "scripts/agents-md-project.mjs"
+      ],
+      "notes": "Band A is authored once and projected into repositories; the script checks the projection."
+    },
+    {
+      "id": "skill-md",
+      "name": "SKILL.md skills with activation rules",
+      "status": "wired",
+      "evidence": [
+        "SKILL.md",
+        "skills/skill-rules.json",
+        "skills/SKILL_REGISTRY.md"
+      ],
+      "validatedBy": [
+        "scripts/validate-agentskills.mjs"
+      ],
+      "notes": "Rule ids in skills/skill-rules.json are what deployments below reference."
+    },
+    {
+      "id": "agent-profiles",
+      "name": "Agent profiles and specialist catalog",
+      "status": "wired",
+      "evidence": [
+        "agents/AGENT_REGISTRY.md",
+        "agents/catalog/specialists.json"
+      ],
+      "validatedBy": [
+        "scripts/validate-agents.mjs",
+        "scripts/build-specialist-catalog.mjs"
+      ],
+      "notes": "Registered agent ids in this registry are the profile filenames under agents/."
+    },
+    {
+      "id": "mcp",
+      "name": "Model Context Protocol servers",
+      "status": "wired",
+      "evidence": [
+        "src/mcp-server.ts",
+        "packages/mcp-server/src/index.ts",
+        "services/starlight-control-plane/src/mcp.ts",
+        "plugins/starlight-intelligence/server/src/mcp.ts"
+      ],
+      "validatedBy": [
+        "test/mcp-server-smoke.test.ts",
+        "packages/mcp-server/test/server.test.mjs",
+        "services/starlight-control-plane/tests/mcp.test.mjs"
+      ],
+      "notes": "Per-server tools are listed under mcpServers."
+    },
+    {
+      "id": "a2a-agent-card",
+      "name": "A2A agent card",
+      "status": "planned",
+      "evidence": [
+        "docs/architecture/ADR-2026-10-30-agy-adk-a2a-control-plane-mapping.md"
+      ],
+      "notes": "The ADR is marked Proposed. No agent card is served from this repository."
+    },
+    {
+      "id": "sip-attestation",
+      "name": "SIP receipt and attestation",
+      "status": "live",
+      "evidence": [
+        "protocol/conform.mjs",
+        "protocol/sign.mjs",
+        "protocol/profiles/sis.json",
+        ".claude/commands/sip-attest.md"
+      ],
+      "validatedBy": [
+        "protocol/test/conform.test.mjs",
+        "protocol/test/sign.test.mjs"
+      ],
+      "deployEvidence": [
+        ".github/workflows/sip-self-receipt.yml"
+      ],
+      "liveCheck": {
+        "url": "https://starlightintelligence.org/verify",
+        "observedAt": "2026-11-27",
+        "httpStatus": 200,
+        "note": "The /verify page answered. The last three sip-self-receipt.yml runs (latest 2026-10-14) succeeded."
+      },
+      "notes": "CI signs the system's own profile; /verify shows the receipt and the commands to check it."
+    }
+  ],
+  "mcpServers": [
+    {
+      "id": "sis-memory-mcp",
+      "name": "starlight-mcp (vault memory)",
+      "transport": "stdio",
+      "runtime": "local-cli",
+      "status": "wired",
+      "entry": "src/mcp-server.ts",
+      "package": "@arcanea/starlight-intelligence-system (bin starlight-mcp)",
+      "tools": [
+        "sis_vault_search",
+        "sis_recent_entries",
+        "sis_stats",
+        "sis_append_entry",
+        "sis_entry_types",
+        "sis_search",
+        "sis_confirm",
+        "sis_invalidate",
+        "sis_contradict",
+        "sis_stale",
+        "sis_continuity_status",
+        "sis_continuity_import",
+        "sis_goal_status",
+        "sis_goal_update",
+        "sis_goal_log",
+        "sis_durability_anchor",
+        "sis_robot_continuity_dispatch",
+        "sis_queen_autonomic_cycle",
+        "sis_marketplace_list",
+        "sis_queen_agent_inspect",
+        "sis_queen_agent_save",
+        "sis_queen_agent_stop",
+        "sis_queen_agent_resume",
+        "sis_teammates_list",
+        "sis_teammates_dispatch",
+        "sis_teammates_approve"
+      ],
+      "evidence": [
+        "src/mcp-server.ts",
+        "package.json",
+        "test/mcp-server-smoke.test.ts"
+      ],
+      "notes": "Reads and writes the local vaults over stdin and stdout."
+    },
+    {
+      "id": "starlight-substrate-mcp",
+      "name": "starlight-substrate-mcp",
+      "transport": "stdio",
+      "runtime": "local-cli",
+      "status": "wired",
+      "entry": "src/starlight-mcp.ts",
+      "package": "@arcanea/starlight-intelligence-system (bin starlight-substrate-mcp)",
+      "tools": [
+        "starlight_registry_query",
+        "starlight_verticals_list",
+        "starlight_attestation_verify",
+        "starlight_alliance_status"
+      ],
+      "evidence": [
+        "src/starlight-mcp.ts",
+        "package.json"
+      ],
+      "notes": "Read-only questions about the SIP registry, verticals, and attestations."
+    },
+    {
+      "id": "starlight-genius-mcp",
+      "name": "starlight-genius-mcp",
+      "transport": "stdio",
+      "runtime": "local-cli",
+      "status": "wired",
+      "entry": "src/mcp-genius.ts",
+      "package": "@arcanea/starlight-intelligence-system (bin starlight-genius-mcp)",
+      "tools": [
+        "starlight_recall",
+        "starlight_remember",
+        "starlight_pulse"
+      ],
+      "evidence": [
+        "src/mcp-genius.ts",
+        "package.json"
+      ],
+      "notes": "A small recall and remember surface."
+    },
+    {
+      "id": "starlight-memory-npm-mcp",
+      "name": "@starlight-intelligence/mcp",
+      "transport": "stdio",
+      "runtime": "local-cli",
+      "status": "wired",
+      "entry": "packages/mcp-server/src/index.ts",
+      "package": "@starlight-intelligence/mcp",
+      "tools": [
+        "starlight_memory_recall",
+        "starlight_memory_remember",
+        "starlight_memory_forget"
+      ],
+      "evidence": [
+        "packages/mcp-server/package.json",
+        "packages/mcp-server/src/cli.ts",
+        "packages/mcp-server/test/server.test.mjs"
+      ],
+      "notes": "The standalone memory server package. npm publication status is reported separately from this registry."
+    },
+    {
+      "id": "control-plane-mcp",
+      "name": "starlight-control-plane task queue",
+      "transport": "streamable-http",
+      "runtime": "cf-control-plane",
+      "status": "wired",
+      "entry": "services/starlight-control-plane/src/mcp.ts",
+      "tools": [
+        "queue_status",
+        "get_task",
+        "enqueue_task",
+        "claim_task",
+        "heartbeat_task",
+        "complete_task",
+        "release_task",
+        "verify_task",
+        "approve_task"
+      ],
+      "evidence": [
+        "services/starlight-control-plane/src/mcp.ts",
+        "services/starlight-control-plane/tests/mcp.test.mjs"
+      ],
+      "notes": "Each tool is the same queue operation the REST routes call. approve_task needs the human role."
+    },
+    {
+      "id": "plugin-mcp",
+      "name": "starlight-intelligence-mcp (plugin)",
+      "transport": "streamable-http",
+      "runtime": "cf-plugin-mcp",
+      "status": "wired",
+      "entry": "plugins/starlight-intelligence/server/src/mcp.ts",
+      "tools": [
+        "get_portfolio_snapshot",
+        "search_workspace",
+        "get_record",
+        "search",
+        "fetch",
+        "create_work_item",
+        "transition_work_item",
+        "record_decision",
+        "register_evidence",
+        "render_command_center"
+      ],
+      "evidence": [
+        "plugins/starlight-intelligence/server/src/mcp.ts",
+        "plugins/starlight-intelligence/server/src/worker.ts"
+      ],
+      "deployEvidence": [
+        ".github/workflows/starlight-plugin-deploy.yml"
+      ],
+      "notes": "Requires Supabase and Cloudflare Access secrets. The deploy workflow has never run."
+    },
+    {
+      "id": "vmcp-edge-router",
+      "name": "Virtual MCP router (cloud worker)",
+      "transport": "in-process",
+      "runtime": "cf-cloud-worker",
+      "status": "wired",
+      "entry": "services/starlight-cloud-worker/src/vmcp.ts",
+      "tools": [
+        "ts_ast_check",
+        "vault_query",
+        "vault_append",
+        "audio_dsp_suno",
+        "cloudflare_deploy",
+        "sentinel_security_scan"
+      ],
+      "evidence": [
+        "services/starlight-cloud-worker/src/vmcp.ts"
+      ],
+      "notes": "A static catalog of tool definitions that the worker filters by intent before handing them to a model. It does not run the tools itself."
+    },
+    {
+      "id": "refero",
+      "name": "Refero (third-party)",
+      "transport": "http",
+      "runtime": null,
+      "status": "wired",
+      "entry": "integrations/mcp/refero.mcp.json",
+      "tools": [],
+      "evidence": [
+        "integrations/mcp/refero.mcp.json",
+        "integrations/mcp/refero.hermes.yaml",
+        "plugins/starlight-web-production/.mcp.json"
+      ],
+      "notes": "A remote design-reference server at api.refero.design. Refero defines its tools, so they are not inventoried here."
+    }
+  ],
+  "deployments": [
+    {
+      "id": "desk-cascade",
+      "agent": {
+        "kind": "service-identity",
+        "id": "desk"
+      },
+      "runtime": "vercel-site",
+      "modelRoute": {
+        "provider": "nebius-token-factory",
+        "models": [
+          "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
+          "deepseek-ai/DeepSeek-V4-Flash-0731",
+          "openai/gpt-oss-120b"
+        ],
+        "calls": true
+      },
+      "mcpServers": [],
+      "skills": [],
+      "status": "live",
+      "evidence": [
+        "site/src/app/api/desk/run/route.ts",
+        "site/src/lib/desk/cascade.ts",
+        "site/src/lib/desk/provider.ts",
+        "site/src/lib/desk/retrieve.ts"
+      ],
+      "deployEvidence": [
+        ".github/workflows/vercel-deploy.yml",
+        "site/vercel.json"
+      ],
+      "liveCheck": {
+        "url": "https://starlightintelligence.org/desk",
+        "observedAt": "2026-11-27",
+        "httpStatus": 200,
+        "note": "The page answered. A run was not triggered for this check because it spends credits."
+      },
+      "notes": "A question in, a cited brief and a signed receipt out. Tavily retrieves sources; a small model extracts claims, a large model writes, and a different family judges."
+    },
+    {
+      "id": "control-plane-review",
+      "agent": {
+        "kind": "service-identity",
+        "id": "cf-review"
+      },
+      "runtime": "cf-control-plane",
+      "modelRoute": {
+        "provider": "cloudflare-workers-ai",
+        "via": "cloudflare-ai-gateway",
+        "models": [
+          "@cf/openai/gpt-oss-120b"
+        ],
+        "calls": true
+      },
+      "mcpServers": [
+        "control-plane-mcp"
+      ],
+      "skills": [],
+      "status": "wired",
+      "evidence": [
+        "services/starlight-control-plane/src/review.ts",
+        "services/starlight-control-plane/wrangler.jsonc",
+        "services/starlight-control-plane/app/manifest.json"
+      ],
+      "notes": "Pull request review at the triage tier. STARLIGHT_GATE_MODELS is empty, so no model here can post a sign-off."
+    },
+    {
+      "id": "harness-claude",
+      "agent": {
+        "kind": "service-identity",
+        "id": "cf-claude"
+      },
+      "runtime": "cf-harness",
+      "modelRoute": {
+        "provider": "anthropic",
+        "via": "cloudflare-ai-gateway",
+        "models": [
+          "claude-sonnet-5-5"
+        ],
+        "calls": true
+      },
+      "mcpServers": [],
+      "skills": [],
+      "status": "wired",
+      "evidence": [
+        "services/starlight-harness/src/agents.ts",
+        "services/starlight-harness/wrangler.jsonc",
+        "services/starlight-harness/docker/claude.Dockerfile"
+      ],
+      "notes": "Claude Code in a Cloudflare sandbox for review, fix, and build tasks. Off: max is 0."
+    },
+    {
+      "id": "harness-codex",
+      "agent": {
+        "kind": "service-identity",
+        "id": "cf-codex"
+      },
+      "runtime": "cf-harness",
+      "modelRoute": {
+        "provider": "openai",
+        "via": "cloudflare-ai-gateway",
+        "models": [
+          "gpt-6-sol"
+        ],
+        "calls": true
+      },
+      "mcpServers": [],
+      "skills": [],
+      "status": "wired",
+      "evidence": [
+        "services/starlight-harness/src/agents.ts",
+        "services/starlight-harness/wrangler.jsonc",
+        "services/starlight-harness/docker/codex.Dockerfile"
+      ],
+      "notes": "Codex CLI in a Cloudflare sandbox for fix and build tasks. Off: max is 0."
+    },
+    {
+      "id": "queen-architect",
+      "agent": {
+        "kind": "registered",
+        "id": "starlight-architect"
+      },
+      "runtime": "local-cli",
+      "modelRoute": {
+        "provider": "anthropic",
+        "models": [
+          "claude-sonnet-4-6",
+          "gpt-5.4"
+        ],
+        "calls": false
+      },
+      "mcpServers": [],
+      "skills": [
+        "intelligence-systems-thinking",
+        "intelligence-pattern-recognition",
+        "foundry-agent-forge",
+        "foundry-system-forge"
+      ],
+      "status": "wired",
+      "evidence": [
+        "src/queen/swarm-command.ts",
+        "src/queen/index.ts",
+        "test/queen-swarm-immune.test.ts"
+      ],
+      "notes": "Build tier in the Queen planner. gpt-5.4 is the fallback. The planner returns a routing plan and calls no model."
+    },
+    {
+      "id": "queen-weaver",
+      "agent": {
+        "kind": "registered",
+        "id": "starlight-weaver"
+      },
+      "runtime": "local-cli",
+      "modelRoute": {
+        "provider": "anthropic",
+        "models": [
+          "claude-sonnet-4-6",
+          "gpt-5.4"
+        ],
+        "calls": false
+      },
+      "mcpServers": [],
+      "skills": [
+        "intelligence-pattern-recognition",
+        "memory-knowledge-synthesis",
+        "vision-design-coherence"
+      ],
+      "status": "wired",
+      "evidence": [
+        "src/queen/swarm-command.ts",
+        "src/queen/index.ts"
+      ],
+      "notes": "Build tier in the Queen planner. The planner returns a routing plan and calls no model."
+    },
+    {
+      "id": "queen-sentinel",
+      "agent": {
+        "kind": "registered",
+        "id": "starlight-sentinel"
+      },
+      "runtime": "local-cli",
+      "modelRoute": {
+        "provider": "anthropic",
+        "models": [
+          "claude-opus-4-6",
+          "gpt-5.4-pro"
+        ],
+        "calls": false
+      },
+      "mcpServers": [],
+      "skills": [
+        "intelligence-pattern-recognition",
+        "intelligence-decision-framework",
+        "safety-permission-gate",
+        "safety-secret-detector",
+        "safety-private-public-split",
+        "safety-mutation-approval"
+      ],
+      "status": "wired",
+      "evidence": [
+        "src/queen/swarm-command.ts",
+        "src/queen/index.ts"
+      ],
+      "notes": "Council tier in the Queen planner and the lead for high-risk paths. The planner calls no model."
+    },
+    {
+      "id": "queen-sage",
+      "agent": {
+        "kind": "registered",
+        "id": "starlight-sage"
+      },
+      "runtime": "local-cli",
+      "modelRoute": {
+        "provider": "anthropic",
+        "models": [
+          "claude-sonnet-4-6",
+          "gpt-5.4"
+        ],
+        "calls": false
+      },
+      "mcpServers": [],
+      "skills": [
+        "memory-knowledge-synthesis",
+        "intelligence-pattern-recognition"
+      ],
+      "status": "wired",
+      "evidence": [
+        "src/queen/swarm-command.ts",
+        "src/queen/index.ts"
+      ],
+      "notes": "Build tier in the Queen planner. The planner calls no model."
+    },
+    {
+      "id": "queen-hermes",
+      "agent": {
+        "kind": "registered",
+        "id": "starlight-hermes"
+      },
+      "runtime": "local-cli",
+      "modelRoute": {
+        "provider": "google-gemini",
+        "models": [
+          "gemini-2.5-flash",
+          "deepseek-v3.2"
+        ],
+        "calls": false
+      },
+      "mcpServers": [],
+      "skills": [
+        "intelligence-hermes-search",
+        "memory-vault-management",
+        "memory-knowledge-synthesis",
+        "intelligence-pattern-recognition",
+        "integration-repo-bridge",
+        "orchestration-hermes-swarm"
+      ],
+      "status": "wired",
+      "evidence": [
+        "src/queen/swarm-command.ts",
+        "src/queen/index.ts"
+      ],
+      "notes": "Scout tier in the Queen planner. deepseek-v3.2 is the fallback and has no provider row here. The planner calls no model."
+    }
+  ]
+}
