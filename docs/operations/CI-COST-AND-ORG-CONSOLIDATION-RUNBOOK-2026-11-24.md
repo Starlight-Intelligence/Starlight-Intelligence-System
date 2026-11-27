@@ -84,14 +84,14 @@
 | Wave | Repository | PR | State | Summary & Verification |
 | --- | --- | --- | --- | --- |
 | 1 | `Starlight-Intelligence/starlightintelligence.ai` | https://github.com/Starlight-Intelligence/starlightintelligence.ai/pull/396 | Draft | Adds zero-dependency `workers/ci-sentinel` Cloudflare Worker (`17 */6 * * *` cron + `/health`, `/audit`, `/run`), `CLOUDFLARE-CI-CUTOVER.md` guide, switches `ci-contract` & `release-aggregate` to `ubuntu-slim`, caps retention to 1–3d. (`ci-aggregate.test.mjs` 54/54, `ci-sentinel` 6/6, `wrangler deploy --dry-run` pass; blocked on `Starlight-Intelligence` Free 2,000-min cap.) |
-| 1 | `frankxai/agentic-ops` | https://github.com/frankxai/agentic-ops/pull/659 | Ready | Moves 7 lightweight workflows/legs to `ubuntu-slim`, draft-gates `customer-intelligence`, trims retention to 3d. `claude-code-review.yml` untouched. (`scripts/tests` + `multi-machine/tests` 21/21 pass; hosted `verify`, `check`, `behavior`, `chain (ubuntu-slim)` green; `Starlight Review` `REQUEST_CHANGES` on `queen-chain-behavior.yml:35` despite `chain (ubuntu-slim)` passing.) |
-| 1 | `frankxai/agentic-ops-hub` | https://github.com/frankxai/agentic-ops-hub/pull/524 | Ready | Moves `ci`, `estate-guard`, `fleet-watch`, `estate-ci-watch` to `ubuntu-slim`, draft-gates `estate-guard`, halves `fleet-watch` cron (`*/6` -> `*/12`), cuts retention to 1–3d. (`verify`, `Tool tests`, `scan` `SUCCESS`; both `Starlight Review` models `APPROVE` with `ACTION_REQUIRED` human-only workflow gate.) |
-| 1 | `frankxai/gencreator.ai` | https://github.com/frankxai/gencreator.ai/pull/375 | Ready | Enables PR-only `cancel-in-progress` on `ci.yml`, moves `web-excellence` & `estate-guard` to `ubuntu-slim`, removes duplicate PR `estate-guard`, caps retention to 1d. Locked surfaces untouched. (`Vercel` & core checks `SUCCESS`; re-triggered after `cf-checker` deploy.) |
-| 1 | `Starlight-Intelligence/.github` | https://github.com/Starlight-Intelligence/.github/pull/13 | **MERGED** | Defaults org-wide `reusable-ci.yml` to `ubuntu-slim` with configurable `runner`, `timeout-minutes`, and `run-build`. (YAML OK.) |
+| 1 | `frankxai/agentic-ops` | https://github.com/frankxai/agentic-ops/pull/659 | **MERGED** | Moves 7 lightweight workflows/legs to `ubuntu-slim`, draft-gates `customer-intelligence`, trims retention to 3d. `claude-code-review.yml` untouched. |
+| 1 | `frankxai/agentic-ops-hub` | https://github.com/frankxai/agentic-ops-hub/pull/524 | **MERGED** | Moves `ci`, `estate-guard`, `fleet-watch`, `estate-ci-watch` to `ubuntu-slim`, draft-gates `estate-guard`, halves `fleet-watch` cron (`*/6` -> `*/12`), cuts retention to 1–3d. |
+| 1 | `frankxai/gencreator.ai` | https://github.com/frankxai/gencreator.ai/pull/375 | **MERGED** | Enables PR-only `cancel-in-progress` on `ci.yml`, moves `web-excellence` & `estate-guard` to `ubuntu-slim`, removes duplicate PR `estate-guard`, caps retention to 1d. Locked surfaces untouched. |
+| 1 | `Starlight-Intelligence/.github` | https://github.com/Starlight-Intelligence/.github/pull/13 | **MERGED** | Defaults org-wide `reusable-ci.yml` to `ubuntu-slim` with configurable `runner`, `timeout-minutes`, and `run-build`. |
 | 1 | `Starlight-Intelligence/Starlight-Intelligence-System` | https://github.com/Starlight-Intelligence/Starlight-Intelligence-System/pull/617 | Draft | This RFC v2 Runbook (zero substrate files modified; awaits `independent-review-policy` + maintainer review). |
 | 2 | `frankxai/agenticincome` | https://github.com/frankxai/agenticincome/pull/155 | **MERGED** | Switches `dependency-audit`, `estate-guard`, `web-excellence`, `knowledge-freshness`, `org-mirror` to `ubuntu-slim`; draft-gates `web-excellence`; caps `estate-guard` retention to 1d and Dependabot open PRs to 3. |
 | 2 | `Arcanea-Labs/arcanea-ai-app` | https://github.com/Arcanea-Labs/arcanea-ai-app/pull/776 | **MERGED** | Caps `retention-days: 1` across all 9 workflows calling `upload-artifact` (down from 7–30 days) to prevent account-wide 2 GB quota lockouts. |
-| 2 | `frankxai/frankx.ai-vercel-website` | https://github.com/frankxai/frankx.ai-vercel-website/pull/1334 | Ready | Caps `upload-artifact` retention to 1d (`ci.yml`, `estate-guard.yml`, `search-context-evidence.yml`) and switches `estate-guard.yml` & `web-excellence.yml` to `ubuntu-slim`. Protected surfaces untouched. (All CI & `Vercel` `SUCCESS`; `Starlight Review` `ACTION_REQUIRED` `ADVISORY`.) |
+| 2 | `frankxai/frankx.ai-vercel-website` | https://github.com/frankxai/frankx.ai-vercel-website/pull/1334 | **MERGED** | Caps `upload-artifact` retention to 1d (`ci.yml`, `estate-guard.yml`, `search-context-evidence.yml`) and switches `estate-guard.yml` & `web-excellence.yml` to `ubuntu-slim`. Protected surfaces untouched. |
 | 3 | `frankxai/agentic-ops` | https://github.com/frankxai/agentic-ops/pull/666 | **MERGED** | Fixes `services/cf-checker` (`Starlight Review`) false-positive blocker on `ubuntu-slim` and `@v7`/`@v6` official action versions across both system prompts (`models.ts`, `review.ts`, `review.test.ts`); deployed live (`70e955d6-aa5c-4804-9108-2cc06d5e7a81`). |
 | 3 | `Starlight-Intelligence/starlight-command-center` | https://github.com/Starlight-Intelligence/starlight-command-center/pull/156 | **MERGED** | Draft-gates heavy jobs across 5 workflows, moves `capability-registry.yml` & `electron-shell` to `ubuntu-slim`, caps all `upload-artifact` retention to 1d. |
 | 3 | `Starlight-Intelligence/starlight-kernel` | https://github.com/Starlight-Intelligence/starlight-kernel/pull/40 | **MERGED** | Draft-gates all 3 CI jobs and moves Linux matrix leg & `release-readiness` to `ubuntu-slim`. |
@@ -99,39 +99,34 @@
 | 3 | `frankxai/agenticpassiveincome` | https://github.com/frankxai/agenticpassiveincome/pull/78 | **MERGED** | Moves lightweight workflows (`estate-guard`, `web-excellence`, `knowledge-freshness`, `draft-github-release`, `release-contract`) to `ubuntu-slim`, draft-gates non-required checks, caps retention to 1d. |
 | 3 | `frankxai/gencreator-community` | https://github.com/frankxai/gencreator-community/pull/38 | **MERGED** | Draft-gates PR runs, moves `estate-guard` & `web-excellence` to `ubuntu-slim`, caps retention 30d -> 1d. |
 | 3 | `frankxai/product-plans` | https://github.com/frankxai/product-plans/pull/90 | **MERGED** | Switches zero-dependency `kits` & `measured` jobs in `ci.yml` (and synced `docs/ci/product-plans-ci.yml`) to `ubuntu-slim` (`timeout-minutes: 10`), preserving draft runs. |
-| 4 | `Starlight-Intelligence/starlight-agent-config` | https://github.com/Starlight-Intelligence/starlight-agent-config/pull/232 | Draft | Moves lightweight Node/Python workflows & Linux matrix legs to `ubuntu-slim`, preserves `ubuntu-latest`/`windows-latest` where `pwsh`/Windows required, draft-gates Windows & non-required PR runs, caps retention 3d -> 1d. (`YAML OK` 13 workflows.) |
-| 4 | `frankxai/starlight-estate` | https://github.com/frankxai/starlight-estate/pull/129 | Draft | Moves `autonomy-lanes` & `character-registry-validate` to `ubuntu-slim` (`timeout-minutes: 10`), preserves `windows-latest` on `mcp-validate`, adds PR concurrency and draft gating. (`YAML OK` 4 workflows.) |
-| 4 | `Arcanea-Labs/AnimeLegends` | https://github.com/Arcanea-Labs/AnimeLegends/pull/85 | Draft | Switches fallback runners (`'ubuntu-latest'` -> `'ubuntu-slim'`) on lightweight validation/Python jobs, preserves `ubuntu-latest` for Next/Remotion builds, adds draft PR gating. (`YAML OK` 6 workflows.) |
-| 4 | `frankxai/starlight-intelligence-academy` | https://github.com/frankxai/starlight-intelligence-academy/pull/112 | Draft | Caps Playwright browser artifact retention 14d -> 1d in `ci.yml`, moves `curriculum.yml` & `visual-anchor-contract.yml` to `ubuntu-slim` with draft gating & PR concurrency. (`YAML OK` 3 workflows.) |
-| 4 | `frankxai/llm-evals` | https://github.com/frankxai/llm-evals/pull/31 | Draft | Gates `deterministic-verification.yml` (`windows-2022`) on ready PRs (`draft == false`), preserving pushes to `main`. (`YAML OK`.) |
-| 4 | `frankxai/claude-code-config` | https://github.com/frankxai/claude-code-config/pull/70 | Draft | Switches pure-Python `validate` job in `ci.yml` to `ubuntu-slim`. (`YAML OK`.) |
-| 4 | `frankxai/frankx-strategy` | https://github.com/frankxai/frankx-strategy/pull/22 | Draft | Switches `test` job in `ci.yml` to `ubuntu-slim` (`timeout-minutes: 10`), adds draft PR gating and PR-only `cancel-in-progress`. (`YAML OK`.) |
+| 4 | `Starlight-Intelligence/starlight-agent-config` | https://github.com/Starlight-Intelligence/starlight-agent-config/pull/232 | **MERGED** | Moves lightweight Node/Python workflows & Linux matrix legs to `ubuntu-slim`, preserves `ubuntu-latest`/`windows-latest` where `pwsh`/Windows required, draft-gates Windows & non-required PR runs, caps retention 3d -> 1d. |
+| 4 | `frankxai/starlight-estate` | https://github.com/frankxai/starlight-estate/pull/129 | **MERGED** | Moves `autonomy-lanes` & `character-registry-validate` to `ubuntu-slim` (`timeout-minutes: 10`), preserves `windows-latest` on `mcp-validate`, adds PR concurrency and draft gating. |
+| 4 | `Arcanea-Labs/AnimeLegends` | https://github.com/Arcanea-Labs/AnimeLegends/pull/85 | **MERGED** | Switches fallback runners (`'ubuntu-latest'` -> `'ubuntu-slim'`) on lightweight validation/Python jobs, preserves `ubuntu-latest` for Next/Remotion builds, adds draft PR gating. |
+| 4 | `frankxai/starlight-intelligence-academy` | https://github.com/frankxai/starlight-intelligence-academy/pull/112 | **MERGED** | Caps Playwright browser artifact retention 14d -> 1d in `ci.yml`, moves `curriculum.yml` & `visual-anchor-contract.yml` to `ubuntu-slim` with draft gating & PR concurrency. |
+| 4 | `frankxai/llm-evals` | https://github.com/frankxai/llm-evals/pull/31 | **MERGED** | Gates `deterministic-verification.yml` (`windows-2022`) on ready PRs (`draft == false`), preserving pushes to `main`. |
+| 4 | `frankxai/claude-code-config` | https://github.com/frankxai/claude-code-config/pull/70 | **MERGED** | Switches pure-Python `validate` job in `ci.yml` to `ubuntu-slim`. |
+| 4 | `frankxai/frankx-strategy` | https://github.com/frankxai/frankx-strategy/pull/22 | **MERGED** | Switches `test` job in `ci.yml` to `ubuntu-slim` (`timeout-minutes: 10`), adds draft PR gating and PR-only `cancel-in-progress`. |
 
 ---
 
-## 4. Frank's Remaining Manual Execution Checklist (Money / UI / Final Approvals)
+## 4. Frank's Remaining Manual Execution Checklist (Money / UI / Secrets)
 
-*Already executed automatically (2026-11-27): merged 10 Wave 1–3 PRs (`.github#13`, `agenticincome#155`, `agentic-ops#666`, `arcanea-ai-app#776`, `starlight-command-center#156`, `starlight-kernel#40`, `starlight-memory#64`, `agenticpassiveincome#78`, `product-plans#90`, `gencreator-community#38`), deployed updated `starlight-cf-checker` (`70e955d6-aa5c-4804-9108-2cc06d5e7a81`), and created R2 bucket `starlight-ci-cache` with lifecycle rule `expire-7d`.*
+*Already executed automatically (2026-11-27): merged **21 of 23** PRs across Waves 1–4, deployed updated `starlight-cf-checker` (`70e955d6-aa5c-4804-9108-2cc06d5e7a81`), created R2 bucket `starlight-ci-cache` (`expire-7d`), purged **419.88 MB** of stale CI storage (`383` stale artifacts / `140.54 MB` + `24` closed-PR caches / `279.34 MB`), and staged all login-gated portals cleanly in **BrowserOS neo** session `antigravity-client/ci-cost-audit`.*
 
-1. **Turn off Copilot Auto Code Review (saves ~$65/mo immediately):**
-   - **GitHub → Settings → Copilot → Code review → Off** (keep manual `@copilot review` only).
-2. **Apply Option A ("1+1" Billing = `$8/mo` base + up to `$40/mo` capped overage):**
-   - Keep `frankxai` Pro ($4/mo) with **$20/mo Actions cap**.
-   - Upgrade **only `Starlight-Intelligence` → Team ($4/mo)** with **$20/mo Actions cap** (immediately unblocks `starlightintelligence.ai#396` and enables private branch protection).
-   - Keep the other 8 orgs on Free ($0/mo).
-3. **Approve & Merge Remaining Open Wave 1–4 PRs:**
-   - Merge human-gated Wave 1–2 workflow PRs (`agentic-ops-hub#524`, `frankx.ai-vercel-website#1334`, `agentic-ops#659`, `gencreator.ai#375`), `SIS#617` (after independent review receipt), `starlightintelligence.ai#396` (after Team upgrade), and ready/merge Wave 4 Draft PRs (`starlight-agent-config#232`, `starlight-estate#129`, `AnimeLegends#85`, `starlight-intelligence-academy#112`, `llm-evals#31`, `claude-code-config#70`, `frankx-strategy#22`).
-4. **Bind `workers/ci-sentinel` Secrets & Workers Builds After `#396` Lands:**
-   - From `Starlight-Intelligence/starlightintelligence.ai` `main` (account `0b5c0d4435bdb220b9ed28efa0a98554`, see `workers/ci-sentinel/docs/CLOUDFLARE-CI-CUTOVER.md`; `starlight-ci-cache` R2 bucket + `expire-7d` rule are already live):
-     ```bash
-     cd workers/ci-sentinel
-     npx wrangler secret put SENTINEL_TOKEN
-     npx wrangler secret put GH_ESTATE_TOKEN
-     npx wrangler deploy
-     ```
-   - Install `starlight-review` (`services/cf-checker`) App on `frankxai` and the remaining 8 orgs.
-   - Connect `workers/agents`, `workers/mcp`, and preview builds to **Cloudflare Workers Builds** (6,000 build min/mo @ 4 vCPU, covered by Cloudflare Startup Credits — verify exact SKUs against active account credit terms).
-   - Once `starlight-ci-sentinel` cron is verified live, disable `fleet-watch.yml`, `estate-ci-watch.yml`, and `ci-budget-guard.yml` crons in `agentic-ops-hub`.
+1. **Sign in to the 5 staged BrowserOS neo tabs** (`GitHub Copilot`, `Starlight-Intelligence Billing`, `Cloudflare Dashboard`, `Blacksmith.sh`, `Vercel`):
+   - **GitHub → Copilot → Code review → Off** (saves ~$65/mo immediately; keep `@copilot review` manual-only).
+   - **Option A ("1+1" Billing = `$8/mo` base):** Keep `frankxai` Pro (`$4/mo`, `$20/mo` Actions cap), upgrade **only `Starlight-Intelligence` → Team (`$4/mo`, `$20/mo` Actions cap)**, leave the other 8 orgs on Free (`$0/mo`).
+2. **Merge the final 2 open PRs:**
+   - Merge `Starlight-Intelligence/starlightintelligence.ai#396` once `Starlight-Intelligence` Team minutes unlock.
+   - Review/approve & merge `Starlight-Intelligence/Starlight-Intelligence-System#617` (`independent-review-policy` + 1 maintainer review).
+3. **Bind `workers/ci-sentinel` Secrets After `#396` Lands:**
+   ```bash
+   cd workers/ci-sentinel
+   npx wrangler secret put SENTINEL_TOKEN
+   npx wrangler secret put GH_ESTATE_TOKEN
+   npx wrangler deploy
+   ```
+   - Install `starlight-review` (`services/cf-checker`) App on `frankxai` and the remaining orgs; once `starlight-ci-sentinel` cron is live, disable `fleet-watch.yml`, `estate-ci-watch.yml`, and `ci-budget-guard.yml` crons in `agentic-ops-hub`.
 
 ---
 
@@ -144,3 +139,15 @@
 5. **Artifact safety check:** Confirm every `upload-artifact` change only reduces `retention-days` (no producer upload removed where a `download-artifact` exists).
 6. **Cloudflare credit scope check:** Confirm Workers, Cron Triggers, Workers Builds, and R2 draw from the active Cloudflare for Startups credit balance on account `0b5c0d4435bdb220b9ed28efa0a98554`.
 7. **Red-team check:** Monitor `starlightintelligence.ai` monthly private Actions usage after migrating `pr-gate` to `starlight-review` and previews to Workers Builds to confirm it stays inside `Starlight-Intelligence` Team's 3,000 included minutes.
+
+---
+
+## 6. Free-Cap & Ultra-Low-Cost Scaling Stack
+
+| Lever | Free Tier / Credits | Current State | Highest-ROI Action |
+| --- | --- | --- | --- |
+| **Blacksmith.sh (`blacksmith-sh`)** | **3,000 FREE 4-vCPU min/mo** (`blacksmith-4vcpu-ubuntu-2404`) + sticky NVMe caches | GitHub App **already installed on 8 orgs**; `0` workflows currently route to it | Route heavy Docker/Next.js builds & Playwright E2E (`gencreator.ai`, `frankx.ai-vercel-website`, `starlightintelligence.ai`) to `blacksmith-4vcpu-ubuntu-2404` for faster runs at `$0` within free tier |
+| **OCI Always Free Ampere A1 ARM** | **4 OCPU + 24 GB RAM + 200 GB storage + 10 TB egress/mo (`$0/mo` forever)** | Available on Frank's Oracle Cloud tenancy | Provision 1 ephemeral private-repo-only self-hosted runner VM for unlimited Linux CI/agent batch jobs outside GitHub quotas |
+| **Cloudflare Startup Credits + Free Tiers** | Workers Cron (100k req/day), R2 `starlight-ci-cache` (10 GB/mo free, 0 egress), Workers Builds (6,000 build min/mo), AI Gateway response caching | `starlight-cf-checker` deployed (`70e955d6`); `starlight-ci-cache` R2 + `expire-7d` **live** | Turn on AI Gateway caching (`starlight-review`) for repeated diff/prompt lookups, deploy `ci-sentinel`, and shift Workers/MCP preview builds to Workers Builds |
+| **GitHub Pro / Team Free Caps** | `frankxai` Pro: 3,000 Linux min + 2 GB storage; `Starlight-Intelligence` Team: 3,000 Linux min + 2 GB storage | All 21 CI/retention PRs merged; **419.88 MB** purged (`383` stale artifacts = `140.54 MB`, `24` closed-PR caches = `279.34 MB`) | Keep `ubuntu-slim` (`3x` cheaper, `1` min = `0.33` standard min multiplier) + `1d` retention so private storage never hits 2 GB lockout again |
+| **Dependabot Batching** | Fewer CI storms | Capped open PRs on `agenticincome`; other repos still ungrouped | Apply weekly `groups:` + `open-pull-requests-limit: 3` across remaining active npm/pip repos |
