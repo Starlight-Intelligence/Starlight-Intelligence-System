@@ -178,18 +178,28 @@ export class StarlightCloudWorker {
       if ((url.pathname === '/v1/chat/completions' || url.pathname === '/chat/completions') && method === 'POST') {
         const body = (await request.json()) as ChatCompletionRequest;
         const tenantMemories = (MEMORY_INDEX.get(tenant.tenantId) || []).slice(-5).map(m => m.content);
-        const completion = await UnifiedAiGateway.complete(body, env, request.headers, tenantMemories);
+        const result = await UnifiedAiGateway.complete(body, env, {
+          headers: request.headers,
+          tenantId: tenant.tenantId,
+          injectedMemories: tenantMemories,
+        });
 
-        DualTelemetryDispatcher.dispatch({
-          traceId: completion.id,
-          name: 'starlight-ai-gateway',
-          userId: tenant.tenantId,
-          input: body.messages,
-          output: completion.choices[0]?.message?.content,
-          metadata: { model: completion.model, cached: completion.cached },
-        }, env, request.headers);
+        if (result.ok) {
+          const completion = result.body;
+          DualTelemetryDispatcher.dispatch({
+            traceId: completion.id,
+            name: 'starlight-ai-gateway',
+            userId: tenant.tenantId,
+            input: body.messages,
+            output: completion.choices[0]?.message?.content,
+            metadata: { model: completion.model, cached: completion.cached },
+          }, env, request.headers);
+        }
 
-        return new Response(JSON.stringify(completion, null, 2), { status: 200, headers: this.CORS_HEADERS });
+        return new Response(JSON.stringify(result.body, null, 2), {
+          status: result.status,
+          headers: result.ok ? this.CORS_HEADERS : { ...this.CORS_HEADERS, 'Cache-Control': 'no-store' },
+        });
       }
 
       // 7. Route vMCP Synthesis: POST /v1/vmcp/synthesize
