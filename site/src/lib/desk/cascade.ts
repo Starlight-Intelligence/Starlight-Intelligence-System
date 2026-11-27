@@ -44,6 +44,7 @@ import {
   type RunReceiptStage,
 } from "./run-receipt";
 import { fileVault, findRelated, type VaultAtom, type VaultStore } from "./vault";
+import { MAX_QUESTION_CHARS } from "./question";
 
 export const MODELS = {
   extract: "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B",
@@ -59,8 +60,8 @@ export const SECTIONS = ["HYPOTHESIS", "METHOD", "SETUP", "RESULTS", "TAKEAWAY",
 // tokens that is a number (WORST_CASE_RUN_TOKENS, at the end of this file)
 // and the daily token budget can refuse a run before it spends.
 
-/** The longest question the Desk takes. The route and runDesk both enforce it. */
-export const MAX_QUESTION_CHARS = 400;
+/** The longest question the Desk takes. The route and runDesk both enforce it. Defined in ./question so pages can import it. */
+export { MAX_QUESTION_CHARS };
 export const MAX_SOURCES = 8;
 /** Claims past this many are dropped; the extract prompt asks for at most this many. */
 export const MAX_CLAIMS = 12;

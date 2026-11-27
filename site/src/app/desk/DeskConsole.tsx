@@ -2,80 +2,14 @@
 
 import { useCallback, useMemo, useRef, useState } from "react";
 import { edgeMeter } from "@/lib/desk/edge-meter";
-import { costFigure, costWarning, gapPhrase, USAGE_UNREPORTED, type CostGap } from "@/lib/desk/cost-copy";
+import { costFigure, costWarning, gapPhrase, USAGE_UNREPORTED } from "@/lib/desk/cost-copy";
 import { referenceList } from "@/lib/desk/references";
+import { askDesk, type DeskResponse, type DeskStage } from "@/lib/desk/ask-client";
+import { MAX_QUESTION_CHARS } from "@/lib/desk/question";
+import { DeskBrief } from "@/components/desk/DeskBrief";
 import { RoomQr } from "./RoomQr";
 
-interface Stage {
-  name: string;
-  status: "ok" | "failed" | "skipped";
-  model?: string;
-  provider?: string;
-  inputTokens?: number;
-  outputTokens?: number;
-  costEur?: number;
-  latencyMs?: number;
-  note?: string;
-}
-
-interface Receipt {
-  receiptId: string;
-  verdict: "PASS" | "FAIL" | "PARTIAL";
-  stages: Stage[];
-  totals: { costEur: number; latencyMs: number; tokens: { input: number; output: number } };
-  subject: { name: string; digest: { sha256: string } };
-}
-
-interface Source {
-  index: number;
-  title: string;
-  url: string;
-}
-
-/** A verified claim. Its index is the `[n]` marker the brief carries. */
-interface Claim {
-  index: number;
-  quote: string;
-  url: string;
-}
-
-interface Belief {
-  id: string;
-  question: string;
-  claim: string;
-  url: string;
-  at: string;
-}
-
-interface Contradiction {
-  priorId: string;
-  priorClaim: string;
-  newClaim: string;
-  reason: string;
-}
-
-interface DeskResponse {
-  question: string;
-  brief: string;
-  sources: Source[];
-  claims?: Claim[];
-  judgement: { score: number; rationale: string } | null;
-  groundingRate: number;
-  related: Belief[];
-  contradictions: Contradiction[];
-  remembered: number;
-  receipt: Receipt;
-  signed: boolean;
-  unsignedReason: string | null;
-  pricesVerified: boolean;
-  costComplete: boolean;
-  unpricedStages: string[];
-  unaccounted?: CostGap[];
-  /** True when the receipt is not signed. */
-  draft?: boolean;
-  /** "total", or "priced-stage subtotal" when the run is cost-incomplete. */
-  costEurMeaning?: string;
-}
+type Stage = DeskStage;
 
 const STAGE_ORDER = ["recall", "retrieve", "extract", "synthesize", "contradict", "judge", "remember"] as const;
 
@@ -111,23 +45,9 @@ export function DeskConsole({ examples }: { examples: string[] }) {
       const startedAt = Date.now();
       timer.current = setInterval(() => setElapsed(Date.now() - startedAt), 100);
       try {
-        const response = await fetch("/api/desk/run", {
-          method: "POST",
-          headers: { "content-type": "application/json" },
-          body: JSON.stringify({ question: trimmed }),
-        });
-        const isJson = (response.headers.get("content-type") ?? "").includes("application/json");
-        const payload: unknown = isJson ? await response.json().catch(() => null) : null;
-        if (!response.ok || !payload) {
-          const detail =
-            payload && typeof payload === "object" && typeof (payload as { error?: unknown }).error === "string"
-              ? (payload as { error: string }).error
-              : `The Desk answered ${response.status}.`;
-          throw new Error(detail);
-        }
-        setResult(payload as DeskResponse);
-      } catch (reason) {
-        setError(reason instanceof Error ? reason.message : "The run failed.");
+        const outcome = await askDesk(trimmed);
+        if (outcome.ok) setResult(outcome.data);
+        else setError(outcome.error);
       } finally {
         if (timer.current) clearInterval(timer.current);
         setPending(false);
@@ -187,7 +107,7 @@ export function DeskConsole({ examples }: { examples: string[] }) {
             value={question}
             onChange={(event) => setQuestion(event.target.value)}
             rows={3}
-            maxLength={400}
+            maxLength={MAX_QUESTION_CHARS}
             spellCheck={false}
             placeholder="What should I know about…"
             className="w-full resize-none rounded-lg border border-white/[0.08] bg-black/40 p-4 font-sans text-[15px] leading-[1.7] text-slate-100 outline-none placeholder:text-slate-600 focus:border-violet-400/50 focus-visible:ring-2 focus-visible:ring-violet-400/60"
@@ -306,7 +226,7 @@ export function DeskConsole({ examples }: { examples: string[] }) {
               <span className="font-mono text-[11px] text-slate-500">{result.receipt.subject.name}</span>
             </div>
             <div className="px-5 py-5">
-              <Brief text={result.brief} />
+              <DeskBrief text={result.brief} />
             </div>
           </section>
 
@@ -459,41 +379,6 @@ export function DeskConsole({ examples }: { examples: string[] }) {
       </section>
     </div>
   );
-}
-
-/**
- * The brief, with its six headings set as headings. The body keeps its citation
- * markers verbatim, because the markers are the point.
- */
-function Brief({ text }: { text: string }) {
-  const blocks = text
-    .split(/^##\s+/m)
-    .map((block) => block.trim())
-    .filter(Boolean)
-    .map((block) => {
-      const newline = block.indexOf("\n");
-      return newline === -1
-        ? { heading: block, body: "" }
-        : { heading: block.slice(0, newline).trim(), body: block.slice(newline + 1).trim() };
-    });
-
-  if (blocks.length === 0) return <p className="text-[14px] leading-[1.9] text-slate-300">{text}</p>;
-
-  return (
-    <div className="space-y-5">
-      {blocks.map((block) => (
-        <section key={block.heading}>
-          <h3 className="text-[13px] font-semibold text-violet-300">{sentenceCase(block.heading)}</h3>
-          <p className="mt-2 whitespace-pre-wrap text-[14px] leading-[1.9] text-slate-300">{block.body}</p>
-        </section>
-      ))}
-    </div>
-  );
-}
-
-/** "HYPOTHESIS" as "Hypothesis": the brief's headings shown in sentence case. Mixed-case text is left alone. */
-function sentenceCase(heading: string): string {
-  return heading === heading.toUpperCase() ? heading.charAt(0) + heading.slice(1).toLowerCase() : heading;
 }
 
 function Figure({ label, value }: { label: string; value: string }) {
