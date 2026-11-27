@@ -6,7 +6,7 @@ That two-layer shape changes how contribution works compared to a
 single-codebase project, so please read the brief overview below before
 opening your first PR.
 
-> **Where to contribute (5 November 2026):** This `frankxai/Starlight-Intelligence-System` repository is the canonical source and issue/PR queue. The same-named copies in `Starlight-Intelligence-Systems` and `Arcanea-Labs` are not alternative contribution targets. A proposed future organization/name change is **not yet in effect**; follow the official README rather than opening duplicate PRs. No private vault data, credentials or operator state is required for an ordinary fixture-backed contribution.
+> **Where to contribute (18 November 2026):** This `Starlight-Intelligence/Starlight-Intelligence-System` repository is the canonical source and issue/PR queue. It moved here from `frankxai/Starlight-Intelligence-System` in November 2026, and the old URL redirects. The same-named copy in `Starlight-Intelligence-Systems`, and any other same-named copy, is not an alternative contribution target; follow the official README rather than opening duplicate PRs. No private vault data, credentials or operator state is required for an ordinary fixture-backed contribution.
 
 > **TL;DR:** Operational-tier changes (vault writes, MCP server, skills,
 > agents, site, the 7 reference commands) follow normal OSS rules.
@@ -23,7 +23,7 @@ By participating, you agree to uphold the [Code of Conduct](./CODE_OF_CONDUCT.md
 (Contributor Covenant v2.1).
 
 Reports to the conduct contact in `CODE_OF_CONDUCT.md`. Security issues
-go through the [private vulnerability reporting form](https://github.com/frankxai/Starlight-Intelligence-System/security/advisories/new)
+go through the [private vulnerability reporting form](https://github.com/Starlight-Intelligence/Starlight-Intelligence-System/security/advisories/new)
 instead of a public issue.
 
 ---
@@ -39,7 +39,7 @@ review.
 ### 2. Get the dev environment up
 
 ```bash
-git clone https://github.com/frankxai/Starlight-Intelligence-System.git
+git clone https://github.com/Starlight-Intelligence/Starlight-Intelligence-System.git
 cd Starlight-Intelligence-System
 npm install
 npm test
@@ -143,10 +143,10 @@ CI uses GitHub Actions — see `.github/workflows/`.
 
 ## Filing a good bug
 
-Use the [bug report form](https://github.com/frankxai/Starlight-Intelligence-System/issues/new?template=bug_report.yml)
+Use the [bug report form](https://github.com/Starlight-Intelligence/Starlight-Intelligence-System/issues/new?template=bug_report.yml)
 for an ordinary, reproducible bug. If the report could expose a vulnerability,
 secret, or private data, stop and use the
-[private vulnerability reporting form](https://github.com/frankxai/Starlight-Intelligence-System/security/advisories/new).
+[private vulnerability reporting form](https://github.com/Starlight-Intelligence/Starlight-Intelligence-System/security/advisories/new).
 
 1. **What you ran** — exact command.
 2. **What you expected** — quick sentence.
@@ -162,7 +162,7 @@ the shape of the data without the values.
 
 ## Filing a good feature request
 
-Use the [feature request form](https://github.com/frankxai/Starlight-Intelligence-System/issues/new?template=feature_request.yml).
+Use the [feature request form](https://github.com/Starlight-Intelligence/Starlight-Intelligence-System/issues/new?template=feature_request.yml).
 State the operator need first, the proposed shape second. The most
 useful proposals come with a 5-line scenario ("I'm in a /yolo session
 and X happens; today I have to Y; if Z existed I could..."). Substrate
