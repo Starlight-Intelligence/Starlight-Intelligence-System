@@ -6,10 +6,11 @@
 // It measures; it never signs and never edits config. See docs/control-plane/ARENA.md.
 
 import {
-  chunkDiff, combineReviews, knobsFor, parseUnifiedDiff, reviewChunks, MAX_CHUNK_BYTES,
+  chunkDiff, combineReviews, knobsFor, modelInput, parseUnifiedDiff, reviewChunks, MAX_CHUNK_BYTES,
   type AiBinding, type CallConfig, type Chunk, type Finding,
 } from '../src/review.ts';
-import { scoreCase, scoreRows, type ArenaRow, type ModelScore, type Mutation } from './score.ts';
+import { scoreCase, scoreRows, scoreCohorts, type ArenaRow, type CohortScore, type ModelScore, type Mutation } from './score.ts';
+import { sha256Hex } from '../src/digest.ts';
 import { matchesFiles, type Seed } from './seeds.ts';
 
 export { SEEDS, SEED_CLASSES, selectSeeds, type Seed } from './seeds.ts';
@@ -104,6 +105,7 @@ export interface ArenaResult {
   rows: ArenaCaseResult[];
   skipped: { seed_id: string; reason: string }[];
   scores: ModelScore[];
+  cohorts: CohortScore[];
 }
 
 export const DEFAULT_CASE_CONCURRENCY = 2;
@@ -113,9 +115,20 @@ export async function runArena(input: ArenaInput): Promise<ArenaResult> {
   const { cases, skipped } = prepareCases(input.baseDiff, input.seeds, input.chunkBytes);
   const conc = Math.max(1, input.caseConcurrency ?? DEFAULT_CASE_CONCURRENCY);
 
+  // Hash exactly the labels and text the reviewer sees, excluding descriptive base refs and
+  // case names. Identical clean inputs (including the two clean seeds) are one evidence unit.
+  const caseIds = await Promise.all(cases.map(c =>
+    sha256Hex(JSON.stringify(c.chunks.map(({ label, text }) => [label, text])))));
+  const seedRules = input.seeds.map(({ id, class: kind, files, find, replace, keywords }) =>
+    [id, kind, files, String(find), replace, keywords]);
   const perModel = await Promise.all(input.models.map(async (model) => {
     const starts: number[] = []; // one rate-limit window per model, across all its cases
     const knobs = JSON.stringify(knobsFor(model, input.cfg.knobs));
+    // Hash the fixed prompt template plus the actual model settings. Bump protocol on grader changes.
+    const template = modelInput(model, { label: '', files: [], text: '', bytes: 0 }, input.cfg);
+    const cohort = await sha256Hex(JSON.stringify(['arena-evidence-v1', model, seedRules, template,
+      input.cfg.gatewayId, input.cfg.timeoutMs, input.cfg.budgetMs, input.cfg.concurrency,
+      input.chunkBytes ?? MAX_CHUNK_BYTES, conc]));
     const out: ArenaCaseResult[] = new Array(cases.length);
     let next = 0;
     const worker = async () => {
@@ -133,6 +146,7 @@ export async function runArena(input: ArenaInput): Promise<ArenaResult> {
         const s = errors.length ? { caught: false, falseAlarm: false, severity: null } : scoreCase(c.seed, c.mutation, combined.verdict, combined.findings);
         out[i] = {
           created_at: now(), model, knobs_json: knobs, seed_id: c.seed.id, seed_class: c.seed.class, base_ref: input.baseRef,
+          cohort_sha256: cohort, case_sha256: caseIds[i],
           caught: s.caught ? 1 : 0, false_alarm: s.falseAlarm ? 1 : 0, severity: s.severity, latency_ms: latency,
           tokens_out: results.reduce((n, r) => n + r.usage.tokensOut, 0), error: errors[0] ?? null,
           verdict, findings: combined.findings, mutation: c.mutation,
@@ -143,5 +157,5 @@ export async function runArena(input: ArenaInput): Promise<ArenaResult> {
     return out;
   }));
   const rows = perModel.flat();
-  return { rows, skipped, scores: scoreRows(rows) };
+  return { rows, skipped, scores: scoreRows(rows), cohorts: scoreCohorts(rows) };
 }
