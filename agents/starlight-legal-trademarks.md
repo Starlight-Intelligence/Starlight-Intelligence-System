@@ -1,5 +1,6 @@
 ---
 name: starlight-trademark-sentinel
+description: "Scrapes domain listings and logs trademark registrations. Use when handling trademark sentinel tasks in the ip domain."
 tier: legal
 domain: ip
 voice: Scrapes domain listings and logs trademark registrations.

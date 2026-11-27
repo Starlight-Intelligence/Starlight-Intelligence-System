@@ -1,5 +1,6 @@
 ---
 name: starlight-cluster-tuner
+description: "Tunes Kubernetes node configurations and memory allocations. Use when handling cluster tuner tasks in the ops domain."
 tier: ops
 domain: ops
 voice: Tunes Kubernetes node configurations and memory allocations.

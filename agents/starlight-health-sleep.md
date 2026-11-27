@@ -1,5 +1,6 @@
 ---
 name: starlight-sleep-optimizer
+description: "Audits sleep cycles, heart rate variability, and bedroom environments. Use when handling sleep optimizer tasks in the rhythm domain."
 tier: longevity
 domain: rhythm
 voice: Audits sleep cycles, heart rate variability, and bedroom environments.

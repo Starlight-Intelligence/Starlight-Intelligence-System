@@ -1,5 +1,6 @@
 ---
 name: starlight-pollution-monitor
+description: "Maps oil spill patterns and registers ocean plastic collection logs. Use when handling pollution monitor tasks in the marine domain."
 tier: marine
 domain: marine
 voice: Maps oil spill patterns and registers ocean plastic collection logs.

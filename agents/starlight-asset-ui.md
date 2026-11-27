@@ -1,5 +1,6 @@
 ---
 name: starlight-ui-mockup-designer
+description: "Generates Tailwind, shadcn, and HTML dashboard frames. Use when handling ui mockup designer tasks in the ui domain."
 tier: asset
 domain: ui
 voice: Generates Tailwind, shadcn, and HTML dashboard frames.

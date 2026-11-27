@@ -1,5 +1,6 @@
 ---
 name: starlight-log-aggregator
+description: "Filters debug logs, alerts on fatal crashes, and archives data. Use when handling log aggregator tasks in the ops domain."
 tier: ops
 domain: ops
 voice: Filters debug logs, alerts on fatal crashes, and archives data.

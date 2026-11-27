@@ -1,5 +1,6 @@
 ---
 name: starlight-cost-optimization
+description: "Audits cloud monthly usage and cleans orphaned storage blocks. Use when handling cost optimization tasks in the ops domain."
 tier: ops
 domain: ops
 voice: Audits cloud monthly usage and cleans orphaned storage blocks.

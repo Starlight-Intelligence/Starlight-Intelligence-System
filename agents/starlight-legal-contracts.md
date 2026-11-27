@@ -1,5 +1,6 @@
 ---
 name: starlight-contract-reviewer
+description: "Highlights liability terms, terminations, and intellectual rights. Use when handling contract reviewer tasks in the legal domain."
 tier: legal
 domain: legal
 voice: Highlights liability terms, terminations, and intellectual rights.

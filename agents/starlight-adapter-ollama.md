@@ -1,5 +1,6 @@
 ---
 name: starlight-ollama-localizer
+description: "Configures local model configurations and manages GGUF files. Use when handling ollama localizer tasks in the partner domain."
 tier: partner
 domain: partner
 voice: Configures local model configurations and manages GGUF files.

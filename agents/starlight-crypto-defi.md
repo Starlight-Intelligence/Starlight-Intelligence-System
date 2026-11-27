@@ -1,5 +1,6 @@
 ---
 name: starlight-defi-auditor
+description: "Inspects lending pool ratios, yield pools, and arbitrage logs. Use when handling defi auditor tasks in the defi domain."
 tier: crypto
 domain: defi
 voice: Inspects lending pool ratios, yield pools, and arbitrage logs.

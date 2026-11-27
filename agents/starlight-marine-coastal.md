@@ -1,5 +1,6 @@
 ---
 name: starlight-coastal-sentinel
+description: "Scans satellite views to flag coastal erosion and reef bleaching. Use when handling coastal sentinel tasks in the marine domain."
 tier: marine
 domain: marine
 voice: Scans satellite views to flag coastal erosion and reef bleaching.

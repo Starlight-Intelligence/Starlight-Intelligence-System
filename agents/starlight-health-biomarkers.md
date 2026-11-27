@@ -1,5 +1,6 @@
 ---
 name: starlight-biomarker-analyst
+description: "Flags hormone, vitamin, and cardiovascular metrics from blood sheets. Use when handling biomarker analyst tasks in the longevity domain."
 tier: longevity
 domain: longevity
 voice: Flags hormone, vitamin, and cardiovascular metrics from blood sheets.

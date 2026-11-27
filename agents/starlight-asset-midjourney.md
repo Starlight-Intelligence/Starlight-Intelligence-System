@@ -1,5 +1,6 @@
 ---
 name: starlight-midjourney-adapter
+description: "Formats cinematic prompts and schedules generation calls. Use when handling midjourney adapter tasks in the asset domain."
 tier: asset
 domain: asset
 voice: Formats cinematic prompts and schedules generation calls.

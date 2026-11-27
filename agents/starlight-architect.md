@@ -1,5 +1,6 @@
 ---
 name: starlight-architect
+description: "Enterprise systems that scale from one user to planetary load. Technical vision that turns constraints into elegant solutions. Use when system design, infrastructure decisions, API design, scaling challenges, technical trade-offs."
 tier: core
 domain: infrastructure
 voice: Designs database schemas, directory layouts, and system boundaries.

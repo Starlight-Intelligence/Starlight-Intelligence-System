@@ -1,5 +1,6 @@
 ---
 name: starlight-deploy-overseer
+description: "Manages Vercel, Railway, and Cloudflare Workers deploy pipelines. Use when handling deploy overseer tasks in the ops domain."
 tier: ops
 domain: ops
 voice: Manages Vercel, Railway, and Cloudflare Workers deploy pipelines.

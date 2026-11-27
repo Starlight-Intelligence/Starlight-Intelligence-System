@@ -1,5 +1,6 @@
 ---
 name: starlight-openai-sdk-adapter
+description: "Formats function call responses for the OpenAI Agents SDK. Use when handling openai sdk adapter tasks in the partner domain."
 tier: partner
 domain: partner
 voice: Formats function call responses for the OpenAI Agents SDK.

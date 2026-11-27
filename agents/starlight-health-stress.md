@@ -1,5 +1,6 @@
 ---
 name: starlight-stress-tracker
+description: "Tracks daily stress spikes and schedules breathing sessions. Use when handling stress tracker tasks in the rhythm domain."
 tier: longevity
 domain: rhythm
 voice: Tracks daily stress spikes and schedules breathing sessions.

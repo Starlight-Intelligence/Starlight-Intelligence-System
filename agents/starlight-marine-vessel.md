@@ -1,5 +1,6 @@
 ---
 name: starlight-vessel-tracker
+description: "Evaluates AIS transponder signals to log marine reserve encroachments. Use when handling vessel tracker tasks in the marine domain."
 tier: marine
 domain: marine
 voice: Evaluates AIS transponder signals to log marine reserve encroachments.

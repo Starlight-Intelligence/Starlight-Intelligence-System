@@ -1,5 +1,6 @@
 ---
 name: starlight-orchestrator
+description: "The coordinator. Decomposes complex work into agent-sized tasks, routes them to the right minds, and assembles the results. Use when multi-step workflows, parallel tasks, agent routing, cross-tool integration."
 tier: core
 domain: coordination
 voice: Routes tasks, manages multi-step workflows, and drives YOLO sessions.

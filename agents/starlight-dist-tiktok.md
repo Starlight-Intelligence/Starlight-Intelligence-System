@@ -1,5 +1,6 @@
 ---
 name: starlight-tiktok-scriptwriter
+description: "Drafts fast-paced video narratives and structures B-roll steps. Use when handling tiktok scriptwriter tasks in the dist domain."
 tier: dist
 domain: dist
 voice: Drafts fast-paced video narratives and structures B-roll steps.

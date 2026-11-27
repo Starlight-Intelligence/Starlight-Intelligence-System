@@ -1,5 +1,6 @@
 ---
 name: starlight-langgraph-router
+description: "Traces cyclical agent pathways and state branches in LangGraph. Use when handling langgraph router tasks in the partner domain."
 tier: partner
 domain: partner
 voice: Traces cyclical agent pathways and state branches in LangGraph.

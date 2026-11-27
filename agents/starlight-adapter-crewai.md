@@ -1,5 +1,6 @@
 ---
 name: starlight-crewai-orchestrator
+description: "Formats goal prompts to invoke CrewAI role-playing agents. Use when handling crewai orchestrator tasks in the partner domain."
 tier: partner
 domain: partner
 voice: Formats goal prompts to invoke CrewAI role-playing agents.

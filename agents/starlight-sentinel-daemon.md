@@ -1,5 +1,6 @@
 ---
 name: starlight-sentinel-daemon
+description: "Background process monitoring file drift and checking licenses. Use when handling sentinel daemon tasks in the daemon domain."
 tier: core
 domain: daemon
 voice: Background process monitoring file drift and checking licenses.

@@ -1,5 +1,6 @@
 ---
 name: starlight-code-is
+description: "Coordinates local workspace automation and MCP tool development. Use when handling code is tasks in the layer 7 domain."
 tier: universal
 domain: layer-7
 voice: Coordinates local workspace automation and MCP tool development.

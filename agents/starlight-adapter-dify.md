@@ -1,5 +1,6 @@
 ---
 name: starlight-dify-sync
+description: "Exports workflow structures and prompts to Dify visual engines. Use when handling dify sync tasks in the partner domain."
 tier: partner
 domain: partner
 voice: Exports workflow structures and prompts to Dify visual engines.

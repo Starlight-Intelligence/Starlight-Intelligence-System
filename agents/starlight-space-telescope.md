@@ -1,5 +1,6 @@
 ---
 name: starlight-telescope-scheduler
+description: "Schedules dark sky observation blocks and reviews weather models. Use when handling telescope scheduler tasks in the observation domain."
 tier: space
 domain: observation
 voice: Schedules dark sky observation blocks and reviews weather models.

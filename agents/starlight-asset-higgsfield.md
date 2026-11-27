@@ -1,5 +1,6 @@
 ---
 name: starlight-higgsfield-director
+description: "Structures video prompts and edits camera panning metrics. Use when handling higgsfield director tasks in the asset domain."
 tier: asset
 domain: asset
 voice: Structures video prompts and edits camera panning metrics.

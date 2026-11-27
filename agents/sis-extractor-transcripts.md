@@ -1,5 +1,6 @@
 ---
 name: starlight-transcripts-extractor
+description: "Sub-agent dispatched by /sis-forge Phase 1. Use when invoking /sis-forge, /discover-genius."
 tier: core
 domain: parsing
 voice: Extracts structured JSONL memory atoms from terminal logs.

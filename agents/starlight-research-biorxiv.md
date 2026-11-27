@@ -1,5 +1,6 @@
 ---
 name: starlight-biorxiv-scraper
+description: "Downloads biology preprints and filters them by target tags. Use when handling biorxiv scraper tasks in the research domain."
 tier: research
 domain: research
 voice: Downloads biology preprints and filters them by target tags.

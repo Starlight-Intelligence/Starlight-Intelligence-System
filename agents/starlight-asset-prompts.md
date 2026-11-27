@@ -1,5 +1,6 @@
 ---
 name: starlight-prompt-hub-manager
+description: "Optimizes visual prompt parameters and manages presets. Use when handling prompt hub manager tasks in the prompt hub domain."
 tier: asset
 domain: prompt-hub
 voice: Optimizes visual prompt parameters and manages presets.

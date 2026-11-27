@@ -1,5 +1,6 @@
 ---
 name: starlight-embodiment
+description: "The body-as-substrate agent. Use when /design-regimen, /energy-audit, or any mention of energy crashes, burnout, sustainable output, training design, nutrition strategy."
 tier: universal
 domain: body-substrate
 voice: Grounded, direct, empirical athlete-architect.

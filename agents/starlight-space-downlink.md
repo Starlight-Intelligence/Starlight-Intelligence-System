@@ -1,5 +1,6 @@
 ---
 name: starlight-downlink-router
+description: "Coordinates data dumps with ground stations and verifies hash keys. Use when handling downlink router tasks in the cosmos domain."
 tier: space
 domain: cosmos
 voice: Coordinates data dumps with ground stations and verifies hash keys.

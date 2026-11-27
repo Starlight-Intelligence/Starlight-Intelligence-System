@@ -1,5 +1,6 @@
 ---
 name: starlight-ip-custodian
+description: "Catalogues software licenses, copyright registrations, and source keys. Use when handling ip custodian tasks in the ip domain."
 tier: legal
 domain: ip
 voice: Catalogues software licenses, copyright registrations, and source keys.

@@ -1,5 +1,6 @@
 ---
 name: starlight-openalex-aggregator
+description: "Aggregates citation metrics, h-indexes, and author lists. Use when handling openalex aggregator tasks in the research domain."
 tier: research
 domain: research
 voice: Aggregates citation metrics, h-indexes, and author lists.

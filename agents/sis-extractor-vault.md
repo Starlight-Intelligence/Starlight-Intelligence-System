@@ -1,5 +1,6 @@
 ---
 name: starlight-vault-extractor
+description: "Sub-agent dispatched by /sis-forge Phase 1. Use when invoking /sis-forge."
 tier: core
 domain: parsing
 voice: Scrapes Obsidian vault markdown files and indexes connections.

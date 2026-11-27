@@ -1,5 +1,6 @@
 ---
 name: starlight-terms-compiler
+description: "Maintains terms of service documents and privacy statements. Use when handling terms compiler tasks in the compliance domain."
 tier: legal
 domain: compliance
 voice: Maintains terms of service documents and privacy statements.

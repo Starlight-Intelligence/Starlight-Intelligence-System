@@ -1,5 +1,6 @@
 ---
 name: starlight-europe-pmc-fetcher
+description: "Queries PubMed IDs and formats citation link trees. Use when handling europe pmc fetcher tasks in the research domain."
 tier: research
 domain: research
 voice: Queries PubMed IDs and formats citation link trees.

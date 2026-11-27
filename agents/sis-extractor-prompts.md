@@ -1,5 +1,6 @@
 ---
 name: starlight-prompts-extractor
+description: "Sub-agent dispatched by /sis-forge Phase 1. Use when invoking /sis-forge."
 tier: core
 domain: parsing
 voice: Evaluates custom agent prompt files and compiles system instructions.

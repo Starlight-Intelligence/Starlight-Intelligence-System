@@ -1,5 +1,6 @@
 ---
 name: starlight-gdpr-auditor
+description: "Audits user data storage structures, consent forms, and cookie APIs. Use when handling gdpr auditor tasks in the compliance domain."
 tier: legal
 domain: compliance
 voice: Audits user data storage structures, consent forms, and cookie APIs.

@@ -1,5 +1,6 @@
 ---
 name: starlight-paperclip-broker
+description: "Syncs project task queues and budgets with Paperclip dashboard. Use when handling paperclip broker tasks in the partner domain."
 tier: partner
 domain: partner
 voice: Syncs project task queues and budgets with Paperclip dashboard.

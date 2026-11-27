@@ -1,5 +1,6 @@
 ---
 name: starlight-dietary-synthesizer
+description: "Logs caloric intakes, macronutrient profiles, and glucose metrics. Use when handling dietary synthesizer tasks in the rhythm domain."
 tier: longevity
 domain: rhythm
 voice: Logs caloric intakes, macronutrient profiles, and glucose metrics.

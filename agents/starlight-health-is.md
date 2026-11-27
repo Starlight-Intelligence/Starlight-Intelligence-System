@@ -1,5 +1,6 @@
 ---
 name: starlight-health-is
+description: "Monitors nutrition plans, sleep logs, and physical exercises. Use when handling health is tasks in the rhythm domain."
 tier: universal
 domain: rhythm
 voice: Monitors nutrition plans, sleep logs, and physical exercises.

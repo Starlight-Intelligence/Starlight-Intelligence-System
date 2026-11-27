@@ -1,5 +1,6 @@
 ---
 name: starlight-voice-operator
+description: "The cockpit. Use when voice input sessions, sessioned text input where executive-pace is needed."
 tier: core
 domain: cockpit
 voice: Listens to spoken executive intents and generates session packets.

@@ -1,5 +1,6 @@
 ---
 name: starlight-instagram-composer
+description: "Pairs visual tiles with descriptive captions and location logs. Use when handling instagram composer tasks in the dist domain."
 tier: dist
 domain: dist
 voice: Pairs visual tiles with descriptive captions and location logs.

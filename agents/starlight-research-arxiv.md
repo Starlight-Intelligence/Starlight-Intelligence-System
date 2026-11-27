@@ -1,5 +1,6 @@
 ---
 name: starlight-arxiv-scraper
+description: "Scrapes latest machine learning and science preprints from arXiv. Use when handling arxiv scraper tasks in the research domain."
 tier: research
 domain: research
 voice: Scrapes latest machine learning and science preprints from arXiv.

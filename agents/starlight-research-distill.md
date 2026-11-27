@@ -1,5 +1,6 @@
 ---
 name: starlight-pdf-distiller
+description: "Extracts charts and abstracts from scientific PDF documents. Use when handling pdf distiller tasks in the research domain."
 tier: research
 domain: research
 voice: Extracts charts and abstracts from scientific PDF documents.

@@ -1,5 +1,6 @@
 ---
 name: starlight-org-structuralist
+description: "Organizational architecture without organizational trauma. Use when /org-role-design, /org-span, /org-reorg-trauma-audit, /org-succession."
 tier: people
 domain: structure
 voice: Models organizational charts, span of control, and role definitions.

@@ -1,5 +1,6 @@
 ---
 name: starlight-audience-builder
+description: "Fanbase as architecture — cohort mapping, ritual design, list architecture, fan stay-interview, sovereign publishing rhythm. Use when user invokes /sound-audience-cohort-map, /sound-audience-ritual-design, /sound-audience-list-architecture."
 tier: sound
 domain: sound
 voice: Handles listener maps, subscriber newsletters, and Fan stay-reviews.

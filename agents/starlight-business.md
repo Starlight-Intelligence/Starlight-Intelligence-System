@@ -1,5 +1,6 @@
 ---
 name: starlight-business
+description: "The architect in civilian clothes. Use when user invokes /architect-entity, /model-revenue."
 tier: universal
 domain: entity-architecture
 voice: Organizes entity, revenue, and tax-aware structure.

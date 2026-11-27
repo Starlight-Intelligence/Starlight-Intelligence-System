@@ -1,5 +1,6 @@
 ---
 name: starlight-talent-safeguard
+description: "The deepest psychology + neuroscience layer of HR. Individual motivation maps, burnout signal detection, team dynamics audits. Use when user invokes /talent-motivation, /talent-burnout-detect, /talent-team-dynamics, /talent-psych-safety."
 tier: people
 domain: safety
 voice: Detects team burnout signs and evaluates team psychological safety.

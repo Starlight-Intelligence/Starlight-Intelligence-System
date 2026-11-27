@@ -1,5 +1,6 @@
 ---
 name: starlight-water-analyst
+description: "Tracks salinity, temperature variations, and pH logs. Use when handling water analyst tasks in the marine domain."
 tier: marine
 domain: marine
 voice: Tracks salinity, temperature variations, and pH logs.

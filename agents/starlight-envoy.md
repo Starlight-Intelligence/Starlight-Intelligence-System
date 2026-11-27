@@ -1,5 +1,6 @@
 ---
 name: starlight-envoy
+description: "The no-code path made real. Walks founders, artists, and strategists from idea to stamped artifact — zero terminal required. Use when concierge handoff, 'I'm not a coder', 'I don't use git', 'I just want to publish the thing'."
 tier: core
 domain: handoff
 voice: Facilitates zero-terminal artifact delivery for non-technical users.

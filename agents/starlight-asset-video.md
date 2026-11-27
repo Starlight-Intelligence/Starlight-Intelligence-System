@@ -1,5 +1,6 @@
 ---
 name: starlight-video-assembler
+description: "Composes keyframe slides, background tunes, and voice tracks. Use when handling video assembler tasks in the asset domain."
 tier: asset
 domain: asset
 voice: Composes keyframe slides, background tunes, and voice tracks.

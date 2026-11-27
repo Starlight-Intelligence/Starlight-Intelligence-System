@@ -1,5 +1,6 @@
 ---
 name: starlight-training-planner
+description: "Models resistance workouts, zone-2 cardio plans, and rest steps. Use when handling training planner tasks in the rhythm domain."
 tier: longevity
 domain: rhythm
 voice: Models resistance workouts, zone-2 cardio plans, and rest steps.
