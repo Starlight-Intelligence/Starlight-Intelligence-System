@@ -1,0 +1,58 @@
+[
+  {
+    "id": "c01",
+    "intent": "Mount a small magnetic whiteboard beside the checkout."
+  },
+  {
+    "id": "c02",
+    "intent": "Give the front desk a printer that takes loose sheets and ink."
+  },
+  {
+    "id": "c03",
+    "intent": "I need yesterday’s confidential forms turned into ribbons."
+  },
+  {
+    "id": "c04",
+    "intent": "Use the classic black desktop stapler for the corner of this handout."
+  },
+  {
+    "id": "c05",
+    "intent": "Bind the middle of a folded program, well past its outside edge."
+  },
+  {
+    "id": "c06",
+    "intent": "Make two holes for a ring binder before filing the sheet."
+  },
+  {
+    "id": "c07",
+    "intent": "Give the cashier a device for adding totals without a computer."
+  },
+  {
+    "id": "c08",
+    "intent": "Read the striped code on a package at the checkout."
+  },
+  {
+    "id": "c09",
+    "intent": "Print a sale receipt from the paper roll."
+  },
+  {
+    "id": "c10",
+    "intent": "Clear the dry-erase surface with a magnetic wiping block."
+  },
+  {
+    "id": "c11",
+    "intent": "Add a printer. Media and output format are undecided."
+  },
+  {
+    "id": "c12",
+    "intent": "Replace the exact stapler that broke this morning. The order does not say which model it was."
+  },
+  {
+    "id": "c13",
+    "intent": "Project a slide deck onto the wall using a ceiling-mounted projector."
+  },
+  {
+    "id": "c14",
+    "intent": "Use a printer with manufacturer-certified waterproof output."
+  }
+]
