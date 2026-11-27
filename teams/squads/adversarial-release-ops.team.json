@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "starlight.team_profile.v2",
+  "id": "adversarial-release-ops",
+  "name": "Adversarial Verification & Release Ops Squad",
+  "mission": "Enforce Maker != Checker across exact commit SHAs, guard Doctrine 0 human gates, coordinate isolated worktrees, and deliver clean estate handovers.",
+  "primaryArtifact": "Exact-SHA review findings, green test/build receipts, clean lane releases, and validated agentic-ops-hub handovers.",
+  "defaultLane": "mechanical",
+  "roles": [
+    {
+      "role": "coordinator",
+      "agentId": "starlight-chief-of-staff",
+      "personalityVoice": "Crisp operational commander keeping lanes unblocked, leases clean, and handover queues current.",
+      "preferredModelFamily": "anthropic",
+      "skills": ["orchestration/agent-handoff-packet", "integration/ecosystem-sync"],
+      "responsibility": "Coordinate multi-repo PR queues, lane leases, and closing ledger updates."
+    },
+    {
+      "role": "maker",
+      "agentId": "starlight-steward",
+      "personalityVoice": "Methodical release engineer running exact build, lint, test, and handover-lint gates.",
+      "preferredModelFamily": "google",
+      "skills": ["orchestration/starlight-teammates", "safety/mutation-approval"],
+      "responsibility": "Prepare draft PRs, run local release checklists, and assemble FRANK_GATES action sheets."
+    },
+    {
+      "role": "independent_verifier",
+      "agentId": "builder-elder",
+      "personalityVoice": "Grizzled feasibility reviewer checking whether built artifacts actually run and recover cleanly.",
+      "preferredModelFamily": "openai",
+      "skills": ["intelligence/decision-framework", "safety/secret-detector"],
+      "responsibility": "Inspect diffs at exact headRefOid for runtime bugs, unverified claims, and missing tests."
+    },
+    {
+      "role": "independent_verifier",
+      "agentId": "shadow-witness",
+      "personalityVoice": "Unflinching red-team critic hunting edge cases, auth bypasses, and silent failures.",
+      "preferredModelFamily": "openai",
+      "skills": ["safety/permission-gate", "foundry/taste-engine"],
+      "responsibility": "Run final adversarial audit across code, UI, and handover accuracy before completion."
+    }
+  ],
+  "mcpEndpoints": ["starlight-fleet-mcp", "starlight-memory"],
+  "doctrine0Guards": {
+    "autonomousSpend": false,
+    "autonomousExternalSend": false,
+    "requireExactShaReview": true,
+    "higgsfieldRequiresApprovedPlan": true
+  },
+  "acceptanceRubric": [
+    "Every PR diff reviewed by an independent checker from a distinct model family",
+    "All lane.mjs leases released and agentic-ops-hub handover lint passes",
+    "Human-gated actions (secrets, deploys, FRANK_PATHS merges, money) staged cleanly in FRANK_GATES.md"
+  ]
+}

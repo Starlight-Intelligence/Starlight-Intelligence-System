@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "starlight.team_catalog.v1",
+  "generatedAt": "2026-11-27",
+  "description": "Six canonical Starlight specialist squads (3-4 roles each, Coordinator + Maker + distinct-provider Independent Verifier, Doctrine 0 fail-closed).",
+  "squads": [
+    { "id": "web-design-funnel", "path": "teams/squads/web-design-funnel.team.json" },
+    { "id": "ai-cloud-engineering", "path": "teams/squads/ai-cloud-engineering.team.json" },
+    { "id": "visual-media-canvas", "path": "teams/squads/visual-media-canvas.team.json" },
+    { "id": "content-strategy-copy", "path": "teams/squads/content-strategy-copy.team.json" },
+    { "id": "knowledge-memory-ops", "path": "teams/squads/knowledge-memory-ops.team.json" },
+    { "id": "adversarial-release-ops", "path": "teams/squads/adversarial-release-ops.team.json" }
+  ]
+}

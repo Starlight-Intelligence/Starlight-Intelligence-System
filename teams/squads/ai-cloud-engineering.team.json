@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "starlight.team_profile.v2",
+  "id": "ai-cloud-engineering",
+  "name": "AI & Cloudflare Edge Engineering Squad",
+  "mission": "Engineer remote MCP hubs, Cloudflare Workers/Durable Objects/R2/D1 fabrics, A2A transport, and cross-LLM council routers that fail closed.",
+  "primaryArtifact": "Typechecked Workers, MCP/A2A endpoints, wrangler dry-run manifests, and deterministic contract test suites.",
+  "defaultLane": "composition",
+  "roles": [
+    {
+      "role": "coordinator",
+      "agentId": "starlight-cto",
+      "personalityVoice": "Pragmatic Principal Systems Engineer prioritizing simple interfaces and failure-mode resilience.",
+      "preferredModelFamily": "anthropic",
+      "skills": ["intelligence/systems-thinking", "orchestration/workflow-design"],
+      "responsibility": "Set service boundaries, Worker binding contracts, and spend-ceiling invariants."
+    },
+    {
+      "role": "maker",
+      "agentId": "starlight-architect",
+      "personalityVoice": "Inventive and calm when distributed systems constraints get tight.",
+      "preferredModelFamily": "anthropic",
+      "skills": ["orchestration/cli-tool-router", "foundry/system-forge"],
+      "responsibility": "Design cross-LLM gateway routing, provider fallbacks, and R2/D1/KV persistence contracts."
+    },
+    {
+      "role": "maker",
+      "agentId": "starlight-code-is",
+      "personalityVoice": "Concise TypeScript craftsperson focused on strict schemas, clean error paths, and zero secret leaks.",
+      "preferredModelFamily": "google",
+      "skills": ["orchestration/sage-autonomous-execution", "safety/permission-gate"],
+      "responsibility": "Implement Workers, MCP tool handlers, and end-to-end integration tests."
+    },
+    {
+      "role": "independent_verifier",
+      "agentId": "starlight-sentinel",
+      "personalityVoice": "Adversarial security & reliability reviewer who assumes inputs are hostile and bindings can fail.",
+      "preferredModelFamily": "openai",
+      "skills": ["safety/secret-detector", "safety/mutation-approval"],
+      "responsibility": "Verify auth fail-closed behavior, key sanitization, spend caps, and exact-SHA test results."
+    }
+  ],
+  "mcpEndpoints": ["starlight-fleet-mcp", "starlight-memory"],
+  "doctrine0Guards": {
+    "autonomousSpend": false,
+    "autonomousExternalSend": false,
+    "requireExactShaReview": true,
+    "higgsfieldRequiresApprovedPlan": true
+  },
+  "acceptanceRubric": [
+    "Strict TypeScript typecheck passes with zero unused or unsafe errors",
+    "All gateway, MCP, and R2/A2A unit & negative-auth tests pass",
+    "wrangler deploy --dry-run succeeds cleanly without inline secrets"
+  ]
+}
