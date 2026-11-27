@@ -1,0 +1,18 @@
+FROM mcr.microsoft.com/playwright:v1.52.0-noble
+
+ENV NODE_ENV=production
+ENV CI=true
+ENV STARLIGHT_SUBSTRATE=true
+ENV OUT_DIR=/tmp/web-critic-artifacts
+
+RUN useradd -m -s /bin/bash starlight \
+    && mkdir -p /home/starlight/web-critic /tmp/web-critic-artifacts \
+    && chown -R starlight:starlight /home/starlight /tmp/web-critic-artifacts
+
+WORKDIR /home/starlight/web-critic
+COPY --chown=starlight:starlight package.json ./
+RUN npm install --omit=dev
+COPY --chown=starlight:starlight src ./src
+
+USER starlight
+ENTRYPOINT ["node", "/home/starlight/web-critic/src/critic.mjs"]
