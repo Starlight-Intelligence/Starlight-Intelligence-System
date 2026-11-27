@@ -150,9 +150,9 @@
 
 | Lever | Free Tier / Credits | Current State | Highest-ROI Action |
 | --- | --- | --- | --- |
-| **Blacksmith.sh (`blacksmith-sh`)** | **Free Tier per org** (`$4.87 − $4.87 = $0.00` verified on `Starlight-Intelligence`; `$0.00` on `frankxai` & `Arcanea-Labs`, no card on file) | **All 9 orgs/user already connected** (`frankxai`, `Starlight-Intelligence`, `Arcanea-Labs`, `FrankX-AI`, `Agentic-Income`, `AI-Architect-Academy`, `AI-Architect-Studio`, `Life-Commons`, `oci-ai-architects`); `0` workflows route to it | Route heavy Docker/Next.js builds & Playwright E2E (`gencreator.ai`, `frankx.ai-vercel-website`, `starlightintelligence.ai`) to `blacksmith-4vcpu-ubuntu-2404` for faster runs + NVMe cache at `$0` inside each org's free quota |
+| **Blacksmith.sh (`blacksmith-sh`)** | **GitHub Organizations ONLY (no personal `frankxai/*` accounts)** (`$4.87 − $4.87 = $0.00` verified on `Starlight-Intelligence`; `$0.00` on `Arcanea-Labs`) | Org apps connected; `Starlight-Intelligence/starlight-command-center` already sets `CI_RUNNER=blacksmith-2vcpu-ubuntu-2404`; `Arcanea-Labs` has `blacksmith-sh` `selected` (`arcanea-ai-app` is public `$0` Actions) | Keep `frankxai/*` personal repos on `ubuntu-latest`/`ubuntu-slim`/Railway (Blacksmith unsupported on personal accounts); use org Blacksmith free quota only on private org builds (`Starlight-Intelligence/*`, `Arcanea-Labs/AnimeLegends`) |
 | **OCI Always Free Ampere A1 ARM** | **4 OCPU + 24 GB RAM + 200 GB storage + 10 TB egress/mo (`$0/mo` forever)** | Available on Frank's Oracle Cloud tenancy | Provision 1 ephemeral private-repo-only self-hosted runner VM for unlimited Linux CI/agent batch jobs outside GitHub quotas |
-| **Cloudflare Startup Credits + Free Tiers** | **`$10,000.00` active** (expires Oct 30, 2027; `R2 · $2,500`, `PlanetScale · $2,500`, Workers/Builds/Containers covered; **EXCLUDES AI Gateway, and Workers AI leaves credit coverage Dec 1, 2026**) | `starlight-cf-checker` **v3.1+ live** (`510b9bf3-a073-46f1-865d-3d837ec2f336`); `starlight-ci-sentinel` **v0.2.0 live** (`b9874704-42ed-43b4-a465-f2366f603ae2`, `/health` `200`, `/sweep` `503`); `starlight-turbo-cache` **v0.1.0 live** (`bb959c9a-9236-4053-9bd4-7b9486c17464`, `/health` `200`, `/v8/artifacts/*` `503`); `starlight-ci-cache` R2 + `expire-7d` **live**; `starlight-review` AI Gateway has `Cache Responses`, `Rate Limit`, and `Spend Limits` **enabled** | **CRITICAL:** Keep `DAILY_BUDGET_USD="5"` on `starlight-cf-checker` (hold `#664` `$100/day`) so post-Dec 1 Workers AI traffic (`$84.88` / `95.9M` tokens in past 30d) stays strictly capped; shift Workers/MCP previews to Workers Builds |
+| **Cloudflare Startup Credits + Free Tiers** | **`$10,000.00` active** (expires Oct 30, 2027; `R2 · $2,500`, `PlanetScale · $2,500`, Workers/Builds/Containers covered; **EXCLUDES AI Gateway, and Workers AI leaves credit coverage Dec 1, 2026**) | `starlight-cf-checker` **v3.1+ live** (`510b9bf3-a073-46f1-865d-3d837ec2f336`); `starlight-ci-sentinel` **v0.2.0 live** (`b9874704-42ed-43b4-a465-f2366f603ae2`, `/health` `200`, `/sweep` `503`); `starlight-turbo-cache` **v0.1.0 live + `TURBO_CACHE_TOKEN` bound** (`bb959c9a-9236-4053-9bd4-7b9486c17464`, `GET /health` `200`, unauth `401`, auth `/status` `200 {"status":"enabled"}`); `starlight-ci-cache` R2 + `expire-7d` **live**; `starlight-review` AI Gateway has `Cache Responses`, `Rate Limit`, and `Spend Limits` **enabled** | **CRITICAL:** Keep `DAILY_BUDGET_USD="5"` on `starlight-cf-checker` (hold `#664` `$100/day`) so post-Dec 1 Workers AI traffic (`$84.88` / `95.9M` tokens in past 30d) stays strictly capped; shift Workers/MCP previews to Workers Builds |
 | **GitHub Pro / Team Free Caps** | `frankxai` Pro: 3,000 Linux min + 2 GB storage; `Starlight-Intelligence` Team: 3,000 Linux min + 2 GB storage | **40/41 PRs merged** (26/27 Waves 1–5 + 5/5 Wave 6 + **9/9 Wave 7**; only `SIS#617` open); Copilot Auto Review **OFF** (`~$65/mo` saved); **419.88 MB** purged (`383` stale artifacts = `140.54 MB`, `24` closed-PR caches = `279.34 MB`) | Keep `ubuntu-slim` (`3x` cheaper) + `1d–3d` retention so private storage never hits 2 GB lockout again |
 | **Dependabot Batching** | Fewer CI storms | `agenticincome#155` & `gencreator-community#39` **MERGED** (`monthly`, grouped, `limit: 3`) | Keep monthly + grouped (`limit: 3`) standard across any new repo |
 
@@ -176,12 +176,12 @@
 | `frankxai/frankx.ai-vercel-website` | https://github.com/frankxai/frankx.ai-vercel-website/pull/1348 | **MERGED** (`b2eafd9b`) | Moves `dependency-audit` to `ubuntu-slim`, caches `~/.cache/puppeteer` (`actions/cache@v5` SHA-pinned) to eliminate repeated Chromium downloads, and adds fail-closed `vars.CI_RUNNER == "blacksmith"` opt-in on `ci`. All 13 CI/contract/Vercel checks green. |
 
 ### Frontier Phase 2 R&D Blueprint (Zero-Wasted-Spend Next Moves)
-1. **One-Command Blacksmith 4-vCPU Cutover (`$0` Free Per-Org Quotas Already Connected):**
-   ```bash
-   gh variable set CI_RUNNER --body blacksmith -R frankxai/frankx.ai-vercel-website
-   gh variable set CI_RUNNER --body blacksmith -R frankxai/gencreator.ai
-   ```
-   Revert instantaneously with `gh variable set CI_RUNNER --body railway` (or `delete CI_RUNNER`) — zero workflow edits needed.
+1. **Blacksmith 4-vCPU Cutover (GitHub Organizations Only — No Personal `frankxai/*` Support):**
+   - `Starlight-Intelligence/starlight-command-center` already has `CI_RUNNER=blacksmith-2vcpu-ubuntu-2404` under `Starlight-Intelligence` (App installed on `all`); opt private org repos in once `Starlight-Intelligence` Team (`$4/mo`) unblocks Actions:
+     ```bash
+     gh variable set CI_RUNNER --body blacksmith -R Starlight-Intelligence/starlightintelligence.ai
+     ```
+   - Personal `frankxai/*` repos (`gencreator.ai`, `frankx.ai-vercel-website`, `agenticincome`) cannot use Blacksmith unless migrated to a GitHub Organization (`gencreator.ai` stays on `CI_RUNNER=railway` / GitHub-hosted; `frankx.ai-vercel-website` is public `$0`). `Arcanea-Labs/arcanea-ai-app` is public (`$0` unlimited GitHub Actions).
 2. **Cloudflare R2 Turborepo Remote Cache (`starlight-ci-cache`, `$2,500` Credit Pool):**
    Place a tiny Cloudflare Worker (`TURBO_TOKEN` bearer auth) in front of the live `starlight-ci-cache` R2 bucket (`expire-7d` already active) and point Turborepo monorepos (`TURBO_API` + `TURBO_TEAM`) at it for cross-branch / cross-runner build caching with `$0` GitHub Actions cache quota.
 3. **Cloudflare Workers Builds Offload:**
@@ -213,22 +213,15 @@
 | --- | --- | --- | --- | --- |
 | `starlight-cf-checker` | `https://starlight-cf-checker.frankxai.workers.dev` | `510b9bf3-a073-46f1-865d-3d837ec2f336` | KV `STATE`, Queue `starlight-review-jobs`, D1 `starlight-review`, Workers AI + AI Gateway `starlight-review` (`DAILY_BUDGET_USD="5"`) | `GET /health` -> HTTP `200` (`ok: true`, `reviews_by_status.done: 114`) |
 | `starlight-ci-sentinel` | `https://starlight-ci-sentinel.frankxai.workers.dev` | `b9874704-42ed-43b4-a465-f2366f603ae2` | Cron Trigger `17 */6 * * *` (`SENTINEL_TOKEN` & `GH_ESTATE_TOKEN` unbound until bound) | `GET /health` -> HTTP `200`; `POST /sweep` -> HTTP `503` fail-closed |
-| `starlight-turbo-cache` | `https://starlight-turbo-cache.frankxai.workers.dev` | `bb959c9a-9236-4053-9bd4-7b9486c17464` | R2 `CACHE_BUCKET` (`starlight-ci-cache`, `expire-7d`, `MAX_ARTIFACT_BYTES="52428800"`) | `GET /health` -> HTTP `200` (`storage: "r2"`); `HEAD /v8/artifacts/0123...` -> HTTP `503` fail-closed |
+| `starlight-turbo-cache` | `https://starlight-turbo-cache.frankxai.workers.dev` | `bb959c9a-9236-4053-9bd4-7b9486c17464` | R2 `CACHE_BUCKET` (`starlight-ci-cache`, `expire-7d`, `MAX_ARTIFACT_BYTES="52428800"`) + **`TURBO_CACHE_TOKEN` secret bound** | `GET /health` -> HTTP `200` (`storage: "r2"`); unauth `HEAD /v8/artifacts/...` -> HTTP `401`; auth `GET /v8/artifacts/status` -> HTTP `200 {"status":"enabled"}` |
 
-### One-Command Cutover (Turbo Remote Cache & Blacksmith Runners)
+### Verified Live R2 Cache & Runner Activation State (2026-11-27)
 
-```bash
-# 1. Bind shared bearer secret on starlight-turbo-cache (same value stored in GitHub Actions secret TURBO_TOKEN):
-npx --yes wrangler secret put TURBO_CACHE_TOKEN --config workers/turbo-cache/wrangler.jsonc
-
-# 2. Wire Arcanea R2 remote cache & Blacksmith runner variables (reversible anytime via `gh variable delete`):
-gh variable set TURBO_API --body https://starlight-turbo-cache.frankxai.workers.dev -R Arcanea-Labs/arcanea-ai-app
-gh variable set TURBO_TEAM --body arcanea -R Arcanea-Labs/arcanea-ai-app
-gh secret set TURBO_TOKEN -R Arcanea-Labs/arcanea-ai-app
-gh variable set CI_RUNNER --body blacksmith -R Arcanea-Labs/arcanea-ai-app
-gh variable set BLACKSMITH_RUNNER --body true -R frankxai/agenticincome
-gh variable set BLACKSMITH_RUNNER --body true -R Starlight-Intelligence/starlight-command-center
-```
+- **Activated end-to-end (`starlight-turbo-cache` + `Arcanea-Labs/arcanea-ai-app`):** `TURBO_CACHE_TOKEN` bound on Worker `starlight-turbo-cache`; `TURBO_TOKEN` secret and `TURBO_API=https://starlight-turbo-cache.frankxai.workers.dev`, `TURBO_TEAM=arcanea` variables set on `Arcanea-Labs/arcanea-ai-app`. `arcanea-ai-app` remains on `$0` unlimited public GitHub Actions runners with R2 remote caching active.
+- **Blacksmith org scope enforced:** Left off personal `frankxai/*` repos (unsupported by Blacksmith on personal accounts); `Starlight-Intelligence/starlight-command-center` retains its existing `CI_RUNNER=blacksmith-2vcpu-ubuntu-2404` variable.
+- **Remaining Frank-only actions (2 items):**
+  1. Click **Upgrade to Team (`$4/mo`) + `$20/mo` Actions cap** on `Starlight-Intelligence` (money fails closed).
+  2. *(Optional)* Create a narrow fine-grained PAT (`Actions: Read & Write` on target repos) and bind `SENTINEL_TOKEN` + `GH_ESTATE_TOKEN` on `starlight-ci-sentinel` to enable automated cache/artifact sweep.
 
 ### Overnight 8-Hour Autonomous Ops Protocol (Prepped for Unattended Execution)
 
