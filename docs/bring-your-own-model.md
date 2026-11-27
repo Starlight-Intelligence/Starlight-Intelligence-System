@@ -6,6 +6,8 @@
 > deliberate default, what an optional semantic layer would look like, and how
 > to choose an embedding model when it lands.
 
+For the standalone, published Starlight Memory package, use the [local MCP install and restart test](../examples/community-memory/README.md). It runs without a model key and can share an owner-controlled vault across authorized local clients.
+
 ## Why keyword-first is the default (not a limitation)
 
 The whole point of the operational layer is that **anyone can install it and it

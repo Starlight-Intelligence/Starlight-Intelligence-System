@@ -1,0 +1,15 @@
+{
+  "name": "starlight-community-memory-example",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "demo": "node smoke.mjs"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.32.2",
+    "@starlight-intelligence/memory": "0.2.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
