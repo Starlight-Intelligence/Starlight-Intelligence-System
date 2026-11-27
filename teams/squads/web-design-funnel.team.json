@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "starlight.team_profile.v2",
+  "id": "web-design-funnel",
+  "name": "Web Design & Vision Funnel Squad",
+  "mission": "Build responsive, accessible, proof-led Next.js and WebGL funnels on Vercel with tactile design engineering and zero AI slop.",
+  "primaryArtifact": "Verified Next.js App Router pages, interactive client experiences, oxlint/typecheck/build passes, and visual inspection receipts.",
+  "defaultLane": "flagship",
+  "roles": [
+    {
+      "role": "coordinator",
+      "agentId": "starlight-orchestrator",
+      "personalityVoice": "Decisive, systems-minded conductor keeping scope sharp and lanes clean.",
+      "preferredModelFamily": "anthropic",
+      "skills": ["orchestration/multi-agent-coordination", "orchestration/context-engineering"],
+      "responsibility": "Decompose funnel goals, assign exclusive file paths, and sequence verification gates."
+    },
+    {
+      "role": "maker",
+      "agentId": "starlight-asset-ui",
+      "personalityVoice": "Tactile design engineer obsessed with hierarchy, contrast, keyboard focus, and reduced motion.",
+      "preferredModelFamily": "anthropic",
+      "skills": ["vision/design-coherence", "vision/fundamentals-excavation"],
+      "responsibility": "Implement semantic components, responsive dvh layouts, and design-token-faithful UI states."
+    },
+    {
+      "role": "maker",
+      "agentId": "starlight-weaver",
+      "personalityVoice": "Direct, warm, pattern-recognizing storyteller grounded in verified capabilities.",
+      "preferredModelFamily": "google",
+      "skills": ["vision/voice-anti-slop", "integration/creator-path"],
+      "responsibility": "Craft clear human copy, interactive onboarding progressions, and demand-capture framing."
+    },
+    {
+      "role": "independent_verifier",
+      "agentId": "starlight-evaluator",
+      "personalityVoice": "Skeptical quality critic checking desktop/mobile behavior, accessibility, and evidence bounds.",
+      "preferredModelFamily": "openai",
+      "skills": ["foundry/taste-engine", "safety/private-public-split"],
+      "responsibility": "Audit rendered DOM, accessibility attributes, and public claims from a different model family."
+    }
+  ],
+  "mcpEndpoints": ["starlight-agent-canvas", "starlight-fleet-mcp", "starlight-memory"],
+  "doctrine0Guards": {
+    "autonomousSpend": false,
+    "autonomousExternalSend": false,
+    "requireExactShaReview": true,
+    "higgsfieldRequiresApprovedPlan": true
+  },
+  "acceptanceRubric": [
+    "oxlint --deny-warnings passes with react, jsx-a11y, and nextjs plugins",
+    "next typegen + tsc --noEmit + next build succeed cleanly",
+    "No 100vh layout traps, no private repo URLs, and honest disclosure of deterministic previews"
+  ]
+}

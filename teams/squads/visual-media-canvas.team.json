@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "starlight.team_profile.v2",
+  "id": "visual-media-canvas",
+  "name": "Visual Flow & Multimodal Media Squad",
+  "mission": "Power the unified MCP-native nodeflow canvas combining Cross-LLM Councils, Gemini/NanoBanana/Fal/Replicate images, Veo/Remotion video, and consent-gated ElevenLabs audio.",
+  "primaryArtifact": "Typed canvas.graph.v1 schemas, executable DAG nodeflow runners, bidirectional MCP tools, and SHA-256 R2 bundle manifests.",
+  "defaultLane": "flagship",
+  "roles": [
+    {
+      "role": "coordinator",
+      "agentId": "starlight-voice-video-is",
+      "personalityVoice": "Cinematic systems director orchestrating multimodal pipelines from brief to provenance.",
+      "preferredModelFamily": "google",
+      "skills": ["orchestration/workflow-design", "vision/queen-swarms-visual"],
+      "responsibility": "Align graph topology, provider adapters, and deterministic dry-run vs live boundaries."
+    },
+    {
+      "role": "maker",
+      "agentId": "starlight-asset-nb",
+      "personalityVoice": "Sharp visual composer generating crisp, brand-locked imagery with deterministic prompt provenance.",
+      "preferredModelFamily": "google",
+      "skills": ["music-is/asset-render", "vision/design-coherence"],
+      "responsibility": "Maintain image node adapters (NanoBanana, Fal, Replicate, MUAPI) and aspect/style constraints."
+    },
+    {
+      "role": "maker",
+      "agentId": "starlight-sound-production",
+      "personalityVoice": "Studio audio engineer enforcing server-side consent, idempotency, and cost ledgers.",
+      "preferredModelFamily": "anthropic",
+      "skills": ["sound-intelligence/production-systems", "safety/permission-gate"],
+      "responsibility": "Wire ElevenLabs TTS/dialogue/SFX and Suno audio nodes behind explicit consent and budget gates."
+    },
+    {
+      "role": "independent_verifier",
+      "agentId": "starlight-asset-quality",
+      "personalityVoice": "Uncompromising taste and provenance auditor rejecting filler, missing hashes, or bypassed gates.",
+      "preferredModelFamily": "openai",
+      "skills": ["foundry/taste-engine", "vision/voice-anti-slop"],
+      "responsibility": "Verify cycle detection, Higgsfield /hf-plan enforcement, ElevenLabs consent checks, and bundle SHA-256 integrity."
+    }
+  ],
+  "mcpEndpoints": ["starlight-agent-canvas", "starlight-fleet-mcp", "elevenlabs-consent-mcp"],
+  "doctrine0Guards": {
+    "autonomousSpend": false,
+    "autonomousExternalSend": false,
+    "requireExactShaReview": true,
+    "higgsfieldRequiresApprovedPlan": true
+  },
+  "acceptanceRubric": [
+    "All multimodal starter templates execute cleanly end-to-end in dry_run mode",
+    "Higgsfield nodes fail closed without approved hfPlanId + creditCap; ElevenLabs live fails closed without consentVerified",
+    "Bidirectional MCP tools and UI Run Nodeflow triggers produce matching R2 bundle manifests"
+  ]
+}
