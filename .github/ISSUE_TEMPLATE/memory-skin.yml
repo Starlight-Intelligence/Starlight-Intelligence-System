@@ -1,0 +1,36 @@
+name: Submit a Memory skin
+description: Propose a portable, free visual edition for the Starlight Memory catalog.
+title: "Memory skin submission — "
+body:
+  - type: markdown
+    attributes:
+      value: "This issue is public. Submit only the appearance manifest and a fictional example. Maintainers review each edition before it can appear in the catalog."
+  - type: textarea
+    id: manifest
+    attributes:
+      label: Appearance JSON
+      description: Paste the v1 file exported by the Memory skin gallery.
+      render: json
+    validations:
+      required: true
+  - type: input
+    id: credit
+    attributes:
+      label: Public creator credit
+      description: Name or handle to display with the edition.
+    validations:
+      required: true
+  - type: textarea
+    id: review
+    attributes:
+      label: Design and testing
+      description: Describe the intended reading environment and your contrast, desktop and mobile checks.
+    validations:
+      required: true
+  - type: checkboxes
+    id: rights
+    attributes:
+      label: Publication rights
+      options:
+        - label: I own or can license this submission and offer its appearance manifest under the MIT license.
+          required: true

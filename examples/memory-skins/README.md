@@ -1,0 +1,7 @@
+# A portable skin for Starlight Memory
+
+The candidate web interface accepts a small JSON file that controls appearance on one device. Download `index-paper.json` from this directory and import it from the Memory skin gallery, preview it, then choose **Apply skin**. After the portal release, the [Memory workspace](https://starlightintelligence.ai/memory) links to the skin gallery. Web availability is independent of the local MCP package.
+
+Version 1 accepts exactly nine fields. Set `version` to 1 and choose a 1–48 character name using letters, numbers, spaces, periods, hyphens or en dashes. Start with a letter or number. Use six-digit hex values for `ground`, `panel`, `ink`, `muted` and `accent`. Each text and accent color must achieve a contrast ratio of at least 4.5:1 against both surfaces. Choose `editorial` or `technical` for the display type and `soft` or `square` for the corner shape. Import files up to 4 KiB. Scripts, external assets and custom CSS are outside the format.
+
+Edit the sample or export a built-in edition. A skin carries no memory content, credentials or connector permissions. The app saves the appearance locally when browser storage is available. To propose a free catalog listing, open a **Submit a Memory skin** issue with the manifest, attribution and design checks. Review covers rights, appearance validation, desktop and mobile specimens, and the release commit. A submission is public and does not automatically publish an edition. Individual users can share and import their own JSON directly.
