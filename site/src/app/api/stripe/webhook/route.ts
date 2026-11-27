@@ -7,6 +7,8 @@
  * Built on SIP — operational tier.
  */
 import { NextResponse } from "next/server";
+import { creditsEnabled } from "@/lib/credits/config";
+import { verifyStripeSignature } from "@/lib/credits/stripe-signature";
 import { supabaseConfigFromEnv, supabaseCreditStore } from "@/lib/credits/supabase-store";
 import { handleStripeWebhook } from "@/lib/credits/stripe-webhook";
 
@@ -26,11 +28,27 @@ export async function POST(request: Request) {
   if (Buffer.byteLength(rawBody, "utf8") > MAX_BODY_BYTES) {
     return NextResponse.json({ error: "body too large" }, { status: 413 });
   }
+  if (!creditsEnabled(process.env)) {
+    return NextResponse.json({ error: "credits are disabled" }, { status: 503, headers: { "cache-control": "no-store" } });
+  }
+  const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET?.trim();
+  if (!webhookSecret) {
+    return NextResponse.json(
+      { error: "stripe webhook secret is not configured" },
+      { status: 503, headers: { "cache-control": "no-store" } },
+    );
+  }
+  const signature = request.headers.get("stripe-signature");
+  const sig = verifyStripeSignature(rawBody, signature, webhookSecret);
+  if (!sig.ok) {
+    console.warn("stripe webhook refused", 401, JSON.stringify({ error: sig.reason }));
+    return NextResponse.json({ error: sig.reason }, { status: 401, headers: { "cache-control": "no-store" } });
+  }
   const config = supabaseConfigFromEnv(process.env);
   const result = await handleStripeWebhook({
     env: process.env,
     rawBody,
-    signature: request.headers.get("stripe-signature"),
+    signature,
     store: config ? supabaseCreditStore(config) : null,
   });
   if (result.status !== 200) {
