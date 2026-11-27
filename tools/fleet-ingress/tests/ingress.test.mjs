@@ -108,10 +108,26 @@ test('buildCloudRunExecutionPayload constructs correct container environment ove
   );
 
   assert.equal(envs.REPO, 'frankxai/frankx.ai-vercel-website');
+  assert.equal(envs.STARLIGHT_REPO, 'frankxai/frankx.ai-vercel-website');
   assert.equal(envs.PR_NUMBER, '981');
   assert.equal(envs.COMMIT_SHA, 'a8c679b6297f8abd9d7c63af5f37351d6fddf916');
   assert.equal(envs.TRIGGER_EVENT, 'pull_request');
+  assert.equal(envs.GIT_REF, 'agent/codex/architecture-showroom');
+  assert.equal(envs.STARLIGHT_REF, 'agent/codex/architecture-showroom');
   assert.equal(envs.CALLBACK_URL, 'https://ingress.starlight.workers.dev/callback');
+  assert.equal(envs.STARLIGHT_CALLBACK_URL, 'https://ingress.starlight.workers.dev/callback');
+
+  const pushRefPayload = buildCloudRunExecutionPayload({
+    event: 'push',
+    repo: 'frankxai/arcanea-ai-app',
+    ref: 'refs/heads/main',
+    sender: 'frankxai',
+  });
+  const pushEnvs = Object.fromEntries(
+    pushRefPayload.overrides.containerOverrides[0].env.map((item) => [item.name, item.value])
+  );
+  assert.equal(pushEnvs.GIT_REF, 'refs/heads/main');
+  assert.equal(pushEnvs.STARLIGHT_REF, 'main');
 });
 
 test('worker fetch handles /health and verifies webhook requests', async () => {

@@ -53,7 +53,7 @@ ENV NODE_ENV=production
 ENV CI=true
 ENV STARLIGHT_SUBSTRATE=true
 ENV PNPM_HOME="/home/starlight/.local/share/pnpm"
-ENV PATH="$PNPM_HOME:$PATH"
+ENV PATH="$PNPM_HOME:$PNPM_HOME/bin:$PATH"
 
 USER starlight
 WORKDIR /home/starlight/workspace
