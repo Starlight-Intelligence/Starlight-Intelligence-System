@@ -33,7 +33,7 @@ export const EventEnvelopeSchema = z.object({
     "completed"
   ]),
   permissionRequestId: z.string().optional(),
-  payload: z.record(z.unknown()).default({}),
+  payload: z.record(z.string(), z.unknown()).default({}),
   artifactReferences: z.array(z.string()).default([]),
 });
 
