@@ -300,6 +300,24 @@ node dist/cli.js init --vaults`}
         </h2>
         <div className="mt-4 flex flex-wrap gap-3">
           <Link
+            href="/desk"
+            className="rounded-full bg-white px-5 py-2.5 text-[13px] font-semibold text-[#060609] transition-std hover:bg-slate-200"
+          >
+            Try the research desk &rarr;
+          </Link>
+          <Link
+            href="/deploy"
+            className="rounded-full border border-white/[0.1] px-5 py-2.5 text-[13px] font-medium text-white transition-std hover:border-white/[0.2] hover:bg-white/[0.04]"
+          >
+            Deploy your Explorer &rarr;
+          </Link>
+          <Link
+            href="/pricing"
+            className="rounded-full border border-white/[0.1] px-5 py-2.5 text-[13px] font-medium text-white transition-std hover:border-white/[0.2] hover:bg-white/[0.04]"
+          >
+            Support or commission &rarr;
+          </Link>
+          <Link
             href="/architecture"
             className="rounded-full border border-white/[0.1] px-5 py-2.5 text-[13px] font-medium text-white transition-std hover:border-white/[0.2] hover:bg-white/[0.04]"
           >

@@ -545,6 +545,20 @@ node dist/cli.js init --vaults`}
           <p className="text-[13px] leading-relaxed text-slate-400">
             Open-core downloads stay ungated. FrankX offers guidepacks, security audits, and premium support bundles around this protocol.
           </p>
+          <div className="mt-5 flex flex-wrap justify-center gap-3">
+            <Link
+              href="/pricing"
+              className="rounded-full bg-white px-5 py-2.5 text-[13px] font-semibold text-[#060609] transition-all hover:bg-cyan-100"
+            >
+              View pricing and support
+            </Link>
+            <Link
+              href="/deploy"
+              className="rounded-full border border-white/[0.12] px-5 py-2.5 text-[13px] font-medium text-white transition-all hover:bg-white/[0.04]"
+            >
+              Deploy Starlight Explorer
+            </Link>
+          </div>
         </div>
       </section>
     </div>

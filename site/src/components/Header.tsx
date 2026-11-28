@@ -140,6 +140,15 @@ function HeaderContent({ pathname }: { pathname: string }) {
             );
           })}
 
+          <Link
+            href="/pricing"
+            className={`inline-flex min-h-11 items-center rounded-md px-3 py-2 text-[13px] transition-micro hover:bg-white/[0.06] ${
+              isActive(pathname, "/pricing") ? "text-white" : "text-slate-300 hover:text-white"
+            }`}
+          >
+            Pricing
+          </Link>
+
           <span className="mx-1.5 h-4 w-px bg-white/[0.08]" aria-hidden="true" />
 
           <a
@@ -219,6 +228,16 @@ function HeaderContent({ pathname }: { pathname: string }) {
                 </div>
               );
             })}
+            <div className="mb-4 border-t border-white/[0.06] pt-3">
+              <Link
+                href="/pricing"
+                className={`flex min-h-11 items-center rounded-lg px-2 text-[14px] transition-micro hover:bg-white/[0.05] hover:text-white ${
+                  isActive(pathname, "/pricing") ? "text-[#c4b5fd]" : "text-slate-200"
+                }`}
+              >
+                Pricing
+              </Link>
+            </div>
             <div className="flex items-center gap-3 border-t border-white/[0.06] pt-5">
               <a
                 href={GITHUB_URL}

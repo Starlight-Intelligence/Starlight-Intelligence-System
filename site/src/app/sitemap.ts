@@ -13,10 +13,16 @@ const STATIC_ROUTES = [
   "/download",
   "/deploy",
   "/quickstart",
+  "/desk",
+  "/pricing",
+  "/sovereign",
+  "/connect",
   "/architecture",
   "/explainer",
   "/verticals",
   "/research",
+  "/field-notes",
+  "/changelog",
   "/knowledge-tree",
   "/knowledge-tree/explore",
   "/cockpit",
@@ -51,7 +57,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority:
       path === ""
         ? 1.0
-        : path === "/protocol" || path === "/download" || path === "/deploy" || path === "/quickstart" || path === "/research"
+        : path === "/protocol" ||
+            path === "/download" ||
+            path === "/deploy" ||
+            path === "/quickstart" ||
+            path === "/desk" ||
+            path === "/pricing" ||
+            path === "/research"
           ? 0.9
           : 0.7,
   }));

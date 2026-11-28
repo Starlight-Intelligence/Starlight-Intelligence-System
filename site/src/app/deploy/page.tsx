@@ -270,9 +270,14 @@ export default function DeployPage() {
             </Link>
           </div>
         </div>
-        <div className="mx-auto mt-8 flex max-w-6xl items-center gap-2 text-xs text-slate-500">
-          <GitBranch className="h-3.5 w-3.5" aria-hidden="true" />
-          Deployment contract v{DEPLOYMENT_CONTRACT.schemaVersion} · MIT source · Built on SIP
+        <div className="mx-auto mt-8 flex max-w-6xl flex-wrap items-center justify-between gap-4 text-xs text-slate-500">
+          <span className="inline-flex items-center gap-2">
+            <GitBranch className="h-3.5 w-3.5" aria-hidden="true" />
+            Deployment contract v{DEPLOYMENT_CONTRACT.schemaVersion} · MIT source · Built on SIP
+          </span>
+          <Link href="/pricing" className="text-slate-300 underline decoration-white/25 underline-offset-4 transition-micro hover:text-white">
+            Need a supporter license or custom estate? View pricing &rarr;
+          </Link>
         </div>
       </section>
     </div>
