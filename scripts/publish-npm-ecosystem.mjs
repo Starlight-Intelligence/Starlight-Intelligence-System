@@ -23,7 +23,7 @@ export function validateReceipt(receipt, sourceSha, directory, requireClean = tr
 }
 
 export const consumerChecks = ['actual-tarball-install', 'strict-public-declarations', 'core-integration',
-  'ai-sdk-generation-and-streaming', 'official-mcp-client-and-stdio'];
+  'ai-sdk-generation-and-streaming', 'official-mcp-client-and-stdio', 'elevenlabs-consent-and-provenance'];
 
 export function validateConsumerReceipt(consumer, manifestBytes, sourceSha) {
   if (consumer?.schemaVersion !== 1 || consumer.sourceSha !== sourceSha || consumer.passed !== true
@@ -35,10 +35,10 @@ export function validateConsumerReceipt(consumer, manifestBytes, sourceSha) {
 
 export function assertPublishingContext(env, sourceSha, args) {
   if (args.length !== 1 || args[0] !== '--execute' || env.GITHUB_ACTIONS !== 'true'
-      || env.GITHUB_REPOSITORY !== 'frankxai/Starlight-Intelligence-System'
+      || env.GITHUB_REPOSITORY !== 'Starlight-Intelligence/Starlight-Intelligence-System'
       || env.GITHUB_REF !== 'refs/heads/main' || env.GITHUB_SHA !== sourceSha || !/^[a-f0-9]{40}$/.test(sourceSha)
       || env.GITHUB_EVENT_NAME !== 'workflow_dispatch'
-      || env.GITHUB_WORKFLOW_REF !== 'frankxai/Starlight-Intelligence-System/.github/workflows/npm-ecosystem-release.yml@refs/heads/main'
+      || env.GITHUB_WORKFLOW_REF !== 'Starlight-Intelligence/Starlight-Intelligence-System/.github/workflows/npm-ecosystem-release.yml@refs/heads/main'
       || !env.ACTIONS_ID_TOKEN_REQUEST_URL || !env.ACTIONS_ID_TOKEN_REQUEST_TOKEN || env.NPM_TOKEN || env.NODE_AUTH_TOKEN) {
     throw new Error('Publication requires the approved main-branch OIDC workflow without a publishing token');
   }

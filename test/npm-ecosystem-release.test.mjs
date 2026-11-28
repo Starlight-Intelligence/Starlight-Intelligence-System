@@ -131,7 +131,7 @@ test('publication validates real artifact bytes and rejects forged registry inte
     return { name, version: '0.1.0', file, sha256: digest(bytes), integrity: 'sha512-' + createHash('sha512').update(bytes).digest('base64') };
   });
   const receipt = { schemaVersion: 1, sourceSha: 'a'.repeat(40), dirty: false, packages };
-  assert.equal(validateReceipt(receipt, receipt.sourceSha, run).length, 3);
+  assert.equal(validateReceipt(receipt, receipt.sourceSha, run).length, targets.length);
   const malformed = { ...receipt, packages: packages.map((row, index) => index ? row : {
     ...row, version: '../outside', file: 'starlight-intelligence-core-../outside.tgz',
   }) };
@@ -148,9 +148,9 @@ test('dirty, mismatched or incomplete receipts and local publication cannot pass
 
 test('publication requires the exact manual main workflow and rejects token fallback', () => {
   const sha = 'a'.repeat(40);
-  const env = { GITHUB_ACTIONS: 'true', GITHUB_REPOSITORY: 'frankxai/Starlight-Intelligence-System',
+  const env = { GITHUB_ACTIONS: 'true', GITHUB_REPOSITORY: 'Starlight-Intelligence/Starlight-Intelligence-System',
     GITHUB_REF: 'refs/heads/main', GITHUB_SHA: sha, GITHUB_EVENT_NAME: 'workflow_dispatch',
-    GITHUB_WORKFLOW_REF: 'frankxai/Starlight-Intelligence-System/.github/workflows/npm-ecosystem-release.yml@refs/heads/main',
+    GITHUB_WORKFLOW_REF: 'Starlight-Intelligence/Starlight-Intelligence-System/.github/workflows/npm-ecosystem-release.yml@refs/heads/main',
     ACTIONS_ID_TOKEN_REQUEST_URL: 'https://example.invalid', ACTIONS_ID_TOKEN_REQUEST_TOKEN: 'fixture' };
   assert.doesNotThrow(() => assertPublishingContext(env, sha, ['--execute']));
   for (const change of [{ GITHUB_ACTIONS: 'false' }, { GITHUB_REPOSITORY: 'other/repository' },
