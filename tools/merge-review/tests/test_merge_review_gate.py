@@ -26,6 +26,34 @@ def receipt(**changes):
             'body': gate.MARKER + json.dumps(body)}
 
 
+ESTATE_PANEL = ['@cf/zai-org/glm-5.3', '@cf/deepseek-ai/deepseek-v4.1-flash-1017']
+
+
+def estate_receipt(**changes):
+    comment = receipt(**changes)
+    comment['user']['login'] = 'starlight-review[bot]'
+    comment['author_association'] = 'NONE'
+    comment['performed_via_github_app'] = {'slug': 'starlight-review'}
+    return comment
+
+
+def estate_run(conclusion='success', annotations=0, findings=False, panel=None, sha=HEAD,
+               name='Starlight Review', slug='starlight-review', status='completed'):
+    panel = ESTATE_PANEL if panel is None else panel
+    lines = ['**APPROVE**: every planned reviewer approved', '', '### Findings', '']
+    if findings:
+        lines += ['| Severity | Where | Finding | Seen by |',
+                  '| --- | --- | --- | --- |',
+                  '| high | `x.ts:1` | a surviving finding | 2 sources |']
+    else:
+        lines += ['None survived evidence checks.']
+    lines += ['', '### Reviewers']
+    lines += [f'- `{model}`: APPROVE, 100 tokens' for model in panel]
+    return {'name': name, 'head_sha': sha, 'status': status, 'conclusion': conclusion,
+            'annotations_count': annotations, 'app': {'slug': slug},
+            'output': {'summary': '\n'.join(lines)}}
+
+
 class MergeReviewTests(unittest.TestCase):
     def evaluate(self, comments, files=FILES, auto_merge=None):
         return gate.evaluate('frankxai/starlight-agent-config', 110, HEAD, files, comments, auto_merge)[0]
@@ -242,6 +270,57 @@ class MergeReviewTests(unittest.TestCase):
         self.assertFalse(self.evaluate([receipt(), receipt(verdict='FAIL')]))
         self.assertFalse(self.evaluate([receipt(), receipt(blockingFindings=['unfixed'])]))
 
+
+
+class EstateReviewerTests(unittest.TestCase):
+    def evaluate(self, comments, files=FILES, check_runs=None):
+        if check_runs is None:
+            check_runs = [estate_run()]
+        return gate.evaluate('frankxai/starlight-agent-config', 110, HEAD, files, comments,
+                             None, check_runs)[0]
+
+    def test_reviewer_receipt_accepted_on_low_risk_change(self):
+        comment = estate_receipt(maker='codex', provider='claude-code')
+        self.assertTrue(self.evaluate([comment]))
+
+    def test_missing_or_failed_check_run_is_rejected(self):
+        comment = estate_receipt(maker='codex', provider='claude-code')
+        self.assertFalse(self.evaluate([comment], check_runs=[]))
+        for conclusion in ['failure', 'action_required', 'neutral', 'cancelled']:
+            with self.subTest(conclusion=conclusion):
+                self.assertFalse(self.evaluate([comment], check_runs=[estate_run(conclusion=conclusion)]))
+        for run in [estate_run(annotations=1), estate_run(findings=True),
+                    estate_run(status='in_progress'), estate_run(name='Other Review'),
+                    estate_run(slug='github-actions'), estate_run(sha='c' * 40)]:
+            with self.subTest(run=run['name']):
+                self.assertFalse(self.evaluate([comment], check_runs=[run]))
+
+    def test_provider_equal_to_maker_or_a_checker_is_rejected(self):
+        self.assertFalse(self.evaluate([estate_receipt(maker='codex', provider='codex')]))
+        panel = ['@cf/openai/gpt-oss-120b', '@cf/zai-org/glm-5.3']
+        self.assertFalse(self.evaluate([estate_receipt(maker='claude-code', provider='codex')],
+                                       check_runs=[estate_run(panel=panel)]))
+        self.assertTrue(self.evaluate([estate_receipt(maker='codex', provider='claude-code')],
+                                      check_runs=[estate_run(panel=panel)]))
+
+    def test_high_risk_path_still_refused(self):
+        path = 'tools/merge-review/merge_review_gate.py'
+        files = [{'filename': path, 'status': 'modified'}]
+        comment = estate_receipt(reviewedFiles=[path], maker='codex', provider='claude-code')
+        self.assertFalse(self.evaluate([comment], files))
+        # The existing App receipt path for high risk is unchanged.
+        self.assertTrue(self.evaluate([receipt(reviewedFiles=[path], provider='cto')], files))
+
+    def test_edited_comment_is_rejected(self):
+        comment = estate_receipt(maker='codex', provider='claude-code')
+        comment['updated_at'] = '2026-10-13T07:05:00Z'
+        self.assertFalse(self.evaluate([comment]))
+        comment = estate_receipt(maker='codex', provider='claude-code')
+        comment['last_edited_at'] = '2026-10-13T07:00:00Z'
+        self.assertFalse(self.evaluate([comment]))
+        comment = estate_receipt(maker='codex', provider='claude-code')
+        comment['content_edit_count'] = 1
+        self.assertFalse(self.evaluate([comment]))
 
 
 class PostingAppTests(unittest.TestCase):
