@@ -27,6 +27,10 @@ def receipt(**changes):
 
 
 ESTATE_PANEL = ['@cf/zai-org/glm-5.3', '@cf/deepseek-ai/deepseek-v4.1-flash-1017']
+# The panel the estate reviewer publishes for a claude-code receipt. Its families
+# include the receipt's own provider; that is the real shape of the emitter's run.
+CLAUDE_PANEL = ['@cf/anthropic/claude-sonnet-4-5', '@cf/zai-org/glm-5.3']
+CODEX_PANEL = ['@cf/openai/gpt-oss-120b', '@cf/zai-org/glm-5.3']
 
 
 def estate_receipt(**changes):
@@ -295,21 +299,38 @@ class EstateReviewerTests(unittest.TestCase):
             with self.subTest(run=run['name']):
                 self.assertFalse(self.evaluate([comment], check_runs=[run]))
 
-    def test_provider_equal_to_maker_or_a_checker_is_rejected(self):
-        self.assertFalse(self.evaluate([estate_receipt(maker='codex', provider='codex')]))
-        panel = ['@cf/openai/gpt-oss-120b', '@cf/zai-org/glm-5.3']
-        self.assertFalse(self.evaluate([estate_receipt(maker='claude-code', provider='codex')],
-                                       check_runs=[estate_run(panel=panel)]))
+    def test_provider_in_a_panel_family_is_accepted_when_not_the_maker(self):
+        # The estate reviewer's provider is always one of the models in its own
+        # panel, so the old "not in the panel" clause made every estate receipt
+        # impossible. A different family from the maker's is the real requirement.
         self.assertTrue(self.evaluate([estate_receipt(maker='codex', provider='claude-code')],
-                                      check_runs=[estate_run(panel=panel)]))
+                                      check_runs=[estate_run(panel=CLAUDE_PANEL)]))
+        self.assertTrue(self.evaluate([estate_receipt(maker='claude-code', provider='codex')],
+                                      check_runs=[estate_run(panel=CODEX_PANEL)]))
+
+    def test_provider_equal_to_the_maker_is_rejected(self):
+        self.assertFalse(self.evaluate([estate_receipt(maker='codex', provider='codex')]))
+        self.assertFalse(self.evaluate([estate_receipt(maker='codex', provider='codex')],
+                                       check_runs=[estate_run(panel=CODEX_PANEL)]))
+        self.assertFalse(self.evaluate([estate_receipt(maker='claude-code', provider='claude-code')],
+                                       check_runs=[estate_run(panel=CLAUDE_PANEL)]))
 
     def test_high_risk_path_still_refused(self):
         path = 'tools/merge-review/merge_review_gate.py'
         files = [{'filename': path, 'status': 'modified'}]
         comment = estate_receipt(reviewedFiles=[path], maker='codex', provider='claude-code')
-        self.assertFalse(self.evaluate([comment], files))
+        # A green exact-head run does not open the estate path on a high-risk path.
+        self.assertFalse(self.evaluate([comment], files, check_runs=[estate_run(panel=CLAUDE_PANEL)]))
         # The existing App receipt path for high risk is unchanged.
         self.assertTrue(self.evaluate([receipt(reviewedFiles=[path], provider='cto')], files))
+
+    def test_annotated_or_finding_run_still_refused(self):
+        comment = estate_receipt(maker='codex', provider='claude-code')
+        self.assertFalse(self.evaluate([comment],
+                                       check_runs=[estate_run(annotations=1, panel=CLAUDE_PANEL)]))
+        self.assertFalse(self.evaluate([comment],
+                                       check_runs=[estate_run(findings=True, panel=CLAUDE_PANEL)]))
+        self.assertFalse(self.evaluate([comment], check_runs=[estate_run(panel=[])]))
 
     def test_edited_comment_is_rejected(self):
         comment = estate_receipt(maker='codex', provider='claude-code')

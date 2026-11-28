@@ -16,17 +16,10 @@ TRUSTED_APPS = {'cursor', 'chatgpt-codex-connector'}
 # The estate's own reviewer. It publishes the "Starlight Review" check run and a
 # review comment per head. Its receipt is accepted only for non-high-risk changes,
 # only when that check run passed at the same head, and only when the receipt's
-# provider is not the maker's and not one of the reviewer's own checker families.
+# provider is not the maker's.
 ESTATE_REVIEWER_APP = 'starlight-review'
 ESTATE_REVIEWER_LOGIN = 'starlight-review[bot]'
 ESTATE_CHECK_NAME = 'Starlight Review'
-# Model-id fragments that name a gate provider's family, used to prove an estate
-# receipt's provider is not one of the checkers that already reviewed the diff.
-PROVIDER_MODEL_MARKERS = {
-    'codex': ('gpt', 'openai', 'codex'),
-    'claude-code': ('claude', 'anthropic'),
-    'antigravity': ('gemini', 'google'),
-}
 # Seats, models or bots that may author a change. The reviewer must be a different one.
 # dependabot and github-actions are bot makers: they are never reviewers, so their
 # high-risk changes (manifests, lockfiles, workflows) still need a CTO PASS.
@@ -135,7 +128,12 @@ def estate_reviewer(comment):
 
 
 def estate_panel(run):
-    """Model ids the estate reviewer listed for this head, or None."""
+    """Model ids the estate reviewer listed for this head, or None.
+
+    Only its presence is required: a run that published no panel is not read as a
+    pass. The panel's model families are deliberately not compared with the
+    receipt's provider (see evaluate).
+    """
     summary = (run.get('output') or {}).get('summary') or ''
     if '### Reviewers' not in summary:
         return None
@@ -144,11 +142,12 @@ def estate_panel(run):
 
 
 def estate_check(check_runs, head):
-    """The estate reviewer's clean Starlight Review run at this head, or None.
+    """The estate reviewer's clean Starlight Review run at this head, or False.
 
     A pass needs the same head, the reviewer App, conclusion success, no
-    annotation and no surviving finding in the published summary. A run that
-    cannot be read fails closed. High-risk changes never reach this path.
+    annotation, no surviving finding in the published summary and a published
+    reviewer panel. A run that cannot be read fails closed. High-risk changes
+    never reach this path.
     """
     for run in check_runs or []:
         if (run.get('name') != ESTATE_CHECK_NAME
@@ -164,21 +163,9 @@ def estate_check(check_runs, head):
                 or 'None survived evidence checks.' not in summary
                 or '| Severity |' in summary):
             continue
-        panel = estate_panel(run)
-        if panel:
-            return {'panel': panel}
-    return None
-
-
-def checker_providers(panel):
-    """Gate providers named by the estate reviewer's own model panel."""
-    found = set()
-    for model in panel:
-        low = model.lower()
-        for provider, markers in PROVIDER_MODEL_MARKERS.items():
-            if any(marker in low for marker in markers):
-                found.add(provider)
-    return found
+        if estate_panel(run):
+            return True
+    return False
 
 
 def edited(comment):
@@ -252,14 +239,14 @@ def evaluate(repository, number, head, files, comments, auto_merge=None, check_r
         return False, 'Missing or invalid source identity or changed files.'
     risky = any(item_high_risk(item) for item in files)
     # High-risk changes keep the stricter App receipt: the estate path is disabled.
-    estate = None if risky else estate_check(check_runs, head)
+    estate = False if risky else estate_check(check_runs, head)
     if risky and auto_merge:
         return False, 'High-risk change has auto-merge armed; disable it. High-risk PRs never auto-merge.'
     if not risky and all(routine_file(item) for item in files):
         return True, 'Routine plain-text notes only; required CI still applies.'
     expected_paths = {item['filename'] for item in files}
     for comment in reversed(comments):
-        estate_receipt = estate is not None and estate_reviewer(comment)
+        estate_receipt = estate and estate_reviewer(comment)
         if (not trusted_poster(comment) and not estate_receipt) or edited(comment):
             continue
         body = comment.get('body', '')
@@ -286,12 +273,12 @@ def evaluate(repository, number, head, files, comments, auto_merge=None, check_r
                 and re.fullmatch(r'[0-9a-f]{64}', receipt['packetSha256'])
                 and isinstance(receipt['resolution'], str) and receipt['resolution'].strip()
             )
-            # The estate reviewer already ran its own panel on this diff. The
-            # receipt's provider must be a different seat and a different model
-            # family from every checker in that panel.
+            # The estate path does not read the run's reviewer panel: that clause
+            # exists to stop a maker's own panel from reviewing itself, and an
+            # App-posted, exact-head, green Starlight Review run already establishes
+            # that a different system reviewed the change.
             if valid and estate_receipt:
-                valid = (receipt['provider'] != receipt['maker']
-                         and receipt['provider'] not in checker_providers(estate['panel']))
+                valid = receipt['provider'] != receipt['maker']
         except (KeyError, TypeError, ValueError):
             valid = False
         if valid:
