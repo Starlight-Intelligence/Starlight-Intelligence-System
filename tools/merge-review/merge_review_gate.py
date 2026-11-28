@@ -13,6 +13,13 @@ TRUSTED_ATTESTORS = {'frankxai'}
 # A receipt counts only if GitHub records it as posted through an allowlisted App.
 # A null performed_via_github_app means a raw token (PAT or gh CLI) and is rejected.
 TRUSTED_APPS = {'cursor', 'chatgpt-codex-connector'}
+# The estate's own reviewer. It publishes the "Starlight Review" check run and a
+# review comment per head. Its receipt is accepted only for non-high-risk changes,
+# only when that check run passed at the same head, and only when the receipt's
+# provider is not the maker's.
+ESTATE_REVIEWER_APP = 'starlight-review'
+ESTATE_REVIEWER_LOGIN = 'starlight-review[bot]'
+ESTATE_CHECK_NAME = 'Starlight Review'
 # Seats, models or bots that may author a change. The reviewer must be a different one.
 # dependabot and github-actions are bot makers: they are never reviewers, so their
 # high-risk changes (manifests, lockfiles, workflows) still need a CTO PASS.
@@ -107,6 +114,60 @@ def posting_app(comment):
     return app.get('slug') if isinstance(app, dict) else None
 
 
+def trusted_poster(comment):
+    """The existing receipt rule: owner account through an allowlisted App."""
+    return (comment.get('user', {}).get('login') in TRUSTED_ATTESTORS
+            and comment.get('author_association') in {'OWNER', 'MEMBER', 'COLLABORATOR'}
+            and posting_app(comment) in TRUSTED_APPS)
+
+
+def estate_reviewer(comment):
+    """A comment posted by the estate reviewer App's own bot identity."""
+    return (posting_app(comment) == ESTATE_REVIEWER_APP
+            and comment.get('user', {}).get('login') == ESTATE_REVIEWER_LOGIN)
+
+
+def estate_panel(run):
+    """Model ids the estate reviewer listed for this head, or None.
+
+    Only its presence is required: a run that published no panel is not read as a
+    pass. The panel's model families are deliberately not compared with the
+    receipt's provider (see evaluate).
+    """
+    summary = (run.get('output') or {}).get('summary') or ''
+    if '### Reviewers' not in summary:
+        return None
+    models = re.findall(r'^- `([^`]+)`:', summary.split('### Reviewers', 1)[1], re.MULTILINE)
+    return models or None
+
+
+def estate_check(check_runs, head):
+    """The estate reviewer's clean Starlight Review run at this head, or False.
+
+    A pass needs the same head, the reviewer App, conclusion success, no
+    annotation, no surviving finding in the published summary and a published
+    reviewer panel. A run that cannot be read fails closed. High-risk changes
+    never reach this path.
+    """
+    for run in check_runs or []:
+        if (run.get('name') != ESTATE_CHECK_NAME
+                or run.get('head_sha') != head
+                or (run.get('app') or {}).get('slug') != ESTATE_REVIEWER_APP
+                or run.get('status') != 'completed'
+                or run.get('conclusion') != 'success'):
+            continue
+        output = run.get('output') or {}
+        summary = output.get('summary') or ''
+        if (run.get('annotations_count') or output.get('annotations_count')
+                or '### Findings' not in summary
+                or 'None survived evidence checks.' not in summary
+                or '| Severity |' in summary):
+            continue
+        if estate_panel(run):
+            return True
+    return False
+
+
 def edited(comment):
     # GitHub keeps the original App attribution when a comment is edited, and the
     # edit may come from a raw token. REST timestamps have one-second resolution,
@@ -128,9 +189,7 @@ MAX_EDIT_LOOKUPS = 5
 
 def receipt_candidate(comment, head):
     """REST-only pre-check: could this comment be the receipt evaluate() decides on?"""
-    if (comment.get('user', {}).get('login') not in TRUSTED_ATTESTORS
-            or comment.get('author_association') not in {'OWNER', 'MEMBER', 'COLLABORATOR'}
-            or posting_app(comment) not in TRUSTED_APPS
+    if ((not trusted_poster(comment) and not estate_reviewer(comment))
             or not comment.get('created_at') or comment.get('created_at') != comment.get('updated_at')):
         return False
     body = comment.get('body', '')
@@ -175,20 +234,20 @@ def graphql_edit_history(node_id):
     return (json.loads(run.stdout).get('data') or {}).get('node') or {}
 
 
-def evaluate(repository, number, head, files, comments, auto_merge=None):
+def evaluate(repository, number, head, files, comments, auto_merge=None, check_runs=None):
     if not re.fullmatch(r'[0-9a-f]{40}', head) or not files:
         return False, 'Missing or invalid source identity or changed files.'
     risky = any(item_high_risk(item) for item in files)
+    # High-risk changes keep the stricter App receipt: the estate path is disabled.
+    estate = False if risky else estate_check(check_runs, head)
     if risky and auto_merge:
         return False, 'High-risk change has auto-merge armed; disable it. High-risk PRs never auto-merge.'
     if not risky and all(routine_file(item) for item in files):
         return True, 'Routine plain-text notes only; required CI still applies.'
     expected_paths = {item['filename'] for item in files}
     for comment in reversed(comments):
-        if (comment.get('user', {}).get('login') not in TRUSTED_ATTESTORS
-                or comment.get('author_association') not in {'OWNER', 'MEMBER', 'COLLABORATOR'}
-                or posting_app(comment) not in TRUSTED_APPS
-                or edited(comment)):
+        estate_receipt = estate and estate_reviewer(comment)
+        if (not trusted_poster(comment) and not estate_receipt) or edited(comment):
             continue
         body = comment.get('body', '')
         # Accept the Windows delimiter without rewriting the hashed report.
@@ -214,6 +273,12 @@ def evaluate(repository, number, head, files, comments, auto_merge=None):
                 and re.fullmatch(r'[0-9a-f]{64}', receipt['packetSha256'])
                 and isinstance(receipt['resolution'], str) and receipt['resolution'].strip()
             )
+            # The estate path does not read the run's reviewer panel: that clause
+            # exists to stop a maker's own panel from reviewing itself, and an
+            # App-posted, exact-head, green Starlight Review run already establishes
+            # that a different system reviewed the change.
+            if valid and estate_receipt:
+                valid = receipt['provider'] != receipt['maker']
         except (KeyError, TypeError, ValueError):
             valid = False
         if valid:
@@ -275,7 +340,8 @@ def main():
                         item['mode'] = modes.get(item['filename'])
         comments = api(f'repos/{repository}/issues/{number}/comments?per_page=100', paginate=True)
         annotate_edit_history(comments, head)
-        ok, summary = evaluate(repository, number, head, files, comments, pr.get('auto_merge'))
+        runs = api(f'repos/{repository}/commits/{head}/check-runs?per_page=100').get('check_runs') or []
+        ok, summary = evaluate(repository, number, head, files, comments, pr.get('auto_merge'), runs)
         if api(endpoint)['head']['sha'] != head:
             ok, summary = False, 'PR head changed during evaluation; rerun for the new head.'
     except Exception as error:
