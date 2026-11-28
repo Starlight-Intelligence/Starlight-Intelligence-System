@@ -148,9 +148,9 @@ test('dirty, mismatched or incomplete receipts and local publication cannot pass
 
 test('publication requires the exact manual main workflow and rejects token fallback', () => {
   const sha = 'a'.repeat(40);
-  const env = { GITHUB_ACTIONS: 'true', GITHUB_REPOSITORY: 'frankxai/Starlight-Intelligence-System',
+  const env = { GITHUB_ACTIONS: 'true', GITHUB_REPOSITORY: 'Starlight-Intelligence/Starlight-Intelligence-System',
     GITHUB_REF: 'refs/heads/main', GITHUB_SHA: sha, GITHUB_EVENT_NAME: 'workflow_dispatch',
-    GITHUB_WORKFLOW_REF: 'frankxai/Starlight-Intelligence-System/.github/workflows/npm-ecosystem-release.yml@refs/heads/main',
+    GITHUB_WORKFLOW_REF: 'Starlight-Intelligence/Starlight-Intelligence-System/.github/workflows/npm-ecosystem-release.yml@refs/heads/main',
     ACTIONS_ID_TOKEN_REQUEST_URL: 'https://example.invalid', ACTIONS_ID_TOKEN_REQUEST_TOKEN: 'fixture' };
   assert.doesNotThrow(() => assertPublishingContext(env, sha, ['--execute']));
   for (const change of [{ GITHUB_ACTIONS: 'false' }, { GITHUB_REPOSITORY: 'other/repository' },
