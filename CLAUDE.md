@@ -63,7 +63,7 @@ This system works across six platforms: Claude Code, Cursor, Cline, Codex, Gemin
 **What you have access to:**
 
 - **151 Agents** — source-counted definitions across Core, Universal, and specialized Domain Vertical layers; verification lives in `metrics/current.json` (including Space, Marine, Longevity, Legal, Crypto, and Partner adapters). Full registry: `agents/AGENT_REGISTRY.md`.
-- **89 Skills** — Auto-activate via `skills/skill-rules.json` across 17 domains (intelligence, orchestration, memory, integration, **foundry**, business, vision, health, relational, **people-intelligence**, sound-intelligence, music-is, energy, machine, **crypto-intelligence**, **safety**, **marine-intelligence**). Foundry adds skills-first capability compilation, agent necessity gates, bounded system packaging, and executable taste evaluation. Existing orchestration includes `/yolo`, `/si` + `/so`, SAGE, and Hermes Swarm.
+- **90 Skills** — Auto-activate via `skills/skill-rules.json` across 17 domains (intelligence, orchestration, memory, integration, **foundry**, business, vision, health, relational, **people-intelligence**, sound-intelligence, music-is, energy, machine, **crypto-intelligence**, **safety**, **marine-intelligence**). Foundry adds skills-first capability compilation, agent necessity gates, bounded system packaging, and executable taste evaluation. Existing orchestration includes `/yolo`, `/si` + `/so`, SAGE, and Hermes Swarm.
 - **10 universal Intelligence Systems + Domain Sub-Stack Tier** — Universal IS (per `STACK.md`, locked v7.5): Self / Wealth / Family / Business / Creator / Second Brain / Code / Voice & Video / Brand + **Starlight Orchestrator** (master layer that routes the other nine). Health is cross-cutting (was layer 7, repositioned 2026-04-25); Spiritual remains optional/private. Domain sub-stacks: People Intelligence at `verticals/people-intelligence/` (first reference, symmetric with Sound Intelligence + Music IS + Energy IS); pattern generalizes via `/spawn-domain-stack` for any sovereign domain. CLAUDE.md taxonomy reconciled with STACK.md 2026-05-05.
 - **4 Transmission Channels** — Cross-system communication
 - **Commands** — substrate commands in-repo + additional commands available per-environment installation (varies by user); covers universal IS + 28 People sub-stack + `/spawn-domain-stack` (meta-command for any domain) + 7 ecosystem export targets (claude-project, chatgpt-project, gemini-gem, cursor, cowork, **microsoft-copilot**, **custom-gpt**)
@@ -173,7 +173,7 @@ See `memory/palace/MEMORY_PALACE.md` for what it is and how to maintain it.
 
 ## Skills
 
-89 auto-activating skill rules fire based on context — keywords, active agent, detected intent.
+90 auto-activating skill rules fire based on context — keywords, active agent, detected intent.
 
 | Domain | Skills |
 |--------|--------|
@@ -182,8 +182,8 @@ See `memory/palace/MEMORY_PALACE.md` for what it is and how to maintain it.
 | **Foundry** | Skill, agent, swarm, vertical, plugin, taste, and evidence compilation |
 | **People / Sound / Music / Energy / Machine / Crypto / Marine** | Domain Sub-Stack skills, Music IS operations, energy intelligence, machine storage/heart, crypto on-chain proof pattern |
 
-Activation rules: `skills/skill-rules.json` (89 rules)
-Skill definitions: mixed layout — `skills/{domain}/{skill-name}/SKILL.md` (35 dir-based skills) or a flat `skills/{domain}/{skill-name}.md` (54 single-file skills). New skills use directory packages; legacy flat files remain compatibility inputs. 35 + 54 = 89.
+Activation rules: `skills/skill-rules.json` (90 rules)
+Skill definitions: mixed layout — `skills/{domain}/{skill-name}/SKILL.md` (36 dir-based skills) or a flat `skills/{domain}/{skill-name}.md` (54 single-file skills). New skills use directory packages; legacy flat files remain compatibility inputs. 36 + 54 = 90.
 
 ---
 
@@ -354,7 +354,7 @@ Brand: **Starlight Intelligence Systems** (`sis`)
 - Keep public labels in sentence case.
 - Run the changed-copy editorial audit before release.
 
-Pinned source: https://github.com/frankxai/starlight-design-intelligence/blob/50ae34c7ac06e6c083f277ca96c3bde8f0a39b43/brand-packs/sis/COPY.md
+Pinned source: https://github.com/Starlight-Intelligence/starlight-design-intelligence/blob/851a11be31a0640df64baabcf2b1fc1afb9ce849/brand-packs/sis/COPY.md
 <!-- STARLIGHT-EDITORIAL:END -->
 
 <!-- STARLIGHT-VOICE:START -->

@@ -9,7 +9,7 @@ Brand: **Starlight Intelligence Systems** (`sis`)
 - Keep public labels in sentence case.
 - Run the changed-copy editorial audit before release.
 
-Pinned source: https://github.com/frankxai/starlight-design-intelligence/blob/3d6fc8fdd38b5db69a16db1078e30d454e891af1/brand-packs/sis/COPY.md (proposal preview; refresh after reviewed merge)
+Pinned source: https://github.com/Starlight-Intelligence/starlight-design-intelligence/blob/851a11be31a0640df64baabcf2b1fc1afb9ce849/brand-packs/sis/COPY.md
 <!-- STARLIGHT-EDITORIAL:END -->
 
 
@@ -38,3 +38,15 @@ Source: https://github.com/frankxai/starlight-design-intelligence/tree/3d6fc8fdd
 Voice version: 1.0.0 · Source state: PROPOSAL_PREVIEW
 GitHub does not automatically inject this into unrelated chats; use .starlight/voice/CHAT_CONTEXT.md in their project or agent instructions.
 <!-- STARLIGHT-VOICE:END -->
+
+## Correctness and security review
+
+Follow AGENTS.md's review and local release rules. Report actionable findings
+against the full head SHA and disclose incomplete coverage. Review skipped or
+missing required dependencies, check-name collisions, stale review evidence and
+privileged workflow execution. A review request, same-provider session or typed
+receipt does not establish independent-provider approval.
+
+Preserve independent-review-policy, harness and scan. Inspect memory/tool execution boundaries, tenant and vault isolation, stale-output handling and denial/recovery behavior. An exit code or fresh heartbeat cannot prove useful output. Report existing bypasses separately; do not use or remove them through this instruction change.
+
+Added by Codex, 3 November 2026, revision 1.

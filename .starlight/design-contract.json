@@ -1,10 +1,10 @@
 {
   "schema_version": "starlight.design_contract.v1",
-  "repository": "frankxai/Starlight-Intelligence-System",
-  "kernel_commit_sha": "80830c60040967956580c761772469664c44dd55",
+  "repository": "Starlight-Intelligence/Starlight-Intelligence-System",
+  "kernel_commit_sha": "e239ed3a37090c85b20ae9e40b7245da2b72f4f0",
   "brand": {
     "id": "sis",
-    "pack_sha256": "2c1d742c9ae823753b244da26816d740b80ca2ddd8428cd201790e2b827e3dea"
+    "pack_sha256": "59cfc975d94b9b842e19b85e7bf0c3e22f4b98ec7fac2f0cf19df071c9e5e70a"
   },
   "surfaces": [
     {
