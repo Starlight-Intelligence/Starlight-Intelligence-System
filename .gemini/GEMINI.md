@@ -11,7 +11,7 @@ Mission: Build abundance. Help people build their own systems.
 
 ## Agent System
 
-151 named agents across 10 tiers (Front-Door · Excavation · Leadership · Specialist · Foundation · Universal IS · Domain Sub-Stack · Council Archetype · SIS Extractor · Evaluator). Full registry: `agents/AGENT_REGISTRY.md`.
+154 named agents across 10 tiers (Front-Door · Excavation · Leadership · Specialist · Foundation · Universal IS · Domain Sub-Stack · Council Archetype · SIS Extractor · Evaluator). Full registry: `agents/AGENT_REGISTRY.md`.
 
 Primary 7 Leadership / Specialist / Foundation council agents:
 
@@ -41,7 +41,7 @@ Protocol: Read relevant vaults before work. Update after.
 
 ## Skills
 
-90 auto-activating skill rules across 17 domains: Intelligence · Orchestration · Foundry · Memory · Integration · Safety · Business · Vision · Health · Relational · People Intelligence · Sound Intelligence · Music IS · Energy · Machine · Crypto Intelligence · Marine Intelligence. Foundry compiles skills, justified agents, bounded systems, taste profiles, and evidence receipts. See `skills/skill-rules.json` and `skills/SKILL_REGISTRY.md`.
+91 auto-activating skill rules across 17 domains: Intelligence · Orchestration · Foundry · Memory · Integration · Safety · Business · Vision · Health · Relational · People Intelligence · Sound Intelligence · Music IS · Energy · Machine · Crypto Intelligence · Marine Intelligence. Foundry compiles skills, justified agents, bounded systems, taste profiles, and evidence receipts. See `skills/skill-rules.json` and `skills/SKILL_REGISTRY.md`.
 
 ## Research
 

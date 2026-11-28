@@ -2905,6 +2905,42 @@
       },
       "priority": "high",
       "load_level": "core"
+    },
+    {
+      "id": "vision-google-flow-studio",
+      "skill": "vision/google-flow-studio",
+      "triggers": {
+        "keywords": [
+          "google flow",
+          "flow studio",
+          "veo 3.1",
+          "omni 1.2",
+          "nano banana",
+          "scenebuilder",
+          "flow ingredients",
+          "multimodal brand pipeline",
+          "animelegends",
+          "sacred-visions",
+          "flow dam",
+          "vis-media"
+        ],
+        "agents": [
+          "starlight-flow-director",
+          "starlight-anime-director",
+          "starlight-cinematic-web-architect",
+          "starlight-weaver",
+          "starlight-visionary"
+        ],
+        "intents": [
+          "multimodal-generation",
+          "video-direction",
+          "character-consistency",
+          "brand-asset-pipeline",
+          "studio-cockpit"
+        ]
+      },
+      "priority": "high",
+      "load_level": "core"
     }
   ],
   "defaults": {
@@ -3110,6 +3146,24 @@
       "intelligence-pattern-recognition",
       "integration-repo-bridge",
       "orchestration-hermes-swarm"
+    ],
+    "starlight-flow-director": [
+      "vision-google-flow-studio",
+      "vision-design-coherence",
+      "vision-voice-anti-slop",
+      "vision-fundamentals-excavation"
+    ],
+    "starlight-anime-director": [
+      "vision-google-flow-studio",
+      "vision-design-coherence",
+      "vision-voice-anti-slop",
+      "vision-fundamentals-excavation"
+    ],
+    "starlight-cinematic-web-architect": [
+      "vision-google-flow-studio",
+      "vision-design-coherence",
+      "vision-voice-anti-slop",
+      "orchestration-context-engineering"
     ]
   }
 }
